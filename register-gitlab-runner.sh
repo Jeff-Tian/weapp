@@ -1,1 +1,1 @@
-docker run --rm -it -v /Users/Shared/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
+docker run --rm -it -v /Users/Shared/gitlab-runner/config:/etc/gitlab-runner -v /Applications:/Applications gitlab/gitlab-runner register
