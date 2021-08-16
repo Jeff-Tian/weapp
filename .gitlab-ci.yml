@@ -2,7 +2,6 @@ image: node:alpine
 
 before_script:
   - export APP_ENV=testing
-  - npm i -g yarn
   - yarn config set registry 'https://registry.npm.taobao.org'
 stages:
   - build
