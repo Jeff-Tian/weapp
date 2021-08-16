@@ -10,8 +10,8 @@ stages:
   - deploy
 
 variables:
-  NPM_CONFIG_CACHE: "/cache/npm"
-  YARN_CACHE_FOLDER: "/cache/yarn"
+  NPM_CONFIG_CACHE: "/var/cache/npm"
+  YARN_CACHE_FOLDER: "/var/cache/yarn"
   DOCKER_DRIVER: overlay2
 build-package:
   stage: build
