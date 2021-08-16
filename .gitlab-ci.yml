@@ -1,4 +1,4 @@
-image: node:alpine
+image: node:latest
 
 before_script:
   - export APP_ENV=testing
@@ -20,8 +20,6 @@ build-package:
     paths:
       - node_modules
   script:
-    - nvm ls
-    - nvm use v15.14.0
     - if [ ! -d "node_modules" ]; then
     - yarn install --cache-folder /cache/yarn
     - fi
