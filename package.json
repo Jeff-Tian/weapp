@@ -35,11 +35,13 @@
   ],
   "author": "Jeff Tian <jeff.tian@outlook.com>",
   "dependencies": {
+    "@apollo/client": "^3.4.15",
     "@babel/runtime": "^7.7.7",
     "@tarojs/components": "3.3.3",
     "@tarojs/react": "3.3.3",
     "@tarojs/runtime": "3.3.3",
     "@tarojs/taro": "3.3.3",
+    "graphql": "^15.6.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "taro-ui": "3.0.0-alpha.10"

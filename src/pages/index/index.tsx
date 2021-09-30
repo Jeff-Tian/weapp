@@ -4,6 +4,7 @@ import {AtButton, AtForm, AtInput, AtTextarea} from 'taro-ui'
 import Taro from '@tarojs/taro'
 import './index.styl'
 import envVersion = Taro.navigateToMiniProgram.envVersion
+import projectConfig from '../../../project.config.json'
 
 type IndexState = Record<string, string>
 
@@ -44,12 +45,18 @@ export default class Index extends Component<any, IndexState> {
       v = this.state.envVersion
     }
 
-    Taro.navigateToMiniProgram({
-      appId: this.state.appid,
-      path: this.state.path,
-      extraData: extraData,
-      envVersion: v
-    }).then()
+    if (projectConfig.appid === this.state.appid) {
+      Taro.navigateTo({
+        url: this.state.path,
+      }).then()
+    } else {
+      Taro.navigateToMiniProgram({
+        appId: this.state.appid,
+        path: this.state.path,
+        extraData: extraData,
+        envVersion: v
+      }).then()
+    }
 
     event.stopPropagation()
   }
