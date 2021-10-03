@@ -1,10 +1,15 @@
 import {AtDrawer, AtNavBar} from "taro-ui"
 import {View} from "@tarojs/components"
+import {useState} from "react"
+import {drawerItems, onDrawerItemClick} from "./drawer-items"
 
 const HardwayLayout = (props) => {
+  const [showDrawer, setShowDrawer] = useState(false)
+
   return <View>
     <AtNavBar
       onClickRgIconSt={() => {
+        setShowDrawer(true)
       }}
       onClickRgIconNd={() => {
       }}
@@ -21,11 +26,12 @@ const HardwayLayout = (props) => {
     {props.children}
 
     <AtDrawer
-      show
+      show={showDrawer}
       mask
       right
-      onClose={console.log}
-      items={['菜单1', '菜单2']}
+      onClose={() => setShowDrawer(false)}
+      items={[...drawerItems.keys()]}
+      onItemClick={onDrawerItemClick}
     ><View>Hello</View></AtDrawer>
   </View>
 }
