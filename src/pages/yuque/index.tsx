@@ -1,5 +1,6 @@
 import {gql, useQuery} from "@apollo/client"
-import {View, Text} from "@tarojs/components"
+import {Text} from "@tarojs/components"
+import HardwayLayout from "../layout/hardway-layout"
 
 const YUQUE_BLOG = gql`
         query {
@@ -15,7 +16,7 @@ const YuQue: React.FC = () => {
 
   console.log(loading, error, data);
 
-  return <View><Text>YuQue Blog</Text></View>
+  return <HardwayLayout><Text>YuQue Blog</Text></HardwayLayout>
 }
 
 export default YuQue

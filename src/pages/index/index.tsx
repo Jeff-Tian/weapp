@@ -1,10 +1,11 @@
 import {Component} from 'react'
-import {View, Text} from '@tarojs/components'
+import {Text} from '@tarojs/components'
 import {AtButton, AtForm, AtInput, AtTextarea} from 'taro-ui'
 import Taro from '@tarojs/taro'
 import './index.styl'
 import envVersion = Taro.navigateToMiniProgram.envVersion
 import projectConfig from '../../../project.config.json'
+import HardwayLayout from "../layout/hardway-layout"
 
 type IndexState = Record<string, string>
 
@@ -73,7 +74,7 @@ export default class Index extends Component<any, IndexState> {
 
   render() {
     return (
-      <View className="index">
+      <HardwayLayout>
         <Text>你要去哪个小程序的哪个页面？</Text>
 
         <AtForm
@@ -105,7 +106,7 @@ export default class Index extends Component<any, IndexState> {
           {/*<AtButton formType="submit">走起！</AtButton>*/}
           {/*<AtButton formType="reset">重置</AtButton>*/}
         </AtForm>
-      </View>
+      </HardwayLayout>
     )
   }
 }
