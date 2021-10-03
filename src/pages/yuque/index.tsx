@@ -30,7 +30,7 @@ const YuQue: React.FC = () => {
   />
     {data && data.allYuque.nodes.map(article => <View><AtCard title={article.title} extra={`${article.word_count} 字`}
       note={article.created_at} thumb={article.cover} onClick={()=>Taro.navigateTo({
-      url: '/pages/yuque/article',
+      url: `/pages/yuque/article?id=${article.id}`,
     })}
     ><AtAvatar image={article.cover} size='large' />
       {article.description}</AtCard><AtDivider lineColor='#fff' />

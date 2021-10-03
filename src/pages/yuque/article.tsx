@@ -1,11 +1,20 @@
 import {gql, useQuery} from "@apollo/client"
-import { View, Image } from "@tarojs/components"
+import { View, Image} from "@tarojs/components"
 import {AtActivityIndicator} from "taro-ui"
+import MarkdownIt from 'markdown-it'
+import Taro from "@tarojs/taro"
+
+import '@tarojs/taro/html.css'
+
 import HardwayLayout from "../layout/hardway-layout"
 
-const YUQUE_BLOG = gql`
+
+const YuQueArticle: React.FC = () => {
+  const md = new MarkdownIt();
+
+  const YUQUE_BLOG = gql`
         query {
-          yuque (id: "53296538") {
+          yuque (id: "${Taro.getCurrentInstance()?.router?.params.id}") {
             id
             title
             description
@@ -17,7 +26,6 @@ const YUQUE_BLOG = gql`
         }
   `
 
-const YuQueArticle: React.FC = () => {
   const {loading, error, data} = useQuery(YUQUE_BLOG)
 
   console.log(loading, error, data)
@@ -26,6 +34,12 @@ const YuQueArticle: React.FC = () => {
     isOpened={loading}
   />
     {data && data.yuque && <View className='at-article'>
+      <Image
+        className='at-article__img'
+        src={data.yuque.cover}
+        mode='widthFix'
+      />
+
       <View className='at-article__h1'>
         {data.yuque.title}
       </View>
@@ -33,14 +47,8 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
-      <Image
-        className='at-article__img'
-        src={data.yuque.cover}
-        mode='widthFix'
-      />
-
-      <View className='at-article__content'>
-        {data.yuque.body}
+      <View className='at-article__content taro_html'>
+        <View dangerouslySetInnerHTML={{__html: md.render(data.yuque.body)}} />
       </View>
 
     </View>}
