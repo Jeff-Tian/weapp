@@ -10,6 +10,9 @@ export const client = new ApolloClient({
       const res = await Taro.request({
         url: url.toString(),
         method: 'POST',
+        header: {
+          'content-type': 'application/json'
+        },
         data: options?.body,
         success: console.log
       })
