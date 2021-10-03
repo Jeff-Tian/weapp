@@ -9,16 +9,21 @@ export default class YuQue extends Component {
     super(props)
 
     const client = new ApolloClient({
+
       link: new HttpLink({
-        uri: 'https://48p1r2roz4.sse.codesandbox.io', fetch: async (url) => {
+        uri: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://jqp5j170i6.execute-api.us-east-1.amazonaws.com/dev/gatsby/graphql')}`,
+
+        async fetch(url, options) {
           const res = await Taro.request({
             url: url.toString(),
+            method: 'POST',
+            data: options?.body,
             success: console.log
           })
 
-          console.log('res = ', res);
+          console.log('res = ', res)
 
-          return {text: async () => JSON.stringify({hello: 'world'})} as any
+          return {text: async () => JSON.stringify(res.data)} as any
         }
       }),
       cache: new InMemoryCache()
@@ -26,12 +31,14 @@ export default class YuQue extends Component {
 
     client.query({
       query: gql`
-    query GetRates {
-        rates(currency: "USD") {
-          currency
+        query ($id: String!) {
+          yuque(id: $id) {
+            id
+            title
+          }
         }
-      }
-  `
+  `,
+      variables: {id: `53296538`},
     }).then(console.log)
   }
 
