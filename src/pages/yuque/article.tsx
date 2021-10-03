@@ -1,5 +1,5 @@
 import {gql, useQuery} from "@apollo/client"
-import { View, Image} from "@tarojs/components"
+import {View, Image} from "@tarojs/components"
 import {AtActivityIndicator} from "taro-ui"
 import MarkdownIt from 'markdown-it'
 import Taro from "@tarojs/taro"
@@ -10,7 +10,7 @@ import HardwayLayout from "../layout/hardway-layout"
 
 
 const YuQueArticle: React.FC = () => {
-  const md = new MarkdownIt();
+  const md = new MarkdownIt()
 
   const YUQUE_BLOG = gql`
         query {
@@ -29,6 +29,12 @@ const YuQueArticle: React.FC = () => {
   const {loading, error, data} = useQuery(YUQUE_BLOG)
 
   console.log(loading, error, data)
+
+  if (data && data.yuque) {
+    Taro.setNavigationBarTitle({
+      title: `${data.yuque.title}`
+    })
+  }
 
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
