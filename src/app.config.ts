@@ -1,7 +1,8 @@
 export default {
   pages: [
     'pages/yuque/index',
-    'pages/index/index',
+    'pages/yuque/article',
+    'pages/index/index'
   ],
   window: {
     backgroundTextStyle: 'light',

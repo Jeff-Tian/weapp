@@ -1,6 +1,8 @@
 import {gql, useQuery} from "@apollo/client"
 import { View } from "@tarojs/components"
-import {AtActivityIndicator, AtCard, AtDivider} from "taro-ui"
+import {AtActivityIndicator, AtAvatar, AtCard, AtDivider} from "taro-ui"
+import Taro from "@tarojs/taro"
+
 import HardwayLayout from "../layout/hardway-layout"
 
 const YUQUE_BLOG = gql`
@@ -27,8 +29,11 @@ const YuQue: React.FC = () => {
     isOpened={loading}
   />
     {data && data.allYuque.nodes.map(article => <View><AtCard title={article.title} extra={`${article.word_count} 字`}
-      note={article.created_at} thumb={article.cover}
-    >{article.description}</AtCard><AtDivider lineColor='#fff' />
+      note={article.created_at} thumb={article.cover} onClick={()=>Taro.navigateTo({
+      url: '/pages/yuque/article',
+    })}
+    ><AtAvatar image={article.cover} size='large' />
+      {article.description}</AtCard><AtDivider lineColor='#fff' />
     </View>)}
   </HardwayLayout>
 }
