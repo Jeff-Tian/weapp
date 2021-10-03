@@ -39,5 +39,6 @@ jobs:
         with:
           target_branch: gh-pages
           build_dir: dist
+          fqdn: taro.pa-ca.me
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
