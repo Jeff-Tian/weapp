@@ -6,6 +6,8 @@ import Taro from "@tarojs/taro"
 
 import '@tarojs/taro/html.css'
 
+import './article.styl'
+
 import HardwayLayout from "../layout/hardway-layout"
 
 

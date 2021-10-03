@@ -2,7 +2,7 @@ import {gql, useQuery} from "@apollo/client"
 import { View } from "@tarojs/components"
 import {AtActivityIndicator, AtAvatar, AtCard, AtDivider} from "taro-ui"
 import Taro from "@tarojs/taro"
-
+import './article.styl'
 import HardwayLayout from "../layout/hardway-layout"
 
 const YUQUE_BLOG = gql`
