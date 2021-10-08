@@ -7,7 +7,7 @@ export const drawerItems = new Map<string, () => any>([
   ['领英资料', async () =>
     Taro.navigateToMiniProgram({
       appId: 'wxbd95fba53da71eaf',
-      path: '/pages/index/index',
+      path: '/src/pages/profile/profile.html?peopleId=ACoAAAd6TWQB6lITfCmh2bF8Byn7Fmlrq2vbbaI',
       extraData: {},
       envVersion: 'release'
     })],
