@@ -53,7 +53,10 @@ const config = {
         },
       },
     },
-    esnextModules: ['taro-ui']
+    esnextModules: ['taro-ui'],
+    router: {
+      mode: 'browser',
+    }
   },
 }
 
