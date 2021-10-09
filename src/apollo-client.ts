@@ -1,19 +1,18 @@
 import {ApolloClient, ApolloLink, createHttpLink, InMemoryCache} from "@apollo/client"
 import Taro from "@tarojs/taro"
+import crypto from 'crypto'
+
 import {createPersistedQueryLink} from "@apollo/client/link/persisted-queries"
-import ENV_TYPE = Taro.ENV_TYPE
-import {sha256} from 'crypto-hash'
 
-const awsLambdaApiGateway = 'https://jqp5j170i6.execute-api.us-east-1.amazonaws.com/dev/gatsby/graphql'
-
-const graphQLServerUrl = Taro.getEnv() === ENV_TYPE.WEB ? awsLambdaApiGateway : `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent(awsLambdaApiGateway)}`
+const graphQLServerUrl = 'https://sls.pa-ca.me/nest/graphql'
 
 const httpLink = createHttpLink({
   uri: graphQLServerUrl,
   async fetch(url, options) {
+    console.log('url = ', url, options)
     const res = await Taro.request({
       url: url.toString(),
-      method: 'POST',
+      method: (options?.method || 'POST') as 'POST' | 'GET',
       header: {
         'content-type': 'application/json'
       },
@@ -27,7 +26,7 @@ const httpLink = createHttpLink({
 
 const queryLink = createPersistedQueryLink({
   useGETForHashedQueries: true,
-  sha256
+  sha256: async (document: string) => crypto.createHash('sha256').update(document).digest('hex')
 })
 
 export const client = new ApolloClient({
