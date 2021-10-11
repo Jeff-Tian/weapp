@@ -20,9 +20,9 @@ jobs:
       - name: deeplinks
         run: |
           mkdir -p dist/pages/yuque
-          cp -r dist/index.html dist/pages/yuque/index.html
-          cp -r dist/index.html dist/pages/yuque/article.html
-          cp -r dist/index.html dist/pages/about/index.html
+          cp dist/index.html dist/pages/yuque/index.html
+          cp dist/index.html dist/pages/yuque/article.html
+          cp dist/index.html dist/pages/about/index.html
           ls dist
 
       -
