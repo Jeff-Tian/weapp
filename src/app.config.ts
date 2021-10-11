@@ -3,7 +3,8 @@ export default {
     'pages/yuque/index',
     'pages/yuque/article',
     'pages/index/index',
-    'pages/about/index'
+    'pages/about/index',
+    'pages/weapp/index'
   ],
   window: {
     backgroundTextStyle: 'light',

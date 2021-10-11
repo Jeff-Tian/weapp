@@ -21,11 +21,13 @@ jobs:
         run: |
           mkdir -p dist/pages/yuque
           mkdir -p dist/pages/about
+          mkdir -p dist/pages/weapp
 
           cp -r dist/index.html dist/pages/yuque/index.html
           cp -r dist/index.html dist/pages/yuque/article.html
           cp -r dist/index.html dist/pages/about/index.html
-          
+          cp -r dist/index.html dist/pages/weapp/index.html
+
           ls dist
 
       -
