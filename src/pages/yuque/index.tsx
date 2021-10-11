@@ -19,9 +19,7 @@ const YUQUE_BLOG = gql`
   `
 
 const YuQue: React.FC = () => {
-  const {loading, error, data} = useQuery(YUQUE_BLOG)
-
-  console.log(loading, error, data)
+  const {loading, error: _error, data} = useQuery(YUQUE_BLOG)
 
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}

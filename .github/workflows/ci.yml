@@ -17,6 +17,14 @@ jobs:
       - name: build
         run: yarn && yarn build:h5
 
+      - name: deeplinks
+        run: |
+          mkdir -p dist/pages/yuque
+          cp -r dist/index.html dist/pages/yuque/index.html
+          cp -r dist/index.html dist/pages/yuque/article.html
+          cp -r dist/index.html dist/pages/about/index.html
+          ls dist
+
       -
         name: Gen dummy page
         run: |

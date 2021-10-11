@@ -13,6 +13,7 @@ export const drawerItems = new Map<string, () => any>([
     })],
   ['小程序直达器',
     async () => Taro.navigateTo({url: '/pages/index/index'})],
+  ['关于', async () => Taro.navigateTo({url: '/pages/about/index'})]
 ])
 
 export const onDrawerItemClick = index => [...drawerItems.values()][index]()
