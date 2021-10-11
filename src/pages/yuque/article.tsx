@@ -44,7 +44,7 @@ const YuQueArticle: React.FC = () => {
     {data && data.yuque && <View className='at-article'>
       <Image
         className='at-article__img'
-        src={data.yuque.cover}
+        src={`https://uniheart.pa-ca.me/proxy?url=${data.yuque.cover}`}
         mode='widthFix'
       />
 

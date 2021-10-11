@@ -25,10 +25,10 @@ const YuQue: React.FC = () => {
     isOpened={loading}
   />
     {data && data.allYuque.map(article => <View><AtCard title={article.title} extra={`${article.word_count} 字`}
-      note={article.created_at} thumb={article.cover} onClick={()=>Taro.navigateTo({
+      note={article.created_at} thumb={`https://uniheart.pa-ca.me/proxy?url=${article.cover}`} onClick={()=>Taro.navigateTo({
       url: `/pages/yuque/article?id=${article.id}`,
     })}
-    ><AtAvatar image={article.cover} size='large' />
+    ><AtAvatar image={`https://uniheart.pa-ca.me/proxy?url=${article.cover}`} size='large' />
       {article.description}</AtCard><AtDivider lineColor='#fff' />
     </View>)}
   </HardwayLayout>
