@@ -4,7 +4,8 @@ export default {
     'pages/yuque/article',
     'pages/index/index',
     'pages/about/index',
-    'pages/weapp/index'
+    'pages/weapp/index',
+    'pages/test/index',
   ],
   window: {
     backgroundTextStyle: 'light',

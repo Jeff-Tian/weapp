@@ -2,14 +2,15 @@ import {gql, useQuery} from "@apollo/client"
 import {View, Image} from "@tarojs/components"
 import {AtActivityIndicator} from "taro-ui"
 import Taro from "@tarojs/taro"
-import ReactMarkdown from "react-markdown"
 import '@tarojs/taro/html.css'
+
+import {remark} from 'remark'
+import remarkHtml from "remark-html"
+import {useState} from "react"
 
 import './article.styl'
 
 import HardwayLayout from "../layout/hardway-layout"
-
-console.log('React = , ', ReactMarkdown)
 
 
 const YuQueArticle: React.FC = () => {
@@ -28,12 +29,18 @@ const YuQueArticle: React.FC = () => {
   `
 
   const {loading, error, data} = useQuery(YUQUE_BLOG)
+  const [html, setHtml] = useState('')
 
   console.log(loading, error, data)
 
   if (data && data.yuque) {
     Taro.setNavigationBarTitle({
       title: `${data.yuque.title}`
+    })
+
+    remark().use(remarkHtml).process(data.yuque.body).then(f => {
+      console.log('f = ', String(f))
+      setHtml(String(f))
     })
   }
 
@@ -56,8 +63,7 @@ const YuQueArticle: React.FC = () => {
       </View>
 
       <View className='at-article__content taro_html'>
-        {/*<View dangerouslySetInnerHTML={{__html: md.render(data.yuque.body)}} />*/}
-        <ReactMarkdown>{data.yuque.body}</ReactMarkdown>
+        <View dangerouslySetInnerHTML={{__html: html}} />
       </View>
 
     </View>}
