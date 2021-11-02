@@ -4,7 +4,7 @@ import {AtActivityIndicator} from "taro-ui"
 import Taro from "@tarojs/taro"
 import '@tarojs/taro/html.css'
 
-import {remark} from 'remark'
+import remark from 'remark'
 import remarkHtml from "remark-html"
 import {useState} from "react"
 
@@ -38,9 +38,14 @@ const YuQueArticle: React.FC = () => {
       title: `${data.yuque.title}`
     })
 
-    remark().use(remarkHtml).process(data.yuque.body).then(f => {
-      console.log('f = ', String(f))
+    const remarked = remark();
+    const used = remarked.use(remarkHtml);
+    const processed = used.process(data.yuque.body);
+    processed.then(f => {
       setHtml(String(f))
+    }).catch(ex => {
+      console.error(ex);
+      setHtml(String('hello, errored'))
     })
   }
 
