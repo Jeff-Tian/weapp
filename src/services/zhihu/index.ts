@@ -7,6 +7,8 @@ import {EventService} from "../../../VSCode-Zhihu/src/service/event.service";
 import {CollectionService} from "../../../VSCode-Zhihu/src/service/collection.service";
 import {CollectionTreeviewProvider} from "../../../VSCode-Zhihu/src/treeview/collection-treeview-provider";
 
+console.log('zhihu loaded!');
+
 export const publish = async () => {
   console.log('publishing...')
 

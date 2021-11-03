@@ -40,8 +40,12 @@ const YuQueArticle: React.FC = () => {
     }).then()
 
     const remarked = remark();
+    console.log('remarked = ', remarked);
     const used = remarked.use(remarkHtml);
+    console.log('used = ', used);
     const processed = used.process(data.yuque.body);
+    console.log('processed = ', processed);
+
     processed.then(f => {
       setHtml(String(f))
     }).catch(ex => {
