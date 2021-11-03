@@ -1,5 +1,5 @@
 import {gql, useQuery} from "@apollo/client"
-import {View, Image} from "@tarojs/components"
+import {View, Image, Button} from "@tarojs/components"
 import {AtActivityIndicator} from "taro-ui"
 import Taro from "@tarojs/taro"
 import '@tarojs/taro/html.css'
@@ -11,6 +11,7 @@ import {useState} from "react"
 import './article.styl'
 
 import HardwayLayout from "../layout/hardway-layout"
+import {publish} from "../../services/zhihu";
 
 
 const YuQueArticle: React.FC = () => {
@@ -36,7 +37,7 @@ const YuQueArticle: React.FC = () => {
   if (data && data.yuque) {
     Taro.setNavigationBarTitle({
       title: `${data.yuque.title}`
-    })
+    }).then()
 
     const remarked = remark();
     const used = remarked.use(remarkHtml);
@@ -49,8 +50,12 @@ const YuQueArticle: React.FC = () => {
     })
   }
 
+  const publishToZhihu = () => {
+    publish()
+  }
+
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
-    isOpened={loading}
+                                             isOpened={loading}
   />
     {data && data.yuque && <View className='at-article'>
       {data.yuque.cover && <Image
@@ -67,8 +72,10 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
+      <Button onClick={publishToZhihu}>发布到知乎</Button>
+
       <View className='at-article__content taro_html'>
-        <View dangerouslySetInnerHTML={{__html: html}} />
+        <View dangerouslySetInnerHTML={{__html: html}}/>
       </View>
 
     </View>}

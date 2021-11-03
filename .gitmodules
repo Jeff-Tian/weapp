@@ -1,0 +1,3 @@
+[submodule "VSCode-Zhihu"]
+	path = VSCode-Zhihu
+	url = https://github.com/niudai/VSCode-Zhihu.git

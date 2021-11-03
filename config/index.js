@@ -1,3 +1,5 @@
+import path from "path";
+
 const config = {
   projectName: 'weapp',
   date: '2021-8-13',
@@ -56,12 +58,18 @@ const config = {
     esnextModules: ['taro-ui'],
     router: {
       mode: 'browser',
-    }
+    },
   },
 }
 
-module.exports = merge => merge({}, config,
-  process.env.NODE_ENV === 'development' ?
-    require('./dev') :
-    require('./prod'),
-)
+module.exports = merge => {
+  const final = merge({
+    }, config,
+    process.env.NODE_ENV === 'development' ?
+      require('./dev') :
+      require('./prod'),
+  );
+
+  console.log('final = ', final)
+  return final
+}

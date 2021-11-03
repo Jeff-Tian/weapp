@@ -22,6 +22,10 @@
       "node_modules/@types",
       "global.d.ts"
     ],
+    "esModuleInterop": false,
+    "paths": {
+      "fs": ["./src/mocks/fs.ts"]
+    }
   },
   "exclude": [
     "node_modules",

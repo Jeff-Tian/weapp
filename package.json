@@ -13,7 +13,7 @@
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
     "build:tt": "taro build --type tt",
-    "build:h5": "taro build --type h5",
+    "build:h5": "cp -r src/mocks/* node_modules&&taro build --type h5",
     "build:rn": "taro build --type rn",
     "build:qq": "taro build --type qq",
     "build:jd": "taro build --type jd",
@@ -43,13 +43,18 @@
     "@tarojs/runtime": "3.3.3",
     "@tarojs/taro": "3.3.3",
     "@testing-library/jest-dom": "^5.14.1",
+    "cheerio": "^1.0.0-rc.10",
+    "form-urlencoded": "^6.0.5",
     "graphql": "^15.6.0",
     "jest": "^27.2.5",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "remark": "12.0.0",
     "remark-html": "^15.0.0",
-    "taro-ui": "3.0.0-alpha.10"
+    "request-promise": "^4.2.6",
+    "taro-ui": "3.0.0-alpha.10",
+    "tough-cookie-filestore": "^0.0.1",
+    "zhihu-encrypt": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
