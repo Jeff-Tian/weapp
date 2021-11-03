@@ -13,9 +13,14 @@ export const publish = async () => {
   console.log('publishing...')
 
   const accountService = new AccountService();
+
+  console.log('account service loaded');
   const profileService = new ProfileService(accountService);
 
+  console.log('profileService loaded');
   const eventService = new EventService();
+
+  console.log('eventService loaded')
   const feedTreeViewProvider = new FeedTreeViewProvider(accountService, profileService, eventService);
 
   const collectionService = new CollectionService();
@@ -25,5 +30,6 @@ export const publish = async () => {
 
   const authService = new AuthenticateService(profileService, accountService, feedTreeViewProvider, webviewService)
 
+  console.log('passwordLogin...')
   await authService.passwordLogin()
 }

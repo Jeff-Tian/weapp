@@ -1,5 +1,3 @@
-import path from "path";
-
 const config = {
   projectName: 'weapp',
   date: '2021-8-13',
@@ -63,13 +61,9 @@ const config = {
 }
 
 module.exports = merge => {
-  const final = merge({
-    }, config,
+  return merge({}, config,
     process.env.NODE_ENV === 'development' ?
       require('./dev') :
       require('./prod'),
-  );
-
-  console.log('final = ', final)
-  return final
+  )
 }
