@@ -34,11 +34,12 @@ const YuQueArticle: React.FC = () => {
 
   console.log(loading, error, data)
 
-  if (data && data.yuque) {
+  if (data && data.yuque && !html) {
     Taro.setNavigationBarTitle({
       title: `${data.yuque.title}`
     }).then()
 
+    console.log('remark = ', remark);
     const remarked = remark();
     console.log('remarked = ', remarked);
     const used = remarked.use(remarkHtml);
@@ -46,12 +47,7 @@ const YuQueArticle: React.FC = () => {
     const processed = used.process(data.yuque.body);
     console.log('processed = ', processed);
 
-    processed.then(f => {
-      setHtml(String(f))
-    }).catch(ex => {
-      console.error(ex);
-      setHtml(String('hello, errored'))
-    })
+    setHtml(String(processed))
   }
 
   const publishToZhihu = () => {
@@ -59,7 +55,7 @@ const YuQueArticle: React.FC = () => {
   }
 
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
-                                             isOpened={loading}
+    isOpened={loading}
   />
     {data && data.yuque && <View className='at-article'>
       {data.yuque.cover && <Image
@@ -79,7 +75,7 @@ const YuQueArticle: React.FC = () => {
       <Button onClick={publishToZhihu}>发布到知乎</Button>
 
       <View className='at-article__content taro_html'>
-        <View dangerouslySetInnerHTML={{__html: html}}/>
+        <View dangerouslySetInnerHTML={{__html: html}} />
       </View>
 
     </View>}
