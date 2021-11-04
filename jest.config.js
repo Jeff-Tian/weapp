@@ -20,4 +20,5 @@ module.exports = {
     './jice.weapp': '<rootDir>/__mock__/jice',
     '/gio-minp/gio-minp.js': '<rootDir>/__mock__/gio'
   },
+  testEnvironment: 'jsdom'
 }
