@@ -1,4 +1,6 @@
-import {Cookie, Store} from "tough-cookie";
+import {Cookie, CookieJar, Store} from "tough-cookie";
+
+type FindCookiesCallback = (err: (Error | null), cookie: Cookie[]) => void
 
 export class BrowserCookieStore implements Store {
   synchronous: boolean;
@@ -22,7 +24,15 @@ export class BrowserCookieStore implements Store {
     cb(null, null)
   }
 
-  findCookies(domain: string, path: string, allowSpecialUseDomain: boolean, cb: (err: (Error | null), cookie: Cookie[]) => void): void {
+  findCookies(domain: string, path: string, cb: FindCookiesCallback): void
+  findCookies(domain: string, path: string, allowSpecialUseDomain: boolean, cb: FindCookiesCallback): void
+  findCookies(domain: string, path: string, allowSpecialUseDomain: boolean | FindCookiesCallback, cb?: FindCookiesCallback): void {
+    console.log('domain: ' + domain, '; path: ' + path, '; allowSpecialUseDomain: ', allowSpecialUseDomain, '; cb = ', cb)
+
+    if (!cb) {
+      cb = allowSpecialUseDomain as FindCookiesCallback
+    }
+
     const decodedCookie = decodeURIComponent(document.cookie)
     const cookies: Cookie[] = []
 
@@ -30,7 +40,13 @@ export class BrowserCookieStore implements Store {
       const cookie = Cookie.parse(c)
 
       if (cookie) {
-        cookies.push(cookie)
+        if (domain && path) {
+          if (cookie.domain === domain && cookie.path === path) {
+            cookies.push(cookie)
+          }
+        } else {
+          cookies.push(cookie)
+        }
       }
     })
 
@@ -79,6 +95,19 @@ export class BrowserCookieStore implements Store {
 
 }
 
+const cookieStore = new BrowserCookieStore()
+cookieStore.synchronous = true;
+
 export const getCookieStore = () => {
-  return new BrowserCookieStore();
+  return cookieStore
+}
+
+export const clearCookieStore = () => {
+  cookieStore.removeCookies('', '', () => {
+  })
+  return cookieStore
+}
+
+export const getCookieJar = () => {
+  return new CookieJar(cookieStore)
 }

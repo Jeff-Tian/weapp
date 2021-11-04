@@ -106,4 +106,14 @@ describe('Browser Cookie Store', () => {
     })
   })
 
+  it('finds cookie without allowSpecialUseDomain', (done) => {
+    const cb = (err, cookies) => {
+      expect(err).toEqual(null)
+      expect(cookies.length).toEqual(0)
+
+      done()
+    }
+
+    sut.findCookies('www.zhihu.com', '/api/v3/oauth/captcha', cb)
+  })
 })
