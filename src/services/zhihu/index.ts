@@ -81,22 +81,27 @@ export const qrcodeLogin = async () => {
 
   const scanInfoUrl = getUrl(`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/scan_info`, '')
 
-  const intervalId = setInterval(async () => {
+  Taro.previewImage({
+    current: `https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`,
+    urls: [`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`],
+  })
+
+  const poll = async () => {
     try {
       const res3 = await Taro.request({
         url: scanInfoUrl,
         dataType: 'json',
       })
 
-      console.log('res3 = ', res3);
+      if (res3.data.status === 0) {
+        await poll();
+      }
 
       if (res3.data.status === 1) {
         Taro.showToast({ title: '扫码成功', icon: 'success', duration: 2000 })
       }
 
       if (!!res3.data.user_id) {
-        clearInterval(intervalId)
-
         Taro.showToast({ title: '登录成功', icon: 'success', duration: 2000 })
 
         const originalCookie = Taro.getStorageSync('set-cookie')
@@ -110,23 +115,15 @@ export const qrcodeLogin = async () => {
 
         Taro.showToast({ title: 'Cookie 设置成功', icon: 'success', duration: 2000 })
         console.log('now cookie = ', Taro.getStorageSync('set-cookie'));
-      }
 
-      console.log('publishing...')
-      await draftColumn()
+        console.log('publishing...')
+        await draftColumn()
+      }
 
     } catch (err) {
       console.error('err = ', err);
     }
-  }, 1000)
+  }
 
-  Taro.previewImage({
-    current: `https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`,
-    urls: [`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`],
-    complete: (r) => {
-      console.log('re = ', r);
-    }
-  })
-
-
+  poll();
 }
