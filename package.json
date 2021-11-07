@@ -44,19 +44,15 @@
     "@tarojs/runtime": "3.3.3",
     "@tarojs/taro": "3.3.3",
     "@testing-library/jest-dom": "^5.14.1",
-    "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
     "form-urlencoded": "^6.0.5",
     "graphql": "^15.6.0",
     "jest": "^27.2.5",
-    "pug": "^3.0.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "remark": "5.0.1",
     "remark-html": "5.0.1",
-    "taro-ui": "3.0.0-alpha.10",
-    "tough-cookie-filestore": "^0.0.1",
-    "zhihu-encrypt": "^1.0.0"
+    "taro-ui": "3.0.0-alpha.10"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",

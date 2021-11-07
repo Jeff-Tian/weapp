@@ -1,16 +1,16 @@
 import Taro from '@tarojs/taro'
 
-export const publish = async () => {
+export const publish = async (title, content) => {
   console.log('login...')
 
   try {
-    await qrcodeLogin()
+    await qrcodeLogin(title, content)
   } catch (ex) {
     console.error('ex = ', ex);
   }
 }
 
-export const draftColumn = async () => {
+export const draftColumn = async (title, content) => {
   const cookie = Taro.getStorageSync('set-cookie').map(item => item.split(';')[0]).join(';')
 
   const draftUrl = getUrl('https://zhuanlan.zhihu.com/api/articles/drafts', cookie)
@@ -19,7 +19,7 @@ export const draftColumn = async () => {
     url: draftUrl,
     method: 'POST',
     dataType: 'json',
-    data: { title: 'he', 'delta-time': 0 },
+    data: { title, content, 'delta-time': 0 },
     header: {
       'authority': 'zhuanlan.zhihu.com',
       'origin': 'https://zhuanlan.zhihu.com',
@@ -39,7 +39,7 @@ export const getUrl = (url: string, cookie) => {
   return Taro.ENV_TYPE.WEB !== Taro.getEnv() ? url : `https://uniheart.pa-ca.me/proxy?cookie=${cookie}&url=${url}`
 }
 
-export const qrcodeLogin = async () => {
+export const qrcodeLogin = async (title, content) => {
   const zhihuUdidUrl = 'https://www.zhihu.com/udid'
   const url = Taro.ENV_TYPE.WEB === Taro.getEnv() ? 'https://uniheart.pa-ca.me/proxy?dataType=text&url=' + encodeURIComponent(zhihuUdidUrl) : zhihuUdidUrl
 
@@ -117,7 +117,7 @@ export const qrcodeLogin = async () => {
         console.log('now cookie = ', Taro.getStorageSync('set-cookie'));
 
         console.log('publishing...')
-        await draftColumn()
+        await draftColumn(title, content)
       }
 
     } catch (err) {

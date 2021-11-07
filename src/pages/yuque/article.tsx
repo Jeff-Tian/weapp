@@ -1,17 +1,17 @@
-import {gql, useQuery} from "@apollo/client"
-import {View, Image, Button} from "@tarojs/components"
-import {AtActivityIndicator} from "taro-ui"
+import { gql, useQuery } from "@apollo/client"
+import { View, Image, Button } from "@tarojs/components"
+import { AtActivityIndicator } from "taro-ui"
 import Taro from "@tarojs/taro"
 import '@tarojs/taro/html.css'
 
 import remark from 'remark'
 import remarkHtml from "remark-html"
-import {useState} from "react"
+import { useState } from "react"
 
 import './article.styl'
 
 import HardwayLayout from "../layout/hardway-layout"
-import {publish} from "../../services/zhihu";
+import { publish } from "../../services/zhihu";
 
 
 const YuQueArticle: React.FC = () => {
@@ -29,7 +29,7 @@ const YuQueArticle: React.FC = () => {
         }
   `
 
-  const {loading, error, data} = useQuery(YUQUE_BLOG)
+  const { loading, error, data } = useQuery(YUQUE_BLOG)
   const [html, setHtml] = useState('')
 
   console.log(loading, error, data)
@@ -50,8 +50,8 @@ const YuQueArticle: React.FC = () => {
     setHtml(String(processed))
   }
 
-  const publishToZhihu = () => {
-    publish()
+  const publishToZhihu = (title, content) => {
+    publish(title, content)
   }
 
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
@@ -72,10 +72,10 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
-      <Button onClick={publishToZhihu}>发布到知乎</Button>
+      <Button onClick={() => publishToZhihu(data.yuque.title, html)}>发布到知乎</Button>
 
       <View className='at-article__content taro_html'>
-        <View dangerouslySetInnerHTML={{__html: html}} />
+        <View dangerouslySetInnerHTML={{ __html: html }} />
       </View>
 
     </View>}
