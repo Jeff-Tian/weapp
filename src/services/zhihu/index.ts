@@ -1,33 +1,79 @@
-import {AuthenticateService} from "../../../VSCode-Zhihu/src/service/authenticate.service";
-import {ProfileService} from "../../../VSCode-Zhihu/src/service/profile.service";
-import {AccountService} from "../../../VSCode-Zhihu/src/service/account.service";
-import {FeedTreeViewProvider} from "../../../VSCode-Zhihu/src/treeview/feed-treeview-provider";
-import {WebviewService} from "../../../VSCode-Zhihu/src/service/webview.service";
-import {EventService} from "../../../VSCode-Zhihu/src/service/event.service";
-import {CollectionService} from "../../../VSCode-Zhihu/src/service/collection.service";
-import {CollectionTreeviewProvider} from "../../../VSCode-Zhihu/src/treeview/collection-treeview-provider";
+import Taro from '@tarojs/taro'
+import { Image } from '@tarojs/components'
 
 export const publish = async () => {
   console.log('publishing...')
 
-  const accountService = new AccountService();
+  await qrcodeLogin()
+}
 
-  console.log('account service loaded');
-  const profileService = new ProfileService(accountService);
+export const getUrl = (url: string, cookie) => {
+  return Taro.ENV_TYPE.WEB !== Taro.getEnv() ? url : `https://uniheart.pa-ca.me/proxy?cookie=${cookie}&url=${url}`
+}
 
-  console.log('profileService loaded');
-  const eventService = new EventService();
+export const qrcodeLogin = async () => {
+  const zhihuUdidUrl = 'https://www.zhihu.com/udid'
+  const url = Taro.ENV_TYPE.WEB === Taro.getEnv() ? 'https://uniheart.pa-ca.me/proxy?dataType=text&url=' + encodeURIComponent(zhihuUdidUrl) : zhihuUdidUrl
 
-  console.log('eventService loaded')
-  const feedTreeViewProvider = new FeedTreeViewProvider(accountService, profileService, eventService);
+  const res = await Taro.request({
+    url,
+    method: 'POST',
+    dataType: 'text',
+    header: {
+      'content-type': `text/plain`,
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
 
-  const collectionService = new CollectionService();
-  const collectionTreeViewProvider = new CollectionTreeviewProvider(profileService, collectionService)
+  Taro.setStorage({
+    key: 'set-cookie',
+    data: JSON.parse(res.data).headers['set-cookie']
+  })
 
-  const webviewService = new WebviewService(collectionService, collectionTreeViewProvider);
+  const cookie = Taro.getStorageSync('set-cookie').map(item => item.split(';')[0]).join(';')
 
-  const authService = new AuthenticateService(profileService, accountService, feedTreeViewProvider, webviewService)
+  const qrcodeUrl = getUrl('https://www.zhihu.com/api/v3/account/api/login/qrcode', cookie)
 
-  console.log('passwordLogin...')
-  await authService.passwordLogin()
+  console.log("cookie=", Taro.getStorageSync('set-cookie'));
+
+
+  const res2 = await Taro.request({
+    url: qrcodeUrl,
+    method: 'POST',
+    dataType: 'json',
+    header: {
+      'content-type': `application/json`,
+      'X-Requested-With': 'XMLHttpRequest',
+      cookie
+    },
+  })
+
+  console.log('res2 = ', res2);
+  Taro.setStorageSync('zhihu-token', res2.data.token);
+
+  const scanInfoUrl = getUrl(`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/scan_info`, '')
+
+  const intervalId = setInterval(async () => {
+    const res3 = await Taro.request({
+      url: scanInfoUrl,
+      dataType: 'json',
+    })
+    console.log('res3 = ', res3);
+
+    if (res3.data.status === 1) {
+      clearInterval(intervalId)
+    }
+
+    Taro.showToast({ title: '扫码成功', icon: 'success', duration: 2000 })
+  }, 1000)
+
+  Taro.previewImage({
+    current: `https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`,
+    urls: [`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`],
+    complete: (r) => {
+      console.log('re = ', r);
+    }
+  })
+
+
 }

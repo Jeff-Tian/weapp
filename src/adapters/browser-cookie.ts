@@ -58,6 +58,7 @@ export class BrowserCookieStore implements Store {
   }
 
   putCookie(cookie: Cookie, cb: (err: (Error | null)) => void): void {
+    console.log('put cookie = ', cookie);
     document.cookie = cookie.toString()
 
     cb(null)
