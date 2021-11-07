@@ -1,5 +1,9 @@
 import Taro from '@tarojs/taro'
 
+export const loginAndPublish = async (title, content) => {
+  return await draftColumn(title, content)
+}
+
 export const publish = async (title, content) => {
   console.log('login...')
 
@@ -12,6 +16,8 @@ export const publish = async (title, content) => {
 
 export const draftColumn = async (title, content) => {
   const cookie = Taro.getStorageSync('set-cookie').map(item => item.split(';')[0]).join(';')
+
+  console.log("publish with cookie: ", cookie);
 
   const draftUrl = getUrl('https://zhuanlan.zhihu.com/api/articles/drafts', cookie)
 
@@ -27,7 +33,8 @@ export const draftColumn = async (title, content) => {
       'sec-fetch-mode': 'cors',
       'sec-fetch-dest': 'empty',
       'referer': 'https://zhuanlan.zhihu.com/write',
-      'x-requested-with': 'fetch'
+      'x-requested-with': 'fetch',
+      cookie
     }
   })
 
