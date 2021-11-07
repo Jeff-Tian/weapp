@@ -53,10 +53,21 @@ export const qrcodeLogin = async (title, content) => {
     }
   })
 
-  Taro.setStorage({
-    key: 'set-cookie',
-    data: JSON.parse(res.data).headers['set-cookie']
-  })
+  console.log('res = ', res.data, res);
+
+  if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+    Taro.setStorage({
+      key: 'set-cookie',
+      data: JSON.parse(res.data).headers['set-cookie']
+    })
+  } else {
+    console.log('setting cookie!')
+
+    Taro.setStorage({
+      key: 'set-cookie',
+      data: (res.cookies ?? []).concat([res.header['set-cookie']]).concat([res.header['Set-Cookie']])
+    })
+  }
 
   const cookie = Taro.getStorageSync('set-cookie').map(item => item.split(';')[0]).join(';')
 
@@ -77,6 +88,21 @@ export const qrcodeLogin = async (title, content) => {
   })
 
   console.log('res2 = ', res2);
+
+  if (!res2.data.token) {
+    console.log('res2.data.token = ', res2.data);
+
+    Taro.showToast({
+      title: res2.data.message || '登录失败',
+      icon: 'none',
+      duration: 2000
+    })
+
+    return;
+  }
+
+  console.log("token saving...")
+
   Taro.setStorageSync('zhihu-token', res2.data.token);
 
   const scanInfoUrl = getUrl(`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/scan_info`, '')
@@ -99,6 +125,8 @@ export const qrcodeLogin = async (title, content) => {
 
       if (res3.data.status === 1) {
         Taro.showToast({ title: '扫码成功', icon: 'success', duration: 2000 })
+
+        await poll();
       }
 
       if (!!res3.data.user_id) {
@@ -106,10 +134,17 @@ export const qrcodeLogin = async (title, content) => {
 
         const originalCookie = Taro.getStorageSync('set-cookie')
 
-        Taro.setStorage({
-          key: 'set-cookie',
-          data: originalCookie.concat(Object.keys(res3.data.cookie).map(key => `${key}=${res3.data.cookie[key]}`))
-        })
+        if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+          Taro.setStorage({
+            key: 'set-cookie',
+            data: originalCookie.concat(Object.keys(res3.data.cookie).map(key => `${key}=${res3.data.cookie[key]}`))
+          })
+        } else {
+          Taro.setStorage({
+            key: 'set-cookie',
+            data: originalCookie.concat(res3.cookies ?? []).concat([res3.header['set-cookie']]).concat([res3.header['Set-Cookie']])
+          })
+        }
 
         Taro.setStorageSync('zhihu-user-info', res3.data)
 
