@@ -1,17 +1,17 @@
-import { gql, useQuery } from "@apollo/client"
-import { View, Image, Button } from "@tarojs/components"
-import { AtActivityIndicator } from "taro-ui"
+import {gql, useQuery} from "@apollo/client"
+import {Button, Image, View} from "@tarojs/components"
+import {AtActivityIndicator} from "taro-ui"
 import Taro from "@tarojs/taro"
 import '@tarojs/taro/html.css'
 
 import remark from 'remark'
 import remarkHtml from "remark-html"
-import { useState } from "react"
+import {useState} from "react"
 
 import './article.styl'
 
 import HardwayLayout from "../layout/hardway-layout"
-import { publish, loginAndPublish } from "../../services/zhihu";
+import {draftDirectly, loginAndPublish} from "../../services/zhihu";
 
 
 const YuQueArticle: React.FC = () => {
@@ -50,14 +50,6 @@ const YuQueArticle: React.FC = () => {
     setHtml(String(processed))
   }
 
-  const publishToZhihu = (title, content) => {
-    publish(title, content)
-  }
-
-  const loginAndPublishToZhihu = (title, content) => {
-    loginAndPublish(title, content)
-  }
-
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
   />
@@ -76,8 +68,8 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
-      <Button onClick={() => loginAndPublishToZhihu(data.yuque.title, html)}>登录并发布到知乎</Button>
-      <Button onClick={() => publishToZhihu(data.yuque.title, html)}>直接发布到知乎</Button>
+      <Button onClick={() => loginAndPublish(data.yuque.title, html)}>登录并发布到知乎</Button>
+      <Button onClick={() => draftDirectly(data.yuque.title, html)}>直接发布到知乎</Button>
 
       <View className='at-article__content taro_html'>
         <View dangerouslySetInnerHTML={{ __html: html }} />
