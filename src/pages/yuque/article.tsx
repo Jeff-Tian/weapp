@@ -11,7 +11,7 @@ import {useState} from "react"
 import './article.styl'
 
 import HardwayLayout from "../layout/hardway-layout"
-import {draftDirectly, loginAndPublish} from "../../services/zhihu";
+import {draftDirectly, loginByQrCode} from "../../services/zhihu";
 
 
 const YuQueArticle: React.FC = () => {
@@ -68,8 +68,8 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
-      <Button onClick={() => loginAndPublish(data.yuque.title, html)}>登录并发布到知乎</Button>
-      <Button onClick={() => draftDirectly(data.yuque.title, html)}>直接发布到知乎</Button>
+      <Button onClick={() => loginByQrCode()}>登录知乎</Button>
+      <Button onClick={() => draftDirectly(data.yuque.title, html)}>发布到知乎</Button>
 
       <View className='at-article__content taro_html'>
         <View dangerouslySetInnerHTML={{ __html: html }} />

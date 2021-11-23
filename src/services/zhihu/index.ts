@@ -4,11 +4,11 @@ export const draftDirectly = async (title, content) => {
   return await draftColumn(title, content)
 }
 
-export const loginAndPublish = async (title, content) => {
+export const loginByQrCode = async () => {
   console.log('login...')
 
   try {
-    await qrcodeLogin(title, content)
+    await qrcodeLogin()
   } catch (ex) {
     console.error('ex = ', ex);
   }
@@ -56,7 +56,7 @@ export const getUrl = (url: string, cookie) => {
   return Taro.ENV_TYPE.WEB !== Taro.getEnv() ? url : `https://uniheart.pa-ca.me/proxy?cookie=${cookie}&url=${url}`
 }
 
-export const qrcodeLogin = async (title, content) => {
+export const qrcodeLogin = async () => {
   const zhihuUdidUrl = 'https://www.zhihu.com/udid'
   const url = Taro.ENV_TYPE.WEB === Taro.getEnv() ? 'https://uniheart.pa-ca.me/proxy?dataType=text&url=' + encodeURIComponent(zhihuUdidUrl) : zhihuUdidUrl
 
@@ -167,11 +167,7 @@ export const qrcodeLogin = async (title, content) => {
 
         Taro.showToast({title: 'Cookie 设置成功', icon: 'success', duration: 2000})
         console.log('now cookie = ', Taro.getStorageSync('set-cookie'));
-
-        console.log('publishing...')
-        await draftColumn(title, content)
       }
-
     } catch (err) {
       console.error('err = ', err);
     }
