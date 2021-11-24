@@ -53,7 +53,7 @@ export const draftColumn = async (title, content) => {
 
 
 export const getUrl = (url: string, cookie) => {
-  return Taro.ENV_TYPE.WEB !== Taro.getEnv() ? url : `https://uniheart.pa-ca.me/proxy?cookie=${cookie}&url=${url}&authority=${encodeURIComponent('zhuanlan.zhihu.com')}&origin=${encodeURIComponent('https://zhuanlan.zhihu.com')}&referer=${encodeURIComponent('https://zhuanlan.zhihu.com/write')}`
+  return Taro.ENV_TYPE.WEB !== Taro.getEnv() ? url : `https://uniheart.pa-ca.me/proxy?cookie=${cookie}&url=${url}&authority=${encodeURIComponent('zhuanlan.zhihu.com')}&origin=${encodeURIComponent('https://zhuanlan.zhihu.com')}&referer=${encodeURIComponent('https://zhuanlan.zhihu.com/write')}&dataType=json`
 }
 
 export const qrcodeLogin = async () => {
