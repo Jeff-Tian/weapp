@@ -15,9 +15,21 @@ import {draftDirectly, loginByQrCode} from "../../services/zhihu";
 
 
 const YuQueArticle: React.FC = () => {
-  const YUQUE_BLOG = gql`
+  const YUQUE_BLOG = Taro.getCurrentInstance()?.router?.params.id ? gql`
         query {
           yuque (id: "${Taro.getCurrentInstance()?.router?.params.id}") {
+            id
+            title
+            description
+            word_count
+            created_at
+            cover
+            body
+          }
+        }
+  ` : gql`
+  query {
+          yuque (slug: "${Taro.getCurrentInstance()?.router?.params.slug}") {
             id
             title
             description
