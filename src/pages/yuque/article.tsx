@@ -7,6 +7,7 @@ import '@tarojs/taro/html.css'
 import remark from 'remark'
 import remarkHtml from "remark-html"
 import {useState} from "react"
+import * as assert from 'assert';
 
 import './article.styl'
 
@@ -14,10 +15,17 @@ import HardwayLayout from "../layout/hardway-layout"
 import {draftDirectly, loginByQrCode} from "../../services/zhihu";
 
 
+
 const YuQueArticle: React.FC = () => {
-  const YUQUE_BLOG = Taro.getCurrentInstance()?.router?.params.id ? gql`
+  const params = Taro.getCurrentInstance()?.router?.params
+
+  assert.ok(params, "本页必须传递参数！")
+
+  const {id, slug} = params
+
+  const YUQUE_BLOG = id ? gql`
         query {
-          yuque (id: "${Taro.getCurrentInstance()?.router?.params.id}") {
+          yuque (id: "${id}") {
             id
             title
             description
@@ -29,7 +37,7 @@ const YuQueArticle: React.FC = () => {
         }
   ` : gql`
   query {
-          yuque (slug: "${Taro.getCurrentInstance()?.router?.params.slug}") {
+          yuque (slug: "${slug}") {
             id
             title
             description
@@ -51,13 +59,9 @@ const YuQueArticle: React.FC = () => {
       title: `${data.yuque.title}`
     }).then()
 
-    console.log('remark = ', remark);
     const remarked = remark();
-    console.log('remarked = ', remarked);
     const used = remarked.use(remarkHtml);
-    console.log('used = ', used);
     const processed = used.process(data.yuque.body);
-    console.log('processed = ', processed);
 
     setHtml(String(processed))
   }
