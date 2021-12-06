@@ -17,7 +17,7 @@ export const loginByQrCode = async () => {
 export const draftColumn = async (title, content) => {
   const cookie = (Taro.getStorageSync('set-cookie') || []).map(item => item.split(';')[0]).join(';')
 
-  if(!cookie){
+  if (!cookie) {
     await Taro.showToast({
       title: '发布失败，请先登录后再试',
       duration: 3000,
@@ -35,7 +35,7 @@ export const draftColumn = async (title, content) => {
     url: draftUrl,
     method: 'POST',
     dataType: 'json',
-    data: {title, content, 'delta-time': 0},
+    data: { title, content, 'delta-time': 0 },
     header: {
       'authority': 'zhuanlan.zhihu.com',
       'origin': 'https://zhuanlan.zhihu.com',
@@ -49,6 +49,14 @@ export const draftColumn = async (title, content) => {
   })
 
   console.log('res = ', res);
+
+  if (res.statusCode === 401) {
+    Taro.showToast({
+      title: `可能上次登录未完成，或者登录已过期，请重新登录后再试。  知乎反馈：${res.data.error.message}`,
+      icon: 'none',
+      duration: 5000
+    })
+  }
 }
 
 
@@ -141,13 +149,13 @@ export const qrcodeLogin = async () => {
       }
 
       if (res3.data.status === 1) {
-        Taro.showToast({title: '扫码成功', icon: 'success', duration: 2000})
+        Taro.showToast({ title: '扫码成功', icon: 'success', duration: 2000 })
 
         await poll();
       }
 
       if (!!res3.data.user_id) {
-        Taro.showToast({title: '登录成功', icon: 'success', duration: 2000})
+        Taro.showToast({ title: '登录成功', icon: 'success', duration: 2000 })
 
         const originalCookie = Taro.getStorageSync('set-cookie')
 
@@ -165,7 +173,7 @@ export const qrcodeLogin = async () => {
 
         Taro.setStorageSync('zhihu-user-info', res3.data)
 
-        Taro.showToast({title: 'Cookie 设置成功', icon: 'success', duration: 2000})
+        Taro.showToast({ title: 'Cookie 设置成功', icon: 'success', duration: 2000 })
         console.log('now cookie = ', Taro.getStorageSync('set-cookie'));
       }
     } catch (err) {
