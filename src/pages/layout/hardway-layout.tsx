@@ -18,7 +18,15 @@ const HardwayLayout = (props) => {
         setShowDrawer(true)
       }}
       onClickRgIconNd={() => {
-        loginByQrCode()
+        if (zhihuUserInfo) {
+          Taro.showToast({
+            title: '已经登录',
+            icon: 'success',
+            duration: 1000
+          })
+        } else {
+          loginByQrCode()
+        }
       }}
       onClickLeftIcon={() => {
       }}
