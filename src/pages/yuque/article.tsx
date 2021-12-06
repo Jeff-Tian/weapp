@@ -1,18 +1,18 @@
-import {gql, useQuery} from "@apollo/client"
-import {Button, Image, View} from "@tarojs/components"
-import {AtActivityIndicator} from "taro-ui"
+import { gql, useQuery } from "@apollo/client"
+import { Button, Image, View } from "@tarojs/components"
+import { AtActivityIndicator } from "taro-ui"
 import Taro from "@tarojs/taro"
 import '@tarojs/taro/html.css'
 
 import remark from 'remark'
 import remarkHtml from "remark-html"
-import {useState} from "react"
+import { useState } from "react"
 import * as assert from 'assert';
 
 import './article.styl'
 
 import HardwayLayout from "../layout/hardway-layout"
-import {draftDirectly} from "../../services/zhihu";
+import { draftDirectly } from "../../services/zhihu";
 
 
 
@@ -21,7 +21,7 @@ const YuQueArticle: React.FC = () => {
 
   assert.ok(params, "本页必须传递参数！")
 
-  const {id, slug} = params
+  const { id, slug } = params
 
   const YUQUE_BLOG = id ? gql`
         query {
@@ -52,7 +52,15 @@ const YuQueArticle: React.FC = () => {
   const { loading, error, data } = useQuery(YUQUE_BLOG)
   const [html, setHtml] = useState('')
 
-  console.log(loading, error, data)
+  if (error) {
+    console.error(error)
+    
+    Taro.showToast({
+      title: error.message,
+      icon: 'none',
+      duration: 3000
+    })
+  }
 
   if (data && data.yuque && !html) {
     Taro.setNavigationBarTitle({
@@ -87,7 +95,9 @@ const YuQueArticle: React.FC = () => {
       <Button onClick={() => draftDirectly(data.yuque.title, html)}>发布到知乎</Button>
 
       <View className='at-article__content taro_html'>
-        <View dangerouslySetInnerHTML={{ __html: html }} />
+        <View className='at-article__section'>
+          <View dangerouslySetInnerHTML={{ __html: html }} />
+        </View>
       </View>
 
     </View>}
