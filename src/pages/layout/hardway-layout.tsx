@@ -1,10 +1,16 @@
-import {AtDrawer, AtNavBar} from "taro-ui"
-import {View} from "@tarojs/components"
-import {useState} from "react"
-import {drawerItems, onDrawerItemClick} from "./drawer-items"
+import Taro from '@tarojs/taro'
+import { AtDrawer, AtNavBar } from "taro-ui"
+import { View } from "@tarojs/components"
+import { useState } from "react"
+import { loginByQrCode } from "../../services/zhihu"
+import { drawerItems, onDrawerItemClick } from "./drawer-items"
+import { StorageKeys } from "../../common/constants"
+
 
 const HardwayLayout = (props) => {
   const [showDrawer, setShowDrawer] = useState(false)
+
+  const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
 
   return <View>
     <AtNavBar
@@ -12,6 +18,7 @@ const HardwayLayout = (props) => {
         setShowDrawer(true)
       }}
       onClickRgIconNd={() => {
+        loginByQrCode()
       }}
       onClickLeftIcon={() => {
       }}
@@ -20,7 +27,7 @@ const HardwayLayout = (props) => {
       leftText='返回'
       leftIconType='chevron-left'
       rightFirstIconType='bullet-list'
-      rightSecondIconType='user'
+      rightSecondIconType={zhihuUserInfo ? { value: 'user', color: 'blue' } : 'user'}
     />
 
     {props.children}
