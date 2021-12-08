@@ -19,7 +19,11 @@ const YUQUE_BLOG = gql`
   `
 
 const YuQue: React.FC = () => {
-  const {loading, error: _error, data} = useQuery(YUQUE_BLOG)
+  const {loading, error, data} = useQuery(YUQUE_BLOG)
+
+  if(error) {
+    Taro.navigateTo({url: `/pages/yuque/article?slug=ytwbzm`}).then()
+  }
 
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
