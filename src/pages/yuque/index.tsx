@@ -4,6 +4,7 @@ import {AtActivityIndicator, AtAvatar, AtCard, AtDivider} from "taro-ui"
 import Taro from "@tarojs/taro"
 import './article.styl'
 import HardwayLayout from "../layout/hardway-layout"
+import {useEffect} from "react";
 
 const YUQUE_BLOG = gql`
         query {
@@ -14,6 +15,7 @@ const YUQUE_BLOG = gql`
             word_count
             created_at
             cover
+            slug
           }
         }
   `
@@ -21,9 +23,11 @@ const YUQUE_BLOG = gql`
 const YuQue: React.FC = () => {
   const {loading, error, data} = useQuery(YUQUE_BLOG)
 
-  if(error) {
-    Taro.navigateTo({url: `/pages/yuque/article?slug=ytwbzm`}).then()
-  }
+  useEffect(() => {
+    if (error) {
+      Taro.navigateTo({url: `/pages/yuque/article?slug=ytwbzm`}).then()
+    }
+  }, [error])
 
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
@@ -33,7 +37,7 @@ const YuQue: React.FC = () => {
       note={article.created_at}
       thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
       onClick={() => Taro.navigateTo({
-                                                                           url: `/pages/yuque/article?id=${article.id}`,
+                                                                           url: `/pages/yuque/article?slug=${article.slug}`,
                                                                          })}
     ><AtAvatar
       image={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
