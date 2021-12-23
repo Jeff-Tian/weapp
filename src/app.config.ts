@@ -5,6 +5,7 @@ export default {
     'pages/index/index',
     'pages/about/index',
     'pages/weapp/index',
+    'pages/tictactoe/index'
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -3,9 +3,8 @@ import { AtDrawer, AtNavBar } from "taro-ui"
 import { View } from "@tarojs/components"
 import { useState } from "react"
 import { loginByQrCode } from "../../services/zhihu"
-import { drawerItems, onDrawerItemClick } from "./drawer-items"
-import { StorageKeys } from "../../common/constants"
-
+import {drawerItems, onDrawerItemClick } from "./drawer-items"
+import {StorageKeys } from "../../common/constants"
 
 const HardwayLayout = (props) => {
   const [showDrawer, setShowDrawer] = useState(false)
