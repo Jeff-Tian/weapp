@@ -29,6 +29,8 @@ jobs:
           cp -r dist/index.html dist/pages/yuque/article.html
           cp -r dist/index.html dist/pages/about/index.html
           cp -r dist/index.html dist/pages/weapp/index.html
+          cp -r dist/index.html dist/pages/pearlsplus/index.html
+          cp -r dist/index.html dist/pages/tictactoe/index.html
 
           ls dist
 
