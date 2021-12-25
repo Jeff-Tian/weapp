@@ -39,6 +39,7 @@
   "dependencies": {
     "@apollo/client": "^3.4.15",
     "@babel/runtime": "^7.7.7",
+    "@babel/standalone": "^7.16.6",
     "@tarojs/components": "3.3.3",
     "@tarojs/react": "3.3.3",
     "@tarojs/runtime": "3.3.3",

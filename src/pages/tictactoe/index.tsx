@@ -4,7 +4,12 @@ import TaroDOM from '@tarojs/react'
 import ReactDOM from 'react-dom'
 import React, { useEffect, useState } from "react";
 import Taro, { ENV_TYPE } from "@tarojs/taro";
+
 import './tictactoe.styl'
+import divviewer from "../../adapters/divviewer";
+
+// eslint-disable-next-line import/no-commonjs
+const Babel = require('@babel/standalone/babel.min.js');
 
 const interpreter = new Interpreter(window, {
   timeout: 1000,
@@ -20,6 +25,73 @@ const TicTacToe = () => {
   const [dynamicContent, setDynamicContent] = useState('')
 
   useEffect(() => {
+    const tictactoe = `class Square extends React.Component {
+  render() {
+    return /*#__PURE__*/(
+      React.createElement("button", { className: "square" }));
+
+
+
+  }}
+
+
+class Board extends React.Component {
+  renderSquare(i) {
+    return /*#__PURE__*/React.createElement(Square, null);
+  }
+
+  render() {
+    const status = 'Next player: X';
+
+    return /*#__PURE__*/(
+      React.createElement("div", null, /*#__PURE__*/
+      React.createElement("div", { className: "status" }, status), /*#__PURE__*/
+      React.createElement("div", { className: "board-row" },
+      this.renderSquare(0),
+      this.renderSquare(1),
+      this.renderSquare(2)), /*#__PURE__*/
+
+      React.createElement("div", { className: "board-row" },
+      this.renderSquare(3),
+      this.renderSquare(4),
+      this.renderSquare(5)), /*#__PURE__*/
+
+      React.createElement("div", { className: "board-row" },
+      this.renderSquare(6),
+      this.renderSquare(7),
+      this.renderSquare(8))));
+
+
+
+  }}
+
+
+class Game extends React.Component {
+  render() {
+    return /*#__PURE__*/(
+      React.createElement("div", { className: "game" }, /*#__PURE__*/
+      React.createElement("div", { className: "game-board" }, /*#__PURE__*/
+      React.createElement(Board, null)), /*#__PURE__*/
+
+      React.createElement("div", { className: "game-info" }, /*#__PURE__*/
+      React.createElement("div", null), /*#__PURE__*/
+      React.createElement("ol", null))));
+
+
+
+  }}
+
+
+// ========================================
+
+ReactDOM.render( /*#__PURE__*/
+React.createElement(Game, null),
+document.getElementById('root'));`
+
+    Babel.registerPlugin('divviewer', divviewer);
+    const output = Babel.transform(tictactoe, {presets: ['env'], plugins: []}).code.replace(/"div"/g, '"view"').replace(/"ol"/g, '"view"')
+    console.log('output = ', output);
+
     const dynamicContentRenderring = `
     console.log(this)
     ReactDOM.render(helloWorld(), document.getElementById('react-dom-view'))
@@ -27,6 +99,8 @@ const TicTacToe = () => {
     function helloWorld (){
       return React.createElement('button');
     }
+
+    ${output}
   `;
     const res = interpreter.evaluate(dynamicContentRenderring)
 
