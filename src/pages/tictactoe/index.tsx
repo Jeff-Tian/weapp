@@ -9,7 +9,7 @@ import './tictactoe.styl'
 import divviewer from "../../adapters/divviewer";
 
 // eslint-disable-next-line import/no-commonjs
-// const Babel = require('@babel/standalone/babel.min.js');
+const Babel = require('@babel/standalone/babel.min.js');
 
 const interpreter = new Interpreter(window, {
   timeout: 1000,
@@ -24,13 +24,11 @@ const TicTacToe = () => {
   const [dynamicContent, setDynamicContent] = useState('')
 
   useEffect(() => {
-    Taro.request({ url: 'https://tictactoets.pa-ca.me/src/Game.tsx', responseType: 'text', dataType: 'text/plain' }).then(data => {
+    Taro.request({ url: 'https://uniheart.pa-ca.me/proxy?url=https%3A%2F%2Fraw.githubusercontent.com%2FJeff-Tian%2FTicTacToeTs%2Fmain%2Fsrc%2FGame.tsx', responseType: 'text', dataType: 'text/plain' }).then(data => {
       const tictactoe = data.data;
 
       // Babel.registerPlugin('divviewer', divviewer);
-      // const output = Babel.transform(tictactoe, { presets: ['env'], plugins: [] }).code.replace(/"div"/g, '"view"').replace(/"ol"/g, '"view"')
-
-      const output = tictactoe;
+      const output = tictactoe.replace(/import.+;/g, '').replace(/export/g, '');
       console.log('output = ', output);
 
       const dynamicContentRenderring = `
@@ -42,8 +40,15 @@ const TicTacToe = () => {
     }
 
     ${output}
+
+    ReactDOM.render(<Game />, document.getElementById('root'))
   `;
-      const res = interpreter.evaluate(dynamicContentRenderring)
+
+      const transpiled = Babel.transform(dynamicContentRenderring, { presets: ['env', 'react'], plugins: [] }).code.replace(/"div"/g, '"view"').replace(/"ol"/g, '"view"')
+
+      console.log('transpiled = ', transpiled);
+
+      const res = interpreter.evaluate(transpiled)
 
       console.log('res = ', res, '; d = ', dynamicContent)
 
