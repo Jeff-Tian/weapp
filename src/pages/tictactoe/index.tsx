@@ -34,14 +34,17 @@ const sanitizeAndRender = (x) => {
   renderReactDOM(sanitized);
 };
 
-function buildBabel(res: Taro.request.SuccessCallbackResult<any>) {
+const buildBabel = (res: Taro.request.SuccessCallbackResult) => {
   const babel = res.data.replace(/const /g, 'var ').replace(/let /g, 'var ');
   global['Babel'] = interpreter.evaluate(`${babel}; window.Babel`)
-}
+};
+
+const sleep = second => new Promise(resolve => setTimeout(resolve, second * 1000))
 
 const TicTacToe = () => {
   const fetchJsAsPlainText = (url: string) => {
     setUrls([...urls, url])
+    setLoadingText('加载脚本中……')
 
     return Taro.request({
       url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent(url)}`,
@@ -59,22 +62,32 @@ const TicTacToe = () => {
   useEffect(() => {
     Promise.all([fetchJsAsPlainText('https://unpkg.com/@babel/standalone@7.16.6/babel.min.js'), fetchJsAsPlainText('https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/Game.tsx')]).then(([babel, tictactoe]) => {
       setUrls([])
+      setLoadingText('脚本加载完成，构建 Babel 中……')
 
       buildBabel(babel)
-      sanitizeAndRender(tictactoe)
 
-      setLoading(false)
+      setLoadingText('Babel 构建完成，渲染中……')
+      sleep(1).then(() => {
+          sanitizeAndRender(tictactoe);
+          setLoadingText('渲染完成。')
+
+          sleep(1).then(() => {
+            setLoading(false)
+          })
+        }
+      )
     })
   }, [])
 
   const [loading, setLoading] = useState(true)
   const [urls, setUrls] = useState<string[]>([])
+  const [loadingText, setLoadingText] = useState('加载脚本中……')
 
   return <View>
     以下是动态渲染的内容：
     <View id='react-dom-view'>
       <AtActivityIndicator mode='normal' size={50} content={`加载 ${urls.join('\n')} 中……`} isOpened={urls.length > 0} />
-      <AtActivityIndicator mode='center' size={128} content='渲染中……'
+      <AtActivityIndicator mode='center' size={128} content={loadingText}
         isOpened={loading}
       />
     </View>
