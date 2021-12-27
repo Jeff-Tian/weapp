@@ -5,13 +5,11 @@ import ReactDOM from 'react-dom'
 import React, {useEffect, useState} from "react";
 import Taro, {ENV_TYPE} from "@tarojs/taro";
 import './tictactoe.styl'
+import {AtActivityIndicator} from "taro-ui";
 // import divviewer from "../../adapters/divviewer";
 
-// eslint-disable-next-line import/no-commonjs
-// const Babel = require('../../lib/package/dist/babel.min.js');
-
 const interpreter = new Interpreter(window, {
-  timeout: 1000,
+  timeout: 5000,
 });
 
 console.log('this = ', this, global, window);
@@ -19,62 +17,54 @@ console.log('this = ', this, global, window);
 window['ReactDOM'] = ENV_TYPE.WEB === Taro.getEnv() ? ReactDOM : TaroDOM;
 window['React'] = React;
 
-const TicTacToe = () => {
-  const [dynamicContent, setDynamicContent] = useState('')
+const renderReactDOM = (dynamicContentRendering: string) => {
+  const transpiled = global['Babel'].transform(dynamicContentRendering, {
+    presets: ['env', 'react'],
+    plugins: []
+  })?.code?.replace(/"div"/g, '"view"').replace(/"ol"/g, '"view"')
 
-  useEffect(() => {
-    Taro.request({
-      url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://unpkg.com/@babel/standalone@7.16.6/babel.min.js')}`,
-      responseType: 'text',
-      dataType: 'text/plain'
-    }).then(res => {
-      const babel = res.data.replace(/const /g, 'var ').replace(/let /g, 'var ');
-      global['Babel'] = interpreter.evaluate(`${babel}; window.Babel`)
+  interpreter.evaluate(transpiled)
+};
 
-
-      Taro.request({
-        url: 'https://uniheart.pa-ca.me/proxy?url=https%3A%2F%2Fraw.githubusercontent.com%2FJeff-Tian%2FTicTacToeTs%2Fmain%2Fsrc%2FGame.tsx',
-        responseType: 'text',
-        dataType: 'text/plain'
-      }).then(data => {
-        const tictactoe = data.data;
-
-        // Babel.registerPlugin('divviewer', divviewer);
-        const output = tictactoe.replace(/import.+;/g, '').replace(/export/g, '');
-        console.log('output = ', output);
-
-        const dynamicContentRenderring = `
-    console.log(this)
-    ReactDOM.render(helloWorld(), document.getElementById('react-dom-view'))
-
-    function helloWorld (){
-      return React.createElement('button');
-    }
-
-    ${output}
-
+const sanitizeAndRender = (x) => {
+  const sanitized = `
+    ${(x.data.replace(/import.+;/g, '').replace(/export/g, ''))}
     ReactDOM.render(<Game />, document.getElementById('root'))
   `;
 
-        const transpiled = global['Babel'].transform(dynamicContentRenderring, {
-          presets: ['env', 'react'],
-          plugins: []
-        })?.code?.replace(/"div"/g, '"view"').replace(/"ol"/g, '"view"')
+  renderReactDOM(sanitized);
+};
 
-        console.log('transpiled = ', transpiled);
+function buildBabel(res: Taro.request.SuccessCallbackResult<any>) {
+  const babel = res.data.replace(/const /g, 'var ').replace(/let /g, 'var ');
+  global['Babel'] = interpreter.evaluate(`${babel}; window.Babel`)
+}
 
-        const finalRes = interpreter.evaluate(transpiled)
+const fetchJsAsPlainText = url => Taro.request({
+  url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent(url)}`, responseType: 'text', dataType: 'text/plain'
+})
 
-        setDynamicContent(finalRes)
-      })
+const TicTacToe = () => {
+  useEffect(() => {
+    Promise.all([fetchJsAsPlainText('https://unpkg.com/@babel/standalone@7.16.6/babel.min.js'), fetchJsAsPlainText('https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/Game.tsx')]).then(([babel, tictactoe]) => {
+      buildBabel(babel)
+      sanitizeAndRender(tictactoe)
+
+      setLoading(false)
     })
   }, [])
+
+  const [loading, setLoading] = useState(true)
 
   return <View>
     以下是动态渲染的内容：
     <View id='react-dom-view'>
+      <AtActivityIndicator mode='center' size={128} content='加载中……'
+        isOpened={loading}
+      />
     </View>
-    <View id='root'></View>
+    <View id='root'>
+    </View>
   </View>
 }
 
