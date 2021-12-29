@@ -1,10 +1,10 @@
-import {View} from "@tarojs/components"
-import {Interpreter} from "eval5";
+import { View } from "@tarojs/components"
+import { Interpreter } from "eval5";
 import TaroDOM from '@tarojs/react'
 import ReactDOM from 'react-dom'
-import React, {useEffect, useState} from "react";
-import Taro, {ENV_TYPE} from "@tarojs/taro";
-import {AtActivityIndicator} from "taro-ui";
+import React, { useEffect, useState } from "react";
+import Taro, { ENV_TYPE } from "@tarojs/taro";
+import { AtActivityIndicator } from "taro-ui";
 import './tictactoe.styl'
 
 // import divviewer from "../../adapters/divviewer";
@@ -17,21 +17,13 @@ window['ReactDOM'] = ENV_TYPE.WEB === Taro.getEnv() ? ReactDOM : TaroDOM;
 window['React'] = React;
 
 const renderReactDOM = (dynamicContentRendering: string) => {
-  const transpiled = global['Babel'].transform(dynamicContentRendering, {
-    presets: ['env', 'react'],
-    plugins: []
-  })?.code?.replace(/"div"/g, '"view"').replace(/"ol"/g, '"view"')
-
-  interpreter.evaluate(transpiled)
+  const newLocal = dynamicContentRendering;
+  console.log('new = ', newLocal);
+  interpreter.evaluate(newLocal)
 };
 
 const sanitizeAndRender = (x) => {
-  const sanitized = `
-    ${(x.data.replace(/import.+;/g, '').replace(/export/g, ''))}
-    ReactDOM.render(<Game />, document.getElementById('root'))
-  `;
-
-  renderReactDOM(sanitized);
+  renderReactDOM(x);
 };
 
 const buildBabel = (res: Taro.request.SuccessCallbackResult) => {
@@ -59,22 +51,40 @@ const TicTacToe = () => {
     });
   }
 
+  const fetchTicTacToe = async () => {
+    const { data } = await Taro.request({
+      url: 'https://sls.pa-ca.me/nest/graphql',
+      method: 'POST',
+      data: {
+        query: `query transformTsx {
+                transform (url: "https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/Game.tsx", extra: "ReactDOM.render(<Game />, document.getElementById('root'))") {
+                    text
+                }
+            }`
+      }
+    })
+
+    console.log('data = ', data);
+    return data.data.transform.text;
+  }
+
   useEffect(() => {
-    Promise.all([fetchJsAsPlainText('https://unpkg.com/@babel/standalone@7.16.6/babel.min.js'), fetchJsAsPlainText('https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/Game.tsx')]).then(([babel, tictactoe]) => {
+    Promise.all([fetchTicTacToe()]).then(([tictactoe]) => {
+      console.log('tic = ', tictactoe);
       setUrls([])
       setLoadingText('脚本加载完成，构建 Babel 中……')
 
-      buildBabel(babel)
+      // buildBabel(babel)
 
       setLoadingText('Babel 构建完成，渲染中……')
       sleep(1).then(() => {
-          sanitizeAndRender(tictactoe);
-          setLoadingText('渲染完成。')
+        sanitizeAndRender(tictactoe);
+        setLoadingText('渲染完成。')
 
-          sleep(1).then(() => {
-            setLoading(false)
-          })
-        }
+        sleep(1).then(() => {
+          setLoading(false)
+        })
+      }
       )
     })
   }, [])
