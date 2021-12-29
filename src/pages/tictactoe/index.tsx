@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Taro, { ENV_TYPE } from "@tarojs/taro";
 import { AtActivityIndicator } from "taro-ui";
 import './tictactoe.styl'
+import HardwayLayout from "../layout/hardway-layout";
 
 // import divviewer from "../../adapters/divviewer";
 
@@ -93,7 +94,7 @@ const TicTacToe = () => {
   const [urls, setUrls] = useState<string[]>([])
   const [loadingText, setLoadingText] = useState('加载脚本中……')
 
-  return <View>
+  return <HardwayLayout><View>
     以下是动态渲染的内容：
     <View id='react-dom-view'>
       <AtActivityIndicator mode='normal' size={50} content={`加载 ${urls.join('\n')} 中……`} isOpened={urls.length > 0} />
@@ -103,7 +104,7 @@ const TicTacToe = () => {
     </View>
     <View id='root'>
     </View>
-  </View>
+  </View></HardwayLayout>
 }
 
 export default TicTacToe
