@@ -6,6 +6,7 @@ export default {
     'pages/about/index',
     'pages/weapp/index',
     'pages/tictactoe/index',
+    'pages/tictactoe/index2',
     'pages/pearlsplus/index'
   ],
   window: {
