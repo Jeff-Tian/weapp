@@ -1,0 +1,35 @@
+name: Upload MiniProgram
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: ['labeled']
+
+jobs:
+  upload:
+    if: ${{ github.ref == 'refs/heads/main' }} || contains(github.event.pull_request.labels.*.name, 'upload_miniprogram')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - shell: bash
+        env:
+          MP_PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }}
+        run: |
+          if [[ -z $MP_PRIVATE_KEY ]]; then
+            echo "##########"
+            echo ""
+            echo "Please set 'MP_PRIVATE_KEY' key in actions secrets"
+            echo ""
+            echo "##########"
+            exit 1
+          else
+            echo "$MP_PRIVATE_KEY" > private.key
+          fi
+      - uses: actions/setup-node@master
+        with:
+          node-version: '12.x'
+      - run: |
+          yarn
+          yarn build:weapp
+          yarn wmp:upload

@@ -26,7 +26,7 @@ const TicTacToe = () => {
                     text
                 }
             }`
-  const {loading: querying, error, data} = useQuery(transformRequest)
+  const {data} = useQuery(transformRequest)
 
   if(data?.transform?.text) {
     interpreter.evaluate(data?.transform?.text)

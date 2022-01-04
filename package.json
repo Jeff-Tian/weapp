@@ -28,7 +28,8 @@
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch",
-    "test": "jest --config ./jest.config.js --no-cache --coverage"
+    "test": "jest --config ./jest.config.js --no-cache --coverage",
+    "wmp:upload": "node scripts/upload.js"
   },
   "browserslist": [
     "last 3 versions",
@@ -70,6 +71,7 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "miniprogram-ci": "^1.6.10",
     "stylelint": "9.3.0",
     "typescript": "^4.1.0"
   }

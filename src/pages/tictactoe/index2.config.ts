@@ -1,5 +1,5 @@
 export default {
-  navigationBarTitleText: 'React 井字棋游戏初始状态',
+  navigationBarTitleText: 'React 井字棋游戏最终状态',
   enableShareAppMessage: true,
   enableShareTimeline: true
 }
