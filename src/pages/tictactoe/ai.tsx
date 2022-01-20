@@ -22,30 +22,16 @@ window['y'] = React;
 const TicTacToe = () => {
   const [loading, setLoading] = useState(true)
 
-  // const transformRequest = gql`query transformTsx {
-  //               transform (url: "https://tictactoe.js.org/static/js/1.1fe80239.chunk.js", extra: "ReactDOM.render(<Game />, document.getElementById('root'))") {
-  //                   text
-  //               }
-  //           }`
-  // const {data} = useQuery(transformRequest)
-  //
-  // if(data?.transform?.text) {
-  //   interpreter.evaluate(data?.transform?.text)
-  // }
+  const transformRequest = gql`query transformTsx {
+                transform (url: "https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/GameAI.tsx", extra: "; ReactDOM.render(<Game />, document.getElementById('root'))") {
+                    text
+                }
+            }`
+  const {data} = useQuery(transformRequest)
 
-  useEffect(() => {
-    setLoading(true)
-    Taro.request({url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent("https://tictactoe.js.org/static/js/1.1fe80239.chunk.js")}`}).then(data => {
-      console.log('data = ', data)
-      if (data) {
-        interpreter.evaluate(data.data)
-
-        setLoading(false)
-      }
-    })
-
-  }, [])
-
+  if(data?.transform?.text) {
+    interpreter.evaluate(data?.transform?.text)
+  }
   return <HardwayLayout><View>
     以下是动态渲染的内容：
     <View id='react-dom-view'>
