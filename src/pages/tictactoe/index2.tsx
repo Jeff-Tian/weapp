@@ -1,4 +1,4 @@
-import {View} from "@tarojs/components"
+import {Button, View} from "@tarojs/components"
 import {Interpreter} from "eval5";
 import TaroDOM from '@tarojs/react'
 import ReactDOM from 'react-dom'
@@ -28,7 +28,7 @@ const TicTacToe = () => {
             }`
   const {data} = useQuery(transformRequest)
 
-  if(data?.transform?.text) {
+  if (data?.transform?.text) {
     interpreter.evaluate(data?.transform?.text)
   }
 
@@ -37,7 +37,7 @@ const TicTacToe = () => {
   }, [])
 
   return <HardwayLayout><View>
-    以下是动态渲染的内容：
+    以下有动态渲染的内容，请稍作等待…… 这是 React 官方井字棋教程的最终状态，玩家 X 和玩家 O 对战。
     <View id='react-dom-view'>
       <AtActivityIndicator mode='center' size={128} content='加载中……'
         isOpened={loading}
@@ -45,6 +45,10 @@ const TicTacToe = () => {
     </View>
     <View id='root'>
     </View>
+    <View>
+      我们可以在这个基础上，让玩家 O 自动下棋，可以点击按钮体验：
+    </View>
+    <Button onClick={() => Taro.navigateTo({url: '/pages/tictactoe/ai'})}>体验人工智能版井字棋</Button>
   </View></HardwayLayout>
 }
 
