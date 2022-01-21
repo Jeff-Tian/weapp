@@ -12,7 +12,9 @@ const config = {
   plugins: [],
   defineConstants: {},
   copy: {
-    patterns: [],
+    patterns: [
+      { from: 'src/pages/pearlsplus/proxy.wasm', to: 'dist/pages/pearlsplus/proxy.wasm' }
+    ],
     options: {},
   },
   framework: 'react',

@@ -8,7 +8,8 @@ export default {
     'pages/tictactoe/index',
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
-    'pages/pearlsplus/index'
+    'pages/pearlsplus/index',
+    'pages/pearlsplus/wasm'
   ],
   window: {
     backgroundTextStyle: 'light',
