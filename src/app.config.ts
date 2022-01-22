@@ -9,12 +9,13 @@ export default {
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
     'pages/pearlsplus/index',
-    'pages/pearlsplus/wasm'
+    'pages/pearlsplus/wasm',
   ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black'
-  }
+  },
+  workers: 'pages/wasm'
 }

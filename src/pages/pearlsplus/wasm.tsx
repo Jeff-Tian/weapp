@@ -1,13 +1,12 @@
+import Taro from '@tarojs/taro'
 import {View} from "@tarojs/components"
 import {useEffect} from "react";
-import Taro from '@tarojs/taro'
 import HardwayLayout from "../layout/hardway-layout";
 
 const PearlsPlus = () => {
   useEffect(() => {
-    const res = WXWebAssembly.instantiate('/pages/pearlsplus/proxy.wasm', {})
-    
-    console.log('res = ', res)
+    const worker = Taro.createWorker('pages/wasm/index.js')
+    worker.postMessage({msg: 'msg from main'});
   }, [])
 
 
