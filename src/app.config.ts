@@ -10,6 +10,7 @@ export default {
     'pages/tictactoe/ai',
     'pages/pearlsplus/index',
     'pages/pearlsplus/wasm',
+    'pages/ip/index'
   ],
   window: {
     backgroundTextStyle: 'light',
