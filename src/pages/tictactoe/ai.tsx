@@ -26,13 +26,11 @@ const transformRequest = gql`query transformTsx {
             }`
 
 const TicTacToe = () => {
-  const [tictactoe, setTictactoe] = useState('')
-
   const {loading, error, data} = useQuery(transformRequest)
 
   if (loading) {
     return <AtActivityIndicator mode='center' size={128} content='加载中……'
-      isOpened={loading}
+                                isOpened={loading}
     />
   }
 
@@ -42,8 +40,9 @@ const TicTacToe = () => {
   }
 
   if (data?.transform?.text) {
-    setTictactoe(String(data?.transform?.text))
-    interpreter.evaluate(tictactoe)
+    setTimeout(() => {
+      interpreter.evaluate(String(data?.transform?.text))
+    })
   }
 
   return <HardwayLayout><View>
