@@ -17,6 +17,7 @@ export const drawerItems = new Map<string, () => void>([
 ])
 
 if (Taro.getEnv() === ENV_TYPE.WEB) {
+  drawerItems.set('向我咨询', async () => window.open('https://www.zhihu.com/consult/people/1073548674713423872'))
   drawerItems.set('小程序', async () => Taro.navigateTo({url: '/pages/weapp/index'}))
 }
 
