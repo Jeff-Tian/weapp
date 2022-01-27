@@ -29,7 +29,8 @@
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch",
     "test": "jest --config ./jest.config.js --no-cache --coverage",
-    "wmp:upload": "node scripts/upload.js"
+    "wmp:upload": "node scripts/upload.js",
+    "deeplinks": "node scripts/deeplinks.js"
   },
   "browserslist": [
     "last 3 versions",

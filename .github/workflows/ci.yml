@@ -19,25 +19,7 @@ jobs:
           git submodule update --init --recursive
           yarn && yarn build:h5
 
-      - name: deeplinks
-        run: |
-          mkdir -p dist/pages/yuque
-          mkdir -p dist/pages/about
-          mkdir -p dist/pages/weapp
-
-          cp -r dist/index.html dist/pages/yuque/index.html
-          cp -r dist/index.html dist/pages/yuque/article.html
-          cp -r dist/index.html dist/pages/about/index.html
-          cp -r dist/index.html dist/pages/weapp/index.html
-#          cp -r dist/index.html dist/pages/pearlsplus/index.html
-          cp -r dist/index.html dist/pages/tictactoe/index.html
-          cp -r dist/index.html dist/pages/tictactoe/index2.html
-          cp -r dist/index.html dist/pages/tictactoe/ai.html
-
-          ls dist
-
-      -
-        name: Gen dummy page
+      - name: Gen dummy page
         run: |
           mkdir public
           cat > public/index.html <<EOL
