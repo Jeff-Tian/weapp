@@ -1725,9 +1725,9 @@ function createWasm() {
   }
 
   function instantiateArrayBuffer(receiver) {
-    console.log('init wasm')
+    console.log('init wasm', this, this.test)
     return WXWebAssembly.instantiate('/pages/wasm/hello.wasm', info).then(function (instance) {
-      console.log('success get instance = ', instance);
+      console.log('success get instance = ', instance, instance.instance.exports.main);
       return instance;
     }).then(receiver, function (reason) {
       err('failed to asynchronously prepare wasm: ' + reason);
