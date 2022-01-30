@@ -1,20 +1,28 @@
 console.log('worker started...')
-console.log('window = ', window, this)
+console.log('window = ', window, this, WebAssembly)
 
 this.test = 'test'
 
-worker.request({
-  url: 'https://gitee.com/zizhujy/weapp/raw/main/src/pages/wasm/hello.wasm?a=xxx',
-  complete: console.log,
-  success: console.info,
-  responseType: 'text/plain',
-  dataType: 'text/plain',
-  fail: console.error,
-  header: {
-    'User-Agent': 'PostmanRuntime/7.28.4',
-    'Referer': ''
-  }
+worker.postMessage({
+  message: 'message'
 })
+
+// worker.request({
+//   url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://raw.githubusercontent.com/Jeff-Tian/PearlsPlus/gh-pages/index.wasm')}`,
+//   complete: console.log,
+//   success: (res) => {
+//     console.log(res.data)
+//     const ws = WebAssembly.instantiate(res.data)
+//     console.log('ws = ', ws)
+//   },
+//   responseType: 'text/plain',
+//   dataType: 'text/plain',
+//   fail: console.error,
+//   header: {
+//     'User-Agent': 'PostmanRuntime/7.28.4',
+//     'Referer': ''
+//   }
+// })
 
 const hello = require('./hello.js');
 console.log('hello = ', hello);

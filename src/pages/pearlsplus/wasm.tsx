@@ -1,12 +1,17 @@
 import Taro from '@tarojs/taro'
-import {View} from "@tarojs/components"
-import {useEffect} from "react";
+import { View } from "@tarojs/components"
+import { useEffect } from "react";
 import HardwayLayout from "../layout/hardway-layout";
 
 const PearlsPlus = () => {
   useEffect(() => {
     const worker = Taro.createWorker('pages/wasm/index.js')
-    worker.postMessage({msg: 'msg from main'});
+    worker.postMessage({ msg: 'msg from main' });
+    worker.onMessage(({ message }) => {
+      Taro.showToast({
+        title: String(message)
+      })
+    })
   }, [])
 
 
