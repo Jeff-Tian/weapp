@@ -23,7 +23,7 @@ const PearlsPlus = () => {
 
 
   return <HardwayLayout><View>
-    以下是动态渲染的内容：
+    以下是 C++ 版的 Hello World 程序显示的内容，在线版见： https://pearlsplus.pa-ca.me/。源代码文件详见：  https://github.com/Jeff-Tian/PearlsPlus/blob/main/main.cpp 。
     <View id='status'></View>
     <View id='progress'></View>
     <View id='spinner'></View>
