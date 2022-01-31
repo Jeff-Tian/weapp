@@ -1,7 +1,7 @@
 console.log('worker started...')
 console.log('window = ', window, this, WebAssembly)
 
-this.test = 'test'
+this.wasmPath = '/pages/wasm/hello.wasm'
 
 worker.postMessage({
   message: 'message'
