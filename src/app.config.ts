@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/pearlsplus/hello',
     'pages/yuque/index',
     'pages/yuque/article',
     'pages/index/index',
@@ -9,7 +10,6 @@ export default {
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
     'pages/pearlsplus/index',
-    'pages/pearlsplus/wasm',
     'pages/ip/index'
   ],
   window: {

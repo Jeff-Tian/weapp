@@ -1,5 +1,3 @@
-
-
 // The Module object: Our interface to the outside world. We import
 // and export values on it. There are various ways Module can be used:
 // 1. Not defined. We create it here
@@ -43,11 +41,14 @@ var quit_ = function (status, toThrow) {
 
 // Attempt to auto-detect the environment
 var ENVIRONMENT_IS_WEB = typeof window === 'object';
-var ENVIRONMENT_IS_WORKER = typeof importScripts === 'function';
+// var ENVIRONMENT_IS_WORKER = typeof importScripts === 'function';
+var ENVIRONMENT_IS_WORKER = true;
 // N.b. Electron.js environment is simultaneously a NODE-environment, but
 // also a web environment.
 var ENVIRONMENT_IS_NODE = typeof process === 'object' && typeof process.versions === 'object' && typeof process.versions.node === 'string';
 var ENVIRONMENT_IS_SHELL = !ENVIRONMENT_IS_WEB && !ENVIRONMENT_IS_NODE && !ENVIRONMENT_IS_WORKER;
+
+console.log('ENVIRONMENT_IS_WEB = ', ENVIRONMENT_IS_WEB, ', ENVIRONMENT_IS_WORKER = ', ENVIRONMENT_IS_WORKER, ', ENVIRONMENT_IS_NODE = ', ENVIRONMENT_IS_NODE, ', ENVIRONMENT_IS_SHELL = ', ENVIRONMENT_IS_SHELL)
 
 if (Module['ENVIRONMENT']) {
   throw new Error('Module.ENVIRONMENT has been deprecated. To force the environment, use the ENVIRONMENT compile-time option (for example, -s ENVIRONMENT=web or -s ENVIRONMENT=node)');
@@ -212,7 +213,7 @@ if (ENVIRONMENT_IS_NODE) {
     // ENVIRONMENT_IS_NODE.
     if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
       if (ENVIRONMENT_IS_WORKER) { // Check worker, not web, since window could be polyfilled
-        scriptDirectory = (self || this).location.href;
+        scriptDirectory = ((self || this).location || {}).href || '';
       } else if (typeof document !== 'undefined' && document.currentScript) { // web
         scriptDirectory = document.currentScript.src;
       }
@@ -228,7 +229,7 @@ if (ENVIRONMENT_IS_NODE) {
         scriptDirectory = '';
       }
 
-      if (!(typeof window === 'object' || typeof importScripts === 'function')) throw new Error('not compiled for this environment (did you build to HTML and try to run it not on the web, or set ENVIRONMENT to something - like node - and run it someplace else - like on the web?)');
+      // if (!(typeof window === 'object' || typeof importScripts === 'function')) throw new Error('not compiled for this environment (did you build to HTML and try to run it not on the web, or set ENVIRONMENT to something - like node - and run it someplace else - like on the web?)');
 
       // Differentiate the Web Worker from the Node Worker case, as reading must
       // be done differently.
@@ -1492,6 +1493,8 @@ Module["preloadedAudios"] = {}; // maps url to audio data
 
 /** @param {string|number=} what */
 function abort(what) {
+  console.error(what, JSON.stringify(what));
+  console.error('callee = ', this.callee);
   {
     if (Module['onAbort']) {
       Module['onAbort'](what);
@@ -1509,7 +1512,7 @@ function abort(what) {
   // Use a wasm runtime error, because a JS error might be seen as a foreign
   // exception, which means we'd run destructors on it. We need the error to
   // simply make the program stop.
-  var e = new WXWebAssembly.RuntimeError(what);
+  var e = new Error(what);
 
   // Throw the error whether or not MODULARIZE is set because abort is used
   // in code paths apart from instantiation where an exception is expected
@@ -1559,11 +1562,14 @@ function createExportWrapper(name, fixedasm) {
 
 var wasmBinaryFile;
 wasmBinaryFile = 'index.wasm';
+console.log('checking...')
 if (!isDataURI(wasmBinaryFile)) {
   wasmBinaryFile = locateFile(wasmBinaryFile);
 }
+console.log('check done');
 
 function getBinary(file) {
+  console.log('getting binary...', file)
   try {
     if (file == wasmBinaryFile && wasmBinary) {
       return new Uint8Array(wasmBinary);
@@ -1663,6 +1669,7 @@ function createWasm() {
   }
 
   function instantiateArrayBuffer(receiver) {
+    console.log('init...', this.wasmPath);
     return WXWebAssembly.instantiate(this.wasmPath, info).then(function (instance) {
       return instance;
     }).then(receiver, function (reason) {
@@ -1674,31 +1681,6 @@ function createWasm() {
       }
       abort(reason);
     });
-  }
-
-  function instantiateAsync() {
-    if (!wasmBinary &&
-      typeof WXWebAssembly.instantiateStreaming === 'function' &&
-      !isDataURI(wasmBinaryFile) &&
-      // Don't use streaming for file:// delivered objects in a webview, fetch them synchronously.
-      !isFileURI(wasmBinaryFile) &&
-      typeof fetch === 'function') {
-      return fetch(wasmBinaryFile, { credentials: 'same-origin' }).then(function (response) {
-        var result = WXWebAssembly.instantiateStreaming(response, info);
-
-        return result.then(
-          receiveInstantiationResult,
-          function (reason) {
-            // We expect the most common failure cause to be a bad MIME type for the binary,
-            // in which case falling back to ArrayBuffer instantiation should work.
-            err('wasm streaming compile failed: ' + reason);
-            err('falling back to ArrayBuffer instantiation');
-            return instantiateArrayBuffer(receiveInstantiationResult);
-          });
-      });
-    } else {
-      return instantiateArrayBuffer(receiveInstantiationResult);
-    }
   }
 
   // User shell pages can write their own Module.instantiateWasm = function(imports, successCallback) callback
@@ -2490,6 +2472,7 @@ var MEMFS = {
 };
 
 function asyncLoad(url, onload, onerror, noRunDep) {
+  console.log('async load....');
   var dep = !noRunDep ? getUniqueRunDependency('al ' + url) : '';
   readAsync(url, function (arrayBuffer) {
     assert(arrayBuffer, 'Loading data file "' + url + '" failed (no arrayBuffer).');

@@ -8,17 +8,20 @@ const PearlsPlus = () => {
   const [output, setOutput] = useState('')
 
   useEffect(() => {
-    const worker = Taro.createWorker('pages/wasm/index.js')
-    worker.onMessage(({ message }) => {
-      if (typeof message === 'string') {
-        Taro.showToast({
-          title: String(message)
-        })
-      } else {
-        console.log('worker said: ', message)
-        setOutput(message.output)
-      }
-    })
+    WXWebAssembly.instantiate('pages/wasm/hello.wasm', { env: { __cxa_atexit: () => { }, strftime_l: () => { }, abort: () => { }, emscripten_resize_heap: () => { }, emscripten_memcpy_big: () => { }, setTempRet0: () => { } }, wasi_snapshot_preview1: { environ_sizes_get: () => { }, environ_get: () => { }, fd_write: () => { }, fd_read: () => { }, fd_close: () => { }, fd_seek: () => { } } }).then(console.log, console.error)
+
+
+    // const worker = Taro.createWorker('pages/wasm/index.js')
+    // worker.onMessage(({ message }) => {
+    //   if (typeof message === 'string') {
+    //     Taro.showToast({
+    //       title: String(message)
+    //     })
+    //   } else {
+    //     console.log('worker said: ', message)
+    //     setOutput(message.output)
+    //   }
+    // })
   }, [])
 
 

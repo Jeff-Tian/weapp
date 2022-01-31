@@ -1,4 +1,4 @@
-this.wasmPath = '/pages/wasm/hello.wasm'
+this.wasmPath = 'pages/wasm/hello.wasm'
 
 Module = {
   print: function (text) {
