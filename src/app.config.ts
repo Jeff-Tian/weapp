@@ -8,8 +8,8 @@ export default {
     'pages/tictactoe/index',
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
-    'pages/pearlsplus/index',
     'pages/pearlsplus/hello',
+    'pages/pearlsplus/1_6_1',
     'pages/ip/index'
   ],
   window: {

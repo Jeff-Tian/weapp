@@ -1,5 +1,5 @@
 export default {
-  navigationBarTitleText: '《编程珠玑》习题（c++ 版）',
+  navigationBarTitleText: 'c++ Hello World',
   enableShareAppMessage: true,
   enableShareTimeline: true
 }
