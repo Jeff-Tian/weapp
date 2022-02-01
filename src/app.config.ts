@@ -18,5 +18,4 @@ export default {
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black'
   },
-  workers: 'pages/wasm'
 }
