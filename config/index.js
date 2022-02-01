@@ -16,7 +16,7 @@ const config = {
   copy: {
     patterns: [
       // {from: 'src/pages/pearlsplus/proxy.wasm', to: 'dist/pages/pearlsplus/proxy.wasm'},
-      {from: 'src/pages/wasm/hello.wasm', to: 'dist/pages/wasm/hello.wasm'},
+      {from: 'src/pages/wasm/1.6.1.wasm', to: 'dist/pages/wasm/1.6.1.wasm'},
       {from: 'src/pages/wasm/index.js', to: 'dist/pages/wasm/index.js'},
       {from: 'src/pages/wasm/hello.js', to: 'dist/pages/wasm/hello.js'}
     ],
