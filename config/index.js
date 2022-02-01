@@ -15,10 +15,6 @@ const config = {
   defineConstants: {},
   copy: {
     patterns: [
-      // {from: 'src/pages/pearlsplus/proxy.wasm', to: 'dist/pages/pearlsplus/proxy.wasm'},
-      {from: 'src/pages/wasm/hello.wasm', to: 'dist/pages/wasm/hello.wasm'},
-      {from: 'src/pages/wasm/index.js', to: 'dist/pages/wasm/index.js'},
-      {from: 'src/pages/wasm/hello.js', to: 'dist/pages/wasm/hello.js'}
     ],
     options: {},
   },

@@ -9,7 +9,7 @@ export default {
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
     'pages/pearlsplus/index',
-    'pages/pearlsplus/wasm',
+    'pages/pearlsplus/hello',
     'pages/ip/index'
   ],
   window: {
