@@ -45,10 +45,6 @@ const PearlsPlus = () => {
     },
     window: {
       prompt: () => {
-        // if (count === 1) {
-        //   setIsModalOpen(true)
-        //   return false
-        // }
         return userInput[count++]
       }
     }
