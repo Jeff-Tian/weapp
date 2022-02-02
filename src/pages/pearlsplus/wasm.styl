@@ -4,6 +4,10 @@
   padding: 5px;
   min-height: 500px;
   box-sizing: border-box;
+
+  textarea {
+    height: 500px;
+  }
 }
 
 .code {
@@ -20,4 +24,22 @@
   padding: 1em 1.5em;
   display: block;
   word-wrap: break-word;
+}
+
+.prompt {
+  background-color: black;
+  border: solid 2px red;
+  color: white;
+  z-index: 99;
+  position: absolute;
+  bottom: 100px;
+  left: 80px;
+
+  button {
+    color: white;
+  }
+}
+
+.inputs {
+  color: black;
 }
