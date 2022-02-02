@@ -2,9 +2,25 @@ import Taro from '@tarojs/taro'
 import {AtTabs, AtTabsPane} from "taro-ui";
 import {View} from "@tarojs/components";
 import {useState} from "react";
+import useRouter = Taro.useRouter;
 
 const HardwayTabs = ({children}) => {
-  const [currentTab, setCurrentTab] = useState(0)
+  const router = useRouter()
+
+  let tab
+  if (router.path === '/pages/pearlsplus/1_6_1') {
+    tab = 0
+  }
+
+  if (router.path === '/pages/yuque/index') {
+    tab = 1
+  }
+
+  if (router.path === '/pages/tictactoe/ai') {
+    tab = 2
+  }
+
+  const [currentTab, setCurrentTab] = useState(tab)
 
   const tabs = [{title: '《编程珠玑》'}, {title: '博文'}, {title: 'AI 井字棋'},]
   return <AtTabs tabList={tabs} current={currentTab} onClick={(index) => {
