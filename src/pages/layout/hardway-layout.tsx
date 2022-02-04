@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import {AtDrawer, AtNavBar} from "taro-ui"
-import {OfficialAccount, View} from "@tarojs/components"
+import {View} from "@tarojs/components"
 import {useState} from "react"
 import {loginByQrCode} from "../../services/zhihu"
 import {drawerItems, onDrawerItemClick} from "./drawer-items"
@@ -48,7 +48,6 @@ const HardwayLayout = (props) => {
       items={[...drawerItems.keys()]}
       onItemClick={onDrawerItemClick}
     />
-    <OfficialAccount />
   </View></HardwayTabs>
 }
 
