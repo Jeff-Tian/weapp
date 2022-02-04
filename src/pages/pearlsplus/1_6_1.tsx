@@ -67,7 +67,6 @@ const PearlsPlus = () => {
     }).catch(err => setStatus(JSON.stringify(err)))
   }, [])
 
-
   return <HardwayLayout><View>
     <View>1.6 习题</View>
     <View>1. 如果不缺内存，如何使用一个具有库的语言来实现一种排序算法以表示和排序集合？</View>

@@ -4,11 +4,11 @@ export const draftDirectly = async (title, content) => {
   return await draftColumn(title, content)
 }
 
-export const loginByQrCode = async () => {
+export const loginByQrCode = async (p: { setRichModalTitle: (value: (((prevState: string) => string) | string)) => void; setIsRichModalOpen: (value: (((prevState: boolean) => boolean) | boolean)) => void; setSaveQR: (value: (((prevState: null) => null) | null)) => void; setZhihuLoginQRCode: (value: (((prevState: string) => string) | string)) => void }) => {
   console.log('login...')
 
   try {
-    await qrcodeLogin()
+    await qrcodeLogin(p)
   } catch (ex) {
     console.error('ex = ', ex);
   }
@@ -35,7 +35,7 @@ export const draftColumn = async (title, content) => {
     url: draftUrl,
     method: 'POST',
     dataType: 'json',
-    data: { title, content, 'delta-time': 0 },
+    data: {title, content, 'delta-time': 0},
     header: {
       'authority': 'zhuanlan.zhihu.com',
       'origin': 'https://zhuanlan.zhihu.com',
@@ -55,7 +55,7 @@ export const draftColumn = async (title, content) => {
       title: `可能上次登录未完成，或者登录已过期，请重新登录后再试。  知乎反馈：${res.data.error.message}`,
       icon: 'none',
       duration: 5000
-    })
+    }).then()
   }
 }
 
@@ -64,7 +64,7 @@ export const getUrl = (url: string, cookie) => {
   return Taro.ENV_TYPE.WEB !== Taro.getEnv() ? url : `https://uniheart.pa-ca.me/proxy?cookie=${cookie}&url=${url}&authority=${encodeURIComponent('zhuanlan.zhihu.com')}&origin=${encodeURIComponent('https://zhuanlan.zhihu.com')}&referer=${encodeURIComponent('https://zhuanlan.zhihu.com/write')}&dataType=json`
 }
 
-export const qrcodeLogin = async () => {
+export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhihuLoginQRCode, setSaveQR}) => {
   const zhihuUdidUrl = 'https://www.zhihu.com/udid'
   const url = Taro.ENV_TYPE.WEB === Taro.getEnv() ? 'https://uniheart.pa-ca.me/proxy?dataType=text&url=' + encodeURIComponent(zhihuUdidUrl) : zhihuUdidUrl
 
@@ -132,11 +132,6 @@ export const qrcodeLogin = async () => {
 
   const scanInfoUrl = getUrl(`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/scan_info`, '')
 
-  Taro.previewImage({
-    current: `https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`,
-    urls: [`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`],
-  })
-
   const poll = async () => {
     try {
       const res3 = await Taro.request({
@@ -149,13 +144,13 @@ export const qrcodeLogin = async () => {
       }
 
       if (res3.data.status === 1) {
-        Taro.showToast({ title: '扫码成功', icon: 'success', duration: 2000 })
+        Taro.showToast({title: '扫码成功', icon: 'success', duration: 2000})
 
         await poll();
       }
 
       if (!!res3.data.user_id) {
-        Taro.showToast({ title: '登录成功', icon: 'success', duration: 2000 })
+        Taro.showToast({title: '登录成功', icon: 'success', duration: 2000})
 
         const originalCookie = Taro.getStorageSync('set-cookie')
 
@@ -173,7 +168,7 @@ export const qrcodeLogin = async () => {
 
         Taro.setStorageSync('zhihu-user-info', res3.data)
 
-        Taro.showToast({ title: 'Cookie 设置成功', icon: 'success', duration: 2000 })
+        Taro.showToast({title: 'Cookie 设置成功', icon: 'success', duration: 2000})
         console.log('now cookie = ', Taro.getStorageSync('set-cookie'));
       }
     } catch (err) {
@@ -181,5 +176,42 @@ export const qrcodeLogin = async () => {
     }
   }
 
-  poll();
+  const imgUrl = `https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`;
+  setZhihuLoginQRCode(imgUrl)
+  setRichModalTitle('保存知乎二维码到相册或者发送给文件传输助手，然后用微信扫一扫或者长按识别它')
+  setIsRichModalOpen(true)
+  setSaveQR(() => () => {
+    console.log('saving...')
+
+    Taro.getSetting({
+      success: () => {
+        Taro.authorize({
+          scope: 'scope.writePhotosAlbum',
+          success: () => {
+            console.log('authorized')
+            Taro.downloadFile({
+              url: imgUrl,
+              success: () => {
+                Taro.showToast({
+                  title: '二维码已经保存到相册，请调用微信扫一扫',
+                  icon: 'success'
+                })
+
+                Taro.scanCode({
+                  success: (res) => {
+                    // charSet: "ISO8859-1"
+                    // errMsg: "scanCode:ok"
+                    // rawData: "Yml0Y29pbjoxNmphZzRHUkt4b044UkdBNWl6ekZIZVZXZmRvZlI1d0hMP2Ftb3VudD0xLjAwMDAwMDAwJmxhYmVsPXBhLXBhLXBhJm1lc3NhZ2U9cGEtcGEtcGE="
+                    // result: "bitcoin:16jag4GRKxoN8RGA5izzFHeVWfdofR5wHL?amount=1.00000000&label=pa-pa-pa&message=pa-pa-pa"
+                    // scanType: "QR_CODE"
+                    console.log(res)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    })
+  })
 }

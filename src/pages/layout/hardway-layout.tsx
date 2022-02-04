@@ -1,14 +1,20 @@
 import Taro from '@tarojs/taro'
 import {AtDrawer, AtNavBar} from "taro-ui"
-import {View} from "@tarojs/components"
+import {View, Image} from "@tarojs/components"
 import {useState} from "react"
 import {loginByQrCode} from "../../services/zhihu"
 import {drawerItems, onDrawerItemClick} from "./drawer-items"
 import {StorageKeys} from "../../common/constants"
 import HardwayTabs from './tabs'
+import '../../common/rich-modal.styl'
+import RichModal from "../../common/RichModal";
 
 const HardwayLayout = (props) => {
   const [showDrawer, setShowDrawer] = useState(false)
+  const [isRichModalOpen, setIsRichModalOpen] = useState(false)
+  const [zhihuLoginQRCode, setZhihuLoginQRCode] = useState('')
+  const [richModalTitle, setRichModalTitle] = useState('')
+  const [saveQR, setSaveQR] = useState(null)
 
   const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
 
@@ -25,7 +31,7 @@ const HardwayLayout = (props) => {
             duration: 1000
           })
         } else {
-          loginByQrCode()
+          loginByQrCode({setIsRichModalOpen, setZhihuLoginQRCode, setRichModalTitle, setSaveQR}).then()
         }
       }}
       onClickLeftIcon={() => {
@@ -37,6 +43,18 @@ const HardwayLayout = (props) => {
       rightFirstIconType='bullet-list'
       rightSecondIconType={zhihuUserInfo ? {value: 'user', color: 'blue'} : 'user'}
     />
+
+    <View id='rich-modal'><RichModal isOpen={isRichModalOpen} onConfirm={() => {
+      setIsRichModalOpen(false)
+      saveQR && saveQR()
+    }} onCancel={() => {
+      setIsRichModalOpen(false)
+    }
+    }
+      title={richModalTitle}
+    >
+      <Image src={zhihuLoginQRCode} />
+    </RichModal></View>
 
     {props.children}
 

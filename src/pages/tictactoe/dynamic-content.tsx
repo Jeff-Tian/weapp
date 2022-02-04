@@ -31,8 +31,9 @@ export const DynamicContent = ({gql}) => {
   }
 
   if (data?.transform?.text) {
-    setTimeout(() =>
-      interpreter.evaluate(data?.transform?.text)
+    setTimeout(() => {
+        interpreter.evaluate(data?.transform?.text)
+      }
     )
   }
 
