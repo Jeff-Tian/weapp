@@ -191,22 +191,29 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
             console.log('authorized')
             Taro.downloadFile({
               url: imgUrl,
-              success: () => {
-                Taro.showToast({
-                  title: '二维码已经保存到相册，请调用微信扫一扫',
-                  icon: 'success'
-                })
+              success: (downloaded) => {
+                Taro.saveImageToPhotosAlbum({
+                  filePath: downloaded.tempFilePath,
+                  success: () => {
 
-                Taro.scanCode({
-                  success: (res) => {
-                    // charSet: "ISO8859-1"
-                    // errMsg: "scanCode:ok"
-                    // rawData: "Yml0Y29pbjoxNmphZzRHUkt4b044UkdBNWl6ekZIZVZXZmRvZlI1d0hMP2Ftb3VudD0xLjAwMDAwMDAwJmxhYmVsPXBhLXBhLXBhJm1lc3NhZ2U9cGEtcGEtcGE="
-                    // result: "bitcoin:16jag4GRKxoN8RGA5izzFHeVWfdofR5wHL?amount=1.00000000&label=pa-pa-pa&message=pa-pa-pa"
-                    // scanType: "QR_CODE"
-                    console.log(res)
+                    Taro.showToast({
+                      title: '二维码已经保存到相册，请调用微信扫一扫',
+                      icon: 'success'
+                    })
+
+                    Taro.scanCode({
+                      success: (res) => {
+                        // charSet: "ISO8859-1"
+                        // errMsg: "scanCode:ok"
+                        // rawData: "Yml0Y29pbjoxNmphZzRHUkt4b044UkdBNWl6ekZIZVZXZmRvZlI1d0hMP2Ftb3VudD0xLjAwMDAwMDAwJmxhYmVsPXBhLXBhLXBhJm1lc3NhZ2U9cGEtcGEtcGE="
+                        // result: "bitcoin:16jag4GRKxoN8RGA5izzFHeVWfdofR5wHL?amount=1.00000000&label=pa-pa-pa&message=pa-pa-pa"
+                        // scanType: "QR_CODE"
+                        console.log(res)
+                      }
+                    })
                   }
                 })
+
               }
             })
           }
