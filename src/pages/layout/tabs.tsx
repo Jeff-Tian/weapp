@@ -7,7 +7,7 @@ import useRouter = Taro.useRouter;
 const HardwayTabs = ({children}) => {
   const router = useRouter()
 
-  let tab
+  let tab = 0
   if (router.path === '/pages/pearlsplus/1_6_1') {
     tab = 0
   }
