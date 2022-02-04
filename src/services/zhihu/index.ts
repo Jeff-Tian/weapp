@@ -140,6 +140,7 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
       })
 
       if (res3.data.status === 0) {
+        Taro.showToast({title: '还未扫码'})
         await poll();
       }
 
@@ -173,16 +174,18 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
       }
     } catch (err) {
       console.error('err = ', err);
+      Taro.showToast({title: `发生错误了： ${JSON.stringify(err)}`})
     }
   }
 
   const imgUrl = `https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`;
   setZhihuLoginQRCode(imgUrl)
-  setRichModalTitle('保存知乎二维码到相册或者发送给文件传输助手，然后用微信扫一扫或者长按识别它')
+  setRichModalTitle('保存知乎二维码到相册，然后使用知乎 APP 扫码登录。')
   setIsRichModalOpen(true)
   setSaveQR(() => () => {
     console.log('saving...')
 
+    poll()
     Taro.getSetting({
       success: () => {
         Taro.authorize({
@@ -197,19 +200,8 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
                   success: () => {
 
                     Taro.showToast({
-                      title: '二维码已经保存到相册，请调用微信扫一扫',
+                      title: '二维码已经保存到相册，请打开知乎 APP 进行扫码。',
                       icon: 'success'
-                    })
-
-                    Taro.scanCode({
-                      success: (res) => {
-                        // charSet: "ISO8859-1"
-                        // errMsg: "scanCode:ok"
-                        // rawData: "Yml0Y29pbjoxNmphZzRHUkt4b044UkdBNWl6ekZIZVZXZmRvZlI1d0hMP2Ftb3VudD0xLjAwMDAwMDAwJmxhYmVsPXBhLXBhLXBhJm1lc3NhZ2U9cGEtcGEtcGE="
-                        // result: "bitcoin:16jag4GRKxoN8RGA5izzFHeVWfdofR5wHL?amount=1.00000000&label=pa-pa-pa&message=pa-pa-pa"
-                        // scanType: "QR_CODE"
-                        console.log(res)
-                      }
                     })
                   }
                 })
