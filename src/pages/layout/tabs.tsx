@@ -3,6 +3,7 @@ import {AtFab, AtTabs, AtTabsPane} from "taro-ui";
 import {OfficialAccount, View, Text} from "@tarojs/components";
 import {useState} from "react";
 import useRouter = Taro.useRouter;
+import './tabs.styl'
 
 const HardwayTabs = ({children}) => {
   const router = useRouter()
@@ -42,21 +43,26 @@ const HardwayTabs = ({children}) => {
   >
     <AtTabsPane current={currentTab} index={0}><View>{children}</View></AtTabsPane>
     <AtTabsPane current={currentTab} index={1}><View>
-      {currentTab === 1 ?
-        <View>
-          <AtFab onClick={() => Taro.navigateToMiniProgram({
-            appId: 'wx71b447f4cd52b251',
-            path: 'pages/webview/index.html?url=/tian-jie/notes/xvpag4/edit',
-            extraData: {},
-            envVersion: 'release'
-          })}>
-            <Text className='at-fab__icon at-icon at-icon-menu'>.</Text>
-          </AtFab>
-        </View> : <View>{currentTab}</View>
-      }
-      {children}</View></AtTabsPane>
+      {children}
+    </View></AtTabsPane>
     <AtTabsPane current={currentTab} index={2}><View>{children}</View></AtTabsPane>
-  </AtTabs></View>
+  </AtTabs>
+
+
+    {currentTab === 1 ?
+      <View className='fab-area'>
+        <AtFab onClick={() => Taro.navigateToMiniProgram({
+          appId: 'wx71b447f4cd52b251',
+          path: '',
+          extraData: {},
+          envVersion: 'release'
+        })}>
+          <Text className='at-fab__icon at-icon at-icon-edit'></Text>
+        </AtFab>
+      </View> : null
+    }
+
+  </View>
 }
 
 export default HardwayTabs
