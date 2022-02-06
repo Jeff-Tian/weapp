@@ -60,7 +60,7 @@ const PearlsPlus = () => {
   }, [])
 
   useEffect(() => {
-    Taro.request({url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://pearlsplus.pa-ca.me/chapter1/wmp-1.6.1.js')}`}).then(({data}) => {
+    Taro.request({url: `https://uniheart.pa-ca.me/proxy?a=c&url=${encodeURIComponent('https://pearlsplus.pa-ca.me/chapter1/wmp-1.6.1.js')}`}).then(({data}) => {
       setStatus('运行时下载完成。')
       setSourceCode(data)
       setStatus('运行时加载完毕。')

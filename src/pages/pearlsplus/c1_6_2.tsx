@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import {View} from "@tarojs/components"
-import {AtButton, AtTextarea} from "taro-ui";
+import {AtTextarea} from "taro-ui";
 import {useEffect, useState} from "react";
 import {Interpreter} from "eval5";
 import HardwayLayout from "../layout/hardway-layout";
@@ -9,11 +9,9 @@ import './wasm.styl'
 const PearlsPlus = () => {
   const [code, setCode] = useState('加载中……')
   const [status, setStatus] = useState('正在加载运行时……')
-  const [isModalOpen, setIsModalOpen] = useState(true)
   const [printed, setPrinted] = useState('')
   let userInput = []
   const output: string[] = []
-  const [sourceCode, setSourceCode] = useState('')
 
   let count = 0;
   const interpreter = new Interpreter({
@@ -44,18 +42,21 @@ const PearlsPlus = () => {
   }, [])
 
   useEffect(() => {
-    Taro.request({url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://pearlsplus.pa-ca.me/chapter1/c1.6.2.js')}`}).then(({
-                                                                                                                                               data,
-                                                                                                                                               statusCode
-                                                                                                                                             }) => {
+    Taro.request({url: `https://uniheart.pa-ca.me/proxy?a=b&url=${encodeURIComponent('https://pearlsplus.pa-ca.me/chapter1/c1.6.2.js')}`}).then(({
+                                                                                                                                                   data,
+                                                                                                                                                   statusCode
+                                                                                                                                                 }) => {
       if (statusCode === 404) {
         const title = '运行时缺失，请确认远程运行时文件存在。';
         Taro.showToast({title}).then()
         setStatus(title)
       } else {
         setStatus('运行时下载完成。')
-        setSourceCode(data)
         setStatus('运行时加载完毕。')
+
+        setTimeout(() => {
+          interpreter.evaluate(data)
+        }, 10)
       }
     }).catch(err => setStatus(JSON.stringify(err)))
   }, [])
@@ -70,7 +71,7 @@ const PearlsPlus = () => {
 
     <View>执行结果：</View>
     <AtTextarea className='terminal' disabled placeholder={status} onChange={() => {
-    }} value={printed} count={false}
+    }} value={printed} count={false} maxLength={100000000000000}
     />
   </View></HardwayLayout>
 }
