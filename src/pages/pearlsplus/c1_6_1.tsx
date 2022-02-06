@@ -45,6 +45,7 @@ const PearlsPlus = () => {
     },
     window: {
       prompt: () => {
+        console.log('count = ', count, userInput[count])
         return userInput[count++] || null
       }
     }
@@ -54,13 +55,13 @@ const PearlsPlus = () => {
 
 
   useEffect(() => {
-    Taro.request({url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://raw.githubusercontent.com/Jeff-Tian/PearlsPlus/main/chapter1/1.6.1.cpp')}`}).then(({data}) => {
+    Taro.request({url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://raw.githubusercontent.com/Jeff-Tian/PearlsPlus/main/chapter1/1.6.1.c')}`}).then(({data}) => {
       setCode(data)
     }).catch(err => setCode(JSON.stringify(err)))
   }, [])
 
   useEffect(() => {
-    Taro.request({url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://pearlsplus.pa-ca.me/chapter1/wmp-1.6.1.js')}`}).then(({data}) => {
+    Taro.request({url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent('https://pearlsplus.pa-ca.me/chapter1/c1.6.1.js')}`}).then(({data}) => {
       setStatus('运行时下载完成。')
       setSourceCode(data)
       setStatus('运行时加载完毕。')
@@ -70,7 +71,7 @@ const PearlsPlus = () => {
   return <HardwayLayout><View>
     <View>1.6 习题</View>
     <View>1. 如果不缺内存，如何使用一个具有库的语言来实现一种排序算法以表示和排序集合？</View>
-    <View>C++ 源代码：</View>
+    <View>C 源代码：</View>
     <AtTextarea className='code' onChange={() => {
     }} value={code} maxLength={1000000000} count={false} disabled
     />
