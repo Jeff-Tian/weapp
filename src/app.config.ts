@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/auth/authing',
     'pages/pearlsplus/1_6_1',
     'pages/pearlsplus/c1_6_1',
     'pages/pearlsplus/c1_6_2',
@@ -14,7 +15,6 @@ export default {
     'pages/pearlsplus/hello',
     'pages/ip/index',
     'pages/auth/keycloak',
-    'pages/auth/authing'
   ],
   window: {
     backgroundTextStyle: 'light',

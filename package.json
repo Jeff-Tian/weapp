@@ -46,6 +46,7 @@
     "@tarojs/runtime": "3.3.3",
     "@tarojs/taro": "3.3.3",
     "@testing-library/jest-dom": "^5.14.1",
+    "authing-wxapp-sdk": "^4.3.22-alpha.7",
     "cheerio": "^1.0.0-rc.10",
     "eval5": "^1.4.7",
     "form-urlencoded": "^6.0.5",
