@@ -13,6 +13,8 @@ export default {
     'pages/tictactoe/ai',
     'pages/pearlsplus/hello',
     'pages/ip/index',
+    'pages/auth/keycloak',
+    'pages/auth/authing'
   ],
   window: {
     backgroundTextStyle: 'light',
