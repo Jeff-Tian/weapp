@@ -4,7 +4,7 @@ import {AtActivityIndicator} from "taro-ui";
 import {useEffect, useState} from "react";
 import {AuthenticationClient} from "authing-wxapp-sdk";
 import HardwayLayout from '../layout/hardway-layout';
-import {memoizeAsync, memoizedAsync} from "../../common/helpers";
+import {memoizedAsync} from "../../common/helpers";
 
 
 const authing = new AuthenticationClient({
@@ -13,26 +13,22 @@ const authing = new AuthenticationClient({
 })
 
 
+const login = async () => {
+  const {code} = await Taro.login()
+   // 成功登录，将 token 写入微信 Storage
+  return await authing.loginByCode(code)
+}
+
 const LoginStatus = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  const login = async () => {
-    const {code} = await Taro.login()
-    const res = await authing.loginByCode(code); // 成功登录，将 token 写入微信 Storage
-    console.log('res = ', res)
-    setUser(res)
-    await authing.updateProfile({
-      nickname: 'Bob'
-    })
-
-    setLoading(false)
-  }
-
-  const memoizedLogin = memoizeAsync(login)
-
   useEffect(() => {
-    memoizedLogin().then()
+    memoizedAsync(login)().then(res => {
+      console.log(res)
+      setLoading(false)
+      setUser(res)
+    })
   }, [])
 
   return <View>

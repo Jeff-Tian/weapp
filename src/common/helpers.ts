@@ -1,12 +1,9 @@
 export const memoizeAsync = <T>(func: (...args) => Promise<T>) => {
   const cache = {}
 
-  console.log('cache = ', cache)
   return async (...args) => {
     const cacheKey = JSON.stringify({fn: func.name, args})
 
-
-    console.log('cache KEY = ', cache, cacheKey)
     if (cache[cacheKey] === undefined) {
       cache[cacheKey] = func(...args).finally(() => (cache[cacheKey] = undefined))
     }
@@ -15,7 +12,7 @@ export const memoizeAsync = <T>(func: (...args) => Promise<T>) => {
   }
 }
 
-export const memoize = (fn: Function) => {
+export const memoize = (fn: Function): Function => {
   const cache: Record<string, object> = {};
 
   return (...args: any[]) => {
@@ -29,5 +26,5 @@ export const memoize = (fn: Function) => {
   }
 }
 
-export const memoizedAsync = memoizeAsync(memoizeAsync as any)
+export const memoizedAsync = memoize(memoizeAsync)
 export const memoized = memoize(memoize)
