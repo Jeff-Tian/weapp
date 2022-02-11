@@ -33,3 +33,4 @@ jobs:
           yarn
           yarn build:weapp
           yarn wmp:upload
+          yarn build:weapp:upload

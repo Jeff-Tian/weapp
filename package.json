@@ -9,7 +9,9 @@
     "css": "stylus"
   },
   "scripts": {
-    "build:weapp": "taro build --type weapp",
+    "build:weapp": "taro build --type weapp --open",
+    "build:weapp:upload": "taro build --type weapp --upload",
+    "build:weapp:preview": "taro build --type weapp --preview",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
     "build:tt": "taro build --type tt",
@@ -31,6 +33,10 @@
     "test": "jest --config ./jest.config.js --no-cache --coverage",
     "wmp:upload": "node scripts/upload.js",
     "deeplinks": "node scripts/deeplinks.js"
+  },
+  "taroConfig": {
+    "version": "1.5.5",
+    "desc": "上传描述"
   },
   "browserslist": [
     "last 3 versions",

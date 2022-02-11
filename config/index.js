@@ -1,5 +1,37 @@
 const {getAllDeepLinks} = require('../scripts/deeplinks')
 
+// 如果你使用 VSCode 作为开发工具， 你还可以使用注释的语法引入插件包含的声明文件，可获得类似于 Typescript 的友好提示
+/**
+ * @typedef { import("@tarojs/plugin-mini-ci").CIOptions } CIOptions
+ * @type {CIOptions}
+ */
+const CIPluginOpt = {
+  // 微信小程序
+  weapp: {
+    appid: "微信小程戏appid",
+    privateKeyPath: "密钥文件相对项目根目录的相对路径，例如 key/private.appid.key"
+  },
+  // 字节跳动小程序
+  tt: {
+    email: "字节小程序邮箱",
+    password: "字节小程序密码"
+  },
+  // 支付宝小程序
+  alipay: {
+    appId: "支付宝小程序appId",
+    toolId: "工具id",
+    privateKeyPath: "密钥文件相对项目根目录的相对路径，例如 key/pkcs8-private-pem"
+  },
+  // 百度小程序
+  swan: {
+    token: "鉴权需要的token令牌"
+  },
+  // 版本号
+  version: "1.0.0",
+  // 版本发布描述
+  desc: "版本描述"
+}
+
 const config = {
   projectName: 'weapp',
   date: '2021-8-13',
@@ -11,7 +43,11 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: [],
+
+  plugins: [
+    ["@tarojs/plugin-mini-ci", CIPluginOpt]
+  ],
+
   defineConstants: {},
   copy: {
     patterns: [
