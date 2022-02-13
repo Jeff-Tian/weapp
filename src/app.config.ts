@@ -15,6 +15,7 @@ export default {
     'pages/pearlsplus/hello',
     'pages/ip/index',
     'pages/auth/keycloak',
+    'pages/video/index'
   ],
   window: {
     backgroundTextStyle: 'light',
