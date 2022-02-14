@@ -59,7 +59,7 @@ const HardwayTabs = ({children}) => {
         })}>
           <Text className='at-fab__icon at-icon at-icon-edit'></Text>
         </AtFab>
-      </View> : null
+      </View> : <View>404</View>
     }
 
   </View>

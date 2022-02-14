@@ -5,10 +5,10 @@ import Taro from "@tarojs/taro"
 import React, {useEffect, useState} from "react";
 import './article.styl'
 import HardwayLayout from "../../layout/hardway-layout"
-import {HardwayErrorDisplay} from "../../components/ErrorDisplay";
+import {ErrorDisplay} from "../../components/ErrorDisplay";
 
 
-const YUQUE_BLOG = gql`
+export const YUQUE_BLOG = gql`
         query PaginatedYuQue($skip: Float!, $take: Float!) {
           paginatedYuque(skip: $skip, take: $take) {
             id
@@ -22,12 +22,14 @@ const YUQUE_BLOG = gql`
         }
   `
 
-const YuQue: React.FC = () => {
-  const {loading, error, data} = useQuery(YUQUE_BLOG, {variables: {skip: 0, take: 5}})
+export const YuQueInner = ()=>{
+  const [skip, setSkip] = useState(0)
+  const [take] = useState(5)
+  const {loading, error, data, refetch} = useQuery(YUQUE_BLOG, {variables: {skip: 0, take: 5}})
   const [status, setStatus]: ['more' | 'loading' | 'noMore' | undefined, Function] = useState('loading')
 
-  const handleClick = (...args: any[]) => {
-    console.log(args)
+  const handleClick = () => {
+    setSkip(skip + take)
     setStatus('loading')
   }
 
@@ -38,11 +40,13 @@ const YuQue: React.FC = () => {
   }, [data])
 
   if (error) {
-    return <HardwayErrorDisplay error={error} />
+    return <ErrorDisplay error={error}>
+      <button onClick={() => refetch()}>重试</button>
+    </ErrorDisplay>
   }
 
 
-  return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
+  return <View><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
   />
     {data && data.paginatedYuque.map(article => <View key={article.id}><AtCard title={article.title}
@@ -59,7 +63,9 @@ const YuQue: React.FC = () => {
       {article.description}</AtCard><AtDivider lineColor='#fff' />
     </View>)}
     <AtLoadMore onClick={handleClick.bind(this)} status={status} />
-  </HardwayLayout>
+  </View>
 }
+
+const YuQue: React.FC = () => <HardwayLayout><YuQueInner /></HardwayLayout>
 
 export default YuQue

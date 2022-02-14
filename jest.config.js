@@ -16,9 +16,9 @@ module.exports = {
     '@tarojs/taro': '<rootDir>/__mock__/tarojs',
     '@/apis/client$': '<rootDir>/__mock__/client',
     '@/(.*)$': '<rootDir>/src/$1',
-    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+    '\\.(css|less|sass|scss|styl)$': 'identity-obj-proxy',
     './jice.weapp': '<rootDir>/__mock__/jice',
-    '/gio-minp/gio-minp.js': '<rootDir>/__mock__/gio'
+    '/gio-minp/gio-minp.js': '<rootDir>/__mock__/gio',
   },
   testEnvironment: 'jsdom'
 }

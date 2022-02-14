@@ -51,7 +51,6 @@
     "@tarojs/react": "3.3.3",
     "@tarojs/runtime": "3.3.3",
     "@tarojs/taro": "3.3.3",
-    "@testing-library/jest-dom": "^5.14.1",
     "authing-wxapp-sdk": "^4.3.22-alpha.7",
     "cheerio": "^1.0.0-rc.10",
     "eval5": "^1.4.7",
@@ -65,11 +64,14 @@
     "taro-ui": "3.0.0-alpha.10"
   },
   "devDependencies": {
+    "@apollo/react-testing": "^4.0.0",
     "@babel/core": "^7.8.0",
     "@tarojs/cli": "3.3.3",
     "@tarojs/mini-runner": "3.3.3",
     "@tarojs/plugin-mini-ci": "3.5.0-canary.1",
     "@tarojs/webpack-runner": "3.3.3",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
     "@types/react": "^17.0.2",
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
@@ -80,6 +82,7 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "miniprogram-ci": "^1.6.10",
     "stylelint": "9.3.0",
     "typescript": "^4.1.0"

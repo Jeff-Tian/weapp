@@ -23,7 +23,9 @@ const taroApi = {
       language: '',
   }),
   getMenuButtonBoundingClientRect: () => {},
-  getEnv: () => {}
+  getEnv: () => {},
+  ENV_TYPE: {},
+  useRouter: ()=>({path: '/pages/not/exist'}),
 }
 
 export default taroApi
