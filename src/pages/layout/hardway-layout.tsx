@@ -18,7 +18,7 @@ const HardwayLayout = (props) => {
 
   const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
 
-  return <HardwayTabs><View>
+  return <HardwayTabs><View style={{minHeight: '1000px'}}>
     <AtNavBar
       onClickRgIconSt={() => {
         setShowDrawer(true)

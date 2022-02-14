@@ -8,8 +8,8 @@ const {getAllDeepLinks} = require('../scripts/deeplinks')
 const CIPluginOpt = {
   // 微信小程序
   weapp: {
-    appid: "微信小程戏appid",
-    privateKeyPath: "密钥文件相对项目根目录的相对路径，例如 key/private.appid.key"
+    appid: "wx8c777d630f2b78e3",
+    privateKeyPath: "private.key"
   },
   // 字节跳动小程序
   tt: {

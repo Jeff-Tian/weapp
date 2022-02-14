@@ -1,14 +1,15 @@
 import {gql, useQuery} from "@apollo/client"
 import {View} from "@tarojs/components"
-import {AtActivityIndicator, AtAvatar, AtCard, AtDivider} from "taro-ui"
+import {AtActivityIndicator, AtAvatar, AtCard, AtDivider, AtLoadMore} from "taro-ui"
 import Taro from "@tarojs/taro"
+import React, {useEffect, useState} from "react";
 import './article.styl'
 import HardwayLayout from "../layout/hardway-layout"
-import {useEffect} from "react";
+
 
 const YUQUE_BLOG = gql`
         query {
-          allYuque {
+          paginatedYuque {
             id
             title
             description
@@ -22,6 +23,12 @@ const YUQUE_BLOG = gql`
 
 const YuQue: React.FC = () => {
   const {loading, error, data} = useQuery(YUQUE_BLOG)
+  const [status, setStatus]: ['more' | 'loading' | 'noMore' | undefined, Function] = useState('more')
+
+  const handleClick = (...args: any[]) => {
+    console.log(args)
+    setStatus('loading')
+  }
 
   useEffect(() => {
     if (error) {
@@ -32,19 +39,20 @@ const YuQue: React.FC = () => {
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
   />
-    {data && data.allYuque.map(article => <View key={article.id}><AtCard title={article.title}
+    {data && data.paginatedYuque.map(article => <View key={article.id}><AtCard title={article.title}
       extra={`${article.word_count} 字`}
       note={article.created_at}
       thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
       onClick={() => Taro.navigateTo({
-                                                                           url: `/pages/yuque/article?slug=${article.slug}`,
-                                                                         })}
+                                                                                 url: `/pages/yuque/article?slug=${article.slug}`,
+                                                                               })}
     ><AtAvatar
       image={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
       size='large'
     />
       {article.description}</AtCard><AtDivider lineColor='#fff' />
     </View>)}
+    <AtLoadMore onClick={handleClick.bind(this)} status={status} />
   </HardwayLayout>
 }
 
