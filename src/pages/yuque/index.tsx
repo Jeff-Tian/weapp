@@ -8,8 +8,8 @@ import HardwayLayout from "../layout/hardway-layout"
 
 
 const YUQUE_BLOG = gql`
-        query {
-          paginatedYuque {
+        query PaginatedYuQue($skip: Float!, $take: Float!) {
+          paginatedYuque(skip: $skip, take: $take) {
             id
             title
             description
@@ -22,8 +22,8 @@ const YUQUE_BLOG = gql`
   `
 
 const YuQue: React.FC = () => {
-  const {loading, error, data} = useQuery(YUQUE_BLOG)
-  const [status, setStatus]: ['more' | 'loading' | 'noMore' | undefined, Function] = useState('more')
+  const {loading, error, data} = useQuery(YUQUE_BLOG, {variables: {skip: 0, take: 5}})
+  const [status, setStatus]: ['more' | 'loading' | 'noMore' | undefined, Function] = useState('loading')
 
   const handleClick = (...args: any[]) => {
     console.log(args)
@@ -36,23 +36,29 @@ const YuQue: React.FC = () => {
     }
   }, [error])
 
+  useEffect(() => {
+    if (data) {
+      setStatus('more')
+    }
+  }, [data])
+
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
-    isOpened={loading}
+                                             isOpened={loading}
   />
     {data && data.paginatedYuque.map(article => <View key={article.id}><AtCard title={article.title}
-      extra={`${article.word_count} 字`}
-      note={article.created_at}
-      thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
-      onClick={() => Taro.navigateTo({
+                                                                               extra={`${article.word_count} 字`}
+                                                                               note={article.created_at}
+                                                                               thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
+                                                                               onClick={() => Taro.navigateTo({
                                                                                  url: `/pages/yuque/article?slug=${article.slug}`,
                                                                                })}
     ><AtAvatar
       image={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
       size='large'
     />
-      {article.description}</AtCard><AtDivider lineColor='#fff' />
+      {article.description}</AtCard><AtDivider lineColor='#fff'/>
     </View>)}
-    <AtLoadMore onClick={handleClick.bind(this)} status={status} />
+    <AtLoadMore onClick={handleClick.bind(this)} status={status}/>
   </HardwayLayout>
 }
 
