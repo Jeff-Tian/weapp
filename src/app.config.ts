@@ -14,6 +14,10 @@ const subpages = [
   {
     root: `pages/subpages/video`,
     pages: ['index']
+  },
+  {
+    root: `pages/subpages/test`,
+    pages: ['index']
   }
 ]
 
@@ -27,14 +31,11 @@ export default {
     'pages/yuque/index',
     'pages/yuque/article',
     'pages/index/index',
-    // 'pages/about/index',
     'pages/weapp/index',
     'pages/tictactoe/index',
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
     'pages/pearlsplus/hello',
-    // 'pages/ip/index',
-    // 'pages/video/index'
   ],
   window: {
     backgroundTextStyle: 'light',
