@@ -11,7 +11,7 @@ import * as assert from 'assert';
 
 import './article.styl'
 
-import HardwayLayout from "../layout/hardway-layout"
+import HardwayLayout from "../../layout/hardway-layout"
 import {draftDirectly} from "../../services/zhihu";
 
 

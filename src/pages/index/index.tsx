@@ -5,7 +5,7 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import envVersion = Taro.navigateToMiniProgram.envVersion
 import projectConfig from '../../../project.config.json'
-import HardwayLayout from "../layout/hardway-layout"
+import HardwayLayout from "../../layout/hardway-layout"
 
 type IndexState = Record<string, string>
 

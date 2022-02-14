@@ -3,7 +3,7 @@ import {View} from "@tarojs/components"
 import {AtTextarea} from "taro-ui";
 import {useEffect, useState} from "react";
 import {Interpreter} from "eval5";
-import HardwayLayout from "../layout/hardway-layout";
+import HardwayLayout from "../../layout/hardway-layout";
 import './wasm.styl'
 
 const PearlsPlus = () => {

@@ -2,7 +2,7 @@ import {Button, View} from "@tarojs/components"
 import Taro from "@tarojs/taro";
 import {gql} from "@apollo/client";
 import './tictactoe.styl'
-import HardwayLayout from "../layout/hardway-layout";
+import HardwayLayout from "../../layout/hardway-layout";
 import {DynamicContent} from "./dynamic-content";
 
 // import divviewer from "../../adapters/divviewer";

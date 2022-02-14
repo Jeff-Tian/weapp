@@ -1,6 +1,6 @@
 import { View } from "@tarojs/components"
 
-import HardwayLayout from "../../layout/hardway-layout"
+import HardwayLayout from "../../../layout/hardway-layout"
 
 import packageJson from '../../../../package.json'
 import SystemInfo from "./system.info";

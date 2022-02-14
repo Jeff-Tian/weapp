@@ -2,12 +2,12 @@ import Taro from '@tarojs/taro'
 import {AtDrawer, AtNavBar} from "taro-ui"
 import {View, Image} from "@tarojs/components"
 import {useState} from "react"
-import {loginByQrCode} from "../../services/zhihu"
+import {loginByQrCode} from "../services/zhihu"
 import {drawerItems, onDrawerItemClick} from "./drawer-items"
-import {StorageKeys} from "../../common/constants"
+import {StorageKeys} from "../common/constants"
 import HardwayTabs from './tabs'
-import '../../components/rich-modal.styl'
-import RichModal from "../../components/RichModal";
+import '../components/rich-modal.styl'
+import RichModal from "../components/RichModal";
 
 const HardwayLayout = (props) => {
   const [showDrawer, setShowDrawer] = useState(false)

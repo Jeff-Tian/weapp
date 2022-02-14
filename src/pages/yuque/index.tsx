@@ -4,7 +4,8 @@ import {AtActivityIndicator, AtAvatar, AtCard, AtDivider, AtLoadMore} from "taro
 import Taro from "@tarojs/taro"
 import React, {useEffect, useState} from "react";
 import './article.styl'
-import HardwayLayout from "../layout/hardway-layout"
+import HardwayLayout from "../../layout/hardway-layout"
+import {HardwayErrorDisplay} from "../../components/ErrorDisplay";
 
 
 const YUQUE_BLOG = gql`
@@ -31,16 +32,15 @@ const YuQue: React.FC = () => {
   }
 
   useEffect(() => {
-    if (error) {
-      Taro.navigateTo({url: `/pages/yuque/article?slug=ytwbzm`}).then()
-    }
-  }, [error])
-
-  useEffect(() => {
     if (data) {
       setStatus('more')
     }
   }, [data])
+
+  if (error) {
+    return <HardwayErrorDisplay error={error} />
+  }
+
 
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
