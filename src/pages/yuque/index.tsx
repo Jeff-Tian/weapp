@@ -3,9 +3,10 @@ import {View} from "@tarojs/components"
 import {AtActivityIndicator, AtAvatar, AtCard, AtDivider, AtLoadMore} from "taro-ui"
 import Taro from "@tarojs/taro"
 import React, {useEffect, useState} from "react";
+import {ErrorDisplay} from "@/components/ErrorDisplay";
 import './article.styl'
 import HardwayLayout from "../../layout/hardway-layout"
-import {ErrorDisplay} from "../../components/ErrorDisplay";
+
 
 
 export const YUQUE_BLOG = gql`
@@ -31,6 +32,7 @@ export const YuQueInner = ()=>{
   const handleClick = () => {
     setSkip(skip + take)
     setStatus('loading')
+    refetch({skip: skip + take, take}).then()
   }
 
   useEffect(() => {

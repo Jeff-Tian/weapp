@@ -25,7 +25,7 @@
     "esModuleInterop": false,
     "paths": {
       "fs": ["./src/mocks/fs.ts"],
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "exclude": [

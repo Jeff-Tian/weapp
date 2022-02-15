@@ -1,4 +1,5 @@
 const {getAllDeepLinks} = require('../scripts/deeplinks')
+const path = require("path");
 
 // 如果你使用 VSCode 作为开发工具， 你还可以使用注释的语法引入插件包含的声明文件，可获得类似于 Typescript 的友好提示
 /**
@@ -99,7 +100,12 @@ const config = {
     copy: {
       patterns:
         getAllDeepLinks().map(f => ({from: 'src/index.html', to: f}))
-    }
+    },
+  },
+  alias: {
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@': path.resolve(__dirname, '../src'),
+    '~@': path.resolve(__dirname, '../src/styles'),
   },
 }
 
