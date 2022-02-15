@@ -7,6 +7,10 @@ const MOCKS = [
   {
     request: {
       query: YUQUE_BLOG,
+      variables: {
+        skip: 0,
+        take: 5
+      }
     },
     result: {
       data: {
@@ -15,7 +19,10 @@ const MOCKS = [
             id: 1,
             title: 'test',
             description: 'test',
-            slug: '1234'
+            slug: '1234',
+            word_count: 4,
+            created_at: '2000-01-01',
+            cover: 'https://img.alicdn.com/tfs/TB1.jpg',
           }],
       },
     },
@@ -41,5 +48,5 @@ it('renders', async () => {
 
   await wait();
 
-  expect(container.textContent).toMatch('重试');
+  expect(container.textContent).toMatch('加载中……test4 字test2000-01-01查看更多');
 });
