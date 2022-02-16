@@ -8,7 +8,6 @@ import './article.styl'
 import HardwayLayout from "../../layout/hardway-layout"
 
 
-
 export const YUQUE_BLOG = gql`
         query PaginatedYuQue($skip: Float!, $take: Float!) {
           paginatedYuque(skip: $skip, take: $take) {
@@ -23,7 +22,8 @@ export const YUQUE_BLOG = gql`
         }
   `
 
-export const YuQueInner = ()=>{
+export const YuQueInner = () => {
+  const [blogs, setBlogs] = useState<any>([])
   const [skip, setSkip] = useState(0)
   const [take] = useState(5)
   const {loading, error, data, refetch} = useQuery(YUQUE_BLOG, {variables: {skip: 0, take: 5}})
@@ -38,6 +38,8 @@ export const YuQueInner = ()=>{
   useEffect(() => {
     if (data) {
       setStatus('more')
+
+      setBlogs(blogs.concat(data.paginatedYuque))
     }
   }, [data])
 
@@ -51,13 +53,13 @@ export const YuQueInner = ()=>{
   return <View><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
   />
-    {data && data.paginatedYuque.map(article => <View key={article.id}><AtCard title={article.title}
+    {blogs.map(article => <View key={article.id}><AtCard title={article.title}
       extra={`${article.word_count} 字`}
       note={article.created_at}
       thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
       onClick={() => Taro.navigateTo({
-                                                                                 url: `/pages/yuque/article?slug=${article.slug}`,
-                                                                               })}
+                                                           url: `/pages/yuque/article?slug=${article.slug}`,
+                                                         })}
     ><AtAvatar
       image={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
       size='large'
