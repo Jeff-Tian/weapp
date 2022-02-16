@@ -15,9 +15,9 @@ const interpreter = new Interpreter(window, {
 window['ReactDOM'] = ENV_TYPE.WEB === Taro.getEnv() ? ReactDOM : TaroDOM;
 window['React'] = React;
 
-export const DynamicContent = ({gql}) => {
+export const DynamicContent = ({gql, variables}: {gql, variables?: object}) => {
 
-  const {loading, error, data} = useQuery(gql)
+  const {loading, error, data} = useQuery(gql, {variables})
 
   if (loading) {
     return <AtActivityIndicator mode='center' size={128} content='加载中……'

@@ -12,6 +12,7 @@ export const drawerItems = new Map<string, () => void>([
   ['编程珠玑习题（c++ 版）1.6.1', async () => Taro.navigateTo({url: '/pages/pearlsplus/1_6_1'})],
   ['编程珠玑习题（c 版）1.6.1', async () => Taro.navigateTo({url: '/pages/pearlsplus/c1_6_1'})],
   ['编程珠玑习题（c 版）1.6.2', async () => Taro.navigateTo({url: '/pages/pearlsplus/c1_6_2'})],
+  ['动态渲染', async()=>Taro.navigateTo({url: '/pages/subpages/react-view/index'})],
   ['小程序直达器',
     async () => Taro.navigateTo({url: '/pages/index/index'})],
   // ['ip 地址', async () => Taro.navigateTo({url: '/pages/ip/index'})],

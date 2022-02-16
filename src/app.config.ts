@@ -18,9 +18,9 @@ const subpages = [
   {
     root: `pages/subpages/test`,
     pages: ['index']
-  }
+  },
+  {root: `pages/subpages/react-view`, pages: ['index']}
 ]
-
 
 
 export default {
