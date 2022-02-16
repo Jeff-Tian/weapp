@@ -25,10 +25,10 @@ const subpages = [
 
 export default {
   pages: [
+    'pages/yuque/index',
     'pages/pearlsplus/1_6_1',
     'pages/pearlsplus/c1_6_1',
     'pages/pearlsplus/c1_6_2',
-    'pages/yuque/index',
     'pages/yuque/article',
     'pages/index/index',
     'pages/weapp/index',
