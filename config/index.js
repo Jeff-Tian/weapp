@@ -28,9 +28,9 @@ const CIPluginOpt = {
     token: "鉴权需要的token令牌"
   },
   // 版本号
-  version: "1.0.0",
+  version: "1.5.6",
   // 版本发布描述
-  desc: "版本描述"
+  desc: "对博文增加分页功能"
 }
 
 const config = {

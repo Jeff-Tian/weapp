@@ -2,9 +2,9 @@ import Taro from '@tarojs/taro'
 import {AtDrawer, AtNavBar} from "taro-ui"
 import {View, Image} from "@tarojs/components"
 import {useState} from "react"
-import {loginByQrCode} from "../services/zhihu"
+import {loginByQrCode} from "@/services/zhihu"
+import {StorageKeys} from "@/common/constants"
 import {drawerItems, onDrawerItemClick} from "./drawer-items"
-import {StorageKeys} from "../common/constants"
 import HardwayTabs from './tabs'
 import '../components/rich-modal.styl'
 import RichModal from "../components/RichModal";
@@ -44,6 +44,15 @@ const HardwayLayout = (props) => {
       rightSecondIconType={zhihuUserInfo ? {value: 'user', color: 'blue'} : 'user'}
     />
 
+    <AtDrawer
+      show={showDrawer}
+      mask
+      right
+      onClose={() => setShowDrawer(false)}
+      items={[...drawerItems.keys()]}
+      onItemClick={onDrawerItemClick}
+    />
+
     <View id='rich-modal'><RichModal isOpen={isRichModalOpen} onConfirm={() => {
       setIsRichModalOpen(false)
       saveQR && saveQR()
@@ -54,18 +63,9 @@ const HardwayLayout = (props) => {
       title={richModalTitle}
     >
       <Image src={zhihuLoginQRCode} />
-    </RichModal></View>
-
+    </RichModal>
+    </View>
     {props.children}
-
-    <AtDrawer
-      show={showDrawer}
-      mask
-      right
-      onClose={() => setShowDrawer(false)}
-      items={[...drawerItems.keys()]}
-      onItemClick={onDrawerItemClick}
-    />
   </View></HardwayTabs>
 }
 
