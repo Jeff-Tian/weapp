@@ -44,7 +44,7 @@ const PearlsPlus = () => {
 
     <View>源代码：</View>
     <AtTextarea className='code' onChange={() => {
-    }} value={code} maxLength={1000000000} count={false} disabled
+    }} value={code} maxLength={Infinity} count={false} disabled
     />
 
     <View>执行结果：</View>

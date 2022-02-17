@@ -31,7 +31,7 @@ const CIPluginOpt = {
   // 版本号
   version: packageJson.version,
   // 版本发布描述
-  desc: "对博文增加分页功能"
+  desc: packageJson.description
 }
 
 const config = {

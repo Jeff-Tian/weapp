@@ -73,7 +73,7 @@ const PearlsPlus = () => {
     <View>1. 如果不缺内存，如何使用一个具有库的语言来实现一种排序算法以表示和排序集合？</View>
     <View>C 源代码：</View>
     <AtTextarea className='code' onChange={() => {
-    }} value={code} maxLength={1000000000} count={false} disabled
+    }} value={code} maxLength={Infinity} count={false} disabled
     />
 
     <Prompt isOpen={isModalOpen} onConfirm={content => {

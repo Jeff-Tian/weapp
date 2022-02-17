@@ -96,7 +96,7 @@ export default class Index extends Component<any, IndexState> {
           <AtTextarea
             value={this.state.extraData}
             onChange={this.handleChange.bind(this, 'extraData')}
-            maxLength={2000}
+            maxLength={Infinity}
             placeholder={JSON.stringify({foo: 'bar'})}
           />
           <AtInput name="envVersion" title="版本" type="text" placeholder="release develop trial"

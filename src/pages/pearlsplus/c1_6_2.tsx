@@ -66,12 +66,12 @@ const PearlsPlus = () => {
     <View>2. 如何使用位逻辑运算（例如与、或、移位）来实现位向量？</View>
     <View>C 源代码：</View>
     <AtTextarea className='code' onChange={() => {
-    }} value={code} maxLength={1000000000} count={false} disabled
+    }} value={code} maxLength={Infinity} count={false} disabled
     />
 
     <View>执行结果：</View>
     <AtTextarea className='terminal' disabled placeholder={status} onChange={() => {
-    }} value={printed} count={false} maxLength={100000000000000}
+    }} value={printed} count={false} maxLength={Infinity}
     />
   </View></HardwayLayout>
 }

@@ -24,7 +24,7 @@ ReactDOM.render(<view>Hello</view>, document.getElementById('root'));
 
   return <View>
     <View>请输入代码：</View>
-    <AtTextarea value={code} onChange={(input) => setCode(input)} count={false} autoFocus focus className='code large' />
+    <AtTextarea value={code} onChange={(input) => setCode(input)} count={false} focus className='code large' maxLength={Infinity} />
     <Button onClick={renderIt}>渲染</Button>
     <View>以下是渲染结果：</View>
     <DynamicContent gql={gqlTemplate} variables={vars} />
