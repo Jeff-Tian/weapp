@@ -1,5 +1,6 @@
 const {getAllDeepLinks} = require('../scripts/deeplinks')
 const path = require("path");
+const packageJson = require('../package.json');
 
 // 如果你使用 VSCode 作为开发工具， 你还可以使用注释的语法引入插件包含的声明文件，可获得类似于 Typescript 的友好提示
 /**
@@ -28,7 +29,7 @@ const CIPluginOpt = {
     token: "鉴权需要的token令牌"
   },
   // 版本号
-  version: "1.5.6",
+  version: packageJson.version,
   // 版本发布描述
   desc: "对博文增加分页功能"
 }
