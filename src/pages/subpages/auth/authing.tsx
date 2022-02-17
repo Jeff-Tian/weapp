@@ -3,8 +3,8 @@ import {View} from "@tarojs/components";
 import {AtActivityIndicator} from "taro-ui";
 import {useEffect, useState} from "react";
 import {AuthenticationClient} from "authing-wxapp-sdk";
+import {memoizedAsync} from "@/common/helpers";
 import HardwayLayout from '../../../layout/hardway-layout';
-import {memoizedAsync} from "../../../common/helpers";
 
 
 const authing = new AuthenticationClient({

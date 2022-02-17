@@ -9,7 +9,7 @@ import HardwayTabs from './tabs'
 import '../components/rich-modal.styl'
 import RichModal from "../components/RichModal";
 
-const HardwayLayout = (props) => {
+const HighLevel = () => {
   const [showDrawer, setShowDrawer] = useState(false)
   const [isRichModalOpen, setIsRichModalOpen] = useState(false)
   const [zhihuLoginQRCode, setZhihuLoginQRCode] = useState('')
@@ -17,8 +17,7 @@ const HardwayLayout = (props) => {
   const [saveQR, setSaveQR] = useState(null)
 
   const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
-
-  return <HardwayTabs><View style={{minHeight: '1000px'}}>
+  return <View>
     <AtNavBar
       onClickRgIconSt={() => {
         setShowDrawer(true)
@@ -53,20 +52,30 @@ const HardwayLayout = (props) => {
       onItemClick={onDrawerItemClick}
     />
 
-    <View id='rich-modal'><RichModal isOpen={isRichModalOpen} onConfirm={() => {
-      setIsRichModalOpen(false)
-      saveQR && saveQR()
-    }} onCancel={() => {
-      setIsRichModalOpen(false)
-    }
-    }
-      title={richModalTitle}
-    >
-      <Image src={zhihuLoginQRCode} />
-    </RichModal>
+    <View id='rich-modal'>
+      <RichModal isOpen={isRichModalOpen} onConfirm={() => {
+        setIsRichModalOpen(false)
+        saveQR && saveQR()
+      }} onCancel={() => {
+        setIsRichModalOpen(false)
+      }} title={richModalTitle}
+      >
+        <Image src={zhihuLoginQRCode} />
+      </RichModal>
     </View>
-    {props.children}
-  </View></HardwayTabs>
+  </View>
+}
+
+
+const HardwayLayout = ({children}) => {
+  return <View>
+    <HighLevel />
+    <HardwayTabs>
+      <View style={{minHeight: '1000px'}}>
+        {children}
+      </View>
+    </HardwayTabs>
+  </View>
 }
 
 export default HardwayLayout
