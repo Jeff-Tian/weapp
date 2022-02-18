@@ -9,15 +9,15 @@ const HardwayTabs = ({children}) => {
   const router = useRouter()
 
   let tab = 0
-  if (router.path === '/pages/pearlsplus/1_6_1') {
+  if (router.path.startsWith('/pages/pearlsplus')) {
     tab = 0
   }
 
-  if (router.path === '/pages/yuque/index') {
+  if (router.path.startsWith('/pages/yuque')) {
     tab = 1
   }
 
-  if (router.path === '/pages/tictactoe/ai') {
+  if (router.path.startsWith('/pages/tictactoe')) {
     tab = 2
   }
 

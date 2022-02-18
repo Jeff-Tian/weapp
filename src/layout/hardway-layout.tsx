@@ -37,8 +37,8 @@ const HighLevel = () => {
       }}
       color='#000'
       title='哈德韦的个人小程序'
-      leftText='返回'
-      leftIconType='chevron-left'
+      // leftText='返回'
+      // leftIconType='chevron-left'
       rightFirstIconType='bullet-list'
       rightSecondIconType={zhihuUserInfo ? {value: 'user', color: 'blue'} : 'user'}
     />
