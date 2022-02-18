@@ -1,8 +1,8 @@
 {
   "name": "weapp",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "private": true,
-  "description": "React View 允许输入更多字符",
+  "description": "优化布局，提升用户体验",
   "templateInfo": {
     "name": "default",
     "typescript": true,
