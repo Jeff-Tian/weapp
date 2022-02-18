@@ -68,7 +68,7 @@
     "@babel/core": "^7.8.0",
     "@tarojs/cli": "next",
     "@tarojs/mini-runner": "next",
-    "@tarojs/plugin-mini-ci": "next",
+    "@tarojs/plugin-mini-ci": "3.4.2",
     "@tarojs/webpack-runner": "next",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",

@@ -4497,10 +4497,10 @@
     webpack-format-messages "^2.0.5"
     yauzl "2.10.0"
 
-"@tarojs/plugin-mini-ci@next":
-  version "3.5.0-canary.1"
-  resolved "https://registry.yarnpkg.com/@tarojs/plugin-mini-ci/-/plugin-mini-ci-3.5.0-canary.1.tgz#6e68ad5ac0bfc6443195851afdca6bf6befc20fd"
-  integrity sha512-p3uvhZJ3SjSeO8nnjOBx4BXNx0NBDUPt+G1Ywz52UcCcLj5ZosXjvXveWT0zv3G8FeuT3NHHRqvngXJOB6Vcmw==
+"@tarojs/plugin-mini-ci@3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@tarojs/plugin-mini-ci/-/plugin-mini-ci-3.4.2.tgz#37c8605232b515afaae03a1489b402d92a6cb838"
+  integrity sha512-OhRT7rNqsgQ9TyKZ9dVGUcWzKPhZjkx7RqKqP/Vw3tv2Dpz9Usf7hHAV4ba6K5wNuUO1fCWft0cdkqSIbOnXkg==
   dependencies:
     minimist "^1.2.5"
     miniprogram-ci "^1.6.1"
