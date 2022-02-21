@@ -17,6 +17,24 @@ yarn
 yarn build:weapp
 ```
 
+## 将它发布成你的个人小程序
+
+如果你也想要有一个个人小程序并且不想从头开发，可以基于 weapp 项目来迭代。
+
+### 部署 Serverless-Space
+
+weapp 的后端服务，主要由 Serverless-Space 提供，如果你要基于 weapp 项目部署你自己的小程序，需要先部署自己的 Serverless-Space 服务，否则，小程序界面上会呈现哈德韦的数据。
+
+参考 []().
+
+### 修改 appid
+
+在项目里，把 appid 修改为你自己申请的小程序的 appid。
+
+### 修改 Serverless-Space 域名
+
+将 sls.pa-ca.me 修改为你自己的后端服务（Serverless-Space）域名。
+
 ## 功能
 
 - 增加关于页面

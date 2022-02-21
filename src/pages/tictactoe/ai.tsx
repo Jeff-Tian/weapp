@@ -7,7 +7,7 @@ import {DynamicContent} from "./dynamic-content";
 // import divviewer from "../../adapters/divviewer";
 
 const transformRequest = gql`query transformTsx {
-                transform (url: "https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/GameAI.tsx", extra: "; ReactDOM.render(<Game />, document.getElementById('root'))") {
+                transform (url: "https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/GameAI.tsx?a=b", extra: "; ReactDOM.render(<Game />, document.getElementById('root'))") {
                     text
                 }
             }`
