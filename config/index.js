@@ -53,6 +53,10 @@ const config = {
   defineConstants: {},
   copy: {
     patterns: [
+      {
+        from: 'src/wemark',
+        to: 'dist/wemark',
+      },
     ],
     options: {},
   },
@@ -77,6 +81,11 @@ const config = {
         },
       },
     },
+    compile: {
+      exclude: [
+        path.resolve(__dirname, '..', 'src/wemark/remarkable.js'),
+      ]
+    }
   },
   h5: {
     publicPath: '/',
