@@ -9,6 +9,7 @@ export const drawerItems = new Map<string, () => void>([
   ['React 井字棋游戏最终状态', async () => Taro.navigateTo({url: '/pages/tictactoe/index2'})],
   ['人工智能版井字棋游戏', async () => Taro.navigateTo({url: '/pages/tictactoe/ai'})],
   ['小程序版的 C++ Hello World', async () => Taro.navigateTo({url: '/pages/pearlsplus/hello'})],
+  ['编程珠玑习题', async () => Taro.navigateTo({url: '/pages/subpages/pearlsplus/index'})],
   ['编程珠玑习题（c++ 版）1.6.1', async () => Taro.navigateTo({url: '/pages/pearlsplus/1_6_1'})],
   ['编程珠玑习题（c 版）1.6.1', async () => Taro.navigateTo({url: '/pages/pearlsplus/c1_6_1'})],
   ['编程珠玑习题（c 版）1.6.2', async () => Taro.navigateTo({url: '/pages/pearlsplus/c1_6_2'})],
