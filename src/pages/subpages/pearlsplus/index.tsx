@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import {RichText, View} from "@tarojs/components"
+import {RichText} from "@tarojs/components"
 
 import remark from 'remark'
 import remarkHtml from "remark-html"

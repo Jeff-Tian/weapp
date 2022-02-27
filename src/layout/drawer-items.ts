@@ -10,9 +10,6 @@ export const drawerItems = new Map<string, () => void>([
   ['人工智能版井字棋游戏', async () => Taro.navigateTo({url: '/pages/tictactoe/ai'})],
   ['小程序版的 C++ Hello World', async () => Taro.navigateTo({url: '/pages/pearlsplus/hello'})],
   ['编程珠玑习题', async () => Taro.navigateTo({url: '/pages/subpages/pearlsplus/index'})],
-  ['编程珠玑习题（c++ 版）1.6.1', async () => Taro.navigateTo({url: '/pages/pearlsplus/1_6_1'})],
-  ['编程珠玑习题（c 版）1.6.1', async () => Taro.navigateTo({url: '/pages/pearlsplus/c1_6_1'})],
-  ['编程珠玑习题（c 版）1.6.2', async () => Taro.navigateTo({url: '/pages/pearlsplus/c1_6_2'})],
   ['动态渲染', async () => Taro.navigateTo({url: '/pages/subpages/react-view/index'})],
   ['动态加载资源', async () => Taro.navigateTo({url: '/pages/subpages/react-view/browser'})],
   ['小程序直达器',
@@ -21,8 +18,8 @@ export const drawerItems = new Map<string, () => void>([
   ['关于', async () => Taro.navigateTo({url: '/pages/subpages/about/index'})],
   ['通过 Authing 登录', async () => Taro.navigateTo({url: '/pages/subpages/auth/authing'})],
   // ['通过 Keycloak 登录', async () => Taro.navigateTo({url: '/pages/subpages/auth/keycloak'})],
-  ['视频', async () => Taro.navigateTo({url: '/pages/subpages/video/index'})],
-  // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/test/index'})],
+  // ['视频', async () => Taro.navigateTo({url: '/pages/subpages/video/index'})],
+  // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/pearlsplus/detail?id=1.6.1'})],
 ])
 
 if (Taro.getEnv() === ENV_TYPE.WEB) {

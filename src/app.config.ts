@@ -22,7 +22,7 @@ const subpages = [
   {root: `pages/subpages/react-view`, pages: ['index', 'browser']},
   {
     root: `pages/subpages/pearlsplus`,
-    pages: ['index']
+    pages: ['index', 'detail', 'c-detail']
   }
 ]
 
