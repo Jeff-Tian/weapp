@@ -29,9 +29,7 @@ const ResourceDetail = () => {
     return <View>${util.inspect(error)}</View>
   }
 
-  return Taro.getEnv() === Taro.ENV_TYPE.WEB ? <MyVideo src={data.downloadUrlOfICloudSharing.downloadURL} /> :
-    <View>本小程序使用 Taro 多端框架开发，本页专供 Web 端使用，微信端小程序不支持。</View>
-    ;
+  return <MyVideo src={data.downloadUrlOfICloudSharing.downloadURL} />    ;
 }
 
 export default ResourceDetail

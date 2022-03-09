@@ -1,6 +1,6 @@
 {
   "name": "weapp",
-  "version": "1.6.17",
+  "version": "1.6.18",
   "private": true,
   "description": "哈德韦的个人小程序",
   "templateInfo": {
@@ -43,7 +43,7 @@
     "update": "taro update self && taro update project"
   },
   "taroConfig": {
-    "version": "1.6.17",
+    "version": "1.6.18",
     "desc": "哈德韦的个人小程序"
   },
   "browserslist": [
