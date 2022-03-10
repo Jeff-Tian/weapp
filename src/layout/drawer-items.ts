@@ -17,9 +17,9 @@ export const drawerItems = new Map<string, () => void>([
   // ['ip 地址', async () => Taro.navigateTo({url: '/pages/ip/index'})],
   ['关于', async () => Taro.navigateTo({url: '/pages/subpages/about/index'})],
   ['通过 Authing 登录', async () => Taro.navigateTo({url: '/pages/subpages/auth/authing'})],
-  // ['通过 Keycloak 登录', async () => Taro.navigateTo({url: '/pages/subpages/auth/keycloak'})],
-  // ['视频', async () => Taro.navigateTo({url: '/pages/subpages/video/index'})],
-  // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/pearlsplus/detail?id=1.6.1'})],
+  ['通过 Keycloak 登录', async () => Taro.navigateTo({url: '/pages/subpages/auth/keycloak'})],
+  ['视频', async () => Taro.navigateTo({url: '/pages/subpages/video/index'})],
+  // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/test/index'})],
 ])
 
 if (Taro.getEnv() === ENV_TYPE.WEB) {
