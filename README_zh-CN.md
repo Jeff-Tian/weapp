@@ -17,6 +17,18 @@ yarn
 yarn build:weapp
 ```
 
+### 更新微信小程序开发版本
+
+先更新 package.json 的 version 和 description，然后执行：
+
+```shell
+yarn build:weapp:upload
+```
+
+### 更新体验版与提交审核
+
+在开发版更新成功后，去 https://mp.weixin.qq.com/wxamp/wacodepage/getcodepage?token=14130862&lang=zh_CN 页面，将最新更新的开发版设置为体验版，在体验版体验完毕后，可以提交审核成为线上版本。
+
 ## 将它发布成你的个人小程序
 
 如果你也想要有一个个人小程序并且不想从头开发，可以基于 weapp 项目来迭代。
