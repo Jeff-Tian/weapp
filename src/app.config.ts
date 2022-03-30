@@ -13,7 +13,7 @@ const subpages = [
   },
   {
     root: `pages/subpages/video`,
-    pages: ['index']
+    pages: ['detail']
   },
   {
     root: `pages/subpages/test`,
@@ -40,6 +40,7 @@ export default {
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
     'pages/pearlsplus/hello',
+    'pages/auth/authing'
   ],
   window: {
     backgroundTextStyle: 'light',
