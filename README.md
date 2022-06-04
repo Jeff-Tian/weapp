@@ -17,3 +17,5 @@ yarn
 yarn build:weapp
 ```
 
+## Troubleshooting
+

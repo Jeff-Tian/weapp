@@ -29,6 +29,32 @@ yarn build:weapp:upload
 
 在开发版更新成功后，去 https://mp.weixin.qq.com/wxamp/wacodepage/getcodepage?token=14130862&lang=zh_CN 页面，将最新更新的开发版设置为体验版，在体验版体验完毕后，可以提交审核成为线上版本。
 
+### 排障指南
+
+#### Windows 11 下命令行中文输出乱码
+
+运行如下 bat 文件解决
+
+```shell
+chinese.bat
+```
+
+#### Windows 11 下 yarn 报 node-sass 相关的错误
+
+##### python2 找不到
+
+```shell
+choco install python2
+```
+
+##### 要求安装 .NET 2 sdk
+
+```shell
+sudo yarn add windows-build-tools --global
+```
+
+即使这个命令卡死状态，现在可以 yarn install 成功了。
+
 ## 将它发布成你的个人小程序
 
 如果你也想要有一个个人小程序并且不想从头开发，可以基于 weapp 项目来迭代。
