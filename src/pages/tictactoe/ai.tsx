@@ -21,9 +21,10 @@ const TicTacToe = () => {
   const [css, setCss] = useState('')
 
   useEffect(() => {
-    Taro.request({url: `https://uniheart.pa-ca.me/proxy?url=${encodeURIComponent(`https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/index.css`)}`}).then(({data})=>{
-      setCss(data)
-      const reactNativeCompatibleCSS = cssToJS(data)
+    Taro.request({url: `https://uniheart.pa-ca.me/proxy?format=json&url=${encodeURIComponent(`https://raw.githubusercontent.com/Jeff-Tian/TicTacToeTs/main/src/index.css`)}`}).then(({data}) => {
+      console.log('data = ', data)
+      setCss(data.raw)
+      const reactNativeCompatibleCSS = cssToJS(data.raw)
       console.log('rcss = ', reactNativeCompatibleCSS)
     })
   }, [])
