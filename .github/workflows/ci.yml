@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/setup-node@master
         with:
-          node-version: 16.13.0
+          node-version: 12.x
 
       - name: Checkout
         uses: actions/checkout@v2
