@@ -28,7 +28,8 @@ jobs:
           fi
       - uses: actions/setup-node@master
         with:
-          node-version: '12.x'
+          node-version: 12.x
+
       - run: |
           yarn
           yarn build:weapp
