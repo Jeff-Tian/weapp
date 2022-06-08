@@ -66,19 +66,21 @@ export const getUrl = (url: string, cookie) => {
 
 export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhihuLoginQRCode, setSaveQR}) => {
   const zhihuUdidUrl = 'https://www.zhihu.com/udid'
-  const url = Taro.ENV_TYPE.WEB === Taro.getEnv() ? 'https://uniheart.pa-ca.me/proxy?dataType=text&url=' + encodeURIComponent(zhihuUdidUrl) : zhihuUdidUrl
+
+  // 该请求不需要经过 Cloudflare CDN
+  const url = Taro.ENV_TYPE.WEB === Taro.getEnv() ? `https://uniheart.herokuapp.com/proxy?dataType=text&url=${encodeURIComponent(zhihuUdidUrl)}&timestamp=${Date.now()}` : zhihuUdidUrl
 
   const res = await Taro.request({
+    mode: 'cors',
     url,
     method: 'POST',
     dataType: 'text',
+    responseType: 'text',
     header: {
       'content-type': `text/plain`,
       'X-Requested-With': 'XMLHttpRequest'
     }
   })
-
-  console.log('res = ', res.data, res);
 
   if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
     Taro.setStorage({
@@ -186,31 +188,35 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
     console.log('saving...')
 
     poll()
-    Taro.getSetting({
-      success: () => {
-        Taro.authorize({
-          scope: 'scope.writePhotosAlbum',
-          success: () => {
-            console.log('authorized')
-            Taro.downloadFile({
-              url: imgUrl,
-              success: (downloaded) => {
-                Taro.saveImageToPhotosAlbum({
-                  filePath: downloaded.tempFilePath,
-                  success: () => {
+    try {
+      Taro.getSetting({
+        success: () => {
+          Taro.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success: () => {
+              console.log('authorized')
+              Taro.downloadFile({
+                url: imgUrl,
+                success: (downloaded) => {
+                  Taro.saveImageToPhotosAlbum({
+                    filePath: downloaded.tempFilePath,
+                    success: () => {
 
-                    Taro.showToast({
-                      title: '二维码已经保存到相册，请打开知乎 APP 进行扫码。',
-                      icon: 'success'
-                    })
-                  }
-                })
+                      Taro.showToast({
+                        title: '二维码已经保存到相册，请打开知乎 APP 进行扫码。',
+                        icon: 'success'
+                      })
+                    }
+                  })
 
-              }
-            })
-          }
-        })
-      }
-    })
+                }
+              })
+            }
+          })
+        }
+      })
+    }catch(ex){
+      console.log('ex = ', ex);
+    }
   })
 }

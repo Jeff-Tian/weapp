@@ -39,15 +39,35 @@ yarn build:weapp:upload
 chinese.bat
 ```
 
-#### Windows 11 下 yarn 报 node-sass 相关的错误
+#### yarn 报 node-sass 相关的错误
 
 ##### python2 找不到
+
+##### Windows
 
 ```shell
 choco install python2
 ```
 
-##### 要求安装 .NET 2 sdk
+##### Mac OSX
+
+```shell
+gyp ERR! stack Error: Can't find Python executable "python", you can set the PYTHON env variable.
+```
+
+直接 `brew install python2` 已经不行了，可以通过 `pyenv` 这样安装：
+
+```shell
+brew install pyenv
+pyenv install 2.7.18
+export PATH="$(pyenv root)/shims:${PATH}"
+pyenv global 2.7.18
+echo 'PATH=$(pyenv root)/shims:$PATH' >> ~/.zshrc
+```
+
+这样操作完后，`python` 默认是 2.7.18 版本，而 `python3` 仍然可用， 不冲突。
+
+##### Windows 11 要求安装 .NET 2 sdk
 
 ```shell
 sudo yarn add windows-build-tools --global
