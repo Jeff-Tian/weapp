@@ -9,6 +9,9 @@ import HardwayTabs from './tabs'
 import '../components/rich-modal.styl'
 import RichModal from "../components/RichModal";
 
+const copyCookieToClipboard = (_cookieData: string) => {
+}
+
 const HighLevel = () => {
   const [showDrawer, setShowDrawer] = useState(false)
   const [isRichModalOpen, setIsRichModalOpen] = useState(false)
@@ -24,6 +27,12 @@ const HighLevel = () => {
       }}
       onClickRgIconNd={() => {
         if (zhihuUserInfo) {
+          console.log('知乎用户信息：', zhihuUserInfo);
+
+          console.log('知乎 cookie: ', Taro.getStorageSync(StorageKeys.zhihuCookie));
+
+          copyCookieToClipboard(JSON.stringify({data: Taro.getStorageSync(StorageKeys.zhihuCookie)}));
+
           Taro.showToast({
             title: '已经登录',
             icon: 'success',
@@ -60,7 +69,7 @@ const HighLevel = () => {
         setIsRichModalOpen(false)
       }} title={richModalTitle}
       >
-        <Image src={zhihuLoginQRCode} />
+        <Image src={zhihuLoginQRCode}/>
       </RichModal>
     </View>
   </View>
@@ -69,7 +78,7 @@ const HighLevel = () => {
 
 const HardwayLayout = ({children}) => {
   return <View>
-    <HighLevel />
+    <HighLevel/>
     <HardwayTabs>
       <View style={{minHeight: '1000px'}}>
         {children}

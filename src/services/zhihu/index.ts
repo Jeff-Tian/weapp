@@ -182,41 +182,44 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
 
   const imgUrl = `https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/image`;
   setZhihuLoginQRCode(imgUrl)
-  setRichModalTitle('保存知乎二维码到相册，然后使用知乎 APP 扫码登录。')
+
+
+  const message = Taro.ENV_TYPE.WEB === Taro.getEnv() ? '请使用知乎 APP 扫码登录。' : '保存知乎二维码到相册，然后使用知乎 APP 扫码登录。'
+
+  setRichModalTitle(message)
   setIsRichModalOpen(true)
   setSaveQR(() => () => {
     console.log('saving...')
 
     poll()
-    try {
-      Taro.getSetting({
-        success: () => {
-          Taro.authorize({
-            scope: 'scope.writePhotosAlbum',
-            success: () => {
-              console.log('authorized')
-              Taro.downloadFile({
-                url: imgUrl,
-                success: (downloaded) => {
-                  Taro.saveImageToPhotosAlbum({
-                    filePath: downloaded.tempFilePath,
-                    success: () => {
 
-                      Taro.showToast({
-                        title: '二维码已经保存到相册，请打开知乎 APP 进行扫码。',
-                        icon: 'success'
-                      })
-                    }
-                  })
+    Taro.ENV_TYPE.WEB !== Taro.getEnv() &&
 
-                }
-              })
-            }
-          })
-        }
-      })
-    }catch(ex){
-      console.log('ex = ', ex);
-    }
-  })
+    Taro.getSetting({
+      success: () => {
+        Taro.authorize({
+          scope: 'scope.writePhotosAlbum',
+          success: () => {
+            console.log('authorized')
+            Taro.downloadFile({
+              url: imgUrl,
+              success: (downloaded) => {
+                Taro.saveImageToPhotosAlbum({
+                  filePath: downloaded.tempFilePath,
+                  success: () => {
+
+                    Taro.showToast({
+                      title: '二维码已经保存到相册，请打开知乎 APP 进行扫码。',
+                      icon: 'success'
+                    })
+                  }
+                })
+
+              }
+            })
+          }
+        })
+      }
+    })
+  }).catch(console.error)
 }

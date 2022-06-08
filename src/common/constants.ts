@@ -1,3 +1,4 @@
 export const StorageKeys = {
-    zhihuUserInfo: 'zhihu-user-info'
+  zhihuUserInfo: 'zhihu-user-info',
+  zhihuCookie: 'set-cookie',
 }
