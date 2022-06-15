@@ -21,6 +21,11 @@ jobs:
         run: |
           git submodule update --init --recursive
           yarn && yarn build:h5
+          sh deeplinks.sh
+
+      - name: deeplinks
+        run: |
+          sh deeplinks.sh | xargs -i install -D -m 644 dist/index.html {}
 
       - name: Gen dummy page
         run: |

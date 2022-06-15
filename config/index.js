@@ -98,10 +98,6 @@ const config = {
     router: {
       mode: 'browser',
     },
-    copy: {
-      patterns:
-        getAllDeepLinks().map(f => ({from: 'src/index.html', to: f}))
-    },
   },
   alias: {
     '@/components': path.resolve(__dirname, '..', 'src/components'),
