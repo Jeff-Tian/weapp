@@ -2,7 +2,7 @@ module.exports = {
   verbose: true,
   moduleFileExtensions: ['js', 'ts', 'jsx', 'tsx', 'json'],
   rootDir: __dirname,
-  testMatch: ['**/__tests__/**/*.(spec|test).ts?(x)'],
+  testMatch: ['**/__tests__/**/*.(spec|test).[tj]s?(x)'],
   transform: {
     '^.+\\.[jt]s?(x)?$': 'babel-jest',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
