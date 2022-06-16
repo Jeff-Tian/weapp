@@ -19,13 +19,13 @@ jobs:
 
       - name: build
         run: |
-          sh ./scripts/deeplinks.sh
+          node ./scripts/deeplinks.js
           git submodule update --init --recursive
           yarn && yarn build:h5
 
       - name: deeplinks
         run: |
-          sh ./scripts/deeplinks.sh | xargs -i install -D -m 644 dist/index.html {}
+          node ./scripts/deeplinks.js | xargs -i install -D -m 644 dist/index.html {}
 
       - name: Gen dummy page
         run: |
