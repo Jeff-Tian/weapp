@@ -19,9 +19,9 @@ jobs:
 
       - name: build
         run: |
+          sh ./scripts/deeplinks.sh
           git submodule update --init --recursive
           yarn && yarn build:h5
-          sh ./scripts/deeplinks.sh
 
       - name: deeplinks
         run: |
