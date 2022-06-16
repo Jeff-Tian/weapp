@@ -4,12 +4,33 @@ import {View, Image} from "@tarojs/components"
 import {useState} from "react"
 import {loginByQrCode} from "@/services/zhihu"
 import {StorageKeys} from "@/common/constants"
+import {gql} from '@apollo/client'
+import {client} from "@/apollo-client";
+
 import {drawerItems, onDrawerItemClick} from "./drawer-items"
 import HardwayTabs from './tabs'
 import '../components/rich-modal.styl'
 import RichModal from "../components/RichModal";
 
-const copyCookieToClipboard = (_cookieData: string) => {
+const COPY_TO_CLIPBOARD = gql`
+mutation CopyToClipboard($clipboard: ClipboardInput!) {
+  copyToClipboard(clipboard: $clipboard) {
+    key
+    value
+  }
+}
+`
+
+const copyCookieToClipboard = (userId: number, cookieData: string) => {
+  client.mutate({
+    mutation: COPY_TO_CLIPBOARD, variables:
+      {
+        clipboard: {
+          key: `zhihu-user-cookie-${userId}`,
+          value: JSON.stringify(cookieData)
+        }
+      }
+  }).then(console.log).catch(console.error)
 }
 
 const HighLevel = () => {
@@ -31,7 +52,7 @@ const HighLevel = () => {
 
           console.log('知乎 cookie: ', Taro.getStorageSync(StorageKeys.zhihuCookie));
 
-          copyCookieToClipboard(JSON.stringify({data: Taro.getStorageSync(StorageKeys.zhihuCookie)}));
+          copyCookieToClipboard(zhihuUserInfo.user_id, JSON.stringify({data: Taro.getStorageSync(StorageKeys.zhihuCookie)}));
 
           Taro.showToast({
             title: '已经登录',
