@@ -32,7 +32,8 @@
     "dev:quickapp": "npm run build:quickapp -- --watch",
     "test": "jest --config ./jest.config.js --no-cache --coverage",
     "wmp:upload": "node scripts/upload.js",
-    "deeplinks": "node scripts/deeplinks.js"
+    "deeplinks": "node scripts/deeplinks.js",
+    "serve": "(cd dist; python -m SimpleHTTPServer)"
   },
   "taroConfig": {
     "version": "1.5.5",
