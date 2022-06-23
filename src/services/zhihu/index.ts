@@ -1,4 +1,12 @@
+import {gql} from '@apollo/client'
 import Taro from '@tarojs/taro'
+
+export const SYNC_YUQUE_TO_ZHIHU = gql`
+mutation SyncYuqueToZhihu($syncYuqueToZhihuSlug2: String!) {
+  syncYuqueToZhihu(slug: $syncYuqueToZhihuSlug2) {
+    slug
+  }
+}`
 
 export const draftDirectly = async (title, content) => {
   return await draftColumn(title, content)

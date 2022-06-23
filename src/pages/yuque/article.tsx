@@ -1,4 +1,4 @@
-import {gql, useQuery} from "@apollo/client"
+import {gql, useMutation, useQuery} from "@apollo/client"
 import {Button, Image, View} from "@tarojs/components"
 import {AtActivityIndicator} from "taro-ui"
 import Taro from "@tarojs/taro"
@@ -8,11 +8,10 @@ import remark from 'remark'
 import remarkHtml from "remark-html"
 import {useState} from "react"
 import * as assert from 'assert';
-import {draftDirectly} from "@/services/zhihu";
+import {SYNC_YUQUE_TO_ZHIHU, draftDirectly} from "@/services/zhihu";
 import './article.styl'
 
 import HardwayLayout from "../../layout/hardway-layout"
-
 
 
 const YuQueArticle: React.FC = () => {
@@ -79,6 +78,12 @@ const YuQueArticle: React.FC = () => {
     }
   }
 
+  const [syncYuqueToZhihu, {error: _syncError, data: _syncResult}] = useMutation(SYNC_YUQUE_TO_ZHIHU, {
+    variables: {
+      "syncYuqueToZhihuSlug2": slug
+    }
+  })
+
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
   />
@@ -97,7 +102,7 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
-      <Button onClick={() => draftDirectly(data.yuque.title, html)}>发布到知乎</Button>
+      <Button onClick={() => slug ? syncYuqueToZhihu() : draftDirectly(data.yuque.title, html)}>发布到知乎</Button>
 
       <View className='at-article__content taro_html'>
         <View className='at-article__section'>
