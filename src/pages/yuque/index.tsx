@@ -6,6 +6,7 @@ import React, {useEffect, useState} from "react";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
 import './article.styl'
 import HardwayLayout from "../../layout/hardway-layout"
+import {fallbackThumbnail} from "@/common/constants";
 
 
 export const YUQUE_BLOG = gql`
@@ -56,12 +57,12 @@ export const YuQueInner = () => {
     {blogs.map(article => <View key={article.id}><AtCard title={article.title}
       extra={`${article.word_count} 字`}
       note={article.created_at}
-      thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
+      thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : fallbackThumbnail}
       onClick={() => Taro.navigateTo({
                                                            url: `/pages/yuque/article?slug=${article.slug}`,
                                                          })}
     ><AtAvatar
-      image={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : 'https://jeff-tian.jiwai.win/icons-2480a96bd1efbed5e33c00a38018fc28/favicon.ico'}
+      image={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : fallbackThumbnail}
       size='large'
     />
       {article.description}</AtCard><AtDivider lineColor='#fff' />
