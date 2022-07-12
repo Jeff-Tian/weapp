@@ -23,6 +23,16 @@ jobs:
     needs: test
 
     steps:
+      - uses: actions/setup-node@master
+        with:
+          node-version: 14.16.1
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: install yarn
+        run: npm i -g yarn
+      - name: install dependencies
+        run: yarn install
+
       - name: build
         run: |
           git submodule update --init --recursive
