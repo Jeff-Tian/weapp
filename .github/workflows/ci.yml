@@ -3,24 +3,28 @@ name: website
 on: push
 
 jobs:
-  publish:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/setup-node@master
         with:
-          node-version: 15.14.0
-
+          node-version: 16.10.0
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: install yarn
         run: npm i -g yarn
+      - name: test
+        run: yarn test
 
+  publish:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
       - name: build
         run: |
           git submodule update --init --recursive
-          yarn && yarn build:h5
+          yarn build:h5
 
       - name: deeplinks
         run: |
