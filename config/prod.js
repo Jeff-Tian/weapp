@@ -3,8 +3,11 @@ module.exports = {
     NODE_ENV: '"production"',
   },
   defineConstants: {},
-  mini: {},
+  mini: {
+    enableSourceMap: true
+  },
   h5: {
+    enableSourceMap: true
     /**
      * 如果h5端编译后体积过大，可以使用webpack-bundle-analyzer插件对打包体积进行分析。
      * 参考代码如下：
