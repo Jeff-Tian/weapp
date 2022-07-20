@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 
 function getAllDeepLinks(parent = '../src/pages') {
-  const subFolders = fs.readdirSync(path.join(__dirname, parent))
+  const subFolders = fs.readdirSync(path.join(__dirname, parent)).filter(p => fs.statSync(path.join(__dirname, parent, p)).isDirectory())
 
   return subFolders.map(dirPath => {
     const all = fs.readdirSync(path.join(__dirname, parent, dirPath))

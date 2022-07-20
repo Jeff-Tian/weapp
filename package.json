@@ -59,6 +59,7 @@
     "form-urlencoded": "^6.0.5",
     "graphql": "^15.6.0",
     "jest": "^27.2.5",
+    "mdast-util-to-string": "^3.1.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "remark": "5.0.1",
