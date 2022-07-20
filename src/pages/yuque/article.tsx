@@ -2,7 +2,6 @@ import {gql, useMutation, useQuery} from "@apollo/client"
 import {Button, Image, View} from "@tarojs/components"
 import {AtActivityIndicator} from "taro-ui"
 import Taro from "@tarojs/taro"
-import '@tarojs/taro/html.css'
 
 import remark from 'remark'
 import remarkHtml from "remark-html"

@@ -1,8 +1,7 @@
-import Taro from '@tarojs/taro'
+import Taro, {useRouter} from '@tarojs/taro'
 import {AtFab, AtTabs, AtTabsPane} from "taro-ui";
 import {OfficialAccount, View, Text} from "@tarojs/components";
 import {useState} from "react";
-import useRouter = Taro.useRouter;
 import './tabs.styl'
 
 const HardwayTabs = ({children}) => {
@@ -25,7 +24,7 @@ const HardwayTabs = ({children}) => {
 
   const tabs = [{title: '《编程珠玑》'}, {title: '博文'}, {title: 'AI 井字棋'},]
   return <View>
-    <OfficialAccount/><AtTabs tabList={tabs} current={currentTab} onClick={(index) => {
+    <OfficialAccount /><AtTabs tabList={tabs} current={currentTab} onClick={(index) => {
     setCurrentTab(index)
 
     if (index === 0) {
@@ -40,7 +39,7 @@ const HardwayTabs = ({children}) => {
       Taro.navigateTo({url: '/pages/tictactoe/ai'}).then()
     }
   }}
-  >
+    >
     <AtTabsPane current={currentTab} index={0}><View>{children}</View></AtTabsPane>
     <AtTabsPane current={currentTab} index={1}><View>
       {children}
@@ -56,7 +55,8 @@ const HardwayTabs = ({children}) => {
           path: '',
           extraData: {},
           envVersion: 'release'
-        })}>
+        })}
+        >
           <Text className='at-fab__icon at-icon at-icon-edit'></Text>
         </AtFab>
       </View> : null
