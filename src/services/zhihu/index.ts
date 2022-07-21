@@ -1,5 +1,6 @@
 import {gql} from '@apollo/client'
 import Taro from '@tarojs/taro'
+import qs from 'qs'
 
 export const SYNC_YUQUE_TO_ZHIHU = gql`
 mutation SyncYuqueToZhihu($syncYuqueToZhihuSlug2: String!) {
@@ -16,6 +17,7 @@ export const loginByQrCode = async (p: { setRichModalTitle: (value: (((prevState
   console.log('login...')
 
   try {
+    console.log('p = ', p)
     await qrcodeLogin(p)
   } catch (ex) {
     console.error('ex = ', ex);
@@ -69,7 +71,18 @@ export const draftColumn = async (title, content) => {
 
 
 export const getUrl = (url: string, cookie) => {
-  return Taro.ENV_TYPE.WEB !== Taro.getEnv() ? url : `https://uniheart.pa-ca.me/proxy?cookie=${cookie}&url=${url}&authority=${encodeURIComponent('zhuanlan.zhihu.com')}&origin=${encodeURIComponent('https://zhuanlan.zhihu.com')}&referer=${encodeURIComponent('https://zhuanlan.zhihu.com/write')}&dataType=json`
+  const q = qs.stringify({
+    cookie,
+    url,
+    authority: encodeURIComponent('zhuanlan.zhihu.com'),
+    origin: encodeURIComponent('https://zhuanlan.zhihu.com'),
+    referer: encodeURIComponent('https://zhuanlan.zhihu.com/write'),
+    dataType: `json`
+  })
+
+  console.log('qs = ', q)
+
+  return Taro.ENV_TYPE.WEB !== Taro.getEnv() ? url : `https://uniheart.pa-ca.me/proxy?${q}`
 }
 
 export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhihuLoginQRCode, setSaveQR}) => {
@@ -136,9 +149,11 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
     return;
   }
 
-  console.log("token saving...")
+  console.log("token saving...", Taro.setStorage, Taro.setStorageSync, res2)
 
   Taro.setStorageSync('zhihu-token', res2.data.token);
+
+  console.log('token set')
 
   const scanInfoUrl = getUrl(`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/scan_info`, '')
 
@@ -164,12 +179,16 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
         Taro.showToast({title: '登录成功', icon: 'success', duration: 2000})
 
         const originalCookie = Taro.getStorageSync('set-cookie')
+        console.log('originalCookie = ', originalCookie)
 
         if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-          Taro.setStorage({
-            key: 'set-cookie',
-            data: originalCookie.concat(Object.keys(res3.data.cookie).map(key => `${key}=${res3.data.cookie[key]}`))
-          })
+          console.log('data = ', res3.data, res3.cookies, res3.header['set-cookie'], res3.header['Set-Cookie'])
+          if (res3.data.cookie) {
+            Taro.setStorage({
+              key: 'set-cookie',
+              data: originalCookie.concat(Object.keys(res3.data.cookie).map(key => `${key}=${res3.data.cookie[key]}`))
+            })
+          }
         } else {
           Taro.setStorage({
             key: 'set-cookie',
@@ -196,6 +215,7 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
 
   setRichModalTitle(message)
   setIsRichModalOpen(true)
+  console.log('set saving ar = ', setSaveQR)
   setSaveQR(() => () => {
     console.log('saving...')
 
@@ -229,5 +249,5 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
         })
       }
     })
-  }).catch(console.error)
+  })
 }

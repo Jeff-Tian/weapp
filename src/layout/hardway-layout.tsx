@@ -60,7 +60,7 @@ const HighLevel = () => {
             duration: 1000
           })
         } else {
-          loginByQrCode({setIsRichModalOpen, setZhihuLoginQRCode, setRichModalTitle, setSaveQR}).then()
+          loginByQrCode({setIsRichModalOpen, setZhihuLoginQRCode, setRichModalTitle, setSaveQR})
         }
       }}
       onClickLeftIcon={() => {
