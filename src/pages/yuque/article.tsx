@@ -1,7 +1,7 @@
 import {gql, useMutation, useQuery} from "@apollo/client"
 import {Button, Image, View} from "@tarojs/components"
-import {AtActivityIndicator} from "taro-ui"
-import Taro from "@tarojs/taro"
+import {AtActivityIndicator, AtBadge, AtButton} from "taro-ui"
+import Taro, {onCopyUrl} from "@tarojs/taro"
 
 import remark from 'remark'
 import remarkHtml from "remark-html"
@@ -96,6 +96,11 @@ const YuQueArticle: React.FC = () => {
 
       <View className='at-article__h1'>
         {data.yuque.title}
+        <AtBadge>
+          <AtButton size='small'
+            onClick={() => Taro.setClipboardData({data: `pages/yuque/article?slug=${slug}`})}
+          >拷贝本页路径</AtButton>
+        </AtBadge>
       </View>
       <View className='at-article__info'>
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
