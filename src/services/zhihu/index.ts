@@ -1,5 +1,5 @@
 import {gql} from '@apollo/client'
-import Taro from '@tarojs/taro'
+import Taro, {ENV_TYPE} from '@tarojs/taro'
 import qs from 'qs'
 
 export const SYNC_YUQUE_TO_ZHIHU = gql`
@@ -77,7 +77,8 @@ export const getUrl = (url: string, cookie) => {
     authority: encodeURIComponent('zhuanlan.zhihu.com'),
     origin: encodeURIComponent('https://zhuanlan.zhihu.com'),
     referer: encodeURIComponent('https://zhuanlan.zhihu.com/write'),
-    dataType: `json`
+    dataType: `json`,
+    format: `json`
   })
 
   console.log('qs = ', q)
@@ -157,12 +158,32 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
 
   const scanInfoUrl = getUrl(`https://www.zhihu.com/api/v3/account/api/login/qrcode/${res2.data.token}/scan_info`, '')
 
+  const queryQrScanInfo = async () => {
+    return ENV_TYPE.WEB !== Taro.getEnv() ? await Taro.request({
+      url: scanInfoUrl,
+      dataType: 'json'
+    }) : await queryQrScanInfoByProxy()
+  }
+
+  const queryQrScanInfoByProxy = async () => {
+    const res11 = await Taro.request({
+      url: scanInfoUrl,
+      dataType: 'json'
+    })
+
+    console.log('res of proxy = ', res11)
+
+    return {
+      data: {...JSON.parse(res11.data.raw)},
+      headers: res11.data.headers,
+      cookies: res11.data.headers['set-cookie'],
+      header: res11.data.headers,
+    }
+  }
+
   const poll = async () => {
     try {
-      const res3 = await Taro.request({
-        url: scanInfoUrl,
-        dataType: 'json',
-      })
+      const res3 = await queryQrScanInfo()
 
       if (res3.data.status === 0) {
         Taro.showToast({title: '还未扫码'})
@@ -182,11 +203,11 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
         console.log('originalCookie = ', originalCookie)
 
         if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-          console.log('data = ', res3.data, res3.cookies, res3.header['set-cookie'], res3.header['Set-Cookie'])
-          if (res3.data.cookie) {
+          console.log('qr scan info = ', res3)
+          if (res3.cookies) {
             Taro.setStorage({
               key: 'set-cookie',
-              data: originalCookie.concat(Object.keys(res3.data.cookie).map(key => `${key}=${res3.data.cookie[key]}`))
+              data: originalCookie.concat(res3.cookies)
             })
           }
         } else {
