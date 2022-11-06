@@ -1,8 +1,15 @@
 import {getAllDeepLinks} from "../../scripts/deeplinks";
 
 describe('deeplinks', () => {
+  it('flats', ()=>{
+    const a = [[1,2], [3,4], [5,6]]
+    expect(a.flatMap(x => x)).toStrictEqual([
+      1, 2, 3, 4, 5, 6
+    ])
+  })
+
   it('get all the deeplink pages', () => {
-    expect(getAllDeepLinks()).toStrictEqual([
+    expect(getAllDeepLinks()).toEqual([
       "dist/pages/auth/authing.html",
       "dist/pages/index/index.html",
       "dist/pages/pearlsplus/1_6_1.html",
