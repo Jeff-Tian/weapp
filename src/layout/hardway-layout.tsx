@@ -57,7 +57,9 @@ const HighLevel = () => {
           Taro.showToast({
             title: '已经登录',
             icon: 'success',
-            duration: 1000
+            duration: 1000,
+          }).then(() => {
+            Taro.navigateTo({url: '/pages/subpages/auth/profile'});
           })
         } else {
           loginByQrCode({setIsRichModalOpen, setZhihuLoginQRCode, setRichModalTitle, setSaveQR})

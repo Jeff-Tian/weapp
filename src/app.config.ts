@@ -1,7 +1,7 @@
 const subpages = [
   {
     root: `pages/subpages/auth/`,
-    pages: ['authing', 'keycloak']
+    pages: ['authing', 'keycloak', 'profile']
   },
   {
     root: `pages/subpages/about`,
@@ -40,7 +40,7 @@ export default {
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
     'pages/pearlsplus/hello',
-    'pages/auth/authing'
+    'pages/auth/authing',
   ],
   window: {
     backgroundTextStyle: 'light',
