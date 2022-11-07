@@ -7,27 +7,33 @@ const {
   prepend,
   append,
   filterByExtension,
-  mapSeparately, mapOver
+  mapSeparately, mapOver, flat, filter
 } = require("./helpers");
 
+const handleFiles = compose(
+  mapOver,
+  mapSeparately(
+    compose(prepend, append('/')),
+    compose(map(replace('.tsx', '.html')), filterByExtension('.tsx'))
+  ),
+);
+const mapHandleFiles = map(handleFiles);
+const mapPrepend = map(prepend(`dist/pages/`));
+
 function getAllDeepLinks(parent = path.join(__dirname, '../src/pages')) {
-  const subFolders = fs.readdirSync(parent).filter(thePath => fs.statSync(path.join(parent, thePath)).isDirectory())
+  const isDirectory = thePath => fs.statSync(path.join(parent, thePath)).isDirectory();
+  const subFolderAndItsChildren = dirPath => [dirPath, fs.readdirSync(path.join(parent, dirPath))];
+  const mapSubFolderAndItsChildren = map(subFolderAndItsChildren);
+  const filterDirectory = filter(isDirectory);
 
-  const dirPathAndSubFolderOrFiles = subFolders
-    .map(dirPath => [dirPath, fs.readdirSync(path.join(parent, dirPath))]);
-
-  const handleFiles = compose(
-    mapOver,
-    mapSeparately(
-      compose(prepend, append('/')),
-      compose(map(replace('.tsx', '.html')), filterByExtension('.tsx'))
-    ),
-  );
-
-  return dirPathAndSubFolderOrFiles
-    .map(handleFiles)
-    .flat()
-    .map(prepend(`dist/pages/`))
+  return compose(
+    mapPrepend,
+    flat,
+    mapHandleFiles,
+    mapSubFolderAndItsChildren,
+    filterDirectory,
+    fs.readdirSync
+  )(parent);
 }
 
 module.exports.getAllDeepLinks = getAllDeepLinks

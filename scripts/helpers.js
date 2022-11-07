@@ -30,3 +30,5 @@ export const tap = msg => x => {
   console.log(msg, x)
   return x
 }
+
+export const flat = a => a.flat()
