@@ -7,17 +7,12 @@ function getAllDeepLinks(parent = '../src/pages') {
 
   return subFolders
     .map(dirPath => [dirPath, fs.readdirSync(path.join(__dirname, parent, dirPath))])
-    .map(res => {
-        const prependAppend = compose(prepend, append('/'), head)(res);
-
-        return compose(
-          map(prependAppend),
-          map(replace('.tsx', '.html')),
-          filterByExtension('.tsx'),
-          tail
-        )
-        (res);
-      }
+    .map(
+      compose(
+        ([d, f]) => map(compose(prepend, append('/'), head)([d, f]))(f),
+        ([d, f]) => [d, map(replace('.tsx', '.html'))(f)],
+        ([d, f]) => [d, filterByExtension('.tsx')(f)],
+      )
     )
     .flat()
     .map(prepend(`dist/pages/`))
