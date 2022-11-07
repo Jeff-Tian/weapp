@@ -1,4 +1,3 @@
-
 export const curry = fn => {
   const arity = fn.length;
 
@@ -23,3 +22,4 @@ export const filterByExtension = compose(filter, endsWith)
 export const prop = propName => obj => obj[propName]
 export const head = arr => arr[0]
 export const tail = arr => arr[arr.length - 1]
+export const identity = x => x

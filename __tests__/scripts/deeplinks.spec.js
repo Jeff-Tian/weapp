@@ -1,8 +1,15 @@
 import {getAllDeepLinks} from "../../scripts/deeplinks";
+import {compose, head, identity} from "../../scripts/helpers";
 
 describe('deeplinks', () => {
-  it('flats', ()=>{
-    const a = [[1,2], [3,4], [5,6]]
+  it('are equal', () => {
+    const res = 'test';
+    expect(head(res)).toEqual('t');
+    expect(head(res)).toEqual(compose(head, identity)(res))
+  })
+
+  it('flats', () => {
+    const a = [[1, 2], [3, 4], [5, 6]]
     expect(a.flatMap(x => x)).toStrictEqual([
       1, 2, 3, 4, 5, 6
     ])
