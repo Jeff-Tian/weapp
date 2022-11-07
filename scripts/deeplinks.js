@@ -6,26 +6,26 @@ const {
   replace,
   prepend,
   append,
-  head,
   filterByExtension,
-  tail,
-  identity,
   mapSeparately, mapOver
 } = require("./helpers");
 
-function getAllDeepLinks(parent = '../src/pages') {
-  const subFolders = fs.readdirSync(path.join(__dirname, parent)).filter(thePath => fs.statSync(path.join(__dirname, parent, thePath)).isDirectory())
+function getAllDeepLinks(parent = path.join(__dirname, '../src/pages')) {
+  const subFolders = fs.readdirSync(parent).filter(thePath => fs.statSync(path.join(parent, thePath)).isDirectory())
 
-  return subFolders
-    .map(dirPath => [dirPath, fs.readdirSync(path.join(__dirname, parent, dirPath))])
-    .map(
-      compose(
-        mapOver,
-        mapSeparately(
-          compose(prepend, append('/')),
-          compose(map(replace('.tsx', '.html')), filterByExtension('.tsx'))),
-      )
-    )
+  const dirPathAndSubFolderOrFiles = subFolders
+    .map(dirPath => [dirPath, fs.readdirSync(path.join(parent, dirPath))]);
+
+  const handleFiles = compose(
+    mapOver,
+    mapSeparately(
+      compose(prepend, append('/')),
+      compose(map(replace('.tsx', '.html')), filterByExtension('.tsx'))
+    ),
+  );
+
+  return dirPathAndSubFolderOrFiles
+    .map(handleFiles)
     .flat()
     .map(prepend(`dist/pages/`))
 }

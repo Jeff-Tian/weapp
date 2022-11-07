@@ -25,3 +25,8 @@ export const tail = arr => arr[arr.length - 1]
 export const identity = x => x
 export const mapSeparately = (map1, map2) => ([a, b]) => [map1(a), map2(b)]
 export const mapOver = a => map(head(a), tail(a))
+
+export const tap = msg => x => {
+  console.log(msg, x)
+  return x
+}
