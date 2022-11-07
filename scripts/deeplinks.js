@@ -17,19 +17,36 @@ const filter = curry((f, a) => a.filter(f))
 const endsWith = curry((e, s) => s.endsWith(e))
 const replace = curry((a, b, s) => s.replace(a, b))
 const prepend = curry((a, b) => `${a}${b}`)
+const append = curry((a, b) => `${b}${a}`)
 const map = curry((f, a) => a.map(f))
 const compose = (...fns) => (...args) => fns.reduceRight((res, fn) => [fn.call(null, ...res)], args)[0]
+
+const filterByExtension = compose(filter, endsWith)
+const prop = propName => obj => obj[propName]
+const head = arr => arr[0]
+const tail = arr => arr[arr.length - 1]
 
 function getAllDeepLinks(parent = '../src/pages') {
   const subFolders = fs.readdirSync(path.join(__dirname, parent)).filter(thePath => fs.statSync(path.join(__dirname, parent, thePath)).isDirectory())
 
   return subFolders
-    .map(dirPath => ({allFiles: fs.readdirSync(path.join(__dirname, parent, dirPath)), dirPath}))
-    .map(({
-            allFiles,
-            dirPath
-          }) => map(compose(prepend(`${dirPath}/`), replace('.tsx', '.html')))(filter(endsWith('.tsx'), allFiles)))
-    .flat().map(prepend(`dist/pages/`))
+    .map(dirPath => [dirPath, fs.readdirSync(path.join(__dirname, parent, dirPath))])
+    .map(res => compose(
+        map(
+          compose(
+            prepend(
+              append('/', head(res))
+            ),
+            replace('.tsx', '.html')
+          )
+        ),
+        filterByExtension('.tsx'),
+        tail
+      )
+      (res)
+    )
+    .flat()
+    .map(prepend(`dist/pages/`))
 }
 
 module.exports.getAllDeepLinks = getAllDeepLinks
