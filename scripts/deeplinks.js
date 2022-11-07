@@ -2,56 +2,40 @@ const path = require('path');
 const fs = require('fs');
 const {
   compose,
-  map,
   replace,
   prepend,
-  append,
-  filterByExtension,
-  mapSeparately, mapOver, flat, filter, curry, identity, duplicate
+  append
 } = require("./helpers");
 
-const handleFiles = compose(
-  mapOver,
-  mapSeparately(
-    compose(prepend, append('/')),
-    compose(map(replace('.tsx', '.html')), filterByExtension('.tsx'))
-  ),
-);
-const mapHandleFiles = map(handleFiles);
-const mapPrepend = map(prepend(`dist/pages/`));
+const getDeepLinksFrom = (parent, folder) => {
+  console.log('parent = ', parent, folder);
+  const subFoldersOrFiles = fs.readdirSync(path.join(__dirname, parent, folder));
 
-const joinPath = curry((parent, sub) => path.join(parent, sub));
-const isItADirectory = fsRes => fsRes.isDirectory();
-const filterDirectory = p => filter(compose(
-  isItADirectory,
-  fs.statSync,
-  joinPath(p)
-));
-const subFolderAndItsChildren = p => compose(
-  mapSeparately(
-    identity,
-    compose(fs.readdirSync, joinPath(p))
-  ),
-  duplicate
-);
-const mapSubFolderAndItsChildren = compose(map, subFolderAndItsChildren);
+  return subFoldersOrFiles.map(subFolderOrFile => {
+    const stats = fs.statSync(path.join(__dirname, parent, folder, subFolderOrFile));
+    if (stats.isDirectory()) {
+      return getDeepLinksFrom(`${parent}/${folder}`, subFolderOrFile);
+    }
 
-const pathOrDefault = parent => parent ? parent : joinPath(__dirname, '../src/pages');
+    if (subFolderOrFile.endsWith('.tsx')) {
+      return [
+        (compose(
+          prepend,
+          append('/')
+        )(`${parent}/${folder}`))(replace('.tsx', '.html')(subFolderOrFile))
+      ];
+    }
 
-const getAllDeepLinks = parent => compose(
-  mapPrepend,
-  flat,
-  mapHandleFiles,
-  mapSubFolderAndItsChildren(pathOrDefault(parent)),
-  filterDirectory(pathOrDefault(parent)),
-  fs.readdirSync,
-  pathOrDefault
-)(parent);
+    return [];
+  }).flat().map(replace('../src', 'dist'))
+}
 
-module.exports.getAllDeepLinks = getAllDeepLinks
+
+module.exports.getAllDeepLinks = (parent = '../src', folder = 'pages') => getDeepLinksFrom(parent, folder);
 
 if (require.main === module) {
-  const allDeepLinks = getAllDeepLinks();
+  console.log('dirname = ', __dirname);
+  const allDeepLinks = module.exports.getAllDeepLinks();
   allDeepLinks.forEach(f => {
     const folder = path.dirname(f);
     fs.mkdirSync(folder, {recursive: true})

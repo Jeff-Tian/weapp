@@ -1,4 +1,4 @@
-export const curry = fn => {
+const curry = fn => {
   const arity = fn.length;
 
   return function $curry(...args) {
@@ -9,27 +9,68 @@ export const curry = fn => {
     return fn.call(null, ...args)
   }
 }
+module.exports.curry = curry
 
-export const filter = curry((f, a) => a.filter(f))
-export const endsWith = curry((e, s) => s.endsWith(e))
-export const replace = curry((a, b, s) => s.replace(a, b))
-export const prepend = curry((a, b) => `${a}${b}`)
-export const append = curry((a, b) => `${b}${a}`)
-export const map = curry((f, a) => a.map(f))
-export const compose = (...fns) => curry((...args) => fns.reduceRight((res, fn) => [fn.call(null, ...res)], args)[0])
+const filter = curry((f, a) => a.filter(f))
+module.exports.filter = filter
 
-export const filterByExtension = compose(filter, endsWith)
-export const prop = propName => obj => obj[propName]
-export const head = arr => arr[0]
-export const tail = arr => arr[arr.length - 1]
-export const identity = x => x
-export const mapSeparately = (map1, map2) => ([a, b]) => [map1(a), map2(b)]
-export const mapOver = a => map(head(a), tail(a))
 
-export const tap = msg => x => {
+const endsWith = curry((e, s) => s.endsWith(e))
+module.exports.endsWith = endsWith
+
+
+const replace = curry((a, b, s) => s.replace(a, b))
+module.exports.replace = replace
+
+
+const prepend = curry((a, b) => `${a}${b}`)
+module.exports.prepend = prepend
+
+const append = curry((a, b) => `${b}${a}`)
+module.exports.append = append
+
+const map = curry((f, a) => a.map(f))
+module.exports.map = map;
+
+
+const compose = (...fns) => curry((...args) => fns.reduceRight((res, fn) => [fn.call(null, ...res)], args)[0])
+module.exports.compose = compose
+
+const filterByExtension = compose(filter, endsWith)
+module.exports.filterByExtension = filterByExtension
+
+
+const prop = propName => obj => obj[propName]
+module.exports.prop = prop
+
+
+const head = arr => arr[0]
+module.exports.head = head
+
+
+const tail = arr => arr[arr.length - 1]
+module.exports.tail = tail;
+
+
+const identity = x => x
+module.exports.identity = identity;
+
+
+const mapSeparately = (map1, map2) => ([a, b]) => [map1(a), map2(b)]
+module.exports.mapSeparately = mapSeparately;
+
+
+const mapOver = a => map(head(a), tail(a))
+module.exports.mapOver = mapOver;
+
+const tap = msg => x => {
   console.log(msg, x)
   return x
 }
+module.exports.tap = tap;
 
-export const flat = a => a.flat()
-export const duplicate = a => [a, a]
+const flat = a => a.flat()
+module.exports.flat = flat;
+
+const duplicate = a => [a, a]
+module.exports.duplicate = duplicate;
