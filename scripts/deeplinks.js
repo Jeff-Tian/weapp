@@ -22,33 +22,28 @@ const mapPrepend = map(prepend(`dist/pages/`));
 
 const joinPath = curry((parent, sub) => path.join(parent, sub));
 const isItADirectory = fsRes => fsRes.isDirectory();
+const filterDirectory = p => filter(compose(
+  isItADirectory,
+  fs.statSync,
+  joinPath(p)
+));
+const subFolderAndItsChildren = p => compose(
+  mapSeparately(
+    identity,
+    compose(fs.readdirSync, joinPath(p))
+  ),
+  duplicate
+);
+const mapSubFolderAndItsChildren = compose(map, subFolderAndItsChildren);
 
-function getAllDeepLinks(parent = joinPath(__dirname, '../src/pages')) {
-  const isDirectory = compose(
-    isItADirectory,
-    fs.statSync,
-    joinPath(parent)
-  )
-  const filterDirectory = filter(isDirectory);
-  const subFolderAndItsChildren = compose(
-    mapSeparately(
-      identity,
-      compose(fs.readdirSync, joinPath(parent))
-    ),
-    duplicate
-  );
-  const mapSubFolderAndItsChildren = map(subFolderAndItsChildren);
-
-
-  return compose(
-    mapPrepend,
-    flat,
-    mapHandleFiles,
-    mapSubFolderAndItsChildren,
-    filterDirectory,
-    fs.readdirSync
-  )(parent);
-}
+const getAllDeepLinks = (parent = joinPath(__dirname, '../src/pages')) => compose(
+  mapPrepend,
+  flat,
+  mapHandleFiles,
+  mapSubFolderAndItsChildren(parent),
+  filterDirectory(parent),
+  fs.readdirSync
+)(parent);
 
 module.exports.getAllDeepLinks = getAllDeepLinks
 
