@@ -36,13 +36,16 @@ const subFolderAndItsChildren = p => compose(
 );
 const mapSubFolderAndItsChildren = compose(map, subFolderAndItsChildren);
 
-const getAllDeepLinks = (parent = joinPath(__dirname, '../src/pages')) => compose(
+const pathOrDefault = parent => parent ? parent : joinPath(__dirname, '../src/pages');
+
+const getAllDeepLinks = parent => compose(
   mapPrepend,
   flat,
   mapHandleFiles,
-  mapSubFolderAndItsChildren(parent),
-  filterDirectory(parent),
-  fs.readdirSync
+  mapSubFolderAndItsChildren(pathOrDefault(parent)),
+  filterDirectory(pathOrDefault(parent)),
+  fs.readdirSync,
+  pathOrDefault
 )(parent);
 
 module.exports.getAllDeepLinks = getAllDeepLinks
