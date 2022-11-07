@@ -16,7 +16,7 @@ export const replace = curry((a, b, s) => s.replace(a, b))
 export const prepend = curry((a, b) => `${a}${b}`)
 export const append = curry((a, b) => `${b}${a}`)
 export const map = curry((f, a) => a.map(f))
-export const compose = (...fns) => (...args) => fns.reduceRight((res, fn) => [fn.call(null, ...res)], args)[0]
+export const compose = (...fns) => curry((...args) => fns.reduceRight((res, fn) => [fn.call(null, ...res)], args)[0])
 
 export const filterByExtension = compose(filter, endsWith)
 export const prop = propName => obj => obj[propName]
@@ -32,3 +32,4 @@ export const tap = msg => x => {
 }
 
 export const flat = a => a.flat()
+export const duplicate = a => [a, a]

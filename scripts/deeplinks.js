@@ -7,7 +7,7 @@ const {
   prepend,
   append,
   filterByExtension,
-  mapSeparately, mapOver, flat, filter
+  mapSeparately, mapOver, flat, filter, curry, identity, duplicate
 } = require("./helpers");
 
 const handleFiles = compose(
@@ -20,11 +20,25 @@ const handleFiles = compose(
 const mapHandleFiles = map(handleFiles);
 const mapPrepend = map(prepend(`dist/pages/`));
 
-function getAllDeepLinks(parent = path.join(__dirname, '../src/pages')) {
-  const isDirectory = thePath => fs.statSync(path.join(parent, thePath)).isDirectory();
-  const subFolderAndItsChildren = dirPath => [dirPath, fs.readdirSync(path.join(parent, dirPath))];
-  const mapSubFolderAndItsChildren = map(subFolderAndItsChildren);
+const joinPath = curry((parent, sub) => path.join(parent, sub));
+const isItADirectory = fsRes => fsRes.isDirectory();
+
+function getAllDeepLinks(parent = joinPath(__dirname, '../src/pages')) {
+  const isDirectory = compose(
+    isItADirectory,
+    fs.statSync,
+    joinPath(parent)
+  )
   const filterDirectory = filter(isDirectory);
+  const subFolderAndItsChildren = compose(
+    mapSeparately(
+      identity,
+      compose(fs.readdirSync, joinPath(parent))
+    ),
+    duplicate
+  );
+  const mapSubFolderAndItsChildren = map(subFolderAndItsChildren);
+
 
   return compose(
     mapPrepend,
