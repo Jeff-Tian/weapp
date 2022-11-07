@@ -34,9 +34,7 @@ function getAllDeepLinks(parent = '../src/pages') {
     .map(res => compose(
         map(
           compose(
-            prepend(
-              append('/', head(res))
-            ),
+            compose(prepend, append('/'))(head(res)),
             replace('.tsx', '.html')
           )
         ),
