@@ -4,14 +4,13 @@ const {
   compose,
   replace,
   prepend,
-  append
+  append, map, flat, mapReplace, flatMap
 } = require("./helpers");
 
 const getDeepLinksFrom = (parent, folder) => {
-  console.log('parent = ', parent, folder);
   const subFoldersOrFiles = fs.readdirSync(path.join(__dirname, parent, folder));
 
-  return subFoldersOrFiles.map(subFolderOrFile => {
+  const doTheWork = subFolderOrFile => {
     const stats = fs.statSync(path.join(__dirname, parent, folder, subFolderOrFile));
     if (stats.isDirectory()) {
       return getDeepLinksFrom(`${parent}/${folder}`, subFolderOrFile);
@@ -27,7 +26,9 @@ const getDeepLinksFrom = (parent, folder) => {
     }
 
     return [];
-  }).flat().map(replace('../src', 'dist'))
+  };
+
+  return mapReplace('../src', 'dist')(flatMap(doTheWork, subFoldersOrFiles));
 }
 
 

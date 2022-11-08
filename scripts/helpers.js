@@ -74,3 +74,9 @@ module.exports.flat = flat;
 
 const duplicate = a => [a, a]
 module.exports.duplicate = duplicate;
+
+const mapReplace = compose(map, replace);
+module.exports.mapReplace = mapReplace;
+
+const flatMap = compose(flat, map);
+module.exports.flatMap = flatMap;
