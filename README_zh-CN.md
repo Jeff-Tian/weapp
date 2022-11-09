@@ -6,9 +6,9 @@
 
 > 哈德韦的个人小程序
 
-|体验版|正式版|
-| --- | --- |
-|![哈德韦体验版](basicprofile.jpeg)| ![哈德韦正式版](./扫码_搜索联合传播样式-微信标准绿版.png) |
+| 体验版                          | 正式版                                 |
+|------------------------------|-------------------------------------|
+| ![哈德韦体验版](basicprofile.jpeg) | ![哈德韦正式版](./扫码_搜索联合传播样式-微信标准绿版.png) |
 
 ## 本地开发
 
@@ -102,3 +102,8 @@ weapp 的后端服务，主要由 Serverless-Space 提供，如果你要基于 w
 - 优化井字棋游戏页面展示
 - 增加人工智能版井字棋游戏页面
 - 增加 C++ 代码展示页面
+
+
+## Star History
+
+![https://api.star-history.com/svg?repos=jeff-tian/weapp&type=Date](https://api.star-history.com/svg?repos=jeff-tian/weapp&type=Date)
