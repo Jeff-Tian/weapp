@@ -38,6 +38,7 @@ export const HighLevel = () => {
   const [saveQR, setSaveQR] = useState(null)
 
   const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
+
   return <View>
     <AtNavBar
       onClickRgIconSt={() => {
@@ -56,7 +57,11 @@ export const HighLevel = () => {
             icon: 'success',
             duration: 1000,
           }).then(() => {
-            Taro.navigateTo({url: '/pages/subpages/auth/profile'});
+            Taro.navigateTo({url: '/pages/subpages/auth/profile'}).then(() => {
+              console.log('跳转到个人中心成功');
+            }).catch((error) => {
+              console.error('跳转到个人中心失败', error);
+            });
           })
         } else {
           loginByQrCode({setIsRichModalOpen, setZhihuLoginQRCode, setRichModalTitle, setSaveQR})
@@ -96,7 +101,7 @@ export const HighLevel = () => {
         setIsRichModalOpen(false)
       }} title={richModalTitle}
       >
-        <Image src={zhihuLoginQRCode} />
+        <Image src={zhihuLoginQRCode}/>
       </RichModal>
     </View>
   </View>

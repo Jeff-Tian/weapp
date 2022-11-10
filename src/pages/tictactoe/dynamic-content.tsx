@@ -15,7 +15,7 @@ const interpreter = new Interpreter(window, {
 window['ReactDOM'] = ENV_TYPE.WEB === Taro.getEnv() ? ReactDOM : TaroDOM;
 window['React'] = React;
 
-export const DynamicContent = ({gql, variables}: {gql, variables?: object}) => {
+export const DynamicContent = ({gql, variables}: { gql, variables?: object }) => {
 
   const {loading, error, data} = useQuery(gql, {variables})
 
@@ -37,5 +37,6 @@ export const DynamicContent = ({gql, variables}: {gql, variables?: object}) => {
     )
   }
 
-  return <View id='root' />
+  return <View id='root'>
+  </View>
 }
