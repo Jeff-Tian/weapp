@@ -28,3 +28,20 @@ export const memoize = (fn: Function): Function => {
 
 export const memoizedAsync = memoize(memoizeAsync)
 export const memoized = memoize(memoize)
+
+export const tail = a => a[a.length - 1]
+
+export const getUrlQuerySeparator = url => url.lastIndexOf('?') >= 0 ? '&' : '?'
+
+export const appendUrlQuery = (url, query) => {
+  const separator = getUrlQuerySeparator(url)
+  return url + separator + query
+}
+
+export const getCurrentPageUrl = (router) => {
+  const path = router.path
+  const pathWithoutQuery = path.split('?')[0]
+  const query = router.params
+
+  return `https://taro.pa-ca.me${pathWithoutQuery}?${new URLSearchParams(query).toString()}`
+}

@@ -11,6 +11,7 @@ import {drawerItems, onDrawerItemClick} from "./drawer-items"
 import HardwayTabs from './tabs'
 import '../components/rich-modal.styl'
 import RichModal from "../components/RichModal";
+import {appendUrlQuery, getCurrentPageUrl, tail} from "@/common/helpers";
 
 const COPY_TO_CLIPBOARD = gql`
 mutation CopyToClipboard($clipboard: ClipboardInput!) {
@@ -66,11 +67,18 @@ const HighLevel = () => {
         }
       }}
       onClickLeftIcon={() => {
+        const path = getCurrentPageUrl(Taro.getCurrentInstance().router)
+
+        Taro.setClipboardData({data: `${path}`}).then(() => {
+          Taro.showToast({
+            title: `${path} 已复制`,
+          })
+        })
       }}
       color='#000'
       title='哈德韦的个人小程序'
-      // leftText='返回'
-      // leftIconType='chevron-left'
+      leftText='复制本页链接'
+      leftIconType='link'
       rightFirstIconType='bullet-list'
       rightSecondIconType={zhihuUserInfo ? {value: 'user', color: 'blue'} : 'user'}
     />
