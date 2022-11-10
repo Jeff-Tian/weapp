@@ -1,8 +1,8 @@
 import {AtFab} from "taro-ui";
 import Taro from "@tarojs/taro";
-import {Swiper, SwiperItem, Text, View} from "@tarojs/components";
+import {Swiper, SwiperItem, Text, View, Image} from "@tarojs/components";
 
-export const Fab = () =><View className='fab-area'>
+export const Fab = () => <View className='fab-area'>
   <AtFab onClick={() => Taro.navigateToMiniProgram({
     appId: 'wx71b447f4cd52b251',
     path: '',
@@ -14,23 +14,22 @@ export const Fab = () =><View className='fab-area'>
   </AtFab>
 </View>
 
-export const Banner = ()=><Swiper
+export const Banner = () => <Swiper
   className='test-h'
   indicatorColor='#999'
   indicatorActiveColor='#333'
-  vertical
   circular
   indicatorDots
+  duration={3000}
+  interval={5000}
   autoplay
 >
   <SwiperItem>
-    <View className='demo-text-1'>1</View>
-  </SwiperItem>
-  <SwiperItem>
-    <View className='demo-text-2'>2</View>
-  </SwiperItem>
-  <SwiperItem>
-    <View className='demo-text-3'>3</View>
+    <Image
+      className='at-article__img'
+      src='https://stackoverflow-readme-profile.johannchopin.fr/profile/769900?theme=dark&website=true&location=true'
+      mode='scaleToFill'
+    />
   </SwiperItem>
 </Swiper>
 
