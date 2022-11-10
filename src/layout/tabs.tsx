@@ -1,9 +1,9 @@
 import Taro, {useRouter} from '@tarojs/taro'
-import {AtFab, AtTabs, AtTabsPane} from "taro-ui";
-import {OfficialAccount, View, Text} from "@tarojs/components";
+import {AtTabs, AtTabsPane} from "taro-ui";
+import {OfficialAccount, View} from "@tarojs/components";
+import {Banner, Fab} from "@/components/HomePageExtra";
 import {useState} from "react";
 import './tabs.styl'
-import {Banner, Fab} from "@/components/HomePageExtra";
 
 const HardwayTabs = ({children}) => {
   const router = useRouter()
@@ -26,7 +26,7 @@ const HardwayTabs = ({children}) => {
   const tabs = [{title: '《编程珠玑》'}, {title: '博文'}, {title: 'AI 井字棋'},]
   return <View>
     <OfficialAccount />
-    <Banner />
+    {currentTab === 1 && <Banner />}
     <AtTabs tabList={tabs} current={currentTab} onClick={(index) => {
       setCurrentTab(index)
 
@@ -51,10 +51,7 @@ const HardwayTabs = ({children}) => {
     </AtTabs>
 
 
-    {currentTab === 1 ?
-      <Fab /> : null
-    }
-
+    {currentTab === 1 && <Fab />}
   </View>
 }
 

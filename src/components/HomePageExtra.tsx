@@ -1,17 +1,8 @@
-import {AtFab} from "taro-ui";
-import Taro from "@tarojs/taro";
-import {Swiper, SwiperItem, Text, View, Image} from "@tarojs/components";
+import {AtAvatar} from "taro-ui";
+import {Swiper, SwiperItem, View, Image} from "@tarojs/components";
 
 export const Fab = () => <View className='fab-area'>
-  <AtFab onClick={() => Taro.navigateToMiniProgram({
-    appId: 'wx71b447f4cd52b251',
-    path: '',
-    extraData: {},
-    envVersion: 'release'
-  })}
-  >
-    <Text className='at-fab__icon at-icon at-icon-edit'></Text>
-  </AtFab>
+  <AtAvatar circle image='https://avatars.githubusercontent.com/u/3367820?v=4'></AtAvatar>
 </View>
 
 export const Banner = () => <Swiper

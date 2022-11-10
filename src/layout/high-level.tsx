@@ -70,14 +70,18 @@ export const HighLevel = () => {
       onClickLeftIcon={() => {
         const path = getCurrentPageUrl(Taro.getCurrentInstance().router)
 
-        Taro.setClipboardData({data: `${path}`}).then(() => {
+        Taro.setClipboardData({data: `${path}`}).then(() =>
           Taro.showToast({
             title: `${path} 已复制`,
+            icon: 'success',
           })
-        })
+        ).catch(err => Taro.showToast({
+          title: `${path} 复制失败：${err}`,
+          icon: 'error'
+        }))
       }}
       color='#000'
-      title='哈德韦的个人小程序'
+      title='哈德韦'
       leftText='复制本页链接'
       leftIconType='link'
       rightFirstIconType='bullet-list'

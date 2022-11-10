@@ -1,3 +1,5 @@
+import qs from 'querystring'
+
 export const memoizeAsync = <T>(func: (...args) => Promise<T>) => {
   const cache = {}
 
@@ -43,5 +45,5 @@ export const getCurrentPageUrl = (router) => {
   const pathWithoutQuery = path.split('?')[0]
   const query = router.params
 
-  return `https://taro.pa-ca.me${pathWithoutQuery}?${new URLSearchParams(query).toString()}`
+  return `https://taro.pa-ca.me${pathWithoutQuery}?${qs.stringify(query)}`
 }
