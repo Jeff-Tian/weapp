@@ -105,7 +105,7 @@ export const HighLevel = () => {
         setIsRichModalOpen(false)
       }} title={richModalTitle}
       >
-        <Image src={zhihuLoginQRCode}/>
+        <Image src={zhihuLoginQRCode} />
       </RichModal>
     </View>
   </View>

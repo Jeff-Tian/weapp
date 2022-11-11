@@ -40,7 +40,6 @@ describe('deeplinks', () => {
       "dist/pages/tictactoe/dynamic-content.html",
       "dist/pages/tictactoe/index.html",
       "dist/pages/tictactoe/index2.html",
-      "dist/pages/weapp/index.html",
       "dist/pages/yuque/article.html",
       "dist/pages/yuque/index.html"
     ]);

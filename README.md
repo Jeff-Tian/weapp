@@ -6,9 +6,9 @@
 
 > Personal Wechat Miniprogram for Hardway
 
-| Trial Version                | Release Version                     |
-|------------------------------|-------------------------------------|
-| ![哈德韦体验版](basicprofile.jpeg) | ![哈德韦正式版](./扫码_搜索联合传播样式-微信标准绿版.png) |
+| Trial Version                                   | Release Version                                   |
+|-------------------------------------------------|---------------------------------------------------|
+| ![哈德韦体验版](https://i1.lensdump.com/i/Rg0UAq.jpg) | ![哈德韦正式版](https://i.lensdump.com/i/Rg0cVA.md.png) |
 
 ## Local development
 

@@ -86,7 +86,7 @@ const YuQueArticle: React.FC = () => {
   })
 
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
-                                             isOpened={loading}
+    isOpened={loading}
   />
     {data && data.yuque && <View className='at-article'>
       {data.yuque.cover && <Image
@@ -100,7 +100,7 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.title}
         <AtBadge>
           <AtButton size='small'
-                    onClick={() => Taro.setClipboardData({data: `pages/yuque/article?slug=${slug}`})}
+            onClick={() => Taro.setClipboardData({data: `pages/yuque/article?slug=${slug}`})}
           >拷贝本页路径</AtButton>
         </AtBadge>
       </View>
@@ -114,7 +114,7 @@ const YuQueArticle: React.FC = () => {
 
       <View className='at-article__content taro_html'>
         <View className='at-article__section'>
-          <View dangerouslySetInnerHTML={{__html: html}}/>
+          <View dangerouslySetInnerHTML={{__html: html}} />
         </View>
       </View>
 

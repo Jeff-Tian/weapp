@@ -1,4 +1,4 @@
-import {View} from "@tarojs/components"
+import {Image, View} from "@tarojs/components"
 import Taro, {ENV_TYPE} from "@tarojs/taro";
 import SinglePageLayout from "@/layout/single-page-layout";
 
@@ -19,9 +19,19 @@ const About = () => {
       <View className='at-article__content'>
         <View className='at-article__section'>
           <View>
-            源代码： <a href='https://github.com/jeff-tian/weapp' target='_blank'>https://github.com/jeff-tian/weapp</a>
+            源代码： {Taro.getEnv() === ENV_TYPE.WEB ?
+            <a href='https://github.com/jeff-tian/weapp' target='_blank'>https://github.com/jeff-tian/weapp</a> :
+            <View>https://github.com/jeff-tian/weapp</View>}
           </View>
         </View>
+        {
+          Taro.getEnv() === ENV_TYPE.WEB &&
+          <View className='at-article__section'>
+            <Image className='at-article__img'
+              src='https://i.lensdump.com/i/Rg0cVA.md.png' mode='widthFix'
+            />
+          </View>
+        }
         <View className='at-article__section'>
           <SystemInfo />
         </View>

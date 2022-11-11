@@ -35,7 +35,6 @@ export default {
     'pages/pearlsplus/c1_6_2',
     'pages/yuque/article',
     'pages/index/index',
-    'pages/weapp/index',
     'pages/tictactoe/index',
     'pages/tictactoe/index2',
     'pages/tictactoe/ai',
