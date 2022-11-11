@@ -1,10 +1,10 @@
 import {Image, View} from "@tarojs/components"
 import Taro, {ENV_TYPE} from "@tarojs/taro";
 import SinglePageLayout from "@/layout/single-page-layout";
-
+import {OfficialAccountCard} from "@/components/OfficialAccountWrapper";
 import packageJson from '../../../../package.json'
 import SystemInfo from "./system.info";
-import {H5OfficialAccountCard, OfficialAccountCard} from "@/components/OfficialAccountWrapper";
+
 
 
 const About = () => {

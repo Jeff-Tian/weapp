@@ -2,7 +2,7 @@
   "name": "weapp",
   "version": "1.6.0",
   "private": true,
-  "description": "增加 Keycloak 对接",
+  "description": "哈德韦的个人小程序",
   "templateInfo": {
     "name": "default",
     "typescript": true,

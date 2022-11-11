@@ -12,7 +12,7 @@ const WeappOfficialAccountImage = () => <Image
   mode='widthFix'
 />
 
-const H5OfficialAccountCard = () => <AtCard note='https://mp.weixin.qq.com/s/sctQJX4eAwSa0a5qcmPLIA' extra='欢迎关注'
+export const H5OfficialAccountCard = () => <AtCard note='https://mp.weixin.qq.com/s/sctQJX4eAwSa0a5qcmPLIA' extra='欢迎关注'
   title='哈德韦公众号'
   thumb='https://avatars.githubusercontent.com/u/3367820?v=4'
 ><a href='https://mp.weixin.qq.com/s/sctQJX4eAwSa0a5qcmPLIA' target='_blank'><Image
