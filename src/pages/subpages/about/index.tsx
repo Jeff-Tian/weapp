@@ -4,6 +4,7 @@ import SinglePageLayout from "@/layout/single-page-layout";
 
 import packageJson from '../../../../package.json'
 import SystemInfo from "./system.info";
+import {H5OfficialAccountCard, OfficialAccountCard} from "@/components/OfficialAccountWrapper";
 
 
 const About = () => {
@@ -32,6 +33,9 @@ const About = () => {
             />
           </View>
         }
+        <View className='at-article__section'>
+          <OfficialAccountCard />
+        </View>
         <View className='at-article__section'>
           <SystemInfo />
         </View>

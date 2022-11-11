@@ -1,8 +1,9 @@
-import Taro, {useRouter} from '@tarojs/taro'
+import Taro, {ENV_TYPE, useRouter} from '@tarojs/taro'
 import {AtTabs, AtTabsPane} from "taro-ui";
 import {OfficialAccount, View} from "@tarojs/components";
 import {Banner, Fab} from "@/components/HomePageExtra";
 import {useState} from "react";
+
 import './tabs.styl'
 
 const HardwayTabs = ({children}) => {
@@ -25,7 +26,7 @@ const HardwayTabs = ({children}) => {
 
   const tabs = [{title: '《编程珠玑》'}, {title: '博文'}, {title: 'AI 井字棋'},]
   return <View>
-    <OfficialAccount />
+    {Taro.getEnv() === ENV_TYPE.WEAPP && <OfficialAccount />}
     {currentTab === 1 && <Banner />}
     <AtTabs tabList={tabs} current={currentTab} onClick={(index) => {
       setCurrentTab(index)

@@ -1,5 +1,7 @@
 import {AtAvatar} from "taro-ui";
 import {Swiper, SwiperItem, View, Image} from "@tarojs/components";
+import OfficialAccountWrapper from "@/components/OfficialAccountWrapper";
+import StackOverflowWrapper from "@/components/StackOverflowWrapper";
 
 export const Fab = () => <View className='fab-area'>
   <AtAvatar circle image='https://avatars.githubusercontent.com/u/3367820?v=4'></AtAvatar>
@@ -16,11 +18,10 @@ export const Banner = () => <Swiper
   autoplay
 >
   <SwiperItem>
-    <Image
-      className='at-article__img'
-      src='https://stackoverflow-readme-profile.johannchopin.fr/profile/769900?theme=dark&website=true&location=true'
-      mode='scaleToFill'
-    />
+    <StackOverflowWrapper />
+  </SwiperItem>
+  <SwiperItem>
+    <OfficialAccountWrapper />
   </SwiperItem>
 </Swiper>
 
