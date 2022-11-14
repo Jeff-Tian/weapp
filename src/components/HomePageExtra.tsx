@@ -2,6 +2,7 @@ import {AtAvatar} from "taro-ui";
 import {Swiper, SwiperItem, View, Image} from "@tarojs/components";
 import OfficialAccountWrapper from "@/components/OfficialAccountWrapper";
 import StackOverflowWrapper from "@/components/StackOverflowWrapper";
+import LinkedImage from "@/components/LinkedImage";
 
 export const Fab = () => <View className='fab-area'>
   <AtAvatar circle image='https://avatars.githubusercontent.com/u/3367820?v=4'></AtAvatar>
@@ -22,6 +23,9 @@ export const Banner = () => <Swiper
   </SwiperItem>
   <SwiperItem>
     <OfficialAccountWrapper />
+  </SwiperItem>
+  <SwiperItem>
+    <LinkedImage src='https://picd.zhimg.com/v2-246288a8f323592fed53cc347aaa65c9_r.jpg?source=172ae18b' href='https://picd.zhimg.com/v2-246288a8f323592fed53cc347aaa65c9_r.jpg?source=172ae18b' mode='widthFix' />
   </SwiperItem>
 </Swiper>
 
