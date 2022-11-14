@@ -1,10 +1,9 @@
 import {Image, View} from "@tarojs/components"
 import Taro, {ENV_TYPE} from "@tarojs/taro";
 import SinglePageLayout from "@/layout/single-page-layout";
-import {OfficialAccountCard} from "@/components/OfficialAccountWrapper";
+import {MiniprogramCard, OfficialAccountCard} from "@/components/OfficialAccountWrapper";
 import packageJson from '../../../../package.json'
 import SystemInfo from "./system.info";
-
 
 
 const About = () => {
@@ -25,14 +24,9 @@ const About = () => {
             <View>https://github.com/jeff-tian/weapp</View>}
           </View>
         </View>
-        {
-          Taro.getEnv() === ENV_TYPE.WEB &&
-          <View className='at-article__section'>
-            <Image className='at-article__img'
-              src='https://i.lensdump.com/i/Rg0cVA.md.png' mode='widthFix'
-            />
-          </View>
-        }
+        <View className='at-article__section'>
+          <MiniprogramCard />
+        </View>
         <View className='at-article__section'>
           <OfficialAccountCard />
         </View>
