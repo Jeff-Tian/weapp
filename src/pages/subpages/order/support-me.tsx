@@ -30,11 +30,29 @@ const askForAuthorizationToSaveImage = async () => {
             title: `二维码图片保存成功，请使用微信扫一扫，并从相册中选择该图片`,
             icon: 'success'
           })
+        }).then(r => {
+          console.log(r)
+          Taro.scanCode({
+            success: (rs) => {
+              console.log(rs)
+            }
+          })
         }).catch(e => console.log(e))
       }
-    }).then(console.log).catch(ex=>{
-      Taro.showToast({
-        title: `下截二维码图片失败，请重试： ${util.inspect(ex)}`,
+    }).then(console.log).catch(ex => {
+      Taro.showModal({
+        title: '下载二维码图片失败',
+        content: util.inspect(ex),
+        success: (res) => {
+          console.log(res)
+          if (res.confirm) {
+            
+          }
+
+          if (res.cancel) {
+
+          }
+        },
       })
     })
   } catch (ex) {
