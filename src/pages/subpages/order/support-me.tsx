@@ -19,8 +19,10 @@ const askForAuthorizationToSaveImage = async () => {
     const authed = await Taro.authorize({scope: 'scope.writePhotosAlbum'})
     console.log(authed)
 
+    const qrImageUrl = 'https://v.pa-pa.me/images/we-com-pay.png';
+
     Taro.downloadFile({
-      url: 'https://v.pa-pa.me/images/we-com-pay.png',
+      url: qrImageUrl,
       success: (res) => {
         Taro.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
@@ -42,11 +44,13 @@ const askForAuthorizationToSaveImage = async () => {
     }).then(console.log).catch(ex => {
       Taro.showModal({
         title: '下载二维码图片失败',
-        content: util.inspect(ex),
+        content: `${util.inspect(ex)}  ${qrImageUrl}`,
+        showCancel: false,
+        confirmText: '我知道了',
         success: (res) => {
           console.log(res)
           if (res.confirm) {
-            
+
           }
 
           if (res.cancel) {
