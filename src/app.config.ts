@@ -23,6 +23,10 @@ const subpages = [
   {
     root: `pages/subpages/pearlsplus`,
     pages: ['index', 'detail', 'c-detail']
+  },
+  {
+    root: `pages/subpages/order`,
+    pages: ['support-me']
   }
 ]
 

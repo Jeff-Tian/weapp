@@ -82,7 +82,7 @@ export const HighLevel = () => {
       }}
       color='#000'
       title='哈德韦'
-      leftText='复制本页链接'
+      leftText='复制链接'
       leftIconType='link'
       rightFirstIconType='bullet-list'
       rightSecondIconType={zhihuUserInfo ? {value: 'user', color: 'blue'} : 'user'}

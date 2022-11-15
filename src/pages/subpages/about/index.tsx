@@ -4,8 +4,6 @@ import SinglePageLayout from "@/layout/single-page-layout";
 import {MiniprogramCard, OfficialAccountCard} from "@/components/OfficialAccountWrapper";
 import packageJson from '../../../../package.json'
 import SystemInfo from "./system.info";
-import LinkedImage from "@/components/LinkedImage";
-
 
 const About = () => {
   return <SinglePageLayout>
@@ -34,12 +32,6 @@ const About = () => {
         <View className='at-article__section'>
           <SystemInfo />
         </View>
-      </View>
-
-      <View className='at-article__h2'>支持哈德韦</View>
-
-      <View className='at-article__content'>
-        <LinkedImage src='https://v.pa-pa.me/images/we-com-pay.png' href='https://v.pa-pa.me/images/we-com-pay.png' mode='aspectFit' />
       </View>
     </View>
   </SinglePageLayout>
