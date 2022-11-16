@@ -29,6 +29,7 @@ describe('deeplinks', () => {
       "dist/pages/subpages/auth/keycloak.html",
       "dist/pages/subpages/auth/profile.html",
       "dist/pages/subpages/ip/index.html",
+      "dist/pages/subpages/order/support-me.html",
       "dist/pages/subpages/pearlsplus/c-detail.html",
       "dist/pages/subpages/pearlsplus/detail.html",
       "dist/pages/subpages/pearlsplus/index.html",
