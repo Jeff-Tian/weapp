@@ -28,7 +28,7 @@ const askForAuthorizationToSaveImage = async () => {
           filePath: res.tempFilePath,
         }).then(r => {
           console.log(r)
-          Taro.showToast({
+          return Taro.showToast({
             title: `二维码图片保存成功，请使用微信扫一扫，并从相册中选择该图片`,
             icon: 'success'
           })
@@ -39,6 +39,8 @@ const askForAuthorizationToSaveImage = async () => {
               console.log(rs)
             }
           })
+
+          Taro.exitMiniProgram();
         }).catch(e => console.log(e))
       }
     }).then(console.log).catch(ex => {
