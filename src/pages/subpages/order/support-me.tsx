@@ -63,7 +63,7 @@ const askForAuthorizationToSaveImage = async () => {
     })
   } catch (ex) {
     Taro.showToast({
-      title: '极权失败，请手动长按二维码图片保存',
+      title: '授权失败，请手动长按二维码图片保存',
       icon: 'error',
     }).then(r => console.log(r)).catch(e => console.error(e))
   }
