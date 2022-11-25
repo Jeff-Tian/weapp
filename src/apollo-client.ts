@@ -3,6 +3,7 @@ import Taro from "@tarojs/taro"
 import crypto from 'crypto'
 
 import {createPersistedQueryLink} from "@apollo/client/link/persisted-queries"
+import {createUploadLink} from "apollo-upload-client";
 
 const graphQLServerUrl = 'https://sls.pa-ca.me/nest/graphql'
 
@@ -32,4 +33,9 @@ const queryLink = createPersistedQueryLink({
 export const client = new ApolloClient({
   link: ApolloLink.from([queryLink, httpLink]),
   cache: new InMemoryCache()
+})
+
+export const uploadClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: createUploadLink() as any
 })

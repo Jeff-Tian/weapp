@@ -27,6 +27,10 @@ const subpages = [
   {
     root: `pages/subpages/order`,
     pages: ['support-me']
+  },
+  {
+    root: `pages/subpages/face-swap`,
+    pages: ['index']
   }
 ]
 
