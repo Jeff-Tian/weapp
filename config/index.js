@@ -46,13 +46,13 @@ const config = {
   outputRoot: 'dist',
 
   plugins: [
-    ["@tarojs/plugin-mini-ci", CIPluginOpt]
+    ["@tarojs/plugin-mini-ci", CIPluginOpt],
+    '@tarojs/plugin-html'
   ],
 
   defineConstants: {},
   copy: {
-    patterns: [
-    ],
+    patterns: [],
     options: {},
   },
   framework: 'react',

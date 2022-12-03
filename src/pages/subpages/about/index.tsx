@@ -5,6 +5,8 @@ import {MiniprogramCard, OfficialAccountCard} from "@/components/OfficialAccount
 import packageJson from '../../../../package.json'
 import SystemInfo from "./system.info";
 
+
+
 const About = () => {
   return <SinglePageLayout>
     <View className='at-article'>
@@ -34,6 +36,12 @@ const About = () => {
         </View>
       </View>
     </View>
+    <div className='badge-base LI-profile-badge' data-locale='en_US' data-size='large' data-theme='dark'
+      data-type='HORIZONTAL' data-vanity='jeff~tian' data-version='v1'
+    ><a className='badge-base__link LI-simple-link'
+      href='https://cn.linkedin.com/in/jeff%7Etian?trk=profile-badge'
+    >Jeff
+      Tian</a></div>
   </SinglePageLayout>
 }
 
