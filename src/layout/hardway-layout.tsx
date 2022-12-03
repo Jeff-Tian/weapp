@@ -1,17 +1,19 @@
-import {View} from "@tarojs/components"
+import {OfficialAccount, View} from "@tarojs/components"
 import {HighLevel} from "@/layout/high-level";
-
-import HardwayTabs from './tabs'
+import {Fab} from "@/components/HomePageExtra";
+import Taro, {ENV_TYPE} from "@tarojs/taro";
+import './fab.styl';
 import '../components/rich-modal.styl'
+
 
 const HardwayLayout = ({children}) => {
   return <View>
     <HighLevel />
-    <HardwayTabs>
-      <View style={{minHeight: '1000px'}}>
-        {children}
-      </View>
-    </HardwayTabs>
+    <View style={{minHeight: '1000px'}}>
+      {Taro.getEnv() === ENV_TYPE.WEAPP && <OfficialAccount />}
+      {children}
+    </View>
+    <Fab />
   </View>
 }
 

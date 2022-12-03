@@ -7,6 +7,7 @@ import {ErrorDisplay} from "@/components/ErrorDisplay";
 import {fallbackThumbnail} from "@/common/constants";
 import './article.styl'
 import HardwayLayout from "../../layout/hardway-layout"
+import {Banner} from "@/components/HomePageExtra";
 
 
 export const YUQUE_BLOG = gql`
@@ -51,9 +52,11 @@ export const YuQueInner = () => {
   }
 
 
-  return <View><AtActivityIndicator mode='center' size={128} content='加载中……'
-    isOpened={loading}
-  />
+  return <View>
+    <Banner />
+    <AtActivityIndicator mode='center' size={128} content='加载中……'
+      isOpened={loading}
+    />
     {blogs.map(article => <View key={article.id}><AtCard title={article.title}
       extra={`${article.word_count} 字`}
       note={article.created_at}
