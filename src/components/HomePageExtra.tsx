@@ -3,8 +3,9 @@ import {Swiper, SwiperItem, View, Image} from "@tarojs/components";
 import OfficialAccountWrapper from "@/components/OfficialAccountWrapper";
 import StackOverflowWrapper from "@/components/StackOverflowWrapper";
 import LinkedImage from "@/components/LinkedImage";
+import {handleClipboard} from "@/functions/clipboard";
 
-export const Fab = () => <View className='fab-area'>
+export const Fab = () => <View className='fab-area' onClick={handleClipboard}>
   <AtAvatar circle image='https://avatars.githubusercontent.com/u/3367820?v=4'></AtAvatar>
 </View>
 
