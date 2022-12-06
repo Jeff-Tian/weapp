@@ -1,8 +1,8 @@
 import {gql, useMutation, useQuery} from "@apollo/client"
 import {Button, Image, View} from "@tarojs/components"
-import {AtActivityIndicator, AtBadge, AtButton} from "taro-ui"
+import {AtActivityIndicator, AtButton} from "taro-ui"
 import Taro from "@tarojs/taro"
-
+import {StorageKeys} from "@/common/constants";
 import remark from 'remark'
 import remarkHtml from "remark-html"
 import {useState} from "react"
@@ -11,7 +11,6 @@ import {SYNC_YUQUE_TO_ZHIHU, draftDirectly} from "@/services/zhihu";
 import './article.styl'
 
 import HardwayLayout from "../../layout/hardway-layout"
-import {StorageKeys} from "@/common/constants";
 
 
 const YuQueArticle: React.FC = () => {
@@ -98,18 +97,30 @@ const YuQueArticle: React.FC = () => {
 
       <View className='at-article__h1'>
         {data.yuque.title}
-        <AtBadge>
+      </View>
+      <View className='at-row'>
+        <View className='at-col'>
           <AtButton size='small'
             onClick={() => Taro.setClipboardData({data: `pages/yuque/article?slug=${slug}`})}
           >拷贝本页路径</AtButton>
-        </AtBadge>
+        </View>
+        <View className='at-col'>
+          <AtButton size='small'
+            onClick={() => Taro.setClipboardData({data: data.yuque.body})}
+          >拷贝正文（markdown）</AtButton>
+        </View>
+        <View className='at-col'>
+          <AtButton size='small' onClick={() => Taro.setClipboardData({data: html})}>拷贝正文（富文本）</AtButton>
+        </View>
       </View>
       <View className='at-article__info'>
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
       {zhihuUserInfo &&
-        <Button onClick={() => slug ? syncYuqueToZhihu() : draftDirectly(data.yuque.title, html)}>发布到知乎</Button>
+        <Button type='primary'
+          onClick={() => slug ? syncYuqueToZhihu() : draftDirectly(data.yuque.title, html)}
+        >发布到知乎</Button>
       }
 
       <View className='at-article__content taro_html'>
