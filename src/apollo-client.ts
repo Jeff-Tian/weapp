@@ -1,4 +1,4 @@
-import {ApolloClient, ApolloLink, concat, createHttpLink, InMemoryCache} from "@apollo/client"
+import {ApolloClient, ApolloLink, createHttpLink, InMemoryCache, split} from "@apollo/client"
 import Taro from "@tarojs/taro"
 import crypto from 'crypto'
 
@@ -30,7 +30,20 @@ const queryLink = createPersistedQueryLink({
   sha256: async (document: string) => crypto.createHash('sha256').update(document).digest('hex')
 })
 
+const testIfUploadOperation = ({query}) => {
+  console.log('query = ', query)
+  const {definitions} = query
+  console.log('def = ', definitions);
+
+  return definitions.some(({kind, operation, selectionSet: {selections}}) => {
+    return kind === 'OperationDefinition' && operation === 'mutation' && selections.some(({name: {value}}) => value === 'uploadImage')
+  })
+}
+
+const httpLinkForNormalOperations = ApolloLink.from([queryLink, httpLink]);
+const uploadLink = createUploadLink({uri: 'https://face-swap-jeff-tian.cloud.okteto.net/graphql'}) as any
+
 export const client = new ApolloClient({
-  link: ApolloLink.from([queryLink, concat(createUploadLink({uri: 'https://face-swap-jeff-tian.cloud.okteto.net/graphql'}) as any, httpLink)]),
+  link: split(testIfUploadOperation, uploadLink, httpLinkForNormalOperations),
   cache: new InMemoryCache()
 })
