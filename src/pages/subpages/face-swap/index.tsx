@@ -28,7 +28,12 @@ const FaceSwap = () => {
     }).then((res) => {
       console.log('files = , ', res);
       const [image1, image2] = res.tempFiles
-      return mutate({variables: {image1: image1.originalFileObj, image2: image2.originalFileObj}}).then(r => {
+      return mutate({
+        variables: {
+          image1: image1.originalFileObj ?? image1,
+          image2: image2.originalFileObj ?? image2
+        }
+      }).then(r => {
         console.log('res = ', r);
         setResult(r.data.uploadImage)
       })

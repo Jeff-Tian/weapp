@@ -1,34 +1,26 @@
 import {OfficialAccount, View} from "@tarojs/components"
 import {HighLevel} from "@/layout/high-level";
 import {Fab} from "@/components/HomePageExtra";
-import Taro, {ENV_TYPE, Component} from "@tarojs/taro";
+import Taro, {ENV_TYPE, usePullDownRefresh} from "@tarojs/taro";
 import './fab.styl';
 import '../components/rich-modal.styl'
 
 
-class HardwayLayout implements Component {
-  private props: any;
+const HardwayLayout = ({children}) => {
 
-  constructor(props) {
-    this.props = props
-  }
-
-  onPullDownRefresh = () => {
+  usePullDownRefresh(() => {
     console.log('用户下拉刷新');
+    Taro.stopPullDownRefresh()
+  })
 
-    Taro.stopPullDownRefresh();
-  }
-
-  render() {
-    return <View>
-      <HighLevel />
-      <View style={{minHeight: '1000px'}}>
-        {Taro.getEnv() === ENV_TYPE.WEAPP && <OfficialAccount />}
-        {this.props.children}
-      </View>
-      <Fab />
+  return <View>
+    <HighLevel />
+    <View style={{minHeight: '1000px'}}>
+      {Taro.getEnv() === ENV_TYPE.WEAPP && <OfficialAccount />}
+      {children}
     </View>
-  }
+    <Fab />
+  </View>
 }
 
 export default HardwayLayout
