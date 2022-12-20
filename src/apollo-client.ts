@@ -5,7 +5,7 @@ import crypto from 'crypto'
 import {createPersistedQueryLink} from "@apollo/client/link/persisted-queries"
 import {createUploadLink} from "apollo-upload-client";
 
-const graphQLServerUrl = 'https://sls.pa-ca.me/nest/graphql'
+const graphQLServerUrl = 'https://sls.pa-ca.me/gateway'
 
 const httpLink = createHttpLink({
   uri: graphQLServerUrl,

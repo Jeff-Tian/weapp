@@ -3,9 +3,7 @@ import {gql, useMutation} from "@apollo/client";
 
 const MUTATION = gql`
   mutation ($image1: Upload!, $image2: Upload!) {
-    uploadImage(image1: $image1, image2: $image2) {
-      result
-    }
+    uploadImage(image1: $image1, image2: $image2)
   }
 `
 
