@@ -29,7 +29,7 @@ const FaceSwap = () => {
 
   return <SinglePageLayout>
     <input type='file' multiple required onChange={onChange} />
-    {result && <AtAvatar image={`data:${result.mimetype};base64,${result.data}`} />}
+    {result && <AtAvatar image={`data:${result.mimetype};base64,${result.data}`} size='large' />}
   </SinglePageLayout>;
 }
 
