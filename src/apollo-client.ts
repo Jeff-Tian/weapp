@@ -1,4 +1,4 @@
-import {ApolloClient, ApolloLink, createHttpLink, InMemoryCache} from "@apollo/client"
+import {ApolloClient, ApolloLink, concat, createHttpLink, InMemoryCache} from "@apollo/client"
 import Taro from "@tarojs/taro"
 import crypto from 'crypto'
 
@@ -31,11 +31,6 @@ const queryLink = createPersistedQueryLink({
 })
 
 export const client = new ApolloClient({
-  link: ApolloLink.from([queryLink, httpLink]),
+  link: ApolloLink.from([queryLink, concat(createUploadLink({uri: 'https://face-swap-jeff-tian.cloud.okteto.net/graphql'}) as any, httpLink)]),
   cache: new InMemoryCache()
-})
-
-export const uploadClient = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: createUploadLink() as any
 })
