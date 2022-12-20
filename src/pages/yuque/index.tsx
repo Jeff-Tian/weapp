@@ -4,10 +4,10 @@ import {AtActivityIndicator, AtAvatar, AtCard, AtDivider, AtLoadMore} from "taro
 import Taro from "@tarojs/taro"
 import React, {useEffect, useState} from "react";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
+import {Banner} from "@/components/HomePageExtra";
 import {fallbackThumbnail} from "@/common/constants";
 import './article.styl'
 import HardwayLayout from "../../layout/hardway-layout"
-import {Banner} from "@/components/HomePageExtra";
 
 
 export const YUQUE_BLOG = gql`

@@ -41,10 +41,13 @@ export const HighLevel = () => {
 
   return <View>
     <AtNavBar
-      onClickRgIconSt={() => {
+      onClickRgIconSt={(...args) => {
+        console.log('rg iconst = ', args);
         setShowDrawer(true)
       }}
-      onClickRgIconNd={() => {
+      onClickRgIconNd={(...args) => {
+        console.log('rg iconnd = ', args);
+
         if (zhihuUserInfo) {
           console.log('知乎用户信息：', zhihuUserInfo);
 
@@ -67,7 +70,8 @@ export const HighLevel = () => {
           loginByQrCode({setIsRichModalOpen, setZhihuLoginQRCode, setRichModalTitle, setSaveQR})
         }
       }}
-      onClickLeftIcon={() => {
+      onClickLeftIcon={(...args) => {
+        console.log('left icon = ', args);
         const path = getCurrentPageUrl(Taro.getCurrentInstance().router)
 
         Taro.setClipboardData({data: `${path}`}).then(() =>

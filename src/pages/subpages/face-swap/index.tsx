@@ -3,6 +3,7 @@ import {gql, useMutation} from "@apollo/client";
 import {useState} from "react";
 import {AtAvatar, AtButton} from "taro-ui";
 import Taro from "@tarojs/taro";
+import util from "util";
 
 const MUTATION = gql`
   mutation ($image1: Upload!, $image2: Upload!) {
@@ -13,6 +14,8 @@ const MUTATION = gql`
     }
   }
 `
+
+const naiveErrorHandler = error => Taro.showModal({title: error.message, content: util.inspect(error)})
 
 const FaceSwap = () => {
   const [mutate] = useMutation(MUTATION)
@@ -25,16 +28,16 @@ const FaceSwap = () => {
     }).then((res) => {
       console.log('files = , ', res);
       const [image1, image2] = res.tempFiles
-      mutate({variables: {image1: image1.originalFileObj, image2: image2.originalFileObj}}).then(r => {
+      return mutate({variables: {image1: image1.originalFileObj, image2: image2.originalFileObj}}).then(r => {
         console.log('res = ', r);
         setResult(r.data.uploadImage)
-      }).catch(console.error)
-    });
+      })
+    }).catch(naiveErrorHandler);
   };
 
   return <SinglePageLayout>
     <AtButton onClick={chooseImage}>选择照片</AtButton>
-    {result && <AtAvatar image={`data:${result.mimetype};base64,${result.data}`} size='large' />}
+    {result && <AtAvatar image={`data:${result.mimetype};base64,${result.data}`} size='large'/>}
   </SinglePageLayout>;
 }
 
