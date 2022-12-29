@@ -3,7 +3,7 @@ import {gql, useMutation} from "@apollo/client";
 import {useState} from "react";
 import {AtAvatar, AtButton} from "taro-ui";
 import Taro from "@tarojs/taro";
-import util from "util";
+import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 
 const MUTATION = gql`
   mutation ($image1: Upload!, $image2: Upload!) {
@@ -14,8 +14,6 @@ const MUTATION = gql`
     }
   }
 `
-
-const naiveErrorHandler = error => Taro.showModal({title: error.message, content: util.inspect(error)})
 
 const FaceSwap = () => {
   const [mutate] = useMutation(MUTATION)

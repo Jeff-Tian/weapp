@@ -30,7 +30,7 @@ const subpages = [
   },
   {
     root: `pages/subpages/face-swap`,
-    pages: ['index']
+    pages: ['index', 'landmark']
   }
 ]
 
