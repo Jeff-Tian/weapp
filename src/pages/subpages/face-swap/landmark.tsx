@@ -1,8 +1,9 @@
 import SinglePageLayout from "@/layout/single-page-layout";
-import {AtButton} from "taro-ui";
+import {AtButton, AtDivider} from "taro-ui";
 import Taro from "@tarojs/taro";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 import {Canvas} from "@tarojs/components";
+import {drawImageFully} from "@/functions/canvas";
 
 const Landmark = () => {
   const context = Taro.createCanvasContext('canvas')
@@ -28,13 +29,14 @@ const Landmark = () => {
     Taro.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
+      sourceType: ['album', 'camera', 'user', 'environment'],
     }).then((res) => {
       console.log('files = , ', res);
       const [image] = res.tempFiles
 
-      context.drawImage(res.tempFilePaths[0], 0, 0, 200, 200)
-      context.draw();
+      const [imagePath] = res.tempFilePaths
+
+      drawImageFully(imagePath, context, 'canvas').then()
 
       return Taro.uploadFile({
         url: 'https://sls.pa-ca.me/face-swap/landmark',
@@ -48,8 +50,6 @@ const Landmark = () => {
         points = JSON.parse(points);
         console.log('points = ', points);
 
-
-        context.drawImage(res.tempFilePaths[0], 0, 0)
 
         context.setStrokeStyle("#ff0000")
         context.setLineWidth(2)
@@ -66,7 +66,8 @@ const Landmark = () => {
 
   return <SinglePageLayout>
     <AtButton onClick={chooseImage}>选择照片</AtButton>
-    <Canvas canvasId='canvas' style='width: 100%; min-height: 500px;'></Canvas>
+    <AtDivider content='识别结果' fontColor='#ed3f14' lineColor='#ed3f14'/>
+    <Canvas canvasId='canvas' id='canvas' style='width: 100%; min-height: 500px;'></Canvas>
   </SinglePageLayout>
 }
 export default Landmark
