@@ -16,7 +16,6 @@ export const drawerItems = new Map<string, () => void>([
     async () => Taro.navigateTo({url: '/pages/index/index'})],
   // ['ip 地址', async () => Taro.navigateTo({url: '/pages/ip/index'})],
   ['关于', async () => Taro.navigateTo({url: '/pages/subpages/about/index'})],
-  ['通过 Authing 登录', async () => Taro.navigateTo({url: '/pages/subpages/auth/authing'})],
   ['支持哈德韦', async () => Taro.navigateTo({url: '/pages/subpages/order/support-me'})],
   // ['换脸', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/index'})],
   ['人脸识别', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/landmark'})],

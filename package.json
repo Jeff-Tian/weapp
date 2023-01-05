@@ -48,6 +48,7 @@
   "author": "Jeff Tian <jeff.tian@outlook.com>",
   "dependencies": {
     "@apollo/client": "^3.4.15",
+    "@authing/guard-react": "^5.1.2",
     "@babel/runtime": "^7.7.7",
     "@tarojs/components": "3.4.13",
     "@tarojs/plugin-framework-react": "^3.4.13",
