@@ -1,9 +1,12 @@
 import SinglePageLayout from "@/layout/single-page-layout";
-import {View} from "@tarojs/components";
+import {useState} from "react";
+import {UserCard} from "@/components/UserCard";
 
 const FriendList = () => {
+  const [friends, setFriends] = useState([])
+
   return <SinglePageLayout>
-    <View>Hello</View>
+    {friends.map(f => <UserCard userInfo={f}/>)}
   </SinglePageLayout>
 }
 

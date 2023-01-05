@@ -1,5 +1,4 @@
 import Taro from "@tarojs/taro"
-import ENV_TYPE = Taro.ENV_TYPE
 
 export const drawerItems = new Map<string, () => void>([
   ['博文', async () => Taro.navigateTo({
@@ -24,7 +23,7 @@ export const drawerItems = new Map<string, () => void>([
   // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/test/index'})],
 ])
 
-if (Taro.getEnv() === ENV_TYPE.WEB) {
+if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
   drawerItems.set('向我咨询', async () => window.open('https://www.zhihu.com/consult/people/1073548674713423872'))
 }
 

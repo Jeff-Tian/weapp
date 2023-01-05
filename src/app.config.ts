@@ -60,4 +60,5 @@ export default {
     navigationBarTextStyle: 'black'
   },
   subpackages: subpages,
+  enablePullDownRefresh: true
 }
