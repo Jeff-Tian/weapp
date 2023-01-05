@@ -1,6 +1,6 @@
 import {Image} from "@tarojs/components";
 import {AtCard} from "taro-ui";
-import Taro, {ENV_TYPE} from "@tarojs/taro";
+import Taro from "@tarojs/taro";
 import LinkedImage from "@/components/LinkedImage";
 
 const H5OfficialAccountImage = () => <a href='https://mp.weixin.qq.com/s/sctQJX4eAwSa0a5qcmPLIA' target='_blank'><Image
@@ -28,7 +28,7 @@ export const OfficialAccountCard = () => <AtCard note='https://mp.weixin.qq.com/
   href='https://mp.weixin.qq.com/s/sctQJX4eAwSa0a5qcmPLIA'
 /></AtCard>
 
-const OfficialAccountWrapper = () => Taro.getEnv() === ENV_TYPE.WEAPP ? <WeappOfficialAccountImage /> :
+const OfficialAccountWrapper = () => Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? <WeappOfficialAccountImage /> :
   <H5OfficialAccountImage />
 
 export default OfficialAccountWrapper

@@ -4,7 +4,7 @@ const {
   compose,
   replace,
   prepend,
-  append, map, flat, mapReplace, flatMap
+  append, mapReplace, flatMap
 } = require("./helpers");
 
 const getDeepLinksFrom = (parent, folder) => {

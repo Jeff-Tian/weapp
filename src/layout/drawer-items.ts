@@ -19,7 +19,7 @@ export const drawerItems = new Map<string, () => void>([
   ['支持哈德韦', async () => Taro.navigateTo({url: '/pages/subpages/order/support-me'})],
   // ['换脸', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/index'})],
   ['人脸识别', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/landmark'})],
-  // ['通过 Keycloak 登录', async () => Taro.navigateTo({url: '/pages/subpages/auth/keycloak'})],
+  ['哈德韦的朋友们', async () => Taro.navigateTo({url: '/pages/subpages/friends/list'})]
   // ['视频', async () => Taro.navigateTo({url: '/pages/subpages/video/detail?zVideoId=1492435273367248896'})],
   // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/test/index'})],
 ])

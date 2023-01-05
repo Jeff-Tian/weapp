@@ -1,5 +1,5 @@
 import {ApolloClient, ApolloLink, createHttpLink, InMemoryCache, split} from "@apollo/client"
-import Taro, {ENV_TYPE} from "@tarojs/taro"
+import Taro from "@tarojs/taro"
 import crypto from 'crypto'
 
 import {createPersistedQueryLink} from "@apollo/client/link/persisted-queries"
@@ -44,7 +44,7 @@ const testIfUploadOperation = ({query}) => {
 }
 
 const httpLinkForNormalOperations = ApolloLink.from([queryLink, httpLink]);
-const onlineUploadableGraphQL = Taro.getEnv() === ENV_TYPE.WEB ? 'https://face-swap-jeff-tian.cloud.okteto.net/graphql' : gatewayGraphQLURl;
+const onlineUploadableGraphQL = Taro.getEnv() === Taro.ENV_TYPE.WEB ? 'https://face-swap-jeff-tian.cloud.okteto.net/graphql' : gatewayGraphQLURl;
 const uploadLink = createUploadLink({
   uri: process.env.FACE_SWAP_ENV !== 'local' ? onlineUploadableGraphQL : 'http://localhost:5001/graphql',
   fetch: theFetch

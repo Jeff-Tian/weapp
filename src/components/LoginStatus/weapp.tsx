@@ -5,6 +5,7 @@ import {AtActivityIndicator} from "taro-ui";
 import Taro from "@tarojs/taro";
 import {AuthenticationClient} from "authing-wxapp-sdk";
 import {authingAppId} from "@/common/constants";
+import {UserCard} from "@/components/UserCard";
 
 
 const authing = new AuthenticationClient({
@@ -33,8 +34,8 @@ export const WeappLoginStatus = () => {
 
   return <View>
     <AtActivityIndicator mode='center' size={128} content='加载中……'
-      isOpened={loading}
+                         isOpened={loading}
     />
-    {!loading ? <View>欢迎，{JSON.stringify(user)}</View> : null}
+    {!loading ? <UserCard userInfo={user || undefined}/> : null}
   </View>
 }

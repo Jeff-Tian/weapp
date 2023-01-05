@@ -1,6 +1,6 @@
 import {useGuard, User} from "@authing/guard-react";
 import {useEffect, useState} from "react";
-import {AtCard} from "taro-ui";
+import {UserCard} from "@/components/UserCard";
 
 export const WebLoginStatus = () => {
   const guard = useGuard();
@@ -18,14 +18,7 @@ export const WebLoginStatus = () => {
   return (
     <div>
       <div id='authing-guard-container'></div>
-      {
-        userInfo &&
-        <AtCard note={userInfo.username || userInfo.nickname || userInfo.email || userInfo.phone || undefined}
-          extra={userInfo.createdAt || undefined}
-          title={userInfo.lastLogin || undefined}
-          thumb={userInfo.photo || undefined}
-        >登录过 {userInfo.loginsCount} 次。</AtCard>
-      }
+      <UserCard userInfo={userInfo}/>
     </div>
   );
 }

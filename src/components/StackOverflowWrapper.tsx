@@ -1,5 +1,5 @@
 import {Image} from "@tarojs/components";
-import Taro, {ENV_TYPE} from "@tarojs/taro";
+import Taro from "@tarojs/taro";
 
 const WeappStackOverflowImage = () => <Image
   className='at-article__img'
@@ -11,6 +11,6 @@ const H5StackOverflowImage = () => <a href='https://stackoverflow.com/users/7699
   target='_blank'
 ><WeappStackOverflowImage /></a>
 
-const StackOverflowWrapper = () => Taro.getEnv() === ENV_TYPE.WEAPP ? <WeappStackOverflowImage /> : <H5StackOverflowImage />
+const StackOverflowWrapper = () => Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? <WeappStackOverflowImage /> : <H5StackOverflowImage />
 
 export default StackOverflowWrapper

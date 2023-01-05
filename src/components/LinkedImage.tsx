@@ -1,4 +1,4 @@
-import Taro, {ENV_TYPE} from "@tarojs/taro";
+import Taro from "@tarojs/taro";
 import {Image} from "@tarojs/components";
 import {ImageProps} from "@tarojs/components/types/Image";
 
@@ -17,7 +17,7 @@ const LinkedImage = ({
                        src,
                        mode,
                        href
-                     }: { src: string, mode?: keyof ImageProps.Mode, href?: string }) => Taro.getEnv() === ENV_TYPE.WEAPP ?
+                     }: { src: string, mode?: keyof ImageProps.Mode, href?: string }) => Taro.getEnv() === Taro.ENV_TYPE.WEAPP ?
   <WeappLinkedImage src={src} mode={mode} /> :
   <H5LinkedImage src={src} mode={mode} href={href ?? src} />
 

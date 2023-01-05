@@ -31,6 +31,10 @@ const subpages = [
   {
     root: `pages/subpages/face-swap`,
     pages: ['index', 'landmark']
+  },
+  {
+    root: `pages/subpages/friends`,
+    pages: ['list']
   }
 ]
 
