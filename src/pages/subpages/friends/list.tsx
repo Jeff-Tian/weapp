@@ -3,8 +3,9 @@ import {UserCard} from "@/components/UserCard";
 import {gql, useQuery} from "@apollo/client";
 import {authingAppId} from "@/common/constants";
 import {useEffect, useState} from "react";
-import {AtLoadMore} from "taro-ui";
+import {AtButton, AtDivider, AtLoadMore} from "taro-ui";
 import {View} from "@tarojs/components";
+import Taro from "@tarojs/taro";
 
 const QUERY = gql`
   query GetFriendList($page: Int!, $pageSize: Int!) {
@@ -19,7 +20,7 @@ const QUERY = gql`
         phone
         photo
         loginsCount
-
+        createdAt
       }
       totalCount
     }
@@ -62,9 +63,10 @@ const FriendList = () => {
   }
 
   return <SinglePageLayout>
-    <View>一共有 {data.friendListByPage.totalCount} 位朋友</View>
-    {friends.map(f => <UserCard key={f.userId} userInfo={f}/>)}
-    <AtLoadMore onClick={loadMore} status={status}/>
+    <AtButton onClick={() => Taro.navigateTo({url: '/pages/subpages/auth/authing'})}>成为朋友</AtButton>
+    <AtDivider content={`一共有 ${data.friendListByPage.totalCount} 位朋友`}></AtDivider>
+    {friends.map(f => <UserCard key={f.userId} userInfo={f} />)}
+    <AtLoadMore onClick={loadMore} status={status} />
   </SinglePageLayout>
 }
 
