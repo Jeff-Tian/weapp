@@ -25,6 +25,7 @@ export const drawerItems = new Map<string, () => void>([
 
 if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
   drawerItems.set('向我咨询', async () => window.open('https://www.zhihu.com/consult/people/1073548674713423872'))
+  drawerItems.set('源代码', async () => window.open('https://github.com/Jeff-Tian/weapp'))
 }
 
 export const onDrawerItemClick = index => [...drawerItems.values()][index]()

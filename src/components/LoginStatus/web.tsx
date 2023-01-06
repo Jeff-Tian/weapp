@@ -1,9 +1,13 @@
-import {useGuard, User} from "@authing/guard-react";
+import {User} from "@authing/guard-react";
 import {useEffect, useState} from "react";
 import {UserCard} from "@/components/UserCard";
+import {authingAppId} from "@/common/constants";
 
 export const WebLoginStatus = () => {
-  const guard = useGuard();
+  const guard = new window.GuardFactory.Guard({
+    appId: authingAppId,
+    mode: 'modal',
+  })
   const [userInfo, setUserInfo] = useState<User>();
 
   useEffect(() => {
@@ -18,7 +22,7 @@ export const WebLoginStatus = () => {
   return (
     <div>
       <div id='authing-guard-container'></div>
-      <UserCard userInfo={userInfo}/>
+      <UserCard userInfo={userInfo} />
     </div>
   );
 }
