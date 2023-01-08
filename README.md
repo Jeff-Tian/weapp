@@ -19,6 +19,22 @@ yarn build:weapp
 
 ## Troubleshooting
 
+### Error with node 18: 'digital envelope routines'
+
+#### Mac OSX
+
+##### shell
+
+```shell
+NODE_OPTIONS="--openssl-legacy-provider" yarn dev:h5
+```
+
+##### cmd
+
+```cmd
+set NODE_OPTIONS="--openssl-legacy-provider" && yarn dev:h5
+```
+
 ## Star History
 
 ![https://api.star-history.com/svg?repos=jeff-tian/weapp&type=Date](https://api.star-history.com/svg?repos=jeff-tian/weapp&type=Date)
