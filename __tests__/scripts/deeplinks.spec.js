@@ -40,6 +40,7 @@ describe('deeplinks', () => {
       "dist/pages/subpages/react-view/index.html",
       "dist/pages/subpages/test/index.html",
       "dist/pages/subpages/video/detail.html",
+      "dist/pages/subpages/video/detail2.html",
       "dist/pages/tictactoe/ai.html",
       "dist/pages/tictactoe/dynamic-content.html",
       "dist/pages/tictactoe/index.html",
