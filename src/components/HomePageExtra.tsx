@@ -17,7 +17,7 @@ export const Banner = () => <Swiper
   circular
   indicatorDots
   duration={130000}
-  interval={5000}
+  interval={0}
   autoplay
 >
   <BgVideo />

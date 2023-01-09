@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {memoizedAsync} from "@/common/helpers";
 import {View} from "@tarojs/components";
-import {AtActivityIndicator} from "taro-ui";
+import {AtActivityIndicator, AtButton} from "taro-ui";
 import Taro from "@tarojs/taro";
 import {AuthenticationClient} from "authing-wxapp-sdk";
 import {authingAppId} from "@/common/constants";
@@ -34,8 +34,15 @@ export const WeappLoginStatus = () => {
 
   return <View>
     <AtActivityIndicator mode='center' size={128} content='加载中……'
-                         isOpened={loading}
+      isOpened={loading}
     />
-    {!loading ? <UserCard userInfo={user || undefined}/> : null}
+    {!loading ? <UserCard userInfo={user || undefined} /> : null}
+
+
+    <AtButton onClick={() => {
+      authing.logout();
+      Taro.reLaunch({url: '/pages/yuque/index'})
+    }}
+    >退出登录</AtButton>
   </View>
 }

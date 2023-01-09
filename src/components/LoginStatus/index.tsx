@@ -5,7 +5,8 @@ import {WebLoginStatus} from "@/components/LoginStatus/web";
 
 export const LoginStatus = () => {
   return <View>
-    {Taro.getEnv() === ENV_TYPE.WEAPP ? <WeappLoginStatus /> : <WebLoginStatus />
+    {
+      Taro.getEnv() === ENV_TYPE.WEAPP ? <WeappLoginStatus /> : <WebLoginStatus />
     }
   </View>
 }
