@@ -1,5 +1,5 @@
 export default {
-  navigationBarTitleText: '视频',
+  navigationBarTitleText: '背景',
   enableShareAppMessage: true,
   enableShareTimeline: true
 }

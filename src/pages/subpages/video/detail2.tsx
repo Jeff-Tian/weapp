@@ -1,18 +1,17 @@
 import {View} from "@tarojs/components"
 import {gql, useMutation, useQuery} from "@apollo/client";
 import Taro from '@tarojs/taro'
-import * as assert from "assert";
 import {AtActivityIndicator} from "taro-ui";
 import * as util from "util";
 import MyVideo from "@/components/MyVideo";
 
 const VideoPage2 = () => {
-  const params = Taro.getCurrentInstance()?.router?.params
+  // const params = Taro.getCurrentInstance()?.router?.params
 
-  assert.ok(params, '本页必须传递知乎回答 url')
+  // assert.ok(params, '本页必须传递知乎回答 url')
 
-  const {url} = params
-  console.log('url = ', url)
+  // const {url} = params
+  // console.log('url = ', url)
 
   const VIDEO_QUERY = gql`query GetVideo {
     video
@@ -23,7 +22,7 @@ const VideoPage2 = () => {
   }`
 
   const {loading, error, data} = useQuery(VIDEO_QUERY)
-  
+
   useMutation(VIDEO_MUTATION)
 
   if (loading) {
@@ -34,7 +33,9 @@ const VideoPage2 = () => {
     return <View>${util.inspect(error)}</View>
   }
 
-  return <MyVideo src={data.video} />;
+  return Taro.getEnv() === Taro.ENV_TYPE.WEB ? <MyVideo src={data.video} /> :
+    <View>本小程序使用 Taro 多端框架开发，本页专供 Web 端使用，微信端小程序不支持。</View>
+    ;
 }
 
 export default VideoPage2
