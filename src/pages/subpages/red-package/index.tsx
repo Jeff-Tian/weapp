@@ -1,8 +1,8 @@
 import SinglePageLayout from "@/layout/single-page-layout";
-import Taro from "@tarojs/taro";
+import Taro, {ENV_TYPE} from "@tarojs/taro";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 import {useEffect, useState} from "react";
-import {View} from "@tarojs/components";
+import {OfficialAccount, View} from "@tarojs/components";
 import {AtButton, AtDivider} from "taro-ui";
 import {OfficialAccountCard} from "@/components/OfficialAccountWrapper";
 
@@ -41,6 +41,9 @@ const RedPackage = () => {
     {
       loading ? <View>加载中……</View> : null
     }
+    <AtDivider>
+      {Taro.getEnv() === ENV_TYPE.WEAPP && <OfficialAccount />}
+    </AtDivider>
     <AtDivider />
     <OfficialAccountCard />
   </SinglePageLayout>
