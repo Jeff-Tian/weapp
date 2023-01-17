@@ -20,7 +20,6 @@ export const Banner = () => <Swiper
   interval={0}
   autoplay
 >
-  <BgVideo />
   <SwiperItem>
     <StackOverflowWrapper />
   </SwiperItem>

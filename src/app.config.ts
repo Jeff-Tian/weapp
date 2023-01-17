@@ -35,6 +35,10 @@ const subpages = [
   {
     root: `pages/subpages/friends`,
     pages: ['list']
+  },
+  {
+    root: `pages/subpages/red-package`,
+    pages: ['index']
   }
 ]
 
