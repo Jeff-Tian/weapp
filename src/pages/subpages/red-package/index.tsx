@@ -1,5 +1,5 @@
 import SinglePageLayout from "@/layout/single-page-layout";
-import Taro, {ENV_TYPE} from "@tarojs/taro";
+import Taro, {ENV_TYPE, useShareAppMessage} from "@tarojs/taro";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 import {useEffect, useState} from "react";
 import {OfficialAccount, View} from "@tarojs/components";
@@ -40,7 +40,15 @@ const RedPackage = () => {
     })
   }, [])
 
-  return <SinglePageLayout bgColor='rgb(212, 86, 69)' padding={0}>
+  useShareAppMessage(()=>{
+    return {
+      title: '送你一张特别的"哈小兔"红包🧧封面！',
+      path: '/pages/subpages/red-package/index',
+      imageUrl: 'https://i1.lensdump.com/i/RxEd2z.md.jpeg'
+    }
+  })
+
+  return <SinglePageLayout bgColor='rgb(212, 86, 69)' padding='0'>
     <View className='at-article'>
       <View className='at-article__content'>
         <View className='at-article__section'>
