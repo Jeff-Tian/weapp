@@ -4,7 +4,6 @@ import {gql, useQuery} from "@apollo/client";
 import {authingAppId} from "@/common/constants";
 import {useEffect, useState} from "react";
 import {AtButton, AtDivider, AtLoadMore} from "taro-ui";
-import {View} from "@tarojs/components";
 import Taro from "@tarojs/taro";
 
 const QUERY = gql`

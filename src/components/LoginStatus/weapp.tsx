@@ -6,6 +6,7 @@ import Taro from "@tarojs/taro";
 import {AuthenticationClient} from "authing-wxapp-sdk";
 import {authingAppId} from "@/common/constants";
 import {UserCard} from "@/components/UserCard";
+import {User} from "@authing/guard-react";
 
 
 const authing = new AuthenticationClient({
@@ -13,7 +14,7 @@ const authing = new AuthenticationClient({
   appId: authingAppId
 })
 
-const login = async () => {
+export const login = async (): Promise<User> => {
   const {code} = await Taro.login()
   // 成功登录，将 token 写入微信 Storage
   return await authing.loginByCode(code)
