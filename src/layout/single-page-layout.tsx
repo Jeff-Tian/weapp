@@ -2,15 +2,15 @@ import {View} from "@tarojs/components";
 import {HighLevel} from "@/layout/high-level";
 import Taro, {usePullDownRefresh} from "@tarojs/taro";
 
-const SinglePageLayout = ({children}) => {
+const SinglePageLayout = ({children, bgColor = 'cornflowerblue', padding = '10px'}) => {
   usePullDownRefresh(() => {
     console.log('用户下拉刷新');
     Taro.stopPullDownRefresh()
   })
 
-  return <View style={{backgroundColor: 'cornflowerblue'}}>
-      <HighLevel />
-      <View style={{padding: '10px'}}>{children}</View>
+  return <View style={{backgroundColor: bgColor}}>
+    <HighLevel />
+    <View style={{padding: padding}}>{children}</View>
   </View>
 }
 

@@ -8,7 +8,7 @@ const WeappLinkedImage = ({src, mode}) => <Image src={src} mode={mode} onClick={
     urls: [src]
   }).then(r => console.log(r))
 }} show-menu-by-longpress
-  style={{maxWidth: '100%'}}
+  style={{maxWidth: '100%', width: '100%'}}
 />
 
 const H5LinkedImage = ({src, mode, href}) => <a href={href} target='_blank'><WeappLinkedImage src={src} mode={mode} /></a>
