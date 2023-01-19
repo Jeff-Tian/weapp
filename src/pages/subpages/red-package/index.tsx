@@ -6,8 +6,8 @@ import {OfficialAccount, View} from "@tarojs/components";
 import {AtButton, AtDivider} from "taro-ui";
 import {OfficialAccountCard} from "@/components/OfficialAccountWrapper";
 import LinkedImage from "@/components/LinkedImage";
-import {login} from "@/components/LoginStatus/weapp";
 import {User} from "@authing/guard-react";
+import {login} from "@/common/login";
 
 const RedPackage = () => {
   const [loading, setLoading] = useState(false);

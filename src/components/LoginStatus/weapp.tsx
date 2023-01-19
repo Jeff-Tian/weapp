@@ -3,34 +3,8 @@ import {memoizedAsync} from "@/common/helpers";
 import {View} from "@tarojs/components";
 import {AtActivityIndicator, AtButton} from "taro-ui";
 import Taro from "@tarojs/taro";
-import {AuthenticationClient} from "authing-wxapp-sdk";
-import {authingAppId} from "@/common/constants";
 import {UserCard} from "@/components/UserCard";
-
-type User = {
-  name: string,
-  email: string,
-  nickname: string,
-  userId: string,
-  username: string,
-  lastLogin: string,
-  phone: string,
-  photo: string,
-  loginsCount: number,
-  createdAt: string
-  preferredUsername: string
-}
-
-const authing = new AuthenticationClient({
-  userPoolId: '620097b69a9dab5e967d0c44',
-  appId: authingAppId
-})
-
-export const login = async (): Promise<User> => {
-  const {code} = await Taro.login()
-  // 成功登录，将 token 写入微信 Storage
-  return await authing.loginByCode(code)
-}
+import {authing, login} from "@/common/login";
 
 
 export const WeappLoginStatus = () => {
