@@ -13,6 +13,11 @@ const RedPackage = () => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
+  const shareRedPackage = () => {
+    Taro.showShareMenu({
+      withShareTicket: true,
+    })
+  };
   function getRedPackage() {
     setLoading(true)
 
@@ -63,29 +68,31 @@ const RedPackage = () => {
         </View>
 
         <AtButton type='primary' loading={loading}
-                  onClick={getRedPackage}
+          onClick={getRedPackage}
         >点击领取&quot;哈小兔&quot;红包🧧封面：</AtButton>
+
+        <AtButton type='secondary' loading={loading} openType='share' onClick={shareRedPackage}>送给朋友</AtButton>
 
         <View className='at-article__section'>
           <LinkedImage mode='widthFix'
-                       src='https://i3.lensdump.com/i/RxEVY5.md.png'
+            src='https://i3.lensdump.com/i/RxEVY5.md.png'
           />
         </View>
 
         <AtButton type='primary' loading={loading}
-                  onClick={getRedPackage}
+          onClick={getRedPackage}
         >点击领取&quot;哈小兔&quot;红包🧧封面：</AtButton>
 
         <View className='at-article__section'>
           <View className='at-article__h2'>你也可以制作！</View>
           <View className='at-article__info'>先点击下图，再长按保存，然而使用支付宝扫码，即可制作你自己的红包封面！</View>
-          <LinkedImage mode='widthFix' src='https://i1.lensdump.com/i/RxEd2z.md.jpeg'/>
+          <LinkedImage mode='widthFix' src='https://i1.lensdump.com/i/RxEd2z.md.jpeg' />
         </View>
         <AtDivider>
-          {Taro.getEnv() === ENV_TYPE.WEAPP && <OfficialAccount/>}
+          {Taro.getEnv() === ENV_TYPE.WEAPP && <OfficialAccount />}
         </AtDivider>
-        <AtDivider/>
-        <OfficialAccountCard/>
+        <AtDivider />
+        <OfficialAccountCard />
       </View>
     </View>
   </SinglePageLayout>
