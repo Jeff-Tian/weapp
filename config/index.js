@@ -57,6 +57,9 @@ const config = {
   },
   framework: 'react',
   mini: {
+    optimizeMainPackage: {
+      enable: true
+    },
     postcss: {
       pxtransform: {
         enable: true,

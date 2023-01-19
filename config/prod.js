@@ -4,7 +4,7 @@ module.exports = {
   },
   defineConstants: {},
   mini: {
-    enableSourceMap: true
+    enableSourceMap: false
   },
   h5: {
     enableSourceMap: true
