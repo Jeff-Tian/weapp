@@ -6,8 +6,20 @@ import Taro from "@tarojs/taro";
 import {AuthenticationClient} from "authing-wxapp-sdk";
 import {authingAppId} from "@/common/constants";
 import {UserCard} from "@/components/UserCard";
-import {User} from "@authing/guard-react";
 
+type User = {
+  name: string,
+  email: string,
+  nickname: string,
+  userId: string,
+  username: string,
+  lastLogin: string,
+  phone: string,
+  photo: string,
+  loginsCount: number,
+  createdAt: string
+  preferredUsername: string
+}
 
 const authing = new AuthenticationClient({
   userPoolId: '620097b69a9dab5e967d0c44',

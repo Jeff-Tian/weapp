@@ -1,10 +1,10 @@
 import {AtAvatar} from "taro-ui";
-import {Swiper, SwiperItem, View} from "@tarojs/components";
+import {Swiper, SwiperItem, View, Image} from "@tarojs/components";
 import OfficialAccountWrapper from "@/components/OfficialAccountWrapper";
 import StackOverflowWrapper from "@/components/StackOverflowWrapper";
 import LinkedImage from "@/components/LinkedImage";
 import {handleClipboard} from "@/functions/clipboard";
-import BgVideo from "@/components/BgVideo";
+import Taro from "@tarojs/taro";
 
 export const Fab = () => <View className='fab-area' onClick={handleClipboard}>
   <AtAvatar circle image='https://avatars.githubusercontent.com/u/3367820?v=4'></AtAvatar>
@@ -16,10 +16,15 @@ export const Banner = () => <Swiper
   indicatorActiveColor='#333'
   circular
   indicatorDots
-  duration={130000}
-  interval={0}
   autoplay
 >
+  <SwiperItem onClick={() => Taro.navigateTo({url: '/pages/subpages/red-package/index'})}>
+    {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <LinkedImage src='https://i1.lensdump.com/i/RxEd2z.md.jpeg'
+      href='https://taro.pa-ca.me/pages/subpages/red-package/index'
+      mode='widthFix'
+    /> : <Image src='https://i1.lensdump.com/i/RxEd2z.md.jpeg' mode='widthFix' />
+    }
+  </SwiperItem>
   <SwiperItem>
     <StackOverflowWrapper />
   </SwiperItem>
