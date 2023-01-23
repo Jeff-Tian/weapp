@@ -38,7 +38,8 @@ const subpages = [
   },
   {
     root: `pages/subpages/red-package`,
-    pages: ['index']
+    pages: ['index'],
+    independent: true
   }
 ]
 

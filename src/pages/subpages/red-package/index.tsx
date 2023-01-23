@@ -18,6 +18,7 @@ const RedPackage = () => {
       withShareTicket: true,
     })
   };
+
   function getRedPackage() {
     setLoading(true)
 
@@ -44,11 +45,15 @@ const RedPackage = () => {
   }
 
   useEffect(() => {
-    Taro.setBackgroundColor({
-      backgroundColor: 'rgb(212, 86, 69)',
-      backgroundColorTop: 'rgb(212, 86, 69)',
-      backgroundColorBottom: 'rgb(212, 86, 69)',
-    })
+    try {
+      Taro.setBackgroundColor({
+        backgroundColor: 'rgb(212, 86, 69)',
+        backgroundColorTop: 'rgb(212, 86, 69)',
+        backgroundColorBottom: 'rgb(212, 86, 69)',
+      }).catch(console.error)
+    } catch (ex) {
+      console.error(ex);
+    }
   }, [])
 
   useShareAppMessage(() => {
