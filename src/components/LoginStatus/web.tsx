@@ -4,12 +4,9 @@ import {UserCard} from "@/components/UserCard";
 import {authingAppId} from "@/common/constants";
 import {AtButton} from "taro-ui";
 import Taro from "@tarojs/taro";
+import {guard} from "@/common/login";
 
 export const WebLoginStatus = () => {
-  const guard = new window.GuardFactory.Guard({
-    appId: authingAppId,
-    mode: 'modal',
-  })
   const [userInfo, setUserInfo] = useState<User>();
 
   useEffect(() => {

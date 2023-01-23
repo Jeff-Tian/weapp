@@ -13,3 +13,17 @@ export const login = async (): Promise<User> => {
   // 成功登录，将 token 写入微信 Storage
   return await authing.loginByCode(code)
 }
+
+export const guard = Taro.getEnv() === Taro.ENV_TYPE.WEB ? new window.GuardFactory.Guard({
+  appId: authingAppId,
+  mode: 'modal',
+}) : null
+
+export const getUserInfo = async (): Promise<User> => {
+  if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+    await login();
+    return await authing.getCurrentUser();
+  } else {
+    return await guard.trackSession();
+  }
+}

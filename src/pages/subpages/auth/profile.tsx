@@ -1,25 +1,41 @@
-import {AtAvatar, AtGrid} from "taro-ui";
-import {View} from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import {AtDivider, AtForm, AtInput} from "taro-ui";
+import Taro, {ENV_TYPE} from "@tarojs/taro";
 import SinglePageLayout from "@/layout/single-page-layout";
+import {useEffect, useState} from "react";
+import {WeappLoginStatus} from "@/components/LoginStatus/weapp";
+import {WebLoginStatus} from "@/components/LoginStatus/web";
+
+import {getUserInfo} from "@/common/login";
+
+import {User} from "@authing/guard-react";
 
 import './profile.styl'
 
 const Profile = () => {
-  return <SinglePageLayout><View>
-    <AtAvatar circle className='centered'
-      image='https://jdc.jd.com/img/200'
-    ></AtAvatar>
-    <AtGrid data={[{image: '', value: '退出登录'}]} onClick={(_item, index) => {
-      if (index === 0) {
-        Taro.clearStorage().then(() => {
-          Taro.reLaunch({url: 'pages/yuque/index'})
-        })
-      }
-    }
-    }
-    />
-  </View></SinglePageLayout>
+  const [userInfo, setUserInfo] = useState<User | null>(null);
+
+  useEffect(() => {
+    getUserInfo().then(setUserInfo)
+  }, [])
+
+  return <SinglePageLayout>
+    {Taro.getEnv() === ENV_TYPE.WEAPP ? <WeappLoginStatus /> : <WebLoginStatus />}
+
+    <AtDivider />
+    <AtForm>
+      <AtInput name='createdAt' title='注册日期' type='text' placeholder='请输入注册日期' value={userInfo?.createdAt} />
+      <AtInput name='phone' title='手机号' type='text' placeholder='请输入手机号' value={userInfo?.phone} />
+      <AtInput name='email' title='邮箱' type='text' placeholder='请输入邮箱' value={userInfo?.email} />
+      <AtDivider />
+      <AtInput name='username' title='用户名' type='text' placeholder='请输入用户名' value={userInfo?.username} />
+      <AtInput name='name' title='姓名' type='text' placeholder='请输入姓名' value={userInfo?.name} />
+      <AtInput name='nickname' title='昵称' type='text' placeholder='请输入昵称' value={userInfo?.nickname} />
+      <AtInput name='address' title='地址' type='text' placeholder='请输入地址' value={userInfo?.address} />
+      <AtInput name='gender' title='性别' type='text' placeholder='请输入性别' value={userInfo?.gender} />
+      <AtInput name='birthday' title='生日' type='text' placeholder='请输入生日' value={userInfo?.birthdate} />
+      <AtInput name='company' title='公司' type='text' placeholder='请输入公司' value={userInfo?.company} />
+    </AtForm>
+  </SinglePageLayout>
 }
 
 export default Profile;
