@@ -9,12 +9,14 @@ const gatewayGraphQLURl = 'https://sls.pa-ca.me/gateway'
 
 
 const theFetch = async (url, options) => {
-  console.log('url = ', url, options)
+  const token = Taro.getStorageSync('_authing_token')
+
   const res = await Taro.request({
     url: url.toString(),
     method: (options?.method || 'POST') as 'POST' | 'GET',
     header: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': token ? `Bearer ${token}` : undefined,
     },
     data: options?.body,
     success: console.log
@@ -34,9 +36,7 @@ const queryLink = createPersistedQueryLink({
 })
 
 const testIfUploadOperation = ({query}) => {
-  console.log('query = ', query)
   const {definitions} = query
-  console.log('def = ', definitions);
 
   return definitions.some(({kind, operation, selectionSet: {selections}}) => {
     return kind === 'OperationDefinition' && operation === 'mutation' && selections.some(({name: {value}}) => value === 'uploadImage')

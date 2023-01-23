@@ -200,10 +200,8 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
         Taro.showToast({title: '登录成功', icon: 'success', duration: 2000})
 
         const originalCookie = Taro.getStorageSync('set-cookie')
-        console.log('originalCookie = ', originalCookie)
 
         if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-          console.log('qr scan info = ', res3)
           if (res3.cookies) {
             Taro.setStorage({
               key: 'set-cookie',
@@ -220,7 +218,6 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
         Taro.setStorageSync('zhihu-user-info', res3.data)
 
         Taro.showToast({title: 'Cookie 设置成功', icon: 'success', duration: 2000})
-        console.log('now cookie = ', Taro.getStorageSync('set-cookie'));
       }
     } catch (err) {
       console.error('err = ', err);
@@ -236,10 +233,8 @@ export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhi
 
   setRichModalTitle(message)
   setIsRichModalOpen(true)
-  console.log('set saving ar = ', setSaveQR)
-  setSaveQR(() => () => {
-    console.log('saving...')
 
+  setSaveQR(() => () => {
     poll()
 
     Taro.ENV_TYPE.WEB !== Taro.getEnv() &&

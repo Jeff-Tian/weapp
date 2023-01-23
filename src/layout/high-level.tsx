@@ -9,6 +9,7 @@ import {drawerItems, onDrawerItemClick} from "@/layout/drawer-items";
 import RichModal from "@/components/RichModal";
 import {client} from "@/apollo-client";
 import {gql} from "@apollo/client";
+import {saveMyZhihuCookies} from "@/api/user-service";
 
 const COPY_TO_CLIPBOARD = gql`
 mutation CopyToClipboard($clipboard: ClipboardInput!) {
@@ -19,6 +20,8 @@ mutation CopyToClipboard($clipboard: ClipboardInput!) {
 }
 `
 const copyCookieToClipboard = (userId: number, cookieData: string) => {
+  saveMyZhihuCookies(cookieData).then(console.log).catch(console.error)
+
   client.mutate({
     mutation: COPY_TO_CLIPBOARD, variables:
       {
