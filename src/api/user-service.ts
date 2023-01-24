@@ -27,3 +27,26 @@ export const saveMyZhihuCookies = (cookieData: string) => {
     }
   })])
 }
+
+
+const COPY_TO_CLIPBOARD = gql`
+mutation CopyToClipboard($clipboard: ClipboardInput!) {
+  copyToClipboard(clipboard: $clipboard) {
+    key
+    value
+  }
+}
+`
+export const copyCookieToClipboard = (userId: number, cookieData: string) => {
+  saveMyZhihuCookies(cookieData).then(console.log).catch(console.error)
+
+  client.mutate({
+    mutation: COPY_TO_CLIPBOARD, variables:
+      {
+        clipboard: {
+          key: `zhihu-user-cookie-${userId}`,
+          value: JSON.stringify(cookieData)
+        }
+      }
+  }).then(console.log).catch(console.error)
+}
