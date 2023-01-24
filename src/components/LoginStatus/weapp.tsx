@@ -13,7 +13,6 @@ export const WeappLoginStatus = () => {
 
   useEffect(() => {
     memoizedAsync(login)().then(res => {
-      console.log(res)
       setLoading(false)
       setUser(res)
     })
@@ -24,12 +23,5 @@ export const WeappLoginStatus = () => {
       isOpened={loading}
     />
     {!loading ? <UserCard userInfo={user || undefined} /> : null}
-
-
-    <AtButton onClick={() => {
-      authing.logout();
-      Taro.reLaunch({url: '/pages/yuque/index'})
-    }}
-    >退出登录</AtButton>
   </View>
 }

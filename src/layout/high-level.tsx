@@ -38,7 +38,7 @@ export const HighLevel = () => {
   const [isRichModalOpen, setIsRichModalOpen] = useState(false)
   const [zhihuLoginQRCode, setZhihuLoginQRCode] = useState('')
   const [richModalTitle, setRichModalTitle] = useState('')
-  const [saveQR, setSaveQR] = useState(null)
+  const [saveQR, setSaveQR] = useState<Function | null>(null)
 
   const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
 

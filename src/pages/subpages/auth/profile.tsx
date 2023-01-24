@@ -1,11 +1,11 @@
-import {AtDivider, AtForm, AtInput} from "taro-ui";
+import {AtButton, AtDivider, AtForm, AtInput} from "taro-ui";
 import Taro, {ENV_TYPE} from "@tarojs/taro";
 import SinglePageLayout from "@/layout/single-page-layout";
 import {useEffect, useState} from "react";
 import {WeappLoginStatus} from "@/components/LoginStatus/weapp";
 import {WebLoginStatus} from "@/components/LoginStatus/web";
 
-import {getUserInfo} from "@/common/login";
+import {authing, getUserInfo} from "@/common/login";
 
 import {User} from "@authing/guard-react";
 
@@ -35,6 +35,20 @@ const Profile = () => {
       <AtInput name='birthday' title='生日' type='text' placeholder='请输入生日' value={userInfo?.birthdate} />
       <AtInput name='company' title='公司' type='text' placeholder='请输入公司' value={userInfo?.company} />
     </AtForm>
+    <AtDivider />
+    <AtButton type='primary' onClick={() => {
+      Taro.showToast({
+        title: '敬请期待！'
+      })
+    }}
+    >绑定知乎账号</AtButton>
+    <AtDivider></AtDivider>
+    <AtButton onClick={() => {
+      authing.logout();
+      Taro.reLaunch({url: '/pages/yuque/index'})
+    }}
+      type='secondary'
+    >退出登录</AtButton>
   </SinglePageLayout>
 }
 

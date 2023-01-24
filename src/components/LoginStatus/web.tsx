@@ -1,9 +1,6 @@
 import {User} from "@authing/guard-react";
 import {useEffect, useState} from "react";
 import {UserCard} from "@/components/UserCard";
-import {authingAppId} from "@/common/constants";
-import {AtButton} from "taro-ui";
-import Taro from "@tarojs/taro";
 import {guard} from "@/common/login";
 
 export const WebLoginStatus = () => {
@@ -22,12 +19,6 @@ export const WebLoginStatus = () => {
     <div>
       <div id='authing-guard-container'></div>
       <UserCard userInfo={userInfo} />
-
-      <AtButton onClick={() => {
-        guard.logout();
-        Taro.reLaunch({url: '/pages/yuque/index'})
-      }}
-      >退出登录</AtButton>
     </div>
   );
 }

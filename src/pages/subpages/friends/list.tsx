@@ -5,6 +5,7 @@ import {authingAppId} from "@/common/constants";
 import {useEffect, useState} from "react";
 import {AtButton, AtDivider, AtLoadMore} from "taro-ui";
 import Taro from "@tarojs/taro";
+import {User} from "@authing/guard-react";
 
 const QUERY = gql`
   query GetFriendList($page: Int!, $pageSize: Int!) {
@@ -31,7 +32,7 @@ const FriendList = () => {
   const [pageSize] = useState(5)
   const [status, setStatus]: ['more' | 'loading' | 'noMore' | undefined, Function] = useState('loading')
 
-  const [friends, setFriends] = useState([])
+  const [friends, setFriends] = useState<Array<User>>([])
 
   const {loading, error, data, refetch} = useQuery(QUERY, {variables: {page, pageSize}})
 
@@ -62,7 +63,7 @@ const FriendList = () => {
   }
 
   return <SinglePageLayout>
-    <AtButton onClick={() => Taro.navigateTo({url: '/pages/subpages/auth/authing'})}>成为朋友</AtButton>
+    <AtButton onClick={() => Taro.navigateTo({url: '/pages/subpages/auth/authing'})} type='primary'>成为朋友</AtButton>
     <AtDivider content={`一共有 ${data.friendListByPage.totalCount} 位朋友`}></AtDivider>
     {friends.map(f => <UserCard key={f.userId} userInfo={f} />)}
     <AtLoadMore onClick={loadMore} status={status} />

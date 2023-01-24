@@ -14,10 +14,7 @@ export const draftDirectly = async (title, content) => {
 }
 
 export const loginByQrCode = async (p: { setRichModalTitle: (value: (((prevState: string) => string) | string)) => void; setIsRichModalOpen: (value: (((prevState: boolean) => boolean) | boolean)) => void; setSaveQR: (value: (((prevState: null) => null) | null)) => void; setZhihuLoginQRCode: (value: (((prevState: string) => string) | string)) => void }) => {
-  console.log('login...')
-
   try {
-    console.log('p = ', p)
     await qrcodeLogin(p)
   } catch (ex) {
     console.error('ex = ', ex);
