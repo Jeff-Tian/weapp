@@ -13,6 +13,7 @@ import {copyCookieToClipboard} from "@/api/user-service";
 
 import {Image, View} from "@tarojs/components";
 import RichModal from "@/components/RichModal";
+import MyZhihu from "@/components/MyZhihu";
 import './profile.styl'
 
 const Profile = () => {
@@ -45,6 +46,9 @@ const Profile = () => {
       <AtInput name='company' title='公司' type='text' placeholder='请输入公司' value={userInfo?.company} />
     </AtForm>
     <AtDivider />
+
+    {userInfo && <MyZhihu />}
+
     <AtButton type='primary' onClick={() => {
       const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
       if (zhihuUserInfo) {

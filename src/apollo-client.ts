@@ -1,22 +1,21 @@
-import {ApolloClient, ApolloLink, createHttpLink, InMemoryCache, split} from "@apollo/client"
+import {ApolloClient, ApolloLink, concat, createHttpLink, InMemoryCache, split} from "@apollo/client"
 import Taro from "@tarojs/taro"
 import crypto from 'crypto'
 
 import {createPersistedQueryLink} from "@apollo/client/link/persisted-queries"
 import {createUploadLink} from "apollo-upload-client";
+import {setContext} from "@apollo/client/link/context";
 
 const gatewayGraphQLURl = 'https://sls.pa-ca.me/gateway'
 
 
 const theFetch = async (url, options) => {
-  const token = Taro.getStorageSync('_authing_token')
-
   const res = await Taro.request({
     url: url.toString(),
     method: (options?.method || 'POST') as 'POST' | 'GET',
     header: {
       'content-type': 'application/json',
-      'Authorization': token ? `Bearer ${token}` : undefined,
+      ...options.headers
     },
     data: options?.body,
     success: console.log
@@ -35,6 +34,17 @@ const queryLink = createPersistedQueryLink({
   sha256: async (document: string) => crypto.createHash('sha256').update(document).digest('hex')
 })
 
+const authLink = setContext((_, {headers}) => {
+  const token = Taro.getStorageSync('_authing_token') || localStorage.getItem('_authing_token')
+  console.log('token = ', token);
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : undefined,
+    }
+  }
+})
+
 const testIfUploadOperation = ({query}) => {
   const {definitions} = query
 
@@ -44,13 +54,16 @@ const testIfUploadOperation = ({query}) => {
 }
 
 const httpLinkForNormalOperations = ApolloLink.from([queryLink, httpLink]);
+
 const onlineUploadableGraphQL = Taro.getEnv() === Taro.ENV_TYPE.WEB ? 'https://face-swap-jeff-tian.cloud.okteto.net/graphql' : gatewayGraphQLURl;
+
 const uploadLink = createUploadLink({
   uri: process.env.FACE_SWAP_ENV !== 'local' ? onlineUploadableGraphQL : 'http://localhost:5001/graphql',
   fetch: theFetch
 }) as any
 
 export const client = new ApolloClient({
-  link: split(testIfUploadOperation, uploadLink, httpLinkForNormalOperations),
+  link: concat(authLink, split(testIfUploadOperation, uploadLink, httpLinkForNormalOperations)),
+
   cache: new InMemoryCache()
 })

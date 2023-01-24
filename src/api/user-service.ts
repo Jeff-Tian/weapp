@@ -3,6 +3,25 @@ import {client} from "@/apollo-client";
 import Taro from "@tarojs/taro";
 import {StorageKeys} from "@/common/constants";
 
+export const GET_PREFERENCE_QUERY = gql`
+  query GetPreference ($key: String!) {
+    myPreference(key: $key) {
+      key
+      value
+    }
+  }
+`;
+
+export const getMyZhihuProfile = () => {
+  return client.query({
+    query:
+    GET_PREFERENCE_QUERY, variables:
+      {
+        key: StorageKeys.zhihuUserCookie
+      }
+  })
+}
+
 const SAVE_PREFERENCE_MUTATION = gql`
 mutation SaveMyZhihuCookies ($key: String, $value: String) {
   saveMyPreference (key: $key, value: $value) {
@@ -16,7 +35,7 @@ export const saveMyZhihuCookies = (cookieData: string) => {
   return Promise.all([client.mutate({
     mutation: SAVE_PREFERENCE_MUTATION,
     variables: {
-      key: 'zhihu-user-cookie',
+      key: StorageKeys.zhihuUserCookie,
       value: cookieData
     }
   }), client.mutate({
