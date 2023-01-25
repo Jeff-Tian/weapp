@@ -14,7 +14,9 @@ export const login = async (): Promise<User> => {
   return await authing.loginByCode(code)
 }
 
-export const guard = Taro.getEnv() === Taro.ENV_TYPE.WEB ? new window.GuardFactory.Guard({
+const Guard = window.GuardFactory ? window.GuardFactory.Guard : function () {
+};
+export const guard = Taro.getEnv() === Taro.ENV_TYPE.WEB ? new Guard({
   appId: authingAppId,
   mode: 'modal',
 }) : null

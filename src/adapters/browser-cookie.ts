@@ -27,8 +27,6 @@ export class BrowserCookieStore implements Store {
   findCookies(domain: string, path: string, cb: FindCookiesCallback): void
   findCookies(domain: string, path: string, allowSpecialUseDomain: boolean, cb: FindCookiesCallback): void
   findCookies(domain: string, path: string, allowSpecialUseDomain: boolean | FindCookiesCallback, cb?: FindCookiesCallback): void {
-    console.log('domain: ' + domain, '; path: ' + path, '; allowSpecialUseDomain: ', allowSpecialUseDomain, '; cb = ', cb)
-
     if (!cb) {
       cb = allowSpecialUseDomain as FindCookiesCallback
     }

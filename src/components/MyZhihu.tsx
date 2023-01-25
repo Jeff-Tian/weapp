@@ -9,8 +9,8 @@ const MyZhihu = () => {
   if (loading) return <div>loading...</div>;
   if (error) return <div>error...</div>;
   return <View>
-    {data.preference.key}:
-    {data.preference.value}
+    {data.myPreference.key}:
+    {data.myPreference.value}
   </View>
 }
 
