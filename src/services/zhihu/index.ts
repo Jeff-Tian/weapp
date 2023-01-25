@@ -86,8 +86,7 @@ export const getUrl = (url: string, cookie) => {
 export const qrcodeLogin = async ({setRichModalTitle, setIsRichModalOpen, setZhihuLoginQRCode, setSaveQR}) => {
   const zhihuUdidUrl = 'https://www.zhihu.com/udid'
 
-  // 该请求不需要经过 Cloudflare CDN
-  const url = Taro.ENV_TYPE.WEB === Taro.getEnv() ? `https://uniheart.herokuapp.com/proxy?dataType=text&url=${encodeURIComponent(zhihuUdidUrl)}&timestamp=${Date.now()}` : zhihuUdidUrl
+  const url = Taro.ENV_TYPE.WEB === Taro.getEnv() ? `https://uniheart.pa-ca.me/proxy?dataType=text&url=${encodeURIComponent(zhihuUdidUrl)}&timestamp=${Date.now()}` : zhihuUdidUrl
 
   const res = await Taro.request({
     mode: 'cors',

@@ -23,7 +23,7 @@ export const getMyZhihuProfile = () => {
 }
 
 const SAVE_PREFERENCE_MUTATION = gql`
-mutation SaveMyZhihuCookies ($key: String, $value: String) {
+mutation SaveMyZhihuCookies ($key: String!, $value: String!) {
   saveMyPreference (key: $key, value: $value) {
     key
     value
@@ -42,7 +42,7 @@ export const saveMyZhihuCookies = (cookieData: string) => {
     mutation: SAVE_PREFERENCE_MUTATION,
     variables: {
       key: StorageKeys.zhihuUserInfo,
-      value: Taro.getStorageSync(StorageKeys.zhihuUserInfo)
+      value: JSON.stringify(Taro.getStorageSync(StorageKeys.zhihuUserInfo))
     }
   })])
 }

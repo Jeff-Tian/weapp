@@ -7,12 +7,6 @@ import {WebLoginStatus} from "@/components/LoginStatus/web";
 
 import {authing, getUserInfo} from "@/common/login";
 import {User} from "@authing/guard-react";
-import {StorageKeys} from "@/common/constants";
-import {loginByQrCode} from "@/services/zhihu";
-import {copyCookieToClipboard} from "@/api/user-service";
-
-import {Image, View} from "@tarojs/components";
-import RichModal from "@/components/RichModal";
 import MyZhihu from "@/components/MyZhihu";
 import './profile.styl'
 
@@ -22,12 +16,6 @@ const Profile = () => {
   useEffect(() => {
     getUserInfo().then(setUserInfo)
   }, [])
-
-  const [zhihuLoginQRCode, setZhihuLoginQRCode] = useState('')
-  const [richModalTitle, setRichModalTitle] = useState('')
-  const [saveQR, setSaveQR] = useState<Function | null>(null)
-  const [isRichModalOpen, setIsRichModalOpen] = useState(false)
-
   return <SinglePageLayout>
     {Taro.getEnv() === ENV_TYPE.WEAPP ? <WeappLoginStatus /> : <WebLoginStatus />}
 
@@ -49,27 +37,6 @@ const Profile = () => {
 
     {userInfo && <MyZhihu />}
 
-    <AtButton type='primary' onClick={() => {
-      const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
-      if (zhihuUserInfo) {
-        copyCookieToClipboard(zhihuUserInfo.user_id, JSON.stringify({data: Taro.getStorageSync(StorageKeys.zhihuCookie)}));
-
-        Taro.showToast({
-          title: '已经登录',
-          icon: 'success',
-          duration: 1000,
-        }).then(() => {
-          Taro.navigateTo({url: '/pages/subpages/auth/profile'}).then(() => {
-            console.log('跳转到个人中心成功');
-          }).catch((error) => {
-            console.error('跳转到个人中心失败', error);
-          });
-        })
-      } else {
-        loginByQrCode({setIsRichModalOpen, setZhihuLoginQRCode, setRichModalTitle, setSaveQR})
-      }
-    }}
-    >绑定知乎账号</AtButton>
     <AtDivider></AtDivider>
     <AtButton onClick={() => {
       authing.logout();
@@ -77,20 +44,6 @@ const Profile = () => {
     }}
       type='secondary'
     >退出登录</AtButton>
-
-
-    <View id='rich-modal'>
-      <RichModal isOpen={isRichModalOpen} onConfirm={() => {
-        setIsRichModalOpen(false)
-        saveQR && saveQR()
-      }} onCancel={() => {
-        setIsRichModalOpen(false)
-      }} title={richModalTitle}
-      >
-        <Image src={zhihuLoginQRCode} />
-      </RichModal>
-    </View>
-
   </SinglePageLayout>
 }
 
