@@ -34,5 +34,4 @@ jobs:
       - name: build
         run: |
           yarn
-          yarn build:weapp
           yarn build:weapp:upload
