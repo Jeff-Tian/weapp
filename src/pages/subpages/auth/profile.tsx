@@ -7,7 +7,7 @@ import {WebLoginStatus} from "@/components/LoginStatus/web";
 
 import {authing, getUserInfo} from "@/common/login";
 import {User} from "@authing/guard-react";
-import MyZhihu from "@/components/MyZhihu";
+import MyZhihu from "@/components/zhihu/MyZhihu";
 import './profile.styl'
 
 const Profile = () => {
