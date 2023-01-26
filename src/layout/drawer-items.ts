@@ -26,7 +26,6 @@ export const drawerItems = new Map<string, () => void>([
 
 if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
   drawerItems.set('向我咨询', async () => window.open('https://www.zhihu.com/consult/people/1073548674713423872'))
-  drawerItems.set('源代码', async () => window.open('https://github.com/Jeff-Tian/weapp'))
   drawerItems.set('视频', async () => Taro.navigateTo({url: '/pages/subpages/video/detail?zVideoId=1492435273367248896'}))
   drawerItems.set('视频2', async () => Taro.navigateTo({url: `/pages/subpages/video/detail2?url=${encodeURIComponent(`https://www.zhihu.com/question/378598799/answer/1126026947`)}`}))
 }
