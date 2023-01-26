@@ -1,12 +1,12 @@
 import {copyCookieToClipboard} from "@/api/user-service";
 import {StorageKeys} from "@/common/constants";
 import {Image, View} from "@tarojs/components";
-import {AtButton} from "taro-ui";
+import {AtButton, AtDivider} from "taro-ui";
 import Taro from "@tarojs/taro";
 import {loginByQrCode} from "@/services/zhihu";
 import RichModal from "@/components/RichModal";
 import {useState} from "react";
-import ZhihuCookie from "@/components/zhihu/ZhihuCookie";
+import ZhihuInfo from "@/components/zhihu/ZhihuInfo";
 
 const MyZhihu = () => {
   const [zhihuLoginQRCode, setZhihuLoginQRCode] = useState('')
@@ -15,7 +15,9 @@ const MyZhihu = () => {
   const [isRichModalOpen, setIsRichModalOpen] = useState(false)
 
   return <View>
-    <ZhihuCookie />
+    <ZhihuInfo infoType={StorageKeys.zhihuUserCookie} />
+    <AtDivider />
+    <ZhihuInfo infoType={StorageKeys.zhihuUserInfo} />
     <AtButton type='primary' onClick={() => {
       const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
       if (zhihuUserInfo) {

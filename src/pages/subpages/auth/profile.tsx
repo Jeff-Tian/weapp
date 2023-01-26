@@ -21,17 +21,21 @@ const Profile = () => {
 
     <AtDivider />
     <AtForm>
-      <AtInput name='createdAt' title='注册日期' type='text' placeholder='请输入注册日期' value={userInfo?.createdAt} />
-      <AtInput name='phone' title='手机号' type='text' placeholder='请输入手机号' value={userInfo?.phone} />
-      <AtInput name='email' title='邮箱' type='text' placeholder='请输入邮箱' value={userInfo?.email} />
+      <AtInput name='createdAt' title='注册日期' type='text' placeholder='请输入注册日期' value={userInfo?.createdAt}
+        disabled
+      />
+      <AtInput name='phone' title='手机号' type='text' placeholder='请输入手机号' value={userInfo?.phone} disabled />
+      <AtInput name='email' title='邮箱' type='text' placeholder='请输入邮箱' value={userInfo?.email} disabled />
       <AtDivider />
-      <AtInput name='username' title='用户名' type='text' placeholder='请输入用户名' value={userInfo?.username} />
-      <AtInput name='name' title='姓名' type='text' placeholder='请输入姓名' value={userInfo?.name} />
-      <AtInput name='nickname' title='昵称' type='text' placeholder='请输入昵称' value={userInfo?.nickname} />
-      <AtInput name='address' title='地址' type='text' placeholder='请输入地址' value={userInfo?.address} />
-      <AtInput name='gender' title='性别' type='text' placeholder='请输入性别' value={userInfo?.gender} />
-      <AtInput name='birthday' title='生日' type='text' placeholder='请输入生日' value={userInfo?.birthdate} />
-      <AtInput name='company' title='公司' type='text' placeholder='请输入公司' value={userInfo?.company} />
+      <AtInput name='username' title='用户名' type='text' placeholder='请输入用户名' value={userInfo?.username}
+        disabled
+      />
+      <AtInput name='name' title='姓名' type='text' placeholder='请输入姓名' value={userInfo?.name} disabled />
+      <AtInput name='nickname' title='昵称' type='text' placeholder='请输入昵称' value={userInfo?.nickname} disabled />
+      <AtInput name='address' title='地址' type='text' placeholder='请输入地址' value={userInfo?.address} disabled />
+      <AtInput name='gender' title='性别' type='text' placeholder='请输入性别' value={userInfo?.gender} disabled />
+      <AtInput name='birthday' title='生日' type='text' placeholder='请输入生日' value={userInfo?.birthdate} disabled />
+      <AtInput name='company' title='公司' type='text' placeholder='请输入公司' value={userInfo?.company} disabled />
     </AtForm>
     <AtDivider />
 
