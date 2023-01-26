@@ -42,9 +42,11 @@ const Profile = () => {
     {userInfo && <MyZhihu />}
 
     <AtDivider></AtDivider>
-    <AtButton onClick={() => {
-      authing.logout();
-      Taro.reLaunch({url: '/pages/yuque/index'})
+    <AtButton onClick={async () => {
+      await authing.logout();
+      Taro.clearStorageSync();
+      // Taro.reLaunch({url: '/pages/yuque/index'})
+      Taro.navigateTo({url: '/pages/yuque/index'})
     }}
       type='secondary'
     >退出登录</AtButton>
