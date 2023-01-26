@@ -5,7 +5,7 @@ import Taro from "@tarojs/taro"
 import {StorageKeys} from "@/common/constants";
 import remark from 'remark'
 import remarkHtml from "remark-html"
-import {useState} from "react"
+import React, {useState} from "react"
 import * as assert from 'assert';
 import {SYNC_YUQUE_TO_ZHIHU, draftDirectly} from "@/services/zhihu";
 import './article.styl'
@@ -14,7 +14,7 @@ import HardwayLayout from "../../layout/hardway-layout"
 
 
 const YuQueArticle: React.FC = () => {
-  const zhihuUserInfo = Taro.getStorageSync(StorageKeys.zhihuUserInfo)
+  const authingUser = Taro.getStorageSync("_authing_user")
   const params = Taro.getCurrentInstance()?.router?.params
 
   assert.ok(params, "本页必须传递参数！")
@@ -117,7 +117,7 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
-      {zhihuUserInfo &&
+      {authingUser &&
         <Button type='primary'
           onClick={() => slug ? syncYuqueToZhihu() : draftDirectly(data.yuque.title, html)}
         >发布到知乎</Button>

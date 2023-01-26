@@ -31,7 +31,7 @@ mutation SaveMyZhihuCookies ($key: String!, $value: String!) {
 }
 `
 
-export const saveMyZhihuCookies = (cookieData: string) => {
+export const saveMyZhihuAccount = (cookieData: string) => {
   return Promise.all([client.mutate({
     mutation: SAVE_PREFERENCE_MUTATION,
     variables: {
@@ -57,7 +57,7 @@ mutation CopyToClipboard($clipboard: ClipboardInput!) {
 }
 `
 export const copyCookieToClipboard = (userId: number, cookieData: string) => {
-  saveMyZhihuCookies(cookieData).then(console.log).catch(console.error)
+  saveMyZhihuAccount(cookieData).then(console.log).catch(console.error)
 
   client.mutate({
     mutation: COPY_TO_CLIPBOARD, variables:
