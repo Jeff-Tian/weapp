@@ -9,7 +9,7 @@ const ZhihuInfo = ({infoType}) => {
   if (loading) return <div>loading...</div>;
   if (error) return <div>error...</div>;
   return <View>
-    <JsonViewer json={data?.preference} />
+    <JsonViewer json={data?.myPreference} />
   </View>
 }
 
