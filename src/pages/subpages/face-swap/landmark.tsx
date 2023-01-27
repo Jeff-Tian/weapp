@@ -4,10 +4,9 @@ import Taro from "@tarojs/taro";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 import {Canvas} from "@tarojs/components";
 import {drawImageFully} from "@/functions/canvas";
+import {useEffect} from "react";
 
-const Landmark = () => {
-  const context = Taro.createCanvasContext('canvas')
-
+function drawSmile(context) {
   context.setStrokeStyle("#00ff00")
   context.setLineWidth(5)
   context.rect(0, 0, 200, 200)
@@ -24,6 +23,17 @@ const Landmark = () => {
   context.arc(120, 80, 5, 0, 2 * Math.PI, true)
   context.stroke()
   context.draw()
+}
+
+const Landmark = () => {
+  let context
+
+  useEffect(() => {
+    context = Taro.createCanvasContext('canvas')
+
+    drawSmile(context);
+  }, [])
+
 
   const chooseImage = () => {
     Taro.chooseImage({
@@ -31,7 +41,6 @@ const Landmark = () => {
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera', 'user', 'environment'],
     }).then((res) => {
-      console.log('files = , ', res);
       const [image] = res.tempFiles
 
       const [imagePath] = res.tempFilePaths
@@ -66,7 +75,7 @@ const Landmark = () => {
 
   return <SinglePageLayout>
     <AtButton onClick={chooseImage}>选择照片</AtButton>
-    <AtDivider content='识别结果' fontColor='#ed3f14' lineColor='#ed3f14'/>
+    <AtDivider content='识别结果' fontColor='#ed3f14' lineColor='#ed3f14' />
     <Canvas canvasId='canvas' id='canvas' style='width: 100%; min-height: 500px;'></Canvas>
   </SinglePageLayout>
 }
