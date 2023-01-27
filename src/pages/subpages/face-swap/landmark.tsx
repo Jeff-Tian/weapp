@@ -29,7 +29,7 @@ const Landmark = () => {
   let context
 
   useEffect(() => {
-    context = Taro.getEnv() === Taro.ENV_TYPE.WEB ? window.document.getElementById('canvas')?.['getContext']('2d') : Taro.createCanvasContext('canvas');
+    context = Taro.createCanvasContext('canvas')
 
     drawSmile(context);
   }, [])
