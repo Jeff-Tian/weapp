@@ -50,7 +50,8 @@ const Landmark = () => {
       return Taro.uploadFile({
         url: 'https://sls.pa-ca.me/face-swap/landmark',
         filePath: image.path,
-        name: 'image'
+        name: 'image',
+        withCredentials: false,
       }).then(r => {
         console.log('res = ', r);
         let {data: points} = r
