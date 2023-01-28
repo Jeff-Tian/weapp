@@ -1,4 +1,4 @@
-# weapp 
+# weapp
 
 ---
 
@@ -6,13 +6,16 @@
 
 > 哈德韦的个人小程序
 
-| 体验版                                             | 正式版                                               |
-|-------------------------------------------------|---------------------------------------------------|
-| ![哈德韦体验版](https://i1.lensdump.com/i/Rg0UAq.jpg) | ![哈德韦正式版](https://i.lensdump.com/i/Rg0cVA.md.png) |
+
+| 体验版                                             | 正式版                                               | 领取红包🧧封面｜                                            |
+|-------------------------------------------------|---------------------------------------------------|------------------------------------------------------|
+| ![哈德韦体验版](https://i1.lensdump.com/i/Rg0UAq.jpg) | ![哈德韦正式版](https://i.lensdump.com/i/Rg0cVA.md.png) | ![领取哈小兔红包封面！](https://i3.lensdump.com/i/RxSMhA.jpeg) |
+
+
 
 ## 图片存储
 
-不建议将图片资源直接放在代码库中，目前图片托管在： https://lensdump.com/。
+不建议将图片资源直接放在代码库中，目前图片托管在： https://lensdump.com/ 。
 
 ## 本地开发
 
@@ -31,7 +34,8 @@ yarn build:weapp:upload
 
 ### 更新体验版与提交审核
 
-在开发版更新成功后，去 https://mp.weixin.qq.com/wxamp/wacodepage/getcodepage?token=14130862&lang=zh_CN 页面，将最新更新的开发版设置为体验版，在体验版体验完毕后，可以提交审核成为线上版本。
+在开发版更新成功后，去 https://mp.weixin.qq.com/wxamp/wacodepage/getcodepage?token=14130862&lang=zh_CN
+页面，将最新更新的开发版设置为体验版，在体验版体验完毕后，可以提交审核成为线上版本。
 
 ### 排障指南
 
@@ -85,7 +89,8 @@ sudo yarn add windows-build-tools --global
 
 ### 部署 Serverless-Space
 
-weapp 的后端服务，主要由 Serverless-Space 提供，如果你要基于 weapp 项目部署你自己的小程序，需要先部署自己的 Serverless-Space 服务，否则，小程序界面上会呈现哈德韦的数据。
+weapp 的后端服务，主要由 Serverless-Space 提供，如果你要基于 weapp 项目部署你自己的小程序，需要先部署自己的
+Serverless-Space 服务，否则，小程序界面上会呈现哈德韦的数据。
 
 参考 []().
 
@@ -106,7 +111,6 @@ weapp 的后端服务，主要由 Serverless-Space 提供，如果你要基于 w
 - 优化井字棋游戏页面展示
 - 增加人工智能版井字棋游戏页面
 - 增加 C++ 代码展示页面
-
 
 ## Star History
 

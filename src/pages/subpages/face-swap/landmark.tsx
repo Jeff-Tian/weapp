@@ -1,10 +1,9 @@
 import SinglePageLayout from "@/layout/single-page-layout";
 import {AtButton, AtDivider} from "taro-ui";
-import Taro from "@tarojs/taro";
+import Taro, {CanvasContext, useReady} from "@tarojs/taro";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 import {Canvas} from "@tarojs/components";
 import {drawImageFully} from "@/functions/canvas";
-import {useEffect} from "react";
 
 function drawSmile(context) {
   context.setStrokeStyle("#00ff00")
@@ -26,14 +25,13 @@ function drawSmile(context) {
 }
 
 const Landmark = () => {
-  let context
-
-  useEffect(() => {
+  useReady(() => {
     context = Taro.createCanvasContext('canvas')
 
-    drawSmile(context);
-  }, [])
+    drawSmile(context)
+  })
 
+  let context: CanvasContext;
 
   const chooseImage = () => {
     Taro.chooseImage({
