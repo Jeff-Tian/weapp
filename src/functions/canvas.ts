@@ -6,10 +6,15 @@ export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId) =>
   query.select('#' + canvasId).boundingClientRect(({height: canvasHeight, width: canvasWidth}) => {
     Taro.getImageInfo({src: imagePath}).then(({width: imageWidth, height: imageHeight}) => {
       const ratio = imageWidth / imageHeight;
+      console.log('ratio = ', ratio, canvasWidth, imageWidth, canvasHeight, imageHeight);
 
       ctx.scale(canvasWidth / imageWidth, canvasHeight / imageHeight / ratio);
 
-      ctx.drawImage(imagePath, 0, 0);
+      if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+        ctx.drawImage(imagePath, 0, 0);
+      } else {
+        ctx.drawImage(imagePath, 0, 0, canvasWidth, canvasHeight);
+      }
     }).catch(naiveErrorHandler)
   }).exec();
 }
