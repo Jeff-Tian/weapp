@@ -18,15 +18,13 @@ export const HighLevel = () => {
 
   return <View>
     <AtNavBar
-      onClickRgIconSt={(...args) => {
-        console.log('rg iconst = ', args);
+      onClickRgIconSt={() => {
         setShowDrawer(true)
       }}
       onClickRgIconNd={() => {
         Taro.navigateTo({url: '/pages/subpages/auth/authing'})
       }}
-      onClickLeftIcon={(...args) => {
-        console.log('left icon = ', args);
+      onClickLeftIcon={() => {
         const path = getCurrentPageUrl(Taro.getCurrentInstance().router)
 
         Taro.setClipboardData({data: `${path}`}).then(() =>

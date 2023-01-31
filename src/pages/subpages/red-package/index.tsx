@@ -1,7 +1,7 @@
 import SinglePageLayout from "@/layout/single-page-layout";
 import Taro, {ENV_TYPE, useShareAppMessage} from "@tarojs/taro";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {OfficialAccount, View} from "@tarojs/components";
 import {AtButton, AtDivider} from "taro-ui";
 import {OfficialAccountCard} from "@/components/OfficialAccountWrapper";
@@ -43,18 +43,6 @@ const RedPackage = () => {
 
     })
   }
-
-  useEffect(() => {
-    try {
-      Taro.setBackgroundColor({
-        backgroundColor: 'rgb(212, 86, 69)',
-        backgroundColorTop: 'rgb(212, 86, 69)',
-        backgroundColorBottom: 'rgb(212, 86, 69)',
-      }).catch(console.error)
-    } catch (ex) {
-      console.error(ex);
-    }
-  }, [])
 
   useShareAppMessage(() => {
     return {
@@ -104,3 +92,13 @@ const RedPackage = () => {
 }
 
 export default RedPackage
+
+definePageConfig({
+  navigationBarTitleText: '领取"哈小兔"红包🧧封面',
+  enableShareAppMessage: true,
+  enableShareTimeline: true,
+  backgroundColor: '#d45645',
+  backgroundColorTop: '#d45645',
+  backgroundColorBottom: '#d45645',
+  navigationBarBackgroundColor: '#d45645'
+})
