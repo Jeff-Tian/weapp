@@ -58,7 +58,6 @@
 		"@tarojs/taro": "3.5.12",
 		"apollo-upload-client": "^17.0.0",
 		"authing-wxapp-sdk": "^4.3.22-alpha.7",
-		"cheerio": "^1.0.0-rc.10",
 		"eval5": "^1.4.7",
 		"form-urlencoded": "^6.0.5",
 		"graphql": "^15.6.0",
