@@ -56,6 +56,7 @@ export default {
     'pages/tictactoe/ai',
     'pages/pearlsplus/hello',
     'pages/auth/authing',
+    'pages/subpages/test/index',
   ],
   window: {
     backgroundTextStyle: 'light',
