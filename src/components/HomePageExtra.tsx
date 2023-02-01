@@ -25,6 +25,12 @@ export const Banner = () => <Swiper
     /> : <Image src='https://i1.lensdump.com/i/RxEd2z.md.jpeg' mode='widthFix' />
     }
   </SwiperItem>
+  <SwiperItem onClick={() => Taro.navigateTo({url: '/pages/subpages/sticker/index'})}>
+    <Image
+      src='https://i3.lensdump.com/i/TiELvi.jpeg'
+      mode='widthFix'
+    />
+  </SwiperItem>
   <SwiperItem>
     <StackOverflowWrapper />
   </SwiperItem>

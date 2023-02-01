@@ -39,6 +39,10 @@ const subpages = [
   {
     root: `pages/subpages/red-package`,
     pages: ['index'],
+  },
+  {
+    root: `pages/subpages/sticker`,
+    pages: ['index'],
   }
 ]
 
