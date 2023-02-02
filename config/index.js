@@ -18,11 +18,11 @@ const CIPluginOpt = {
     password: "字节小程序密码"
   },
   // 支付宝小程序
-  alipay: {
-    appId: "支付宝小程序appId",
-    toolId: "工具id",
-    privateKeyPath: "密钥文件相对项目根目录的相对路径，例如 key/pkcs8-private-pem"
-  },
+  // alipay: {
+  //   appid: "支付宝小程序appId",
+  //   toolId: "工具id",
+    // privateKeyPath: "密钥文件相对项目根目录的相对路径，例如 key/pkcs8-private-pem"
+  // },
   // 百度小程序
   swan: {
     token: "鉴权需要的token令牌"
