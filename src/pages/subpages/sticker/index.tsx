@@ -1,11 +1,12 @@
 import SinglePageLayout from "@/layout/single-page-layout";
-import {Image, View} from "@tarojs/components";
+import {View} from "@tarojs/components";
+import LinkedImage from "@/components/LinkedImage";
 
 const Sticker = () => {
   return <SinglePageLayout>
     <View className='at-article'>
-      <View className='at-article__h1'>识别下面的二维码，领取微信表情：</View>
-      <Image
+      <View className='at-article__h1'>点击下图进入预览模式，然后长按识别二维码（或者保存到本地然后扫一扫），领取微信表情：</View>
+      <LinkedImage
         src='https://i2.lensdump.com/i/TiEvVm.png'
         mode='widthFix'
       />
@@ -16,7 +17,7 @@ const Sticker = () => {
 export default Sticker
 
 definePageConfig({
-  navigationBarTitleText: '领取"哈小兔"得偿所愿微信表情',
+  navigationBarTitleText: '领取"哈德韦"出品微信表情',
   enableShareAppMessage: true,
   enableShareTimeline: true,
   backgroundColor: '#d45645',

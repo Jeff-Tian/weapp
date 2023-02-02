@@ -25,7 +25,7 @@ const RedPackage = () => {
     login().then(setUser).catch(console.error).finally(() => {
       if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
         Taro.showRedPackage({
-          url: 'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=nGeAmofNueP&check_type=2#wechat_redirect',
+          url: 'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=n2EbSjwa4kN&check_type=2#wechat_redirect',
           success: (res) => {
             console.log(res)
           },
