@@ -2,16 +2,14 @@ import {gql, useMutation, useQuery} from "@apollo/client"
 import {Button, Image, View} from "@tarojs/components"
 import {AtActivityIndicator, AtButton} from "taro-ui"
 import Taro from "@tarojs/taro"
-import {StorageKeys} from "@/common/constants";
 import remark from 'remark'
 import remarkHtml from "remark-html"
 import React, {useState} from "react"
 import * as assert from 'assert';
 import {SYNC_YUQUE_TO_ZHIHU, draftDirectly} from "@/services/zhihu";
-import './article.styl'
-
+import WebMarkdownViewer from "@/components/markdown-viewer/h5";
 import HardwayLayout from "../../layout/hardway-layout"
-
+import './article.styl'
 
 const YuQueArticle: React.FC = () => {
   const authingUser = Taro.getStorageSync("_authing_user")
@@ -22,31 +20,31 @@ const YuQueArticle: React.FC = () => {
   const {id, slug} = params
 
   const YUQUE_BLOG = id ? gql`
-        query {
-          yuque (id: "${id}") {
-            id
-            title
-            description
-            word_count
-            created_at
-            cover
-            body
-            body_html
-          }
-        }
+    query {
+      yuque (id: "${id}") {
+        id
+        title
+        description
+        word_count
+        created_at
+        cover
+        body
+        body_html
+      }
+    }
   ` : gql`
-  query {
-          yuque (slug: "${slug}") {
-            id
-            title
-            description
-            word_count
-            created_at
-            cover
-            body
-            body_html
-          }
-        }
+    query {
+      yuque (slug: "${slug}") {
+        id
+        title
+        description
+        word_count
+        created_at
+        cover
+        body
+        body_html
+      }
+    }
   `
 
   const {loading, error, data} = useQuery(YUQUE_BLOG)
@@ -125,7 +123,10 @@ const YuQueArticle: React.FC = () => {
 
       <View className='at-article__content taro_html'>
         <View className='at-article__section'>
-          <View dangerouslySetInnerHTML={{__html: html}} />
+          {
+            Taro.getEnv() === Taro.ENV_TYPE.WEB ? <WebMarkdownViewer markdown={data.yuque.body} /> :
+              <View dangerouslySetInnerHTML={{__html: html}} />
+          }
         </View>
       </View>
 
