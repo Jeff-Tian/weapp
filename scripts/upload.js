@@ -12,10 +12,19 @@ const {appid: appId} = require('../project.config.json');
     privateKeyPath: './private.key',
     ignores: [
       '.github',
+      '.run',
+      '.swc',
+      '.vscode',
+      '__mock__',
+      '__tests__',
+      'build',
+      'coverage',
+      'dist',
       'scripts',
       'README.md',
       'yarn.lock',
-      'node_modules/**/*'
+      'node_modules/**/*',
+      '扫码_搜索联合传播样式-微信标准绿版.png',
     ]
   });
   const uploadResult = await upload({
