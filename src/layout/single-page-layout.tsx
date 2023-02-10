@@ -8,9 +8,13 @@ const SinglePageLayout = ({children, bgColor = 'cornflowerblue', padding = '10px
     Taro.stopPullDownRefresh()
   })
 
-  return <View style={{backgroundColor: bgColor, height: '100%'}}>
+  return <View style={{backgroundColor: bgColor, height: '100vh', display: 'flex', flexDirection: 'column'}}>
     <HighLevel />
-    <View style={{padding: padding}}>{children}</View>
+    <View style={{
+      padding: padding,
+      flex: 1,
+    }}
+    >{children}</View>
   </View>
 }
 
