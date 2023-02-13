@@ -10,17 +10,45 @@ const Sticker = () => {
   let context: CanvasContext;
   useReady(() => {
     context = Taro.createCanvasContext('sticker-canvas')
+
+    context.setStrokeStyle("#00ff00")
+    context.setLineWidth(5)
+    context.rect(0, 0, 200, 200)
+    context.stroke()
+    context.setStrokeStyle("#ff0000")
+    context.setLineWidth(2)
+    context.moveTo(160, 100)
+    context.arc(100, 100, 60, 0, 2 * Math.PI, true)
+    context.moveTo(140, 100)
+    context.arc(100, 100, 40, 0, Math.PI, false)
+    context.moveTo(85, 80)
+    context.arc(80, 80, 5, 0, 2 * Math.PI, true)
+    context.moveTo(125, 80)
+    context.arc(120, 80, 5, 0, 2 * Math.PI, true)
+    context.stroke()
+    context.draw()
   })
   const chooseImage = () => {
     Taro.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
+      sourceType: ['album', 'camera', 'user', 'environment'],
     }).then((res) => {
       console.log('files = , ', res);
-      const [image1] = res.tempFiles
 
-      return drawImageFully(image1.path, context, 'sticker-canvas').then(() => {console.log('drawn')})
+      drawImageFully(res.tempFilePaths[0], context, 'sticker-canvas').then(() => {
+        console.log('drawn');
+      })
+
+      setTimeout(() => {
+        context.setStrokeStyle("#ff0000")
+        context.setLineWidth(2)
+        context.moveTo(10, 10);
+        context.lineTo(20, 20);
+        context.stroke()
+        context.draw();
+      }, 100)
+      
     }).catch(naiveErrorHandler);
   };
 

@@ -3,20 +3,27 @@ import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 
 export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId) => {
   const query = Taro.createSelectorQuery();
-  query.select('canvas[canvas-id=' + canvasId + ']').boundingClientRect(canvas => {
-    console.log('canvas = ', canvas, ', imagePath = ', imagePath);
-    const {width: canvasWidth, height: canvasHeight} = canvas;
+  const canvas = Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? query.select('#' + canvasId) :
+    query.select('canvas[canvas-id=' + canvasId + ']');
 
-    Taro.getImageInfo({src: imagePath}).then(({width: imageWidth, height: imageHeight}) => {
-      const ratio = imageWidth / imageHeight;
-      console.log('ratio = ', ratio, canvasWidth, imageWidth, canvasHeight, imageHeight);
+  canvas.boundingClientRect(canvasRes => {
+    const {width: canvasWidth, height: canvasHeight} = canvasRes;
 
-      ctx.scale(canvasWidth / imageWidth, canvasHeight / imageHeight / ratio);
+    Taro.getImageInfo({src: imagePath}).then((res) => {
+      const {width: imageWidth, height: imageHeight} = res;
+      const imageRatio = imageWidth / imageHeight;
 
       if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+        console.log('imagePath = ', imagePath);
+        ctx.scale(canvasWidth / imageWidth, canvasHeight / imageHeight / imageRatio);
         ctx.drawImage(imagePath, 0, 0);
       } else {
-        ctx.drawImage(imagePath, 0, 0, canvasWidth, canvasHeight);
+        ctx = ctx['__raw__'];
+        const image = new Image();
+        image.onload = () => {
+          ctx.drawImage(image, 0, 0, imageWidth, imageHeight, 0, 0, canvasWidth, canvasHeight);
+        }
+        image.src = res.path;
       }
     }).catch(naiveErrorHandler)
   }).exec();
