@@ -51,8 +51,7 @@ const config = {
 
   defineConstants: {},
   copy: {
-    patterns: [
-    ],
+    patterns: [],
     options: {},
   },
   framework: 'react',
@@ -110,6 +109,15 @@ const config = {
     '@': path.resolve(__dirname, '../src'),
     '~@': path.resolve(__dirname, '../src/styles'),
   },
+  jsMinimizer: ['esbuild'],
+  esbuild: {
+    minify: {
+      enabled: true,
+      config: {
+        target: 'es5'
+      }
+    }
+  }
 }
 
 module.exports = merge => {

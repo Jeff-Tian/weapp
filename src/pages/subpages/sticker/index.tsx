@@ -41,14 +41,8 @@ const Sticker = () => {
       })
 
       setTimeout(() => {
-        context.setStrokeStyle("#ff0000")
-        context.setLineWidth(2)
-        context.moveTo(10, 10);
-        context.lineTo(20, 20);
-        context.stroke()
-        context.draw();
       }, 100)
-      
+
     }).catch(naiveErrorHandler);
   };
 
