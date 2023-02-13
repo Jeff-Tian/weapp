@@ -12,11 +12,9 @@ const VideoPage = () => {
   assert.ok(params, '本页必须传递知乎 zvideo id')
 
   const ZVIDEO_QUERY = gql`query GetVideo {
-    getVideoInfoByUrl(zvideoUrl: "https://www.zhihu.com/zvideo/${params.zVideoId}") {
-      first {
-        playUrl
+      getVideoInfoByUrl(zvideoUrl: "https://www.zhihu.com/zvideo/${params.zVideoId}") {
+          playUrl
       }
-    }
   }`
   const {loading, error, data} = useQuery(ZVIDEO_QUERY)
 
@@ -28,7 +26,7 @@ const VideoPage = () => {
     return <View>${util.inspect(error)}</View>
   }
 
-  return <MyVideo src={data.getVideoInfoByUrl.first.playUrl} />;
+  return <MyVideo src={data.getVideoInfoByUrl.playUrl} />;
 }
 
 export default VideoPage
