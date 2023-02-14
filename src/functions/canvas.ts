@@ -18,6 +18,7 @@ export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId) =>
         ctx.scale(canvasWidth / imageWidth, canvasHeight / imageHeight / imageRatio);
         ctx.drawImage(imagePath, 0, 0);
       } else {
+        window.ctx = ctx;
         ctx = ctx['__raw__'];
         const image = new Image();
         image.onload = () => {
