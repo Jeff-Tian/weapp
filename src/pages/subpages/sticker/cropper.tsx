@@ -13,16 +13,15 @@ const Cropper = () => {
     setContext(Taro.createCanvasContext('sticker-canvas'))
   })
   const chooseImage = () => {
+    setContext(Taro.createCanvasContext('sticker-canvas'))
+
     Taro.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera', 'user', 'environment'],
     }).then((res) => {
-      poll(() => context !== undefined, 1000, 1000).then(() => {
-      })
-
-      drawImageFully(res.tempFilePaths[0], context!, 'sticker-canvas').then(() => {
-        console.log('drawn');
+      poll(() => context !== undefined, 1000, 10000).then(() => {
+        return drawImageFully(res.tempFilePaths[0], context!, 'sticker-canvas')
       })
     }).catch(naiveErrorHandler);
   };
