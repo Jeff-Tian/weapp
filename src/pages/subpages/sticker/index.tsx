@@ -4,7 +4,7 @@ import LinkedImage from "@/components/LinkedImage";
 import Cropper from "@/pages/subpages/sticker/cropper";
 
 const Sticker = () => {
-  return <SinglePageLayout>
+  return <SinglePageLayout height='200vh'>
     <View className='at-article'>
       <View
         className='at-article__h1'

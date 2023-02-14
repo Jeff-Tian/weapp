@@ -2,7 +2,7 @@ import Taro, {CanvasContext, useReady} from "@tarojs/taro";
 import {drawImageFully} from "@/functions/canvas";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 import {Canvas, View} from "@tarojs/components";
-import {AtButton} from "taro-ui";
+import {AtButton, AtDivider} from "taro-ui";
 import {useState} from "react";
 import {poll} from "@/functions/poll";
 
@@ -32,9 +32,11 @@ const Cropper = () => {
       上传图片，自动裁剪成微信表情尺寸。
     </View>
     <AtButton onClick={chooseImage}>选择照片</AtButton>
+    <AtDivider />
     <View>
-      <Canvas canvasId='sticker-canvas' id='sticker-canvas' style='width: 300px; height: 300px;'></Canvas>
+      <Canvas canvasId='sticker-canvas' id='sticker-canvas' style='width: 100%; height: 300px;'></Canvas>
     </View>
+    <AtDivider />
   </View>
 }
 

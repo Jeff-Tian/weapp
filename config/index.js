@@ -109,10 +109,10 @@ const config = {
     '@': path.resolve(__dirname, '../src'),
     '~@': path.resolve(__dirname, '../src/styles'),
   },
-  jsMinimizer: ['esbuild'],
+  jsMinimizer: 'esbuild',
   esbuild: {
     minify: {
-      enabled: true,
+      enable: true,
       config: {
         target: 'es5'
       }
