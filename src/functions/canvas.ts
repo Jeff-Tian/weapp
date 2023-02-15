@@ -20,6 +20,11 @@ export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId, sx
         sy = 0;
       }
 
+      if (imageWidth < imageHeight) {
+        sx = 0;
+        sy = -diff / 2;
+      }
+
       const imageRatio = imageWidth / imageHeight;
 
       if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
@@ -35,7 +40,7 @@ export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId, sx
         ctx = ctx['__raw__'];
         const image = new Image();
         image.onload = () => {
-          ctx.drawImage(image, sx, sy, imageWidth - diff, imageHeight, 0, 0, canvasWidth, canvasHeight);
+          ctx.drawImage(image, sx, sy, imageWidth - Math.max(diff, 0), imageHeight - Math.max(-diff, 0), 0, 0, canvasWidth, canvasHeight);
         }
         image.src = res.path;
       }
