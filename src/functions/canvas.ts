@@ -10,8 +10,6 @@ export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId) =>
 
   canvas.boundingClientRect(canvasRes => {
     const {width: canvasWidth, height: canvasHeight} = canvasRes;
-    console.log('res = ', canvasRes);
-
     Taro.getImageInfo({src: imagePath}).then((res) => {
       const {width: imageWidth, height: imageHeight} = res;
       console.log('imgres = ', res);
@@ -30,7 +28,7 @@ export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId) =>
         ctx = ctx['__raw__'];
         const image = new Image();
         image.onload = () => {
-          ctx.drawImage(image, 0, 0, imageWidth, 1539, 0, 0, canvasWidth, canvasHeight);
+          ctx.drawImage(image, 0, 0, imageWidth, imageHeight, 0, 0, canvasWidth, canvasHeight);
         }
         image.src = res.path;
       }
