@@ -39,8 +39,19 @@ export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId, sx
 
         ctx = ctx['__raw__'];
         const image = new Image();
-        image.onload = () => {
-          ctx.drawImage(image, sx, sy, imageWidth - Math.max(diff, 0), imageHeight - Math.max(-diff, 0), 0, 0, canvasWidth, canvasHeight);
+        image.onload = function () {
+          // step 1
+          const oc = document.createElement('canvas');
+          const octx = oc.getContext('2d');
+          oc.width = this.width;
+          oc.height = this.height;
+
+          // step 2: pre-filter image using steps as radius
+          const steps = (oc.width / canvasWidth) >> 1;
+          octx.filter = `blur(${steps}px)`;
+          octx.drawImage(this, 0, 0);
+
+          ctx.drawImage(oc, sx, sy, imageWidth - Math.max(diff, 0), imageHeight - Math.max(-diff, 0), 0, 0, canvasWidth, canvasHeight);
         }
         image.src = res.path;
       }
