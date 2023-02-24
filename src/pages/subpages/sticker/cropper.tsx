@@ -31,6 +31,24 @@ const Cropper = () => {
     }).catch(naiveErrorHandler);
   };
 
+  const download = () => {
+    const gif = new window.GIF({
+      workers: 2,
+      quality: 10,
+      workerScript: `/static/gif.worker.js`
+    });
+    gif.addFrame(document.querySelector('canvas[canvas-id=sticker-canvas-240-240]'), {delay: 200});
+    gif.on('finished', function (blob) {
+      const url = URL.createObjectURL(blob);
+      window.open(url);
+      const link = document.createElement('a');
+      link.download = 'canvas.gif';
+      link.href = url;
+      link.click();
+    });
+    gif.render();
+  }
+
   return <View>
     <View className='at-article__h1'>你也可以制作！</View>
     <View className='at-article__content'>
@@ -45,9 +63,10 @@ const Cropper = () => {
     />
     <View>240 x 240 (GIF + PNG)</View>
     <Canvas canvasId='sticker-canvas-240-240' id='sticker-canvas-240-240' style='width: 240px; height: 240px;'></Canvas>
-    <View>120 x 120 (GIF)</View>
+    <View>120 x 120 (PNG)</View>
     <Canvas canvasId='sticker-canvas-120-120' id='sticker-canvas-120-120' style='width: 120px; height: 120px;'></Canvas>
     <AtDivider />
+    <AtButton onClick={download}>下载/保存</AtButton>
   </View>
 }
 

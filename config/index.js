@@ -51,7 +51,10 @@ const config = {
 
   defineConstants: {},
   copy: {
-    patterns: [],
+    patterns: [{
+      from: 'src/static',
+      to: 'dist/static'
+    }],
     options: {},
   },
   framework: 'react',
@@ -84,7 +87,7 @@ const config = {
     staticDirectory: 'static',
     output: {
       filename: 'js/[name].[hash].js',
-      chunkFilename: 'js/[name].[chunkhash].js'
+      chunkFilename: 'js/[name].[chunkhash].js',
     },
     postcss: {
       autoprefixer: {
