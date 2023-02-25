@@ -7,13 +7,15 @@ import {useState} from "react";
 import {poll} from "@/functions/poll";
 import LinkedImage from "@/components/LinkedImage";
 
-const downloadPng = (canvas, filename: string) => {
-  console.log('canvas = ', canvas);
-  const dataURL = canvas.toDataURL('image/png');
+const downloadFile = (url, filename) => {
   const a = document.createElement('a');
-  a.href = dataURL;
+  a.href = url;
   a.download = filename;
   a.click();
+}
+
+const downloadPng = (canvas, filename: string) => {
+  downloadFile(canvas.toDataURL('image/png'), filename);
 };
 
 const Cropper = () => {
@@ -49,11 +51,7 @@ const Cropper = () => {
     gif.addFrame(document.querySelector('canvas[canvas-id=sticker-canvas-240-240]'), {delay: 200});
     gif.on('finished', function (blob) {
       const url = URL.createObjectURL(blob);
-      window.open(url);
-      const link = document.createElement('a');
-      link.download = 'canvas.gif';
-      link.href = url;
-      link.click();
+      downloadFile(url, '240-240.gif');
     });
     gif.render();
 
