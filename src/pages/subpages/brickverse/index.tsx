@@ -11,6 +11,8 @@ const Brickverse = () => {
         path: `/pages/subpages/webview/index?src=${encodeURIComponent('https://brickverse.pa-ca.me/')}`,
         envVersion: 'release'
       })
+
+      return;
     }
 
     window.location.href = "https://brick.cat"
