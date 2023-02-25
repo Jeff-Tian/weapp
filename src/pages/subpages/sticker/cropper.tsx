@@ -7,6 +7,15 @@ import {useState} from "react";
 import {poll} from "@/functions/poll";
 import LinkedImage from "@/components/LinkedImage";
 
+const downloadPng = (canvas, filename: string) => {
+  console.log('canvas = ', canvas);
+  const dataURL = canvas.toDataURL('image/png');
+  const a = document.createElement('a');
+  a.href = dataURL;
+  a.download = filename;
+  a.click();
+};
+
 const Cropper = () => {
   const [contexts, setContexts] = useState<Map<string, CanvasContext>>(new Map())
   const [imagePath, setImagePath] = useState<string | undefined>(undefined)
@@ -47,6 +56,9 @@ const Cropper = () => {
       link.click();
     });
     gif.render();
+
+    downloadPng(document.querySelector('[canvas-id=sticker-canvas-120-120]'), '120-120.png');
+    downloadPng(document.querySelector('[canvas-id=sticker-canvas-240-240]'), '240-240.png');
   }
 
   return <View>
