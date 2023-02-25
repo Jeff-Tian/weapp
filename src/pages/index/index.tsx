@@ -3,7 +3,6 @@ import {Text} from '@tarojs/components'
 import {AtButton, AtForm, AtInput, AtTextarea} from 'taro-ui'
 import Taro from '@tarojs/taro'
 import './index.styl'
-import envVersion = Taro.navigateToMiniProgram.envVersion
 import projectConfig from '../../../project.config.json'
 import HardwayLayout from "../../layout/hardway-layout"
 
@@ -41,7 +40,7 @@ export default class Index extends Component<any, IndexState> {
       extraData = {}
     }
 
-    let v: keyof envVersion = 'release'
+    let v: keyof Taro.navigateToMiniProgram.EnvVersion = 'release'
     if (this.state.envVersion === 'release' || this.state.envVersion === 'develop' || this.state.envVersion === 'trial') {
       v = this.state.envVersion
     }
@@ -82,15 +81,15 @@ export default class Index extends Component<any, IndexState> {
           onReset={this.onReset.bind(this)}
         >
           <AtInput
-            name="appid"
-            title="appid"
-            type="text"
-            placeholder="wx9fe2a6e64bfa9dd6"
+            name='appid'
+            title='appid'
+            type='text'
+            placeholder='wx9fe2a6e64bfa9dd6'
             value={this.state.appid}
             onChange={this.handleChange.bind(this, 'appid')}
           />
-          <AtInput name="path" title="页面路径" type="text" placeholder="/pages/subpages/grand-opening/index?id=38"
-                   value={this.state.path} onChange={this.handleChange.bind(this, 'path')}
+          <AtInput name='path' title='页面路径' type='text' placeholder='/pages/subpages/grand-opening/index?id=38'
+            value={this.state.path} onChange={this.handleChange.bind(this, 'path')}
           />
           <Text>额外参数：</Text>
           <AtTextarea
@@ -99,8 +98,8 @@ export default class Index extends Component<any, IndexState> {
             maxLength={Infinity}
             placeholder={JSON.stringify({foo: 'bar'})}
           />
-          <AtInput name="envVersion" title="版本" type="text" placeholder="release develop trial"
-                   value={this.state.envVersion} onChange={this.handleChange.bind(this, 'envVersion')}
+          <AtInput name='envVersion' title='版本' type='text' placeholder='release develop trial'
+            value={this.state.envVersion} onChange={this.handleChange.bind(this, 'envVersion')}
           />
           <AtButton onClick={this.onSubmit.bind(this)}>走起！</AtButton>
           {/*<AtButton formType="submit">走起！</AtButton>*/}

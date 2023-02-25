@@ -43,7 +43,7 @@ const Cropper = () => {
   };
 
   const download = () => {
-    const gif = new window.GIF({
+    const gif = new window['GIF']({
       workers: 2,
       quality: 10,
       workerScript: `/static/gif.worker.js`

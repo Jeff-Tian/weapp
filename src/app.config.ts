@@ -43,6 +43,10 @@ const subpages = [
   {
     root: `pages/subpages/sticker`,
     pages: ['index'],
+  },
+  {
+    root: `pages/subpages/brickverse`,
+    pages: ['index']
   }
 ]
 

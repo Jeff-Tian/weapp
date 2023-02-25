@@ -4,6 +4,9 @@ export const drawerItems = new Map<string, () => void>([
   ['博文', async () => Taro.navigateTo({
     url: '/pages/yuque/index',
   })],
+  ['brickverse', async () => Taro.navigateTo({
+    url: '/pages/subpages/brickverse/index',
+  })],
   ['React 井字棋游戏初始状态', async () => Taro.navigateTo({url: '/pages/tictactoe/index'})],
   ['React 井字棋游戏最终状态', async () => Taro.navigateTo({url: '/pages/tictactoe/index2'})],
   ['人工智能版井字棋游戏', async () => Taro.navigateTo({url: '/pages/tictactoe/ai'})],
