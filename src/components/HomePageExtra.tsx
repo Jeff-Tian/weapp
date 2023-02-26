@@ -18,12 +18,8 @@ export const Banner = () => <Swiper
   indicatorDots
   autoplay
 >
-  <SwiperItem onClick={() => Taro.navigateTo({url: '/pages/subpages/red-package/index'})}>
-    {Taro.getEnv() === Taro.ENV_TYPE.WEB ? <LinkedImage src='https://i1.lensdump.com/i/RxEd2z.md.jpeg'
-      href='https://taro.pa-ca.me/pages/subpages/red-package/index'
-      mode='widthFix'
-    /> : <Image src='https://i1.lensdump.com/i/RxEd2z.md.jpeg' mode='widthFix' />
-    }
+  <SwiperItem onClick={() => Taro.navigateTo({url: '/pages/subpages/brickverse/index'})}>
+    <Image src='https://i.lensdump.com/i/TVjKjm.md.jpeg' mode='widthFix' />
   </SwiperItem>
   <SwiperItem onClick={() => Taro.navigateTo({url: '/pages/subpages/sticker/index'})}>
     <Image
