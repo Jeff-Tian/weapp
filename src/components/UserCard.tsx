@@ -1,6 +1,7 @@
 import {User} from "@authing/guard-react";
 import {AtCard} from "taro-ui";
 import {View} from "@tarojs/components";
+import Taro from "@tarojs/taro";
 
 export const UserCard = ({userInfo}: { userInfo: User | undefined }) => {
   return userInfo ?
@@ -8,5 +9,6 @@ export const UserCard = ({userInfo}: { userInfo: User | undefined }) => {
       extra={userInfo.phone || undefined}
       title={userInfo.username || userInfo.nickname || userInfo.email || undefined}
       thumb={userInfo.photo || undefined}
+      onClick={() => Taro.navigateTo({url: '/pages/subpages/auth/profile'})}
     >共登录过 {userInfo.loginsCount} 次。</AtCard> : <View>未获取到信息</View>
 }

@@ -3,7 +3,7 @@ import {authingAppId} from "@/common/constants";
 import {User} from "@authing/guard-react";
 import Taro from "@tarojs/taro";
 
-export const authing = new AuthenticationClient({
+const authing = new AuthenticationClient({
   userPoolId: '620097b69a9dab5e967d0c44',
   appId: authingAppId
 })
@@ -27,5 +27,13 @@ export const getUserInfo = async (): Promise<User> => {
     return await authing.getCurrentUser();
   } else {
     return await guard.trackSession();
+  }
+}
+
+export const logout = async () => {
+  if (Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
+    await guard.logout();
+  } else {
+    await authing.logout();
   }
 }

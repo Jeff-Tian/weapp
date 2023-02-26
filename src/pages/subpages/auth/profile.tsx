@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {WeappLoginStatus} from "@/components/LoginStatus/weapp";
 import {WebLoginStatus} from "@/components/LoginStatus/web";
 
-import {authing, getUserInfo} from "@/common/login";
+import {getUserInfo, logout} from "@/common/login";
 import {User} from "@authing/guard-react";
 import MyZhihu from "@/components/zhihu/MyZhihu";
 import './profile.styl'
@@ -42,12 +42,7 @@ const Profile = () => {
     {userInfo && <MyZhihu />}
 
     <AtDivider></AtDivider>
-    <AtButton onClick={async () => {
-      await authing.logout();
-      Taro.clearStorageSync();
-      // Taro.reLaunch({url: '/pages/yuque/index'})
-      Taro.navigateTo({url: '/pages/yuque/index'})
-    }}
+    <AtButton onClick={logout}
       type='secondary'
     >退出登录</AtButton>
   </SinglePageLayout>

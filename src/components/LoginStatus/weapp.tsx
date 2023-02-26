@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react";
 import {memoizedAsync} from "@/common/helpers";
 import {View} from "@tarojs/components";
-import {AtActivityIndicator, AtButton} from "taro-ui";
-import Taro from "@tarojs/taro";
+import {AtActivityIndicator} from "taro-ui";
 import {UserCard} from "@/components/UserCard";
-import {authing, login} from "@/common/login";
+import {login} from "@/common/login";
 
 
 export const WeappLoginStatus = () => {
