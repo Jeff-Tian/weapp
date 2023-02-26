@@ -1,7 +1,7 @@
 import {MockedProvider} from '@apollo/react-testing';
 import {act, render} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'
-import {YUQUE_BLOG, YuQueInner} from "@/pages/yuque";
+import {BlogList, YUQUE_BLOG} from "@/components/BlogList";
 
 const MOCKS = [
   {
@@ -40,13 +40,13 @@ async function wait(ms = 0) {
 it('renders', async () => {
   const {container} = render(
     <MockedProvider addTypename={false} mocks={MOCKS}>
-      <YuQueInner />
+      <BlogList />
     </MockedProvider>
   );
 
-  expect(container.textContent).toBe('加载中……加载中');
+  expect(container.textContent).toBe('加载中……');
 
   await wait();
 
-  expect(container.textContent).toMatch('加载中……test4 字test2000-01-01查看更多');
+  expect(container.textContent).toMatch('test4 字test2000-01-01查看更多');
 });
