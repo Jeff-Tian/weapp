@@ -41,10 +41,6 @@ export const BlogList = () => {
     }
   }, [data])
 
-  if (loading) {
-    setStatus('loading')
-  }
-
   if (error) {
     return <View>
       <ErrorDisplay error={error}>
@@ -54,19 +50,20 @@ export const BlogList = () => {
   }
 
   return <View>
-    {blogs.map(article => <View key={article.id}><AtCard title={article.title}
-      extra={`${article.word_count} 字`}
-      note={article.created_at}
-      thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : fallbackThumbnail}
-      onClick={() => Taro.navigateTo({
-                                                           url: `/pages/yuque/article?slug=${article.slug}`,
-                                                         })}
-    ><AtAvatar
-      image={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : fallbackThumbnail}
-      size='large'
-    />
-      {article.description}</AtCard><AtDivider lineColor='#fff' />
+    {blogs.map(article => <View key={article.id}>
+      <AtCard title={article.title}
+        extra={`${article.word_count} 字`}
+        note={article.created_at}
+        thumb={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : fallbackThumbnail}
+        onClick={() => Taro.navigateTo({
+                url: `/pages/yuque/article?slug=${article.slug}`,
+              })}
+      ><AtAvatar
+        image={article.cover ? `https://uniheart.pa-ca.me/proxy?url=${article.cover}` : fallbackThumbnail}
+        size='large'
+      />
+        {article.description}</AtCard><AtDivider lineColor='#fff' />
     </View>)}
-    <AtLoadMore loadingText='加载中……' onClick={handleClick.bind(this)} status={status} />
+    <AtLoadMore loadingText='加载中……' onClick={handleClick.bind(this)} status={loading ? 'loading' : status} />
   </View>
 }
