@@ -2,8 +2,8 @@ import Taro, {CanvasContext, useReady} from "@tarojs/taro";
 import {drawImageFully} from "@/functions/canvas";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 import {Canvas, View} from "@tarojs/components";
-import {AtButton, AtDivider} from "taro-ui";
-import {useState} from "react";
+import {AtButton, AtDivider, AtSlider} from "taro-ui";
+import {useEffect, useState} from "react";
 import {poll} from "@/functions/poll";
 import LinkedImage from "@/components/LinkedImage";
 
@@ -19,11 +19,14 @@ const downloadPng = (canvas, filename: string) => {
 };
 
 const Cropper = () => {
+  const [offset, setOffset] = useState(0)
   const [contexts, setContexts] = useState<Map<string, CanvasContext>>(new Map())
   const [imagePath, setImagePath] = useState<string | undefined>(undefined)
 
   useReady(() => {
     setContexts(new Map([['sticker-canvas-240-240', Taro.createCanvasContext('sticker-canvas-240-240')], ['sticker-canvas-120-120', Taro.createCanvasContext('sticker-canvas-120-120')]]))
+
+    console.log('ready!')
   })
   const chooseImage = () => {
     setContexts(new Map([['sticker-canvas-240-240', Taro.createCanvasContext('sticker-canvas-240-240')], ['sticker-canvas-120-120', Taro.createCanvasContext('sticker-canvas-120-120')]]))
@@ -36,11 +39,15 @@ const Cropper = () => {
       const [tempFilePath] = res.tempFilePaths;
       setImagePath(tempFilePath)
 
-      poll(() => contexts !== undefined && contexts.size === 2, 1000, 10000).then(() => {
-        return Promise.all([...contexts].map(([canvasId, context]) => drawImageFully(tempFilePath, context, canvasId)))
-      })
+      poll(() => contexts !== undefined && contexts.size === 2, 1000, 10000).then(() => Promise.all([...contexts].map(([canvasId, context]) => drawImageFully(tempFilePath, context, canvasId, 0, 0, offset))))
     }).catch(naiveErrorHandler);
   };
+
+  useEffect(() => {
+    console.log('offset change!');
+
+    [...contexts].map(([canvasId, context]) => drawImageFully(imagePath, context, canvasId, 0, 0, offset))
+  }, [offset])
 
   const download = () => {
     const gif = new window['GIF']({
@@ -71,6 +78,7 @@ const Cropper = () => {
       src={imagePath}
       mode='widthFix'
     />
+    <AtSlider onChange={(value) => setOffset(value)} min={-100} max={100} showValue value={offset}></AtSlider>
     <View>240 x 240 (GIF + PNG)</View>
     <Canvas canvasId='sticker-canvas-240-240' id='sticker-canvas-240-240' style='width: 240px; height: 240px;'></Canvas>
     <View>120 x 120 (PNG)</View>

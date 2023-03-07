@@ -3,6 +3,7 @@ export const poll = (fn, interval = 1000, timeout = 10000) => {
     const endTime = Number(new Date()) + timeout;
     const checkCondition = () => {
       const condition = fn();
+      console.log('condition', condition);
       if (condition) {
         resolve(condition);
       } else if (Number(new Date()) < endTime) {
