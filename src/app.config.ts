@@ -47,6 +47,10 @@ const subpages = [
   {
     root: `pages/subpages/brickverse`,
     pages: ['index']
+  },
+  {
+    root: `pages/subpages/tictactoe`,
+    pages: ['index', 'index2', 'ai']
   }
 ]
 

@@ -1,8 +1,8 @@
 import {Button, View} from "@tarojs/components";
 import {AtTextarea} from "taro-ui";
 import {useState} from "react";
-import {DynamicContent} from "@/pages/tictactoe/dynamic-content";
 import {gql} from "@apollo/client";
+import {DynamicContent} from "@/pages/subpages/tictactoe/dynamic-content";
 
 const gqlTemplate = gql`query transformTsx ($code: String!) {
                 transform (sourceCode: $code, extra: "") {
