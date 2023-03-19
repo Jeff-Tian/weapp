@@ -32,6 +32,20 @@ const Brickverse = () => {
     />
     <AtDivider />
     <LinkedImage mode='widthFix' src='https://i3.lensdump.com/i/TV0CFz.jpeg' href='https://brick.cat' />
+    <AtButton type='primary' onClick={() => {
+      if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+        Taro.openEmbeddedMiniProgram({
+          appId: 'wx9fe2a6e64bfa9dd6',
+          path: `/pages/subpages/webview/index?src=${encodeURIComponent('https://brickverse.pa-ca.me/')}`,
+        })
+      } else {
+        Taro.showToast({
+          title: '仅支持微信小程序',
+        })
+      }
+    }
+    }
+    >半屏打开</AtButton>
   </SinglePageLayout>
 }
 

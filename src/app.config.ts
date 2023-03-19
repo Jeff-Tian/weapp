@@ -58,16 +58,8 @@ const subpages = [
 export default {
   pages: [
     'pages/yuque/index',
-    'pages/pearlsplus/1_6_1',
-    'pages/pearlsplus/c1_6_1',
-    'pages/pearlsplus/c1_6_2',
     'pages/yuque/article',
     'pages/index/index',
-    'pages/tictactoe/index',
-    'pages/tictactoe/index2',
-    'pages/tictactoe/ai',
-    'pages/pearlsplus/hello',
-    'pages/auth/authing',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -76,5 +68,6 @@ export default {
     navigationBarTextStyle: 'black'
   },
   subpackages: subpages,
-  enablePullDownRefresh: true
+  enablePullDownRefresh: true,
+  "embeddedAppIdList": ["wx9fe2a6e64bfa9dd6"]
 }
