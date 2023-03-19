@@ -5,7 +5,7 @@ import {Interpreter} from "eval5";
 import HardwayLayout from "@/layout/hardway-layout";
 import {AtButton, AtTextarea} from "taro-ui";
 import assert from "assert";
-import '../../pearlsplus/wasm.styl'
+import './wasm.styl'
 
 const Prompt = ({isOpen, onConfirm}) => {
   const [content, setContent] = useState('')

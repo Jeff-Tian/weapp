@@ -19,7 +19,7 @@ const CIPluginOpt = {
   },
   // 支付宝小程序
   alipay: {
-    appId: "支付宝小程序appId",
+    appid: "1234",
     toolId: "工具id",
     privateKeyPath: "密钥文件相对项目根目录的相对路径，例如 key/pkcs8-private-pem"
   },
