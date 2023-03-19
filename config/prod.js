@@ -12,7 +12,7 @@ module.exports = {
       }
     },
     csso: {
-      enable: true,
+      enable: false,
       config: {
         // 配置项同 https://cssnano.co/docs/what-are-optimisations/
       }
