@@ -12,14 +12,16 @@ import {client} from "./apollo-client"
 
 handleClipboard()
 
-Taro.onPageNotFound(({isEntryPage, path}) => {
-  console.log('path = ', isEntryPage, path);
-})
+if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+  Taro.onPageNotFound(({isEntryPage, path}) => {
+    console.log('path = ', isEntryPage, path);
+  })
 
-Taro.onError((error) => {
-  console.error('ah')
-  console.error(error)
-})
+  Taro.onError((error) => {
+    console.error('ah')
+    console.error(error)
+  })
+}
 
 class App extends Component {
   render() {

@@ -35,8 +35,8 @@ const queryLink = createPersistedQueryLink({
 })
 
 const authLink = setContext((_, {headers}) => {
-  const token = Taro.getStorageSync('_authing_token') || localStorage.getItem('_authing_token')
-  console.log('token = ', token);
+  const token = Taro.getStorageSync('_authing_token') || (localStorage ? localStorage.getItem('_authing_token') : undefined)
+
   return {
     headers: {
       ...headers,
