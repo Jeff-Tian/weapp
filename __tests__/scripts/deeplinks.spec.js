@@ -17,7 +17,6 @@ describe('deeplinks', () => {
 
   it('get all the deeplink pages', () => {
     expect(getAllDeepLinks()).toEqual([
-      "dist/pages/auth/authing.html",
       "dist/pages/index/index.html",
       "dist/pages/pearlsplus/1_6_1.html",
       "dist/pages/pearlsplus/c1_6_1.html",
@@ -50,9 +49,6 @@ describe('deeplinks', () => {
       "dist/pages/subpages/tictactoe/index2.html",
       "dist/pages/subpages/video/detail.html",
       "dist/pages/subpages/video/detail2.html",
-      "dist/pages/tictactoe/ai.html",
-      "dist/pages/tictactoe/index.html",
-      "dist/pages/tictactoe/index2.html",
       "dist/pages/yuque/article.html",
       "dist/pages/yuque/index.html"
     ]);
