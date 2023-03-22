@@ -8,6 +8,7 @@ import Taro from "@tarojs/taro";
 
 import './app.styl'
 import {client} from "./apollo-client"
+import {getRedirect} from "@/functions/redirect";
 
 
 handleClipboard()
@@ -24,6 +25,12 @@ if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
 }
 
 class App extends Component {
+  onPageNotFound({path}) {
+    console.log('on page not found', path)
+
+    Taro.redirectTo({url: getRedirect(path)})
+  }
+
   render() {
     return <ApolloProvider client={client}>
       {this.props.children}
