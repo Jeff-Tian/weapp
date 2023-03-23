@@ -21,7 +21,7 @@ const Profile = () => {
 
     <AtDivider />
     <AtForm>
-      <AtInput name='createdAt' title='注册日期' type='text' placeholder='请输入注册日期' value={userInfo?.createdAt}
+      <AtInput name='createdAt' title='注册日期' type='text' placeholder='请输入注册日期' value={userInfo?.createdAt ?? ''}
         disabled
       />
       <AtInput name='phone' title='手机号' type='text' placeholder='请输入手机号' value={userInfo?.phone} disabled />
