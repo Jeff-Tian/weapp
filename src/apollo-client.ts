@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import {createPersistedQueryLink} from "@apollo/client/link/persisted-queries"
 import {createUploadLink} from "apollo-upload-client";
 import {setContext} from "@apollo/client/link/context";
+import {getToken} from "@/common/token";
 
 const gatewayGraphQLURl = 'https://sls.pa-ca.me/gateway'
 
@@ -35,7 +36,9 @@ const queryLink = createPersistedQueryLink({
 })
 
 const authLink = setContext((_, {headers}) => {
-  const token = Taro.getStorageSync('_authing_token') || (localStorage ? localStorage.getItem('_authing_token') : undefined)
+  const token = getToken();
+
+  console.log("getToken = ", token)
 
   return {
     headers: {
