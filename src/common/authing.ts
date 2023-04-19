@@ -14,3 +14,5 @@ export const guard = Taro.getEnv() === Taro.ENV_TYPE.WEB ? new Guard({
   appId: authingAppId,
   mode: 'modal',
 }) : null
+
+console.log('new guard = ', guard, guard.getToken);

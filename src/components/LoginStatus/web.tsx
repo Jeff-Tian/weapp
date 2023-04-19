@@ -1,7 +1,7 @@
 import {User} from "@authing/guard-react";
 import {useEffect, useState} from "react";
 import {UserCard} from "@/components/UserCard";
-import {guard} from "@/common/login";
+import {guard} from "@/common/authing";
 
 export const WebLoginStatus = () => {
   const [userInfo, setUserInfo] = useState<User>();

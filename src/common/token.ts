@@ -3,9 +3,11 @@ import {authing, guard} from "@/common/authing";
 
 export const getToken = async () => {
   if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-    const {token} = await authing.getCurrentUser();
-    return token;
+    const user = await authing.getCurrentUser();
+    return user?.token;
   } else {
-    return guard.getToken();
+    const user = await guard.checkLoginStatus();
+
+    return user?.token;
   }
 }

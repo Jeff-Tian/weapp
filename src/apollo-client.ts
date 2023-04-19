@@ -35,8 +35,8 @@ const queryLink = createPersistedQueryLink({
   sha256: async (document: string) => crypto.createHash('sha256').update(document).digest('hex')
 })
 
-const authLink = setContext((_, {headers}) => {
-  const token = getToken();
+const authLink = setContext(async (_, {headers}) => {
+  const token = await getToken();
 
   console.log("getToken = ", token)
 
