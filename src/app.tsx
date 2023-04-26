@@ -6,12 +6,10 @@ import { getRedirect } from "@/functions/redirect";
 
 import "taro-ui/dist/style/index.scss";
 import Taro from "@tarojs/taro";
-import { inject } from "@vercel/analytics";
 
 import "./app.styl";
 import { client } from "./apollo-client";
 
-inject();
 handleClipboard();
 
 if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
@@ -39,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;

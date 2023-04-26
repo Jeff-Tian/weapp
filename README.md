@@ -1,4 +1,3 @@
-
 # weapp
 
 ---
@@ -6,6 +5,13 @@
 [简体中文](README_zh-CN.md)
 
 > Personal Wechat Miniprogram for Hardway
+
+## Domains
+
+- https://taro.jefftian.dev
+- https://taro.pa-ca.me
+
+## Mini program
 
 | Trial Version                                   | Release Version                                      |
 |-------------------------------------------------|------------------------------------------------------|
