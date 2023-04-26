@@ -1,6 +1,6 @@
 {
 	"name": "weapp",
-	"version": "1.6.12",
+	"version": "1.6.14",
 	"private": true,
 	"description": "哈德韦的个人小程序",
 	"templateInfo": {
@@ -33,7 +33,6 @@
 		"dev:jd": "npm run build:jd -- --watch",
 		"dev:quickapp": "npm run build:quickapp -- --watch",
 		"test": "jest --config ./jest.config.js --no-cache --coverage",
-		"wmp:upload": "node scripts/upload.js",
 		"deeplinks": "node scripts/deeplinks.js",
 		"serve": "python3 -m http.server --directory dist --cgi",
 		"node18": "NODE_OPTIONS=\"--no-experimental-fetch --openssl-legacy-provider\" yarn build:h5",
