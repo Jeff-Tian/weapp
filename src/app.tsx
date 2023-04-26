@@ -1,40 +1,41 @@
-import {ApolloProvider} from '@apollo/client'
-import {Component} from 'react'
+import { ApolloProvider } from "@apollo/client";
+import { Component } from "react";
 
-import {handleClipboard} from "@/functions/clipboard";
+import { handleClipboard } from "@/functions/clipboard";
+import { getRedirect } from "@/functions/redirect";
 
-import 'taro-ui/dist/style/index.scss'
+import "taro-ui/dist/style/index.scss";
 import Taro from "@tarojs/taro";
+import { inject } from "@vercel/analytics";
 
-import './app.styl'
-import {client} from "./apollo-client"
-import {getRedirect} from "@/functions/redirect";
+import "./app.styl";
+import { client } from "./apollo-client";
 
-
-handleClipboard()
+inject();
+handleClipboard();
 
 if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-  Taro.onPageNotFound(({isEntryPage, path}) => {
-    console.log('path = ', isEntryPage, path);
-  })
+  Taro.onPageNotFound(({ isEntryPage, path }) => {
+    console.log("path = ", isEntryPage, path);
+  });
 
   Taro.onError((error) => {
-    console.error('ah')
-    console.error(error)
-  })
+    console.error("ah");
+    console.error(error);
+  });
 }
 
 class App extends Component {
-  onPageNotFound({path}) {
-    console.log('on page not found', path)
+  onPageNotFound({ path }) {
+    console.log("on page not found", path);
 
-    Taro.redirectTo({url: getRedirect(path)})
+    Taro.redirectTo({ url: getRedirect(path) });
   }
 
   render() {
-    return <ApolloProvider client={client}>
-      {this.props.children}
-    </ApolloProvider>
+    return (
+      <ApolloProvider client={client}>{this.props.children}</ApolloProvider>
+    );
   }
 }
 

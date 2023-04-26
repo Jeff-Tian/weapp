@@ -59,6 +59,7 @@
 		"@tarojs/react": "3.6.5",
 		"@tarojs/runtime": "3.6.5",
 		"@tarojs/taro": "3.6.5",
+		"@vercel/analytics": "^1.0.0",
 		"apollo-upload-client": "^17.0.0",
 		"authing-wxapp-sdk": "^4.3.22-alpha.7",
 		"eval5": "^1.4.7",
