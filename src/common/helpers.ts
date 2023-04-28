@@ -1,5 +1,3 @@
-import qs from 'querystring'
-
 export const memoizeAsync = <T>(func: (...args) => Promise<T>) => {
   const cache = {}
 
@@ -38,12 +36,4 @@ export const getUrlQuerySeparator = url => url.lastIndexOf('?') >= 0 ? '&' : '?'
 export const appendUrlQuery = (url, query) => {
   const separator = getUrlQuerySeparator(url)
   return url + separator + query
-}
-
-export const getCurrentPageUrl = (router) => {
-  const path = router.path
-  const pathWithoutQuery = path.split('?')[0]
-  const query = router.params
-
-  return `https://taro.pa-ca.me${pathWithoutQuery}?${qs.stringify(query)}`
 }
