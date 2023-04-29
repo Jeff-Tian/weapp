@@ -25,10 +25,6 @@ describe('deeplinks', () => {
   it('get all the deeplink pages', () => {
     expect(getAllDeepLinks()).toEqual([
       "dist/pages/index/index.html",
-      "dist/pages/pearlsplus/1_6_1.html",
-      "dist/pages/pearlsplus/c1_6_1.html",
-      "dist/pages/pearlsplus/c1_6_2.html",
-      "dist/pages/pearlsplus/hello.html",
       "dist/pages/subpages/about/index.html",
       "dist/pages/subpages/about/system.info.html",
       "dist/pages/subpages/auth/authing.html",
