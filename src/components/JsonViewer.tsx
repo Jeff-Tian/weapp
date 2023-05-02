@@ -6,7 +6,10 @@ const JsonViewer = ({json}) => {
     {!json && <View>{`${json}`}</View>}
     {
       json && Object.keys(json).map(key => {
-        return <AtInput name={key} title={key} type='text' placeholder={key} value={json[key]} disabled />
+        return <AtInput key={key} name={key} title={key} type='text' placeholder={key} value={json[key]} disabled
+          onChange={() => {
+                        }}
+        />
       })
     }
   </AtForm>
