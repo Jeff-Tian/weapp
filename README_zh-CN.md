@@ -6,6 +6,13 @@
 
 > 哈德韦的个人小程序
 
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Jeff-Tian_weapp&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Jeff-Tian_weapp)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Jeff-Tian_weapp&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Jeff-Tian_weapp)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Jeff-Tian_weapp&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Jeff-Tian_weapp)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Jeff-Tian_weapp&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Jeff-Tian_weapp)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Jeff-Tian_weapp&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Jeff-Tian_weapp)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Jeff-Tian_weapp&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Jeff-Tian_weapp)
+
 ## 域名
 
 - https://taro.jefftian.dev
