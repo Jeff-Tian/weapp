@@ -4,10 +4,6 @@ module.exports = {
   },
   defineConstants: {},
   mini: {
-    webpackChain(chain) {
-      chain.plugin('analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
-    },
     enableSourceMap: false,
     terser: {
       enable: true,

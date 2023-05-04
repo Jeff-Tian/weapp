@@ -10,7 +10,13 @@ const CIPluginOpt = {
   // 微信小程序
   weapp: {
     appid: "wx8c777d630f2b78e3",
-    privateKeyPath: "private.key"
+    privateKeyPath: "private.key",
+    setting: {
+      es6: true,
+      minifyJS: true,
+      minifyWXML: true,
+      minify: true
+    }
   },
   // 字节跳动小程序
   tt: {
