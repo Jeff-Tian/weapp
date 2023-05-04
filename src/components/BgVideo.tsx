@@ -24,7 +24,7 @@ const BgVideo = () => {
     return null;
   }
 
-  if (!data || !data.video) {
+  if (!data?.video) {
     return null;
   }
 

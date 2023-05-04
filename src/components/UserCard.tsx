@@ -4,11 +4,22 @@ import {View} from "@tarojs/components";
 import Taro from "@tarojs/taro";
 
 export const UserCard = ({userInfo}: { userInfo: User | undefined }) => {
+  const navigateToProfile = () => {
+    const currentPath = Taro.getCurrentInstance().router?.path;
+
+    if (currentPath?.startsWith('/pages/subpages/auth/profile') && Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+      window.open('https://www.brickverse.net/profile')
+      return;
+    }
+
+    return Taro.navigateTo({url: '/pages/subpages/auth/profile'});
+  };
+
   return userInfo ?
     <AtCard note={`注册于 ${userInfo.createdAt}，最近于 ${userInfo.lastLogin} 登录过`}
       extra={userInfo.phone || undefined}
       title={userInfo.username || userInfo.nickname || userInfo.email || undefined}
       thumb={userInfo.photo || undefined}
-      onClick={() => Taro.navigateTo({url: '/pages/subpages/auth/profile'})}
+      onClick={navigateToProfile}
     >共登录过 {userInfo.loginsCount} 次。</AtCard> : <View>未获取到信息</View>
 }

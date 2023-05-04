@@ -14,7 +14,7 @@ describe('remark', () => {
             }
           },
           type: 'text',
-          value: '<a name=\"he04y\">'
+          value: '<a name="he04y">'
         }
       ]
     }

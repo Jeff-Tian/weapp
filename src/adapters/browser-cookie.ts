@@ -9,15 +9,13 @@ export class BrowserCookieStore implements Store {
     const decodedCookie = decodeURIComponent(document.cookie)
 
     decodedCookie.split(';').forEach(c => {
-      while (c.charAt(0) == ' ') {
+      while (c.startsWith(' ')) {
         c = c.substring(1)
       }
 
       const name = key + '='
-      if (c.indexOf(name) == 0) {
+      if (c.startsWith(name)) {
         cb(null, Cookie.parse(c.substring(name.length, c.length)) ?? null)
-
-        return
       }
     });
 
