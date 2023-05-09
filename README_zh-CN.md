@@ -24,6 +24,10 @@
 |-------------------------------------------------|---------------------------------------------------|
 | ![哈德韦体验版](https://i1.lensdump.com/i/Rg0UAq.jpg) | ![哈德韦正式版](https://i.lensdump.com/i/Rg0cVA.md.png) | 
 
+### 微信小程序密钥
+
+一旦在微信小程序后台更新完密钥，就需要同步将密钥更新到 authing.cn 的后台中：https://console.authing.cn/console/620097b69a9dab5e967d0c44/connection/social-identity-source/info?provider=wechat&type=wechat:miniprogram:default&sourceId=6204b1aacf9a04e869484aa2 ，否则会造成小程序无法登录。
+
 ## 图片存储
 
 不建议将图片资源直接放在代码库中，目前图片托管在： https://lensdump.com/ 。
