@@ -1,11 +1,11 @@
 import Taro from '@tarojs/taro'
 import HardwayLayout from "@/layout/hardway-layout";
 import {View} from "@tarojs/components";
-import {useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import {AtActivityIndicator} from "taro-ui";
-import {memoizedAsync} from "@/common/helpers";
+import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 
-const login = async()=>{
+const login = async () => {
   const {code} = await Taro.login();
   console.log('code = ', code)
   return Taro.request({
@@ -13,22 +13,21 @@ const login = async()=>{
   });
 }
 
-const LoginStatus = ()=>{
+const LoginStatus = () => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<Taro.request.SuccessCallbackResult | null>(null);
 
-  useEffect(()=>{
-    memoizedAsync(login)().then(res=>{
+  useCallback(() => {
+    login().then(res => {
       console.log('res = ', res)
       setLoading(false);
       setUser(res)
-    })
-
+    }).catch(naiveErrorHandler)
   }, [])
 
   return <View>
     <AtActivityIndicator mode='center' size={128} content='加载中……' isOpened={loading} />
-    {!loading? <View>欢迎，{JSON.stringify(user)}</View>: null}
+    {!loading ? <View>欢迎，{JSON.stringify(user)}</View> : null}
   </View>
 }
 

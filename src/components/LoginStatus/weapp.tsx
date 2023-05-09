@@ -1,20 +1,22 @@
 import {useEffect, useState} from "react";
-import {memoizedAsync} from "@/common/helpers";
 import {View} from "@tarojs/components";
 import {AtActivityIndicator} from "taro-ui";
 import {UserCard} from "@/components/UserCard";
 import {login} from "@/common/login";
+import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
+import {User} from "@authing/guard-react";
 
 
 export const WeappLoginStatus = () => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    memoizedAsync(login)().then(res => {
+    login().then(res => {
       setLoading(false)
+
       setUser(res)
-    })
+    }).catch(naiveErrorHandler)
   }, [])
 
   return <View>

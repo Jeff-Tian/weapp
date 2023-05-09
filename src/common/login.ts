@@ -6,7 +6,7 @@ import {authing, guard} from "@/common/authing";
 export const login = async (): Promise<User> => {
   const {code} = await Taro.login()
   // 成功登录，将 token 写入微信 Storage
-  return await authing.loginByCode(code)
+  return await authing.loginByCode(code);
 }
 
 

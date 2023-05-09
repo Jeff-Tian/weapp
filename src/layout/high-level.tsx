@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Taro from "@tarojs/taro";
-import { View } from "@tarojs/components";
-import { AtDrawer, AtNavBar } from "taro-ui";
-import { getCurrentPageUrl } from "@/common/helpers";
-import { drawerItems, onDrawerItemClick } from "@/layout/drawer-items";
-import { User } from "@authing/guard-react";
-import { getUserInfo } from "@/common/login";
-import { copyCurrentPagePath } from "@/functions/current-page";
+import {View} from "@tarojs/components";
+import {AtDrawer, AtNavBar} from "taro-ui";
+import {getCurrentPageUrl} from "@/common/helpers";
+import {drawerItems, onDrawerItemClick} from "@/layout/drawer-items";
+import {User} from "@authing/guard-react";
+import {getUserInfo} from "@/common/login";
+import {copyCurrentPagePath} from "@/functions/current-page";
+import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 
 export const HighLevel = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -14,7 +15,7 @@ export const HighLevel = () => {
   const [userInfo, setUserInfo] = useState<User | null>(null);
 
   useEffect(() => {
-    getUserInfo().then(setUserInfo);
+    getUserInfo().then(setUserInfo).catch(naiveErrorHandler);
   }, []);
 
   return (
@@ -24,7 +25,7 @@ export const HighLevel = () => {
           setShowDrawer(true);
         }}
         onClickRgIconNd={() => {
-          Taro.navigateTo({ url: "/pages/subpages/auth/authing" });
+          Taro.navigateTo({url: "/pages/subpages/auth/authing"});
         }}
         onClickLeftIcon={copyCurrentPagePath}
         color='#000'
@@ -33,7 +34,7 @@ export const HighLevel = () => {
         leftIconType='link'
         rightFirstIconType='bullet-list'
         rightSecondIconType={
-          userInfo ? { value: "user", color: "blue" } : "user"
+          userInfo ? {value: "user", color: "blue"} : "user"
         }
       />
 
