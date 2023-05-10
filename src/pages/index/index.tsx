@@ -2,7 +2,6 @@ import {Component} from 'react'
 import {Text} from '@tarojs/components'
 import {AtButton, AtForm, AtInput, AtTextarea} from 'taro-ui'
 import Taro from '@tarojs/taro'
-import './index.styl'
 import projectConfig from '../../../project.config.json'
 import HardwayLayout from "../../layout/hardway-layout"
 

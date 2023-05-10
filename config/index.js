@@ -64,6 +64,17 @@ const config = {
     options: {},
   },
   framework: 'react',
+  rn: {
+    resolve: {
+      include: ['taro-ui'], // 处理引用 node_modules/taro-ui 的依赖。
+    },
+    enableSvgTransform: true, // 处理图标
+    stylus: {
+      options: {
+        use: ["nib"]
+      }
+    }
+  },
   mini: {
     optimizeMainPackage: {
       enable: true
