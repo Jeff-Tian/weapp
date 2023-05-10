@@ -46,7 +46,7 @@
   "compileType": "miniprogram",
   "condition": {},
   "libVersion": "2.22.0",
-  "srcMiniprogramRoot": "dist/",
+  "srcMiniprogramRoot": "dist/weapp/",
   "packOptions": {
     "ignore": [],
     "include": []
