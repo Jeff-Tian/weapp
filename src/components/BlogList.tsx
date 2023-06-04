@@ -39,7 +39,7 @@ export const BlogList = () => {
 
       setBlogs(blogs.concat(data.paginatedYuque))
     }
-  }, [blogs, data])
+  }, [data])
 
   if (error) {
     console.error(error)

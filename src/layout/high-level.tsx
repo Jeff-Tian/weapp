@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import Taro from "@tarojs/taro";
 import {View} from "@tarojs/components";
 import {AtDrawer, AtNavBar} from "taro-ui";
-import {getCurrentPageUrl} from "@/common/helpers";
 import {drawerItems, onDrawerItemClick} from "@/layout/drawer-items";
 import {User} from "@authing/guard-react";
 import {getUserInfo} from "@/common/login";
