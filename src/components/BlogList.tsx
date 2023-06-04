@@ -39,9 +39,10 @@ export const BlogList = () => {
 
       setBlogs(blogs.concat(data.paginatedYuque))
     }
-  }, [data])
+  }, [blogs, data])
 
   if (error) {
+    console.error(error)
     return <View>
       <ErrorDisplay error={error}>
         <button onClick={() => refetch()}>重试</button>

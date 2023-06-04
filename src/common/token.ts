@@ -8,7 +8,7 @@ export const getToken = async () => {
   } else {
     const loginStatus = await guard.checkLoginStatus();
 
-    if (loginStatus.data.id) {
+    if (loginStatus?.data?.id) {
       const user = await guard.trackSession();
 
       return user.token;
