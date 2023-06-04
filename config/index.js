@@ -59,7 +59,7 @@ const config = {
   copy: {
     patterns: [{
       from: 'src/static',
-      to: 'dist/static'
+      to: 'dist/h5/static'
     }],
     options: {},
   },
