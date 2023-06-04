@@ -40,6 +40,6 @@ if (require.main === module) {
   allDeepLinks.forEach(f => {
     const folder = path.dirname(f);
     fs.mkdirSync(folder, {recursive: true})
-    fs.copyFileSync('dist/index.html', f)
+    fs.copyFileSync('dist/h5/index.html', f)
   })
 }
