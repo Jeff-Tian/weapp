@@ -40,6 +40,7 @@ describe('deeplinks', () => {
       "dist/pages/subpages/pearlsplus/detail.html",
       "dist/pages/subpages/pearlsplus/hello.html",
       "dist/pages/subpages/pearlsplus/index.html",
+      "dist/pages/subpages/pearlsplus/shared/components.html",
       "dist/pages/subpages/react-view/browser.html",
       "dist/pages/subpages/react-view/index.html",
       "dist/pages/subpages/red-package/index.html",
