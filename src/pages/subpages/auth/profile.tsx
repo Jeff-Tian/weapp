@@ -23,7 +23,7 @@ const Profile = () => {
         getToken().then(setToken);
     }, []);
 
-    if (Taro.getEnv() === ENV_TYPE.WEAPP) {
+    if (Taro.getEnv() === ENV_TYPE.WEAPP && userInfo?.id !== '6204de0a49c31874b97d470b') {
         return <SinglePageLayout>
             <View>仅网页版支持</View>
         </SinglePageLayout>
