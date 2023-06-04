@@ -99,11 +99,6 @@ const YuQueArticle: React.FC = () => {
       <View className='at-row'>
         <View className='at-col'>
           <AtButton size='small'
-            onClick={() => Taro.setClipboardData({data: `pages/yuque/article?slug=${slug}`})}
-          >拷贝本页路径</AtButton>
-        </View>
-        <View className='at-col'>
-          <AtButton size='small'
             onClick={() => Taro.setClipboardData({data: data.yuque.body})}
           >拷贝正文（markdown）</AtButton>
         </View>
