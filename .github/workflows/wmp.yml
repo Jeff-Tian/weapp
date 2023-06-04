@@ -34,4 +34,4 @@ jobs:
       - name: build
         run: |
           yarn
-          yarn build:weapp:upload
+          NODE_OPTIONS="--no-experimental-fetch --openssl-legacy-provider" yarn build:weapp:upload
