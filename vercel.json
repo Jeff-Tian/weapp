@@ -4,5 +4,20 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "routes": [
+    {
+      "src": "/favicon.ico",
+      "headers": { "Location": "https://jeff-tian.jiwai.win/favicon-32x32.png" },
+      "status": 302
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
