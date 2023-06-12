@@ -12,7 +12,7 @@ export const UserCard = ({userInfo}: { userInfo: User | undefined }) => {
       return;
     }
 
-    if (userInfo?.id === '6204de0a49c31874b97d470b') {
+    if (userInfo?.id === '6204de0a49c31874b97d470b' || Taro.getEnv() === Taro.ENV_TYPE.WEB) {
       return Taro.navigateTo({url: '/pages/subpages/auth/profile'});
     } else {
       Taro.showToast({

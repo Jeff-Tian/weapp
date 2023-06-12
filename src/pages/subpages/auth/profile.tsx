@@ -10,7 +10,7 @@ import {User} from "@authing/guard-react";
 import MyZhihu from "@/components/zhihu/MyZhihu";
 import {Button, Label, RootPortal, View} from "@tarojs/components";
 import {getToken} from "@/common/token";
-import JsonViewer, {JsonViewerWrapper} from "@/components/JsonViewer";
+import {JsonViewerWrapper} from "@/components/JsonViewer";
 import {parseJwt} from "@/functions/jwt";
 
 const Profile = () => {
