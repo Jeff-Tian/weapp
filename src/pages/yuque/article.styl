@@ -8,8 +8,32 @@ view.at-article, view.at-article__section {
   view {
     user-select: all;
   }
+
+  img {
+    max-width: 100%;
+  }
 }
 
 .at-article__content {
   padding: 1em;
 }
+
+code {
+  white-space: pre-wrap !important;
+  counter-reset: step;
+  counter-increment: step 0;
+  margin-left: 40px;
+  min-width: calc(100% - 40px) !important;
+}
+
+//
+//.line::before {
+//  content: counter(step);
+//  counter-increment: step;
+//  width: 2ch;
+//  margin-right: 36px;
+//  margin-left: calc(-36px - 2ch);
+//  display: inline-block;
+//  text-align: right;
+//  color: var(--vp-code-line-number-color);
+//}
