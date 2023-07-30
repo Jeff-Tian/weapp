@@ -1,6 +1,11 @@
 {
   "rewrites": [
     {
+      "source": "/api/gateway/:path*",
+      "destination": "https://sls.pa-ca.me/stg/gateway/:path*"
+    },
+    
+    {
       "source": "/https/:match/:url*",
       "destination": "https://:match/:url*"
     },
@@ -36,7 +41,6 @@
       "source": "/:protocol*/:match/:url*/",
       "destination": ":protocol://:match/:url*/"
     },
-
     {
       "source": "/static/(.*)",
       "destination": "/static/$1"
