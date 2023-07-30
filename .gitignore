@@ -11,3 +11,4 @@ lib
 private.key
 .idea
 .swc
+yarn-error.log

@@ -7,7 +7,7 @@ import {createUploadLink} from "apollo-upload-client";
 import {setContext} from "@apollo/client/link/context";
 import {getToken} from "@/common/token";
 
-const gatewayGraphQLURl = 'https://sls.pa-ca.me/gateway'
+const gatewayGraphQLURl = 'https://sls.pa-ca.me/stg/gateway'
 
 
 const theFetch = async (url, options) => {
