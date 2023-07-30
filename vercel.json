@@ -1,23 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/static/(.*)",
-      "destination": "/static/$1"
-    },
-    {
-      "source": "/css/(.*)",
-      "destination": "/css/$1"
-    },
-    {
-      "source": "/js/(.*)",
-      "destination": "/js/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    },
-    
-    {
       "source": "/https/:match/:url*",
       "destination": "https://:match/:url*"
     },
@@ -52,6 +35,23 @@
     {
       "source": "/:protocol*/:match/:url*/",
       "destination": ":protocol://:match/:url*/"
+    },
+
+    {
+      "source": "/static/(.*)",
+      "destination": "/static/$1"
+    },
+    {
+      "source": "/css/(.*)",
+      "destination": "/css/$1"
+    },
+    {
+      "source": "/js/(.*)",
+      "destination": "/js/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
