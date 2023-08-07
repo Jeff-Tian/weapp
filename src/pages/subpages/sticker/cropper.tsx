@@ -4,8 +4,8 @@ import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
 import {Canvas, View} from "@tarojs/components";
 import {AtButton, AtDivider, AtSlider} from "taro-ui";
 import {useEffect, useState} from "react";
-import {poll} from "@/functions/poll";
 import LinkedImage from "@/components/LinkedImage";
+import {flushSync} from 'react-dom';
 
 const downloadFile = (url, filename) => {
   const a = document.createElement('a');
@@ -15,6 +15,7 @@ const downloadFile = (url, filename) => {
 }
 
 const downloadPng = (canvas, filename: string) => {
+  console.log('canvas = ', canvas, canvas.toDataURL);
   downloadFile(canvas.toDataURL('image/png'), filename);
 };
 
@@ -24,12 +25,12 @@ const Cropper = () => {
   const [imagePath, setImagePath] = useState<string | undefined>(undefined)
 
   useReady(() => {
-    setContexts(new Map([['sticker-canvas-240-240', Taro.createCanvasContext('sticker-canvas-240-240')], ['sticker-canvas-120-120', Taro.createCanvasContext('sticker-canvas-120-120')]]))
-
-    console.log('ready!')
+    flushSync(() => {
+      setContexts(new Map([['sticker-canvas-240-240', Taro.createCanvasContext('sticker-canvas-240-240')], ['sticker-canvas-120-120', Taro.createCanvasContext('sticker-canvas-120-120')]]))
+    })
   })
   const chooseImage = () => {
-    setContexts(new Map([['sticker-canvas-240-240', Taro.createCanvasContext('sticker-canvas-240-240')], ['sticker-canvas-120-120', Taro.createCanvasContext('sticker-canvas-120-120')]]))
+    console.log('contexts = ', contexts);
 
     Taro.chooseImage({
       count: 1,
@@ -39,7 +40,9 @@ const Cropper = () => {
       const [tempFilePath] = res.tempFilePaths;
       setImagePath(tempFilePath)
 
-      poll(() => contexts !== undefined && contexts.size === 2, 1000, 10000).then(() => Promise.all([...contexts].map(([canvasId, context]) => drawImageFully(tempFilePath, context, canvasId, 0, 0, offset))))
+      Promise.all([...contexts].map(([canvasId, context]) => drawImageFully(tempFilePath, context, canvasId, 0, 0, offset))).then(r => {
+        console.log('drawed = ', r);
+      })
     }).catch(naiveErrorHandler);
   };
 
@@ -62,8 +65,8 @@ const Cropper = () => {
     });
     gif.render();
 
-    downloadPng(document.querySelector('[canvas-id=sticker-canvas-120-120]'), '120-120.png');
-    downloadPng(document.querySelector('[canvas-id=sticker-canvas-240-240]'), '240-240.png');
+    downloadPng(document.querySelector('canvas[canvas-id=sticker-canvas-120-120]'), '120-120.png');
+    downloadPng(document.querySelector('canvas[canvas-id=sticker-canvas-240-240]'), '240-240.png');
   }
 
   return <View>

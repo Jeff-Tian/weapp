@@ -32,12 +32,15 @@ export const drawImageFully = async (imagePath, ctx: CanvasContext, canvasId, sx
         ctx.draw();
       } else {
         const h5Canvas = document.querySelector(h5CanvasSelector);
-        if (h5Canvas) {
-          h5Canvas.width = canvasWidth;
-          h5Canvas.height = canvasHeight;
+
+        if (!h5Canvas) {
+          throw new Error('canvas is empty!')
         }
 
-        ctx = ctx['__raw__'];
+        h5Canvas.width = canvasWidth;
+        h5Canvas.height = canvasHeight;
+
+        ctx = h5Canvas.getContext('2d');
         const image = new Image();
         image.onload = function () {
           // step 1
