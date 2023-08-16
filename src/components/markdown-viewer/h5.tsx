@@ -3,11 +3,21 @@ import remarkHtml from "remark-html"
 import {View} from "@tarojs/components"
 import unist from 'unist-util-visit'
 
+function proxyUrl(url) {
+  if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+    return url;
+  }
+
+  const parts = url.split('://')
+
+  return `/${parts[0]}/${parts[1]}`
+}
+
 function imageHandler() {
   return (tree) => {
     unist(tree, 'image', (node) => {
       node.type = 'html'
-      node.value = `<img src="https://uniheart.pa-ca.me/proxy?url=${node.url}" />`
+      node.value = `<img src="${proxyUrl(node.url)}" />`
       return unist.SKIP
     })
   }
