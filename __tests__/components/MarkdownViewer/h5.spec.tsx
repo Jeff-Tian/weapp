@@ -10,20 +10,10 @@ it('renders', async () => {
 `);
 })
 
-describe('renders images with self vercel proxies', () => {
-  it('https', async () => {
-    const {container} = render(
-      <WebMarkdownViewer markdown='![test](https://img.alicdn.com/tfs/TB1.jpg)' />
-    );
+it('renders image with proxies', async () => {
+  const {container} = render(
+    <WebMarkdownViewer markdown='![test](https://img.alicdn.com/tfs/TB1.jpg)' />
+  );
 
-    expect(container.querySelector('img')?.src).toBe('http://localhost/https/img.alicdn.com/tfs/TB1.jpg')
-  })
-
-  it('http', async () => {
-    const {container} = render(
-      <WebMarkdownViewer markdown='![test](http://img.alicdn.com/tfs/TB1.jpg)' />
-    );
-
-    expect(container.querySelector('img')?.src).toBe('http://localhost/http/img.alicdn.com/tfs/TB1.jpg')
-  })
+  expect(container.querySelector('img')?.src).toBe('https://uniheart.pa-ca.me/proxy?url=https://img.alicdn.com/tfs/TB1.jpg')
 })
