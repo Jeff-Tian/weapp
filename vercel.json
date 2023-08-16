@@ -1,30 +1,10 @@
 {
-  "headers": [
-    {
-      "source": "/https/:match/:url*",
-      "headers": [
-        {
-          "key": "Referer",
-          "value": ""
-        }
-      ]
-    },
-    {
-      "source": "/http/:match/:url*",
-      "headers": [
-        {
-          "key": "Referer",
-          "value": ""
-        }
-      ]
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/gateway/:path*",
       "destination": "https://sls.pa-ca.me/stg/gateway/:path*"
     },
-
+    
     {
       "source": "/https/:match/:url*",
       "destination": "https://:match/:url*"
