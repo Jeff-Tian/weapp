@@ -17,9 +17,9 @@ describe('deeplinks', () => {
   })
 
   it('redirects', () => {
-    const path = '/pages/pearlsplus/1_6_1'
+    const path = 'pages/pearlsplus/1_6_1'
     const redirectsTo = redirectFor(path);
-    expect(redirectsTo).toEqual('/pages/subpages/pearlsplus/1_6_1');
+    expect(redirectsTo).toEqual('pages/subpages/pearlsplus/1_6_1');
   })
 
   it('get all the deeplink pages', () => {
@@ -53,6 +53,8 @@ describe('deeplinks', () => {
       "dist/pages/subpages/tictactoe/index2.html",
       "dist/pages/subpages/video/detail.html",
       "dist/pages/subpages/video/detail2.html",
+      "dist/pages/subpages/video/detail3.html",
+      "dist/pages/subpages/video/index.html",
       "dist/pages/yuque/article.html",
       "dist/pages/yuque/index.html"
     ]);
