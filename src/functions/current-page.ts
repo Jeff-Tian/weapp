@@ -10,7 +10,7 @@ const getCurrentPath = (router = Taro.getCurrentInstance().router) => {
     const pathWithoutQuery = path.split("?")[0];
     const {$taroTimestamp, ...query} = params;
 
-    return `${pathWithoutQuery}${Object.keys(query).length === 0 ? '' : qs.stringify(query)}`;
+    return `${pathWithoutQuery}${Object.keys(query).length === 0 ? '' : `?${qs.stringify(query)}`}`;
 };
 
 const getCurrentPageUrl = (router = Taro.getCurrentInstance().router) => {
