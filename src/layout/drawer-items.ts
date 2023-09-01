@@ -23,15 +23,13 @@ export const drawerItems = new Map<string, () => void>([
   ['人脸识别', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/landmark'})],
   ['哈德韦的朋友们', async () => Taro.navigateTo({url: '/pages/subpages/friends/list'})],
   ['红包🧧封面', async () => Taro.navigateTo({url: '/pages/subpages/red-package/index'})],
-  ['微信表情', async () => Taro.navigateTo({url: '/pages/subpages/sticker/index'})]
-
+  ['微信表情', async () => Taro.navigateTo({url: '/pages/subpages/sticker/index'})],
+  ['资源', async () => Taro.navigateTo({url: '/pages/subpages/video/index'})],
   // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/test/index'})],
 ])
 
 if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
   drawerItems.set('向我咨询', async () => window.open('https://www.zhihu.com/consult/people/1073548674713423872'))
-  drawerItems.set('视频', async () => Taro.navigateTo({url: '/pages/subpages/video/detail?zVideoId=1492435273367248896'}))
-  drawerItems.set('视频2', async () => Taro.navigateTo({url: `/pages/subpages/video/detail2?url=${encodeURIComponent(`https://www.zhihu.com/question/378598799/answer/1126026947`)}`}))
 }
 
 export const onDrawerItemClick = index => [...drawerItems.values()][index]()

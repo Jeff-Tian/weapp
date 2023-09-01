@@ -13,7 +13,7 @@ const subpages = [
   },
   {
     root: `pages/subpages/video`,
-    pages: ['detail', 'detail2']
+    pages: ['index', 'detail', 'detail2']
   },
   {
     root: `pages/subpages/test`,

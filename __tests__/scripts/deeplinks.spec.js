@@ -1,6 +1,6 @@
 import {getAllDeepLinks} from "../../scripts/deeplinks";
 import {compose, head, identity} from "../../scripts/helpers";
-import {getRedirect} from "@/functions/redirect";
+import {redirectFor, tryRedirect} from "@/functions/redirect";
 
 describe('deeplinks', () => {
   it('are equal', () => {
@@ -18,7 +18,7 @@ describe('deeplinks', () => {
 
   it('redirects', () => {
     const path = '/pages/pearlsplus/1_6_1'
-    const redirectsTo = getRedirect(path);
+    const redirectsTo = redirectFor(path);
     expect(redirectsTo).toEqual('/pages/subpages/pearlsplus/1_6_1');
   })
 

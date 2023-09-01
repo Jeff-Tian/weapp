@@ -1,19 +1,19 @@
-import { ApolloProvider } from "@apollo/client";
-import { Component } from "react";
+import {ApolloProvider} from "@apollo/client";
+import {Component} from "react";
 
-import { handleClipboard } from "@/functions/clipboard";
-import { getRedirect } from "@/functions/redirect";
+import {handleClipboard} from "@/functions/clipboard";
+import {tryRedirect} from "@/functions/redirect";
 
 import "taro-ui/dist/style/index.scss";
 import Taro from "@tarojs/taro";
 
 import "./app.styl";
-import { client } from "./apollo-client";
+import {client} from "./apollo-client";
 
 handleClipboard();
 
 if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
-  Taro.onPageNotFound(({ isEntryPage, path }) => {
+  Taro.onPageNotFound(({isEntryPage, path}) => {
     console.log("path = ", isEntryPage, path);
   });
 
@@ -24,10 +24,10 @@ if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
 }
 
 class App extends Component {
-  onPageNotFound({ path }) {
+  onPageNotFound({path}) {
     console.log("on page not found", path);
 
-    Taro.redirectTo({ url: getRedirect(path) });
+    tryRedirect(path);
   }
 
   render() {
