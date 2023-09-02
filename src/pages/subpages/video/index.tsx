@@ -3,7 +3,7 @@ import {useState} from "react";
 import Taro from "@tarojs/taro";
 
 const ResourceIndex = () => {
-  const [resourceId, setResourceId] = useState('1492435273367248896')
+  const [resourceId, setResourceId] = useState('02aPe3Jgy3COgyPaWfUJPyfFw')
 
   const loadResource = () => {
     if (!resourceId) {
