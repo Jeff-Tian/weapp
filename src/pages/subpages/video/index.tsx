@@ -58,6 +58,7 @@ const ResourceIndex = () => {
       <Input type='text' placeholder='请输入资源标识' maxlength={-1}
         onInput={(event) => setResourceId(event.detail.value)}
         onConfirm={loadResource}
+        value={resourceId}
       />
       <Button onClick={loadResource}>加载资源</Button>
     </View>
