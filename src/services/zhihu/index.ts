@@ -1,17 +1,5 @@
-import {gql} from '@apollo/client'
 import Taro, {ENV_TYPE} from '@tarojs/taro'
 import qs from 'qs'
-
-export const SYNC_YUQUE_TO_ZHIHU = gql`
-mutation SyncYuqueToZhihu($syncYuqueToZhihuSlug2: String!) {
-  syncYuqueToZhihu(slug: $syncYuqueToZhihuSlug2) {
-    slug
-  }
-}`
-
-export const draftDirectly = async (title, content) => {
-  return await draftColumn(title, content)
-}
 
 export const loginByQrCode = async (p: { setRichModalTitle: (value: (((prevState: string) => string) | string)) => void; setIsRichModalOpen: (value: (((prevState: boolean) => boolean) | boolean)) => void; setSaveQR: (value: (((prevState: null) => null) | null)) => void; setZhihuLoginQRCode: (value: (((prevState: string) => string) | string)) => void }) => {
   try {
@@ -20,52 +8,6 @@ export const loginByQrCode = async (p: { setRichModalTitle: (value: (((prevState
     console.error('ex = ', ex);
   }
 }
-
-export const draftColumn = async (title, content) => {
-  const cookie = (Taro.getStorageSync('set-cookie') || []).map(item => item.split(';')[0]).join(';')
-
-  if (!cookie) {
-    await Taro.showToast({
-      title: '发布失败，请先登录后再试',
-      duration: 3000,
-      icon: 'none'
-    })
-
-    return
-  }
-
-  console.log("publish with cookie: ", cookie);
-
-  const draftUrl = getUrl('https://zhuanlan.zhihu.com/api/articles/drafts', cookie)
-
-  const res = await Taro.request({
-    url: draftUrl,
-    method: 'POST',
-    dataType: 'json',
-    data: {title, content, 'delta-time': 0},
-    header: {
-      'authority': 'zhuanlan.zhihu.com',
-      'origin': 'https://zhuanlan.zhihu.com',
-      'sec-fetch-site': 'same-origin',
-      'sec-fetch-mode': 'cors',
-      'sec-fetch-dest': 'empty',
-      'referer': 'https://zhuanlan.zhihu.com/write',
-      'x-requested-with': 'fetch',
-      cookie
-    }
-  })
-
-  console.log('res = ', res);
-
-  if (res.statusCode === 401) {
-    Taro.showToast({
-      title: `可能上次登录未完成，或者登录已过期，请重新登录后再试。  知乎反馈：${res.data.error.message}`,
-      icon: 'none',
-      duration: 5000
-    }).then()
-  }
-}
-
 
 export const getUrl = (url: string, cookie) => {
   const q = qs.stringify({

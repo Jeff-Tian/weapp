@@ -1,18 +1,16 @@
-import {gql, useMutation, useQuery} from "@apollo/client"
-import {Button, Image, View} from "@tarojs/components"
+import {gql, useQuery} from "@apollo/client"
+import {Image, View} from "@tarojs/components"
 import {AtActivityIndicator, AtButton} from "taro-ui"
 import Taro from "@tarojs/taro"
 import remark from 'remark'
 import remarkHtml from "remark-html"
 import React, {useState} from "react"
 import * as assert from 'assert';
-import {SYNC_YUQUE_TO_ZHIHU, draftDirectly} from "@/services/zhihu";
 import WebMarkdownViewer from "@/components/markdown-viewer/h5";
 import HardwayLayout from "../../layout/hardway-layout"
 import './article.styl'
 
 const YuQueArticle: React.FC = () => {
-  const authingUser = Taro.getStorageSync("_authing_user")
   const params = Taro.getCurrentInstance()?.router?.params
 
   assert.ok(params, "本页必须传递参数！")
@@ -76,12 +74,6 @@ const YuQueArticle: React.FC = () => {
     }
   }
 
-  const [syncYuqueToZhihu, {error: _syncError, data: _syncResult}] = useMutation(SYNC_YUQUE_TO_ZHIHU, {
-    variables: {
-      "syncYuqueToZhihuSlug2": slug
-    }
-  })
-
   return <HardwayLayout><AtActivityIndicator mode='center' size={128} content='加载中……'
     isOpened={loading}
   />
@@ -110,12 +102,6 @@ const YuQueArticle: React.FC = () => {
         {data.yuque.created_at}&nbsp;&nbsp;&nbsp;{data.yuque.word_count} 字
       </View>
 
-      {authingUser &&
-        <Button type='primary'
-          onClick={() => slug ? syncYuqueToZhihu() : draftDirectly(data.yuque.title, html)}
-        >发布到知乎</Button>
-      }
-
       <View className='at-article__content taro_html'>
         <View className='at-article__section'>
           {
@@ -124,8 +110,8 @@ const YuQueArticle: React.FC = () => {
           }
         </View>
       </View>
-
-    </View>}
+    </View>
+    }
   </HardwayLayout>
 }
 
