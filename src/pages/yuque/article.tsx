@@ -10,6 +10,12 @@ import WebMarkdownViewer from "@/components/markdown-viewer/h5";
 import HardwayLayout from "../../layout/hardway-layout"
 import './article.styl'
 
+if (process.env.TARO_ENV !== 'h5') {
+  require('@tarojs/taro/html.css')
+}
+Taro.options.html.skipElements.add('code')
+
+
 const YuQueArticle: React.FC = () => {
   const params = Taro.getCurrentInstance()?.router?.params
 
