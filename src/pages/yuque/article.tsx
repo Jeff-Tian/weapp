@@ -13,8 +13,6 @@ import './article.styl'
 if (process.env.TARO_ENV !== 'h5') {
   require('@tarojs/taro/html.css')
 }
-Taro.options.html.skipElements.add('code')
-
 
 const YuQueArticle: React.FC = () => {
   const params = Taro.getCurrentInstance()?.router?.params

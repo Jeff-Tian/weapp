@@ -18,16 +18,31 @@ view.at-article, view.at-article__section {
   padding: 1em;
 }
 
+table {
+  border: solid 1px black;
+  width: 100%;
+  margin: 0.5em 0;
+}
+
+table th, 
+table td {
+  border: solid 1px black;
+  border-collapse: collapse;
+}
+
+pre {
+  border: solid 1px grey;
+  min-width: calc(100% - 40px) !important;
+}
+
 code {
   white-space: pre-wrap !important;
   counter-reset: step;
   counter-increment: step 0;
-  margin-left: 40px;
-  min-width: calc(100% - 40px) !important;
 }
 
-//
-//.line::before {
+
+// .line::before {
 //  content: counter(step);
 //  counter-increment: step;
 //  width: 2ch;
@@ -36,4 +51,4 @@ code {
 //  display: inline-block;
 //  text-align: right;
 //  color: var(--vp-code-line-number-color);
-//}
+// }
