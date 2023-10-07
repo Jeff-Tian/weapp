@@ -1,6 +1,6 @@
 import {getAllDeepLinks} from "../../scripts/deeplinks";
 import {compose, head, identity} from "../../scripts/helpers";
-import {redirectFor, tryRedirect} from "@/functions/redirect";
+import {redirectFor} from "@/functions/redirect";
 
 describe('deeplinks', () => {
   it('are equal', () => {
