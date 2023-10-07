@@ -18,7 +18,6 @@ export const drawerItems = new Map<string, () => void>([
     async () => Taro.navigateTo({url: '/pages/index/index'})],
   // ['ip 地址', async () => Taro.navigateTo({url: '/pages/ip/index'})],
   ['关于', async () => Taro.navigateTo({url: '/pages/subpages/about/index'})],
-  // ['换脸', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/index'})],
   ['人脸识别', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/landmark'})],
   ['哈德韦的朋友们', async () => Taro.navigateTo({url: '/pages/subpages/friends/list'})],
   ['红包🧧封面', async () => Taro.navigateTo({url: '/pages/subpages/red-package/index'})],
@@ -28,9 +27,11 @@ export const drawerItems = new Map<string, () => void>([
 ])
 
 if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+  drawerItems.set('换脸', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/index'}))
+
   drawerItems.set('向我咨询', async () => window.open('https://www.zhihu.com/consult/people/1073548674713423872'))
 
-  drawerItems.set('支持哈德韦', async () => Taro.navigateTo({ url: '/pages/subpages/order/support-me' }))
+  drawerItems.set('支持哈德韦', async () => Taro.navigateTo({url: '/pages/subpages/order/support-me'}))
 }
 
 export const onDrawerItemClick = index => [...drawerItems.values()][index]()
