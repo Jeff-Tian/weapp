@@ -30,7 +30,9 @@ export const Banner = () => <Swiper
   <SwiperItem>
     <StackOverflowWrapper />
   </SwiperItem>
-  <SwiperItem>
+  <SwiperItem
+    onClick={() => Taro.navigateTo({url: `/pages/subpages/react-view/webview?src=${encodeURIComponent('https://mp.weixin.qq.com/s/yjlyzp_XGFeRG9Su7X418A')}`})}
+  >
     <OfficialAccountWrapper />
   </SwiperItem>
   <SwiperItem>

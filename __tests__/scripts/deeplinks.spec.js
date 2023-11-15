@@ -43,6 +43,7 @@ describe('deeplinks', () => {
       "dist/pages/subpages/pearlsplus/shared/components.html",
       "dist/pages/subpages/react-view/browser.html",
       "dist/pages/subpages/react-view/index.html",
+      "dist/pages/subpages/react-view/webview.html",
       "dist/pages/subpages/red-package/index.html",
       "dist/pages/subpages/sticker/cropper.html",
       "dist/pages/subpages/sticker/index.html",
