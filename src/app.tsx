@@ -1,11 +1,13 @@
 import {ApolloProvider} from "@apollo/client";
-import {Component} from "react";
 
+import {useState} from "react";
 import {handleClipboard} from "@/functions/clipboard";
 import {tryRedirect} from "@/functions/redirect";
 
 import "taro-ui/dist/style/index.scss";
-import Taro from "@tarojs/taro";
+import Taro, { usePageNotFound } from "@tarojs/taro";
+
+import {AppContext, AppNameEnum} from "@/app-context";
 
 import "./app.styl";
 import {client} from "./apollo-client";
@@ -23,18 +25,20 @@ if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
   });
 }
 
-class App extends Component {
-  onPageNotFound({path}) {
+const App = ({children}) => {
+  const [appName, setAppName] = useState(AppNameEnum.hardway);
+
+  usePageNotFound(({path}) => {
     console.log("on page not found", path);
 
     tryRedirect(path);
-  }
+  })
 
-  render() {
-    return (
-      <ApolloProvider client={client}>{this.props.children}</ApolloProvider>
-    );
-  }
-}
+  return (
+    <AppContext.Provider value={{appName, setAppName}}>
+      <ApolloProvider client={client}>{children}</ApolloProvider>
+    </AppContext.Provider>
+  );
+};
 
 export default App;

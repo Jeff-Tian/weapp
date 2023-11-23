@@ -1,8 +1,9 @@
-import SinglePageLayout from "@/layout/single-page-layout";
 import {AtButton, AtDivider} from "taro-ui";
 import Taro from "@tarojs/taro";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 import LinkedImage from "@/components/LinkedImage";
+import SimpleLayout from "@/layout/simple-layout";
+import {AppContext, AppNameEnum} from "@/app-context";
 
 const Brickverse = () => {
   const gotoBrickverse = () => {
@@ -25,14 +26,20 @@ const Brickverse = () => {
   useEffect(auto === 'false' ? () => {
   } : gotoBrickverse, [])
 
-  return <SinglePageLayout bgColor='white'>
+
+  const {appName, setAppName} = useContext(AppContext);
+
+  setAppName(AppNameEnum.brickverse);
+
+  return <SimpleLayout bgColor='white'>
     <AtButton type='primary' onClick={gotoBrickverse}>立即进入 Brickverse！</AtButton>
     <LinkedImage mode='widthFix' src='https://www.brick.cat/static/media/benny.9fa238f11aec0cbaf24f.png'
       href='https://brick.cat'
     />
     <AtDivider />
     <LinkedImage mode='widthFix' src='https://i3.lensdump.com/i/TV0CFz.jpeg' href='https://brick.cat' />
-  </SinglePageLayout>
+  </SimpleLayout>
+
 }
 
 export default Brickverse

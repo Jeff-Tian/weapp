@@ -57,9 +57,10 @@ const subpages = [
 
 export default {
   pages: [
-    'pages/yuque/index',
+    `pages/subpages/brickverse/index?auto=false`,
     'pages/yuque/article',
     'pages/index/index',
+    'pages/yuque/index'
   ],
   window: {
     backgroundTextStyle: 'light',

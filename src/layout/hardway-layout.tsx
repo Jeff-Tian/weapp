@@ -1,5 +1,5 @@
 import {OfficialAccount, View} from "@tarojs/components"
-import {HighLevel} from "@/layout/high-level";
+import {HighLevel} from "@/layout/components/high-level";
 import {Fab} from "@/components/HomePageExtra";
 import Taro, {ENV_TYPE, usePullDownRefresh} from "@tarojs/taro";
 import './fab.styl';
