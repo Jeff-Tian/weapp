@@ -56,8 +56,8 @@ const subpages = [
 
 
 export default {
+  entryPagePath: 'pages/subpages/brickverse/index',
   pages: [
-    `pages/subpages/brickverse/index?auto=false`,
     'pages/yuque/article',
     'pages/index/index',
     'pages/yuque/index'

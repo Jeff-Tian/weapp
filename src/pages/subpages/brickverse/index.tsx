@@ -23,11 +23,11 @@ const Brickverse = () => {
   const params = Taro.getCurrentInstance()?.router?.params
   const {auto} = params
 
-  useEffect(auto === 'false' ? () => {
+  useEffect(auto !== 'true' ? () => {
   } : gotoBrickverse, [])
 
 
-  const {appName, setAppName} = useContext(AppContext);
+  const {setAppName} = useContext(AppContext);
 
   setAppName(AppNameEnum.brickverse);
 
