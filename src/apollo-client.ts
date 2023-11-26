@@ -8,7 +8,7 @@ import {setContext} from "@apollo/client/link/context";
 import {getToken} from "@/common/token";
 
 const gatewayGraphQLURl: string = 'https://sls.pa-ca.me/stg/gateway'
-
+const brickverseGraphQLURl: string = 'https://strapi.pa-ca.me/graphql'
 
 const theFetch = async (url, options) => {
   const res = await Taro.request({
@@ -27,6 +27,11 @@ const theFetch = async (url, options) => {
 
 const httpLink = createHttpLink({
   uri: gatewayGraphQLURl,
+  fetch: theFetch
+})
+
+const brickverseLink = createHttpLink({
+  uri: brickverseGraphQLURl,
   fetch: theFetch
 })
 
@@ -68,5 +73,19 @@ const uploadLink = createUploadLink({
 export const client = new ApolloClient({
   link: concat(authLink, split(testIfUploadOperation, uploadLink, httpLinkForNormalOperations)),
 
+  cache: new InMemoryCache()
+})
+
+const brickverseAuthLink = setContext(async (_, {headers}) => {
+  return {
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${process.env.BRICKVERSE_TOKEN}`,
+    }
+  }
+})
+
+export const brickverseClient = new ApolloClient({
+  link: concat(brickverseAuthLink, brickverseLink),
   cache: new InMemoryCache()
 })

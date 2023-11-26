@@ -4,6 +4,7 @@ import {useContext, useEffect} from "react";
 import LinkedImage from "@/components/LinkedImage";
 import SimpleLayout from "@/layout/simple-layout";
 import {AppContext, AppNameEnum} from "@/app-context";
+import Banner from "@/components/brickverse/banner";
 
 const Brickverse = () => {
   const gotoBrickverse = () => {
@@ -32,6 +33,7 @@ const Brickverse = () => {
   setAppName(AppNameEnum.brickverse);
 
   return <SimpleLayout bgColor='white'>
+    <Banner />
     <AtButton type='primary' onClick={gotoBrickverse}>立即进入 Brickverse！</AtButton>
     <LinkedImage mode='widthFix' src='https://www.brick.cat/static/media/benny.9fa238f11aec0cbaf24f.png'
       href='https://brick.cat'

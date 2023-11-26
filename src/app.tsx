@@ -5,12 +5,12 @@ import {handleClipboard} from "@/functions/clipboard";
 import {tryRedirect} from "@/functions/redirect";
 
 import "taro-ui/dist/style/index.scss";
-import Taro, { usePageNotFound } from "@tarojs/taro";
+import Taro, {usePageNotFound} from "@tarojs/taro";
 
 import {AppContext, AppNameEnum} from "@/app-context";
 
 import "./app.styl";
-import {client} from "./apollo-client";
+import {brickverseClient, client} from "./apollo-client";
 
 handleClipboard();
 
@@ -36,7 +36,11 @@ const App = ({children}) => {
 
   return (
     <AppContext.Provider value={{appName, setAppName}}>
-      <ApolloProvider client={client}>{children}</ApolloProvider>
+      {
+        appName === AppNameEnum.brickverse
+          ? <ApolloProvider client={brickverseClient}>{children}</ApolloProvider>
+          : <ApolloProvider client={client}>{children}</ApolloProvider>
+      }
     </AppContext.Provider>
   );
 };
