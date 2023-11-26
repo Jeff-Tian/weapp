@@ -1,7 +1,8 @@
-import {View} from "@tarojs/components";
+import {Swiper, SwiperItem, View} from "@tarojs/components";
 import {GET_POSTS_QUERY} from "@/api/brickverse";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
 import {useQuery} from "@apollo/client";
+import Taro from "@tarojs/taro";
 
 const Banner = () => {
   const {data, error, loading} = useQuery(GET_POSTS_QUERY)
@@ -9,10 +10,26 @@ const Banner = () => {
     return <ErrorDisplay error={error}>发生了错误！</ErrorDisplay>
   }
   if (loading) {
-    return "正在加载中……"
+    return <View>正在加载中……</View>
   }
 
-  return <View>{data.posts.meta.pagination.total}</View>
+  return <Swiper
+    className='brickverse-banner'
+    indicatorColor='#999'
+    indicatorActiveColor='#333'
+    circular
+    indicatorDots
+    autoplay
+  >
+    {
+      data.posts.data.map((post) => <SwiperItem key={post.id}
+        onClick={() => Taro.navigateTo({url: `/pages/subpages/brickverse/post?id=${post.id}`})}
+      >
+        <View className='at-article__h1'>{post.attributes.Title}</View>
+        <View className='at-article__p'>{post.attributes.Content}</View>
+      </SwiperItem>)
+    }
+  </Swiper>
 }
 
 export default Banner;
