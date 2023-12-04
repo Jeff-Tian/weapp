@@ -3,6 +3,8 @@ import {useQuery} from "@apollo/client";
 import Taro from "@tarojs/taro";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
 import {View} from "@tarojs/components";
+import WebMarkdownViewer from "@/components/markdown-viewer/h5";
+import React from "react";
 
 const Post = () => {
   const {
@@ -23,7 +25,10 @@ const Post = () => {
   return (
     <View className='at-article'>
       <View className='at-article__h1'>{data.post.data.attributes.Title}</View>
-      <View className='at-article__content'>{data.post.data.attributes.Content}</View>
+      <View className='at-article__content taro_html'>
+        <WebMarkdownViewer markdown={data.post.data.attributes.Content} />
+      </View>
+      <View>以上内容通过 https://strapi.brickverse.dev/admin 编辑</View>
     </View>
   )
 }

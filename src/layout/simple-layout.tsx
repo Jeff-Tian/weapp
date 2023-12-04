@@ -4,7 +4,6 @@ import {SimpleFrame} from "@/layout/components/simple-frame";
 
 const SimpleLayout = ({children, bgColor = 'cornflowerblue', padding = '10px', height = '100vh'}) => {
   usePullDownRefresh(() => {
-    console.log('用户下拉刷新');
     Taro.stopPullDownRefresh()
   })
 

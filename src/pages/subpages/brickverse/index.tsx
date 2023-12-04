@@ -5,8 +5,11 @@ import LinkedImage from "@/components/LinkedImage";
 import SimpleLayout from "@/layout/simple-layout";
 import {AppContext, AppNameEnum} from "@/app-context";
 import Banner from "@/components/brickverse/banner";
+import {View} from "@tarojs/components";
 
 const Brickverse = () => {
+  Taro.hideHomeButton({});
+
   const gotoBrickverse = () => {
     if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
       Taro.navigateToMiniProgram({
@@ -34,6 +37,7 @@ const Brickverse = () => {
 
   return <SimpleLayout bgColor='white'>
     <Banner />
+    <View>以上内容通过 https://strapi.brickverse.dev/admin 编辑</View>
     <AtButton type='primary' onClick={gotoBrickverse}>立即进入 Brickverse！</AtButton>
     <LinkedImage mode='widthFix' src='https://www.brick.cat/static/media/benny.9fa238f11aec0cbaf24f.png'
       href='https://brick.cat'

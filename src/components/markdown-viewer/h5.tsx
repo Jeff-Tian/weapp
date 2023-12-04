@@ -17,7 +17,6 @@ const WebMarkdownViewer = ({markdown}) => {
   const remarked = remark();
   const used = remarked.use(imageHandler).use(remarkHtml);
   const processed = used.process(markdown);
-  console.log('p = ', processed)
 
   return <View dangerouslySetInnerHTML={{__html: processed.contents}} />
 }

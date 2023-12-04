@@ -58,14 +58,14 @@ const subpages = [
 export default {
   entryPagePath: 'pages/subpages/brickverse/index',
   pages: [
+    'pages/yuque/index',
     'pages/yuque/article',
     'pages/index/index',
-    'pages/yuque/index'
   ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: '哈德韦',
+    navigationBarTitleText: 'Brickverse',
     navigationBarTextStyle: 'black'
   },
   subpackages: subpages,
