@@ -3,7 +3,6 @@ import {GET_POSTS_QUERY} from "@/api/brickverse";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
 import {useQuery} from "@apollo/client";
 import Taro from "@tarojs/taro";
-import WebMarkdownViewer from "@/components/markdown-viewer/h5";
 
 const Banner = () => {
   const {data, error, loading} = useQuery(GET_POSTS_QUERY)
@@ -28,7 +27,7 @@ const Banner = () => {
       >
         <View className='at-article__h1'>{post.attributes.Title}</View>
         <View className='at-article__content taro_html'>
-          <WebMarkdownViewer markdown={post.attributes.Content} />
+          <View dangerouslySetInnerHTML={{__html: post.attributes.Content}} />
         </View>
         <View className='at-article__p'>{post.attributes.Content}</View>
       </SwiperItem>)

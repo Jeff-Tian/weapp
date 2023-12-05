@@ -26,7 +26,7 @@ const Post = () => {
     <View className='at-article'>
       <View className='at-article__h1'>{data.post.data.attributes.Title}</View>
       <View className='at-article__content taro_html'>
-        <WebMarkdownViewer markdown={data.post.data.attributes.Content} />
+        <View dangerouslySetInnerHTML={{__html: data.post.data.attributes.Content}} />
       </View>
       <View>以上内容通过 https://strapi.brickverse.dev/admin 编辑</View>
     </View>
