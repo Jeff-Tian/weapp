@@ -1,4 +1,4 @@
-import {Swiper, SwiperItem, View} from "@tarojs/components";
+import {Swiper, SwiperItem, View, Text} from "@tarojs/components";
 import {GET_POSTS_QUERY} from "@/api/brickverse";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
 import {useQuery} from "@apollo/client";
@@ -27,7 +27,7 @@ const Banner = () => {
       >
         <View className='at-article__h1'>{post.attributes.Title}</View>
         <View className='at-article__content taro_html'>
-          <View dangerouslySetInnerHTML={{__html: post.attributes.Content}} />
+          <Text decode dangerouslySetInnerHTML={{__html: post.attributes.Content}} />
         </View>
       </SwiperItem>)
     }
