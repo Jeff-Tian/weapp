@@ -3,10 +3,13 @@ import {useQuery} from "@apollo/client";
 import Taro from "@tarojs/taro";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
 import {View} from "@tarojs/components";
-import WebMarkdownViewer from "@/components/markdown-viewer/h5";
-import React from "react";
+import {useContext} from "react";
+import {AppContext, AppNameEnum} from "@/app-context";
 
 const Post = () => {
+  const {setAppName} = useContext(AppContext);
+  setAppName(AppNameEnum.brickverse);
+
   const {
     data,
     error,
