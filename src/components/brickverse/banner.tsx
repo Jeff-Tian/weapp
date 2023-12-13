@@ -29,7 +29,6 @@ const Banner = () => {
         <View className='at-article__content taro_html'>
           <View dangerouslySetInnerHTML={{__html: post.attributes.Content}} />
         </View>
-        <View className='at-article__p'>{post.attributes.Content}</View>
       </SwiperItem>)
     }
   </Swiper>
