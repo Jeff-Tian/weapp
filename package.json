@@ -72,7 +72,7 @@
     "apollo-upload-client": "^17.0.0",
     "authing-wxapp-sdk": "^4.3.22-alpha.7",
     "eval5": "^1.4.7",
-    "expo": "~47.0.3",
+    "expo": "~49.0.0",
     "form-urlencoded": "^6.0.5",
     "graphql": "^15.6.0",
     "mdast-util-to-string": "^3.1.0",
