@@ -1,8 +1,9 @@
-import {Swiper, SwiperItem, View, Text} from "@tarojs/components";
+import {Swiper, SwiperItem, View} from "@tarojs/components";
 import {GET_POSTS_QUERY} from "@/api/brickverse";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
 import {useQuery} from "@apollo/client";
 import Taro from "@tarojs/taro";
+import MarkdownViewer from "@/components/markdown-viewer";
 
 const Banner = () => {
   const {data, error, loading} = useQuery(GET_POSTS_QUERY)
@@ -27,7 +28,8 @@ const Banner = () => {
       >
         <View className='at-article__h1'>{post.attributes.Title}</View>
         <View className='at-article__content taro_html'>
-          <Text decode dangerouslySetInnerHTML={{__html: post.attributes.Content}} />
+          {/*<MarkdownViewer markdown={post.attributes.Content} />*/}
+          <View dangerouslySetInnerHTML={{__html: post.attributes.Content.replace(/&nbsp;/g, ' ')}}></View>
         </View>
       </SwiperItem>)
     }
