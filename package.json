@@ -56,8 +56,6 @@
     "@apollo/client": "^3.4.15",
     "@authing/guard-react": "^5.1.2",
     "@babel/runtime": "^7.7.7",
-    "@ckeditor/ckeditor5-build-classic": "^40.2.0",
-    "@ckeditor/ckeditor5-react": "^6.2.0",
     "@tarojs/components": "3.6.7",
     "@tarojs/components-rn": "^3.6.17",
     "@tarojs/plugin-framework-react": "3.6.7",

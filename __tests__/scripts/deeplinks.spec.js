@@ -30,7 +30,6 @@ describe('deeplinks', () => {
       "dist/pages/subpages/auth/authing.html",
       "dist/pages/subpages/auth/keycloak.html",
       "dist/pages/subpages/auth/profile.html",
-      "dist/pages/subpages/brickverse/ckeditor.html",
       "dist/pages/subpages/brickverse/index.html",
       "dist/pages/subpages/brickverse/post.html",
       "dist/pages/subpages/face-swap/index.html",
