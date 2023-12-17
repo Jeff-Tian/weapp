@@ -31,7 +31,7 @@ const Post = () => {
   return (
     <View className='at-article'>
       <View className='at-article__h1'>{data.post.data.attributes.Title}</View>
-      <View style={{padding: '1.5em'}} className='at-article__content taro_html'>
+      <View className='at-article__content taro_html'>
         {/*<MarkdownViewer markdown={data.post.data.attributes.Content} />*/}
         <View dangerouslySetInnerHTML={{__html: data.post.data.attributes.Content.replace(/&nbsp;/g, ' ')}}></View>
       </View>
