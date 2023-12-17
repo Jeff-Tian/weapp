@@ -27,7 +27,7 @@ const Banner = () => {
         onClick={() => Taro.navigateTo({url: `/pages/subpages/brickverse/post?id=${post.id}`})}
       >
         <View className='at-article__h1'>{post.attributes.Title}</View>
-        <View className='at-article__content taro_html'>
+        <View style={{ padding: '0 2em' }} className='at-article__content taro_html'>
           {/*<MarkdownViewer markdown={post.attributes.Content} />*/}
           <View dangerouslySetInnerHTML={{__html: post.attributes.Content.replace(/&nbsp;/g, ' ')}}></View>
         </View>
