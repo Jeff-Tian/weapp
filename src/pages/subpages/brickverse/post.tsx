@@ -9,6 +9,7 @@ import Banner from "@/components/brickverse/banner";
 import PostItem from "@/components/brickverse/post-item";
 
 import './post.styl';
+import SimpleLayout from "@/layout/simple-layout";
 
 if (process.env.TARO_ENV !== 'h5') {
   require('@tarojs/taro/html.css')
@@ -33,12 +34,12 @@ const Post = () => {
   }
 
   return (
-    <View>
+    <SimpleLayout bgColor='white'>
       <PostItem title={data.post.data.attributes.Title} content={data.post.data.attributes.Content} />
       <View style={{color: 'red', fontWeight: 'bold', fontSize: 'xx-large'}}>以上内容和以下内容均由
         https://strapi.brickverse.dev/admin 编辑</View>
       <Banner />
-    </View>
+    </SimpleLayout>
   )
 }
 
