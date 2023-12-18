@@ -7,9 +7,9 @@ import {useContext} from "react";
 import {AppContext, AppNameEnum} from "@/app-context";
 import Banner from "@/components/brickverse/banner";
 import PostItem from "@/components/brickverse/post-item";
+import SimpleLayout from "@/layout/simple-layout";
 
 import './post.styl';
-import SimpleLayout from "@/layout/simple-layout";
 
 if (process.env.TARO_ENV !== 'h5') {
   require('@tarojs/taro/html.css')
