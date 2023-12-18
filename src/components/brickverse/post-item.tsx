@@ -7,6 +7,10 @@ Taro.options.html.transformElement = (el, parsedElement) => {
     console.log('transforming a tag to brickverse-link', el, parsedElement);
     el.setAttribute('class', 'brickverse-link')
   }
+  if (el.nodeName === 'image') {
+    console.log('transforming img tag to brickverse-img', el, parsedElement);
+    el.setAttribute('mode', 'widthFix')
+  }
   return el
 }
 
