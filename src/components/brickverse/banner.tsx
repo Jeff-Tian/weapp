@@ -3,6 +3,7 @@ import {GET_POSTS_QUERY} from "@/api/brickverse";
 import {ErrorDisplay} from "@/components/ErrorDisplay";
 import {useQuery} from "@apollo/client";
 import Taro from "@tarojs/taro";
+import './brickverse.styl';
 
 const Banner = () => {
   const {data, error, loading} = useQuery(GET_POSTS_QUERY)
