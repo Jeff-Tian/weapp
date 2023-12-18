@@ -6,10 +6,16 @@ import {View} from "@tarojs/components";
 import {useContext} from "react";
 import {AppContext, AppNameEnum} from "@/app-context";
 import Banner from "@/components/brickverse/banner";
+import PostItem from "@/components/brickverse/post-item";
 
 import './post.styl';
 
+if (process.env.TARO_ENV !== 'h5') {
+  require('@tarojs/taro/html.css')
+}
+
 const Post = () => {
+
   const {setAppName} = useContext(AppContext);
   setAppName(AppNameEnum.brickverse);
 
@@ -26,16 +32,11 @@ const Post = () => {
     return <View>正在加载中……</View>
   }
 
-  console.log('data = ', data);
-
   return (
-    <View className='at-article'>
-      <View className='at-article__h1'>{data.post.data.attributes.Title}</View>
-      <View className='at-article__content taro_html'>
-        {/*<MarkdownViewer markdown={data.post.data.attributes.Content} />*/}
-        <View dangerouslySetInnerHTML={{__html: data.post.data.attributes.Content.replace(/&nbsp;/g, ' ')}}></View>
-      </View>
-      <View style={{color: 'red', fontWeight: 'bold', fontSize: 'xx-large'}}>以上内容和以下内容均由 https://strapi.brickverse.dev/admin 编辑</View>
+    <View>
+      <PostItem title={data.post.data.attributes.Title} content={data.post.data.attributes.Content} />
+      <View style={{color: 'red', fontWeight: 'bold', fontSize: 'xx-large'}}>以上内容和以下内容均由
+        https://strapi.brickverse.dev/admin 编辑</View>
       <Banner />
     </View>
   )

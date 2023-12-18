@@ -1,16 +1,23 @@
 {
   "name": "weapp",
-  "version": "1.6.19",
+  "version": "1.7.0",
   "private": true,
-  "description": "哈德韦的个人小程序",
+  "description": "哈德韦的 Brickverse 个人小程序",
   "templateInfo": {
     "name": "default",
     "typescript": true,
     "css": "stylus"
   },
   "sideEffects": [
+    "./src/app.styl",
     "./src/layout/fab.styl",
-    "./src/pages/yuque/article.styl"
+    "./src/pages/yuque/article.styl",
+    "./src/components/brickverse/brickverse.styl",
+    "./src/pages/subpages/brickverse/post.styl",
+    "./src/pages/index/index.styl",
+    "./src/components/rich-modal.styl",
+    "./src/pages/subpages/tictactoe/tictactoe.styl",
+    "./src/pages/subpages/pearlsplus/wasm.styl"
   ],
   "scripts": {
     "build:weapp": "taro build --type weapp --open",
@@ -43,8 +50,8 @@
     "update": "taro update self && taro update project"
   },
   "taroConfig": {
-    "version": "1.6.18",
-    "desc": "哈德韦的个人小程序"
+    "version": "1.7.0",
+    "desc": "哈德韦的 Brickverse 个人小程序"
   },
   "browserslist": [
     "last 3 versions",
