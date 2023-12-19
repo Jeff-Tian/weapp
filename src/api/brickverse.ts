@@ -25,7 +25,7 @@ export const GetPost = (id) => brickverseClient.query({
 
 export const GET_POSTS_QUERY = gql`
   query GetPosts {
-    posts {
+    posts (sort: "id:asc") {
       data {
         id
         attributes {
