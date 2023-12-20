@@ -4,6 +4,7 @@ import {View} from "@tarojs/components"
 import unist from 'unist-util-visit'
 
 function imageHandler() {
+  // 由于有一些网站会屏蔽外链，所以需要使用代理
   return (tree) => {
     unist(tree, 'image', (node) => {
       node.type = 'html'
