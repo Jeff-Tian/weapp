@@ -1,6 +1,6 @@
 {
   "name": "weapp",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "private": true,
   "description": "哈德韦的 Brickverse 个人小程序",
   "templateInfo": {
@@ -50,7 +50,7 @@
     "update": "taro update self && taro update project"
   },
   "taroConfig": {
-    "version": "1.7.0",
+    "version": "1.7.1",
     "desc": "哈德韦的 Brickverse 个人小程序"
   },
   "browserslist": [

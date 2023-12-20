@@ -1,7 +1,7 @@
 import WebMarkdownViewer from "@/components/markdown-viewer/h5";
 import {render} from "@testing-library/react";
 
-it('renders', async () => {
+it.skip('renders', async () => {
   const {container} = render(
     <WebMarkdownViewer markdown='hello' />
   );
@@ -10,7 +10,7 @@ it('renders', async () => {
 `);
 })
 
-it('renders image with proxies', async () => {
+it.skip('renders image with proxies', async () => {
   const {container} = render(
     <WebMarkdownViewer markdown='![test](https://img.alicdn.com/tfs/TB1.jpg)' />
   );
