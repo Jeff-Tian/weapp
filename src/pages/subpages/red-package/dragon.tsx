@@ -11,6 +11,16 @@ import {login} from "@/common/login";
 
 const RedPackage = () => {
   useShareAppMessage(() => {
+    const displayName = user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''
+
+    if (displayName.indexOf('哈德韦') >= 0) {
+      return {
+        title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
+        path: '/pages/subpages/red-package/dragon',
+        imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
+      }
+    }
+
     return {
       title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
       path: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
@@ -56,7 +66,8 @@ const RedPackage = () => {
 
   if (src && src.length > 0) {
     Taro.showToast({
-      title: src
+      title: src,
+      duration: 5000
     });
 
     Taro.navigateTo({
