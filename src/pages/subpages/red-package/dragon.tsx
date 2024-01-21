@@ -1,7 +1,7 @@
 import SinglePageLayout from "@/layout/single-page-layout";
-import Taro, {ENV_TYPE, useShareAppMessage} from "@tarojs/taro";
+import Taro, {ENV_TYPE, useAddToFavorites, useShareAppMessage, useShareTimeline} from "@tarojs/taro";
 import {naiveErrorHandler} from "@/functions/naiveErrorHandler";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {OfficialAccount, View} from "@tarojs/components";
 import {AtButton, AtDivider} from "taro-ui";
 import {OfficialAccountCard} from "@/components/OfficialAccountWrapper";
@@ -15,7 +15,7 @@ const RedPackage = () => {
 
   const shareRedPackage = () => {
     Taro.showShareMenu({
-      withShareTicket: true,
+      withShareTicket: false,
     })
   };
 
@@ -52,7 +52,39 @@ const RedPackage = () => {
     }
   })
 
-  return <SinglePageLayout bgColor='rgb(212, 86, 69)' padding='0'>
+  useShareTimeline(() => {
+    return {
+      title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
+      path: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
+      imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
+    }
+  })
+
+  useAddToFavorites(() => {
+    return {
+      title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
+      query: 'from=favorites',
+      imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
+    }
+  })
+
+  useEffect(() => {
+    Taro.onCopyUrl(() => {
+      return {
+        query: 'from=copy'
+      }
+    });
+
+    return () => {
+      Taro.offCopyUrl(() => {
+        return {
+          query: 'from=copy'
+        }
+      });
+    }
+  }, []);
+
+  return <SinglePageLayout bgColor='rgb(212, 86, 69)' padding='0' showHeader={false}>
     <View className='at-article'>
       <View className='at-article__content'>
         <View className='at-article__section'>
@@ -78,7 +110,9 @@ const RedPackage = () => {
         <View className='at-article__section'>
           <View className='at-article__h2'>你也可以制作！</View>
           <View className='at-article__info'>关注公众号“哈德韦”，给作者打个赏，我教你！</View>
-          <LinkedImage mode='widthFix' src='https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/' />
+          <LinkedImage mode='widthFix'
+            src='https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
+          />
         </View>
         <AtDivider>
           {Taro.getEnv() === ENV_TYPE.WEAPP && <OfficialAccount />}
