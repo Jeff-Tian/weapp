@@ -60,6 +60,10 @@ const RedPackage = () => {
     }
   }, []);
 
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+
   const params = Taro.getCurrentInstance()?.router?.params
 
   const {src} = params
@@ -69,16 +73,18 @@ const RedPackage = () => {
       title: src,
       duration: 5000
     });
-
-    Taro.navigateTo({
-      url: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA'
+    login().then(setUser).catch(console.error).finally(() => {
+      const displayName = user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''
+      if (displayName.indexOf('哈德韦') >= 0) {
+      } else {
+        Taro.navigateTo({
+          url: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA'
+        })
+      }
     })
 
     return <View>跳转中……</View>
   }
-
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
 
   const shareRedPackage = () => {
     Taro.showShareMenu({
