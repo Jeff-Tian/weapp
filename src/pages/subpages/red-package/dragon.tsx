@@ -15,7 +15,7 @@ const RedPackage = () => {
 
   const shareRedPackage = () => {
     Taro.showShareMenu({
-      withShareTicket: false,
+      withShareTicket: true,
     })
   };
 
