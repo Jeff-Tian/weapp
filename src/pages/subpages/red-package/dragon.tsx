@@ -10,6 +10,62 @@ import {User} from "@authing/guard-react";
 import {login} from "@/common/login";
 
 const RedPackage = () => {
+  useShareAppMessage(() => {
+    return {
+      title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
+      path: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
+      imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
+    }
+  })
+
+  useShareTimeline(() => {
+    return {
+      title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
+      query: 'src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
+      imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
+    }
+  })
+
+  useAddToFavorites(() => {
+    return {
+      title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
+      query: 'src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
+      imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
+    }
+  })
+
+  useEffect(() => {
+    Taro.onCopyUrl(() => {
+      return {
+        query: 'src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
+      }
+    });
+
+    return () => {
+      Taro.offCopyUrl(() => {
+        return {
+          query: 'src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
+        }
+      });
+    }
+  }, []);
+
+  const params = Taro.getCurrentInstance()?.router?.params
+
+  const {src} = params
+
+  if (src && src.length > 0) {
+    Taro.showToast({
+      title: src
+    });
+
+    Taro.navigateTo({
+      url: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA'
+    })
+
+    return <View>跳转中……</View>
+  }
+
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
@@ -43,46 +99,6 @@ const RedPackage = () => {
 
     })
   }
-
-  useShareAppMessage(() => {
-    return {
-      title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
-      path: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
-      imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
-    }
-  })
-
-  useShareTimeline(() => {
-    return {
-      title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
-      path: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA',
-      imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
-    }
-  })
-
-  useAddToFavorites(() => {
-    return {
-      title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
-      query: 'from=favorites',
-      imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
-    }
-  })
-
-  useEffect(() => {
-    Taro.onCopyUrl(() => {
-      return {
-        query: 'from=copy'
-      }
-    });
-
-    return () => {
-      Taro.offCopyUrl(() => {
-        return {
-          query: 'from=copy'
-        }
-      });
-    }
-  }, []);
 
   return <SinglePageLayout bgColor='rgb(212, 86, 69)' padding='0' showHeader={false}>
     <View className='at-article'>
