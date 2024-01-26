@@ -20,7 +20,7 @@ export const drawerItems = new Map<string, () => void>([
   ['关于', async () => Taro.navigateTo({url: '/pages/subpages/about/index'})],
   ['人脸识别', async () => Taro.navigateTo({url: '/pages/subpages/face-swap/landmark'})],
   ['哈德韦的朋友们', async () => Taro.navigateTo({url: '/pages/subpages/friends/list'})],
-  ['红包🧧封面', async () => Taro.navigateTo({url: '/pages/subpages/red-package/dragon?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA'})],
+  ['红包🧧封面', async () => Taro.navigateTo({url: '/pages/subpages/red-package/dragon'})],
   ['微信表情', async () => Taro.navigateTo({url: '/pages/subpages/sticker/index'})],
   ['资源', async () => Taro.navigateTo({url: '/pages/subpages/video/index'})],
   // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/test/index'})],
