@@ -1,7 +1,6 @@
 import {ApolloProvider} from "@apollo/client";
 
 import {useState} from "react";
-import {handleClipboard} from "@/functions/clipboard";
 import {tryRedirect} from "@/functions/redirect";
 
 import "taro-ui/dist/style/index.scss";
@@ -11,8 +10,6 @@ import {AppContext, AppNameEnum} from "@/app-context";
 
 import "./app.styl";
 import {brickverseClient, client} from "./apollo-client";
-
-handleClipboard();
 
 if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
   Taro.onPageNotFound(({isEntryPage, path}) => {

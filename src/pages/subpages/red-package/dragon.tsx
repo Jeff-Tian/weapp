@@ -13,7 +13,7 @@ const RedPackage = () => {
   useShareAppMessage(() => {
     const displayName = user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''
 
-    if (displayName.indexOf('哈德韦') >= 0 || displayName.indexOf('Jeff Tian') >= 0) {
+    if (displayName.indexOf('哈德韦') >= 0 || displayName.indexOf('Jeff Tian') >= 0 || displayName.indexOf('wechat_6em1g4') >= 0) {
       return {
         title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
         path: '/pages/subpages/red-package/dragon',
@@ -75,7 +75,7 @@ const RedPackage = () => {
     });
     login().then(setUser).catch(console.error).finally(() => {
       const displayName = user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''
-      if (displayName.indexOf('哈德韦') >= 0 || displayName.indexOf('Jeff Tian') >= 0) {
+      if (displayName.indexOf('哈德韦') >= 0 || displayName.indexOf('Jeff Tian') >= 0 || displayName.indexOf('wechat_6em1g4') >= 0) {
       } else {
         Taro.navigateTo({
           url: '/pages/subpages/react-view/webview?src=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FkBUKusrdKPubi3t34PcSNA'

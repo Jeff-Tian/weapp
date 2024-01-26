@@ -45,3 +45,17 @@ export const GET_POSTS_QUERY = gql`
 export const GetPosts = () => brickverseClient.query({
   query: GET_POSTS_QUERY
 });
+
+export const GET_ANNUAL_RED_PACKAGE_COVER_QUERY = gql`
+  query GetAnnualRedPackageCover {
+    annualRedPackageCover {
+      data {
+        id
+        attributes {
+          link
+          name
+        }
+      }
+    }
+  }
+`;
