@@ -97,10 +97,10 @@ const RedPackage = () => {
   }
 
 
-  const dragons = ['https://lensdump.com/i/45udlM',
-    'https://lensdump.com/i/45umra',
-    'https://lensdump.com/i/45us4e',
-    'https://lensdump.com/i/45u3Pk]']
+  const dragons = ['https://b.l3n.co/i/45udlM.png',
+    'https://c.l3n.co/i/45umra.png',
+    'https://b.l3n.co/i/45us4e.png',
+    'https://a.l3n.co/i/45u3Pk.png']
 
   return <SinglePageLayout bgColor='rgb(212, 86, 69)' padding='0' showHeader>
     <View className='at-article'>
