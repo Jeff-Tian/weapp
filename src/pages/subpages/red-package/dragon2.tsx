@@ -7,8 +7,14 @@ import {AtButton, AtDivider} from "taro-ui";
 import {OfficialAccountCard} from "@/components/OfficialAccountWrapper";
 import LinkedImage from "@/components/LinkedImage";
 import {User} from "@authing/guard-react";
-import {login} from "@/common/login";
+import {GetAnnualRedPackageCover} from "@/api/hardway";
 import "./dragon.styl";
+
+const getRedPackageCoverLink = async () => {
+  const res = await GetAnnualRedPackageCover();
+
+  return res.data.annualRedPackageCover.data.attributes.link;
+}
 
 const RedPackage = () => {
   useShareAppMessage(() => {
@@ -17,7 +23,7 @@ const RedPackage = () => {
     if (displayName.indexOf('哈德韦') >= 0 || displayName.indexOf('Jeff Tian') >= 0 || displayName.indexOf('wechat_6em1g4') >= 0) {
       return {
         title: `${user?.nickname ?? user?.name ?? user?.username ?? user?.preferredUsername ?? user?.email ?? ''}送你一张特别的"哈小龙"红包🧧封面！`,
-        path: '/pages/subpages/red-package/dragon',
+        path: '/pages/subpages/red-package/dragon2',
         imageUrl: 'https://mmcomm.qpic.cn/wx_redskin/GP64KknEwj3sMW4qkj041icMxE0X1eXEw3Jpia5Vuuo85968Iib4xXW5glwicfWDdSLY/'
       }
     }
@@ -74,10 +80,10 @@ const RedPackage = () => {
   function getRedPackage() {
     setLoading(true)
 
-    login().then(setUser).catch(console.error).finally(() => {
+    getRedPackageCoverLink().then(link => {
       if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
         Taro.showRedPackage({
-          url: 'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=v3s9Xd0QsDA&check_type=2#wechat_redirect',
+          url: link,
           success: (res) => {
             console.log(res)
           },
@@ -92,8 +98,7 @@ const RedPackage = () => {
         window.open('https://mp.weixin.qq.com/s/kBUKusrdKPubi3t34PcSNA')
         setLoading(false)
       }
-
-    })
+    }).catch(naiveErrorHandler)
   }
 
 

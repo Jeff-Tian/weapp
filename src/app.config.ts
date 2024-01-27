@@ -38,7 +38,7 @@ const subpages = [
   },
   {
     root: `pages/subpages/red-package`,
-    pages: ['index', 'dragon'],
+    pages: ['index', 'dragon', 'dragon2'],
   },
   {
     root: `pages/subpages/sticker`,
