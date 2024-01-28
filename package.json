@@ -75,7 +75,7 @@
     "@tarojs/taro": "3.6.7",
     "@tarojs/taro-rn": "^3.6.17",
     "apollo-upload-client": "^17.0.0",
-    "authing-wxapp-sdk": "^4.3.22-alpha.7",
+    "authing-wxapp-sdk": "^4.3.23",
     "eval5": "^1.4.7",
     "expo": "~49.0.0",
     "form-urlencoded": "^6.0.5",
