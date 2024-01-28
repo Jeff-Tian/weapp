@@ -1,6 +1,5 @@
 import {gql} from "@apollo/client";
 import {client} from "@/apollo-client";
-import Taro from "@tarojs/taro";
 
 
 export const GET_ANNUAL_RED_PACKAGE_COVER_QUERY = gql`
