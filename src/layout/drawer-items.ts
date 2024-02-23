@@ -6,8 +6,8 @@ export const drawerItems = new Map<string, () => void>([
   })],
   ['井字棋游戏', async () => Taro.navigateTo({url: '/pages/subpages/tictactoe/ai'})],
   ['关于', async () => Taro.navigateTo({url: '/pages/subpages/about/index'})],
-  ['哈德韦的朋友们', async () => Taro.navigateTo({url: '/pages/subpages/friends/list'})],
-  ['微信表情', async () => Taro.navigateTo({url: '/pages/subpages/sticker/index'})],
+  // ['哈德韦的朋友们', async () => Taro.navigateTo({url: '/pages/subpages/friends/list'})],
+  // ['微信表情', async () => Taro.navigateTo({url: '/pages/subpages/sticker/index'})],
   // ['测试', async () => Taro.navigateTo({url: '/pages/subpages/test/index'})],
 ])
 
