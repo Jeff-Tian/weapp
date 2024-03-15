@@ -1,0 +1,58 @@
+.terminal {
+  background: #000;
+  color: #fff;
+  padding: 0.125rem;
+  min-height: 12.5rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.terminal taro-textarea-core {
+  height: 12.5rem;
+}
+.code {
+  background: #f4f4f4;
+  border: 0.025rem solid #ddd;
+  border-left: 0.075rem solid #f36d33;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: monospace;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+.large.code taro-textarea-core {
+  min-height: 12.5rem;
+}
+.prompt {
+  background-color: #000;
+  border: solid 0.05rem #f00;
+  color: #fff;
+  z-index: 99;
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2rem;
+}
+.prompt taro-button-core {
+  color: #fff;
+}
+.inputs {
+  color: #000;
+}
+
+.fab-area {
+  position: fixed;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 1100;
+}
+
+#rich-modal {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+}
+

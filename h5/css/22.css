@@ -1,0 +1,13 @@
+.fab-area {
+  position: fixed;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 1100;
+}
+
+#rich-modal {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+}
+

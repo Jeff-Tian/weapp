@@ -1,0 +1,16 @@
+.taro_html img,
+.taro_html taro-image-core {
+  width: 100%;
+}
+.at-article__content {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.brickverse-banner {
+  min-height: 12.5rem;
+}
+.brickverse-link {
+  font-weight: bold;
+}
+

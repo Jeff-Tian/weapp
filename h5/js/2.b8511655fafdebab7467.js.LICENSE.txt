@@ -1,0 +1,201 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+ * repeat-string <https://github.com/jonschlinkert/repeat-string>
+ *
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module mdast:to-hast
+ * @fileoverview Transform MDAST to HAST.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module remark:html
+ * @fileoverview Compile Markdown to HTML with remark.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module unified
+ * @fileoverview Pluggable text processing interface.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module unist:util:position
+ * @fileoverview Utility to get either the starting or the
+ *   ending position of a node, and if its generated or not.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module vfile
+ * @fileoverview Virtual file format to attach additional
+ *   information related to processed input.  Similar to
+ *   `wearefractal/vinyl`.  Additionally, `VFile` can be
+ *   passed directly to ESLint formatters to visualise
+ *   warnings and errors relating to a file.
+ * @example
+ *   var VFile = require('vfile');
+ *
+ *   var file = new VFile({
+ *     'directory': '~',
+ *     'filename': 'example',
+ *     'extension': 'txt',
+ *     'contents': 'Foo *bar* baz'
+ *   });
+ *
+ *   file.toString(); // 'Foo *bar* baz'
+ *   file.filePath(); // '~/example.txt'
+ *
+ *   file.move({'extension': 'md'});
+ *   file.filePath(); // '~/example.md'
+ *
+ *   file.warn('Something went wrong', {'line': 2, 'column': 3});
+ *   // { [~/example.md:2:3: Something went wrong]
+ *   //   name: '~/example.md:2:3',
+ *   //   file: '~/example.md',
+ *   //   reason: 'Something went wrong',
+ *   //   line: 2,
+ *   //   column: 3,
+ *   //   fatal: false }
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015-2016 Titus Wormer
+ * @license MIT
+ * @module remark
+ * @fileoverview Markdown processor powered by plugins.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015-2016 Titus Wormer
+ * @license MIT
+ * @module remark:compiler
+ * @fileoverview Markdown compiler
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015-2016 Titus Wormer
+ * @license MIT
+ * @module remark:parse
+ * @fileoverview Markdown parser.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015-2016 Titus Wormer
+ * @license MIT
+ * @module remark:parse:defaults
+ * @fileoverview Default options for `parse`.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015-2016 Titus Wormer
+ * @license MIT
+ * @module remark:parser
+ * @fileoverview Markdown parser.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015-2016 Titus Wormer
+ * @license MIT
+ * @module remark:stringify
+ * @fileoverview Markdown Compiler.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2015-2016 Titus Wormer
+ * @license MIT
+ * @module remark:stringify:defaults
+ * @fileoverview Default options for `stringify`.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2016 Titus Wormer
+ * @license MIT
+ * @module hast:to-html
+ * @fileoverview Stringify HAST to HTML.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2016 Titus Wormer
+ * @license MIT
+ * @module hast:to-html:character-data
+ * @fileoverview Stringify CDATA.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2016 Titus Wormer
+ * @license MIT
+ * @module hast:to-html:comment
+ * @fileoverview Stringify comments.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2016 Titus Wormer
+ * @license MIT
+ * @module hast:to-html:directive
+ * @fileoverview Stringify directives.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2016 Titus Wormer
+ * @license MIT
+ * @module hast:to-html:doctype
+ * @fileoverview Stringify doctypes.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2016 Titus Wormer
+ * @license MIT
+ * @module hast:to-html:element
+ * @fileoverview Stringify elements.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2016 Titus Wormer
+ * @license MIT
+ * @module hast:to-html:omission
+ * @fileoverview Check if a tag can be omitted.
+ */
+
+/**
+ * @author Titus Wormer
+ * @copyright 2016 Titus Wormer
+ * @license MIT
+ * @module hast:to-html:text
+ * @fileoverview Stringify text.
+ */

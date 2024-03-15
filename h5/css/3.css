@@ -1,0 +1,69 @@
+body {
+  font: 0.35rem "Century Gothic", Futura, sans-serif;
+  margin: 0.5rem;
+}
+taro-view-core {
+  padding-left: 5 rpx;
+}
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.status {
+  margin-bottom: 0.25rem;
+}
+.square {
+  background: #fff;
+  border: 0.025rem solid #999;
+  float: left;
+  font-size: 0.6rem;
+  font-weight: bold;
+  line-height: 100 rpx;
+  height: 100 rpx;
+  margin-right: -0.025rem;
+  margin-top: -0.025rem;
+  padding: 0;
+  text-align: center;
+  width: 100 rpx;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.square:focus {
+  outline: none;
+}
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+.game-info {
+  margin-left: 0.5rem;
+}
+taro-view-core {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+taro-button-core {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  min-width: 2.5rem;
+  height: 2.5rem;
+}
+
+.fab-area {
+  position: fixed;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 1100;
+}
+
+#rich-modal {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+}
+
