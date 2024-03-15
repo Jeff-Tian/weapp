@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Banner} from "@/components/HomePageExtra";
+import {Banner} from "@/components/HomePageExtra/HomePageExtra";
 import {BlogList} from "@/components/BlogList";
 import {AppContext, AppNameEnum} from "@/app-context";
 import './article.styl'

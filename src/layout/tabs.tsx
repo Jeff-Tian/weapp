@@ -1,7 +1,7 @@
 import Taro, {ENV_TYPE, useRouter} from '@tarojs/taro'
 import {AtTabs, AtTabsPane} from "taro-ui";
 import {OfficialAccount, View} from "@tarojs/components";
-import {Banner, Fab} from "@/components/HomePageExtra";
+import {Banner, Fab} from "@/components/HomePageExtra/HomePageExtra";
 import {useState} from "react";
 
 import './tabs.styl'

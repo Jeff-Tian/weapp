@@ -1,8 +1,8 @@
 {
   "name": "weapp",
-  "version": "1.8.4",
+  "version": "1.8.5",
   "taroConfig": {
-    "version": "1.8.4",
+    "version": "1.8.5",
     "desc": "哈德韦的 Brickverse 个人小程序"
   },
   "private": true,
